@@ -1,7 +1,6 @@
 # Virtual environments
-venv/
 venv_mac/
-venv_local/
+venv_pi/
 .venv/
 
 # Python
