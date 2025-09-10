@@ -7,13 +7,3 @@ venv_pi/
 __pycache__/
 *.py[cod]
 *.so
-
-# IDE
-.vscode/
-
-# OS
-.DS_Store
-
-# Logs
-*.log
-logs/
