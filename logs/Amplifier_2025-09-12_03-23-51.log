@@ -1,0 +1,10 @@
+2025-09-12 03:23:51,803 - INFO - Amplifier script started
+2025-09-12 03:23:51,804 - INFO - Processing cycle...
+2025-09-12 03:23:51,804 - DEBUG - debug details
+2025-09-12 03:23:51,805 - ERROR - something went wrong
+2025-09-12 03:23:53,805 - INFO - Processing cycle...
+2025-09-12 03:23:53,806 - DEBUG - debug details
+2025-09-12 03:23:53,806 - ERROR - something went wrong
+2025-09-12 03:23:55,740 - INFO - Received shutdown signal (Ctrl+C)
+2025-09-12 03:23:55,741 - INFO - Shutting down gracefully...
+2025-09-12 03:23:55,742 - INFO - Amplifier script stopped
