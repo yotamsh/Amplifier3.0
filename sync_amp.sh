@@ -1,9 +1,14 @@
 #!/bin/bash
 #
-# Generic Project Sync Script
+# Generic Project Sync Script with Split Requirements Support
 # 
 # This script continuously syncs a local project to a remote server,
 # manages virtual environments, and syncs logs back.
+#
+# REQUIREMENTS STRUCTURE:
+# - requirements-common.txt: Packages for both Mac and Pi (auto-updated from Mac venv)
+# - requirements-pi.txt: Pi-only packages (manually maintained, hardware-specific)
+# - requirements.txt: Auto-generated on Pi by combining both files
 #
 # To use for different projects, update the configuration variables below.
 #
@@ -44,24 +49,29 @@ trap cleanup SIGINT SIGTERM
 while true; do
     echo -e "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] Checking local requirements...${NC}"
     
-    # Only update local requirements.txt if packages have changed
+    # Update local requirements-common.txt if Mac packages have changed
     if [ -f "${LOCAL_PROJECT_DIR}${LOCAL_VENV_NAME}/bin/pip" ]; then
         source "${LOCAL_PROJECT_DIR}${LOCAL_VENV_NAME}/bin/activate"
         
-        # Get current package list and compare with existing requirements.txt
+        # Get current package list and compare with existing requirements-common.txt
         CURRENT_PACKAGES=$(pip freeze | sort)
-        if [ -f "${LOCAL_PROJECT_DIR}requirements.txt" ]; then
-            EXISTING_PACKAGES=$(sort "${LOCAL_PROJECT_DIR}requirements.txt")
+        if [ -f "${LOCAL_PROJECT_DIR}requirements-common.txt" ]; then
+            EXISTING_PACKAGES=$(grep -v '^#' "${LOCAL_PROJECT_DIR}requirements-common.txt" | sort)
         else
             EXISTING_PACKAGES=""
         fi
         
         if [ "$CURRENT_PACKAGES" != "$EXISTING_PACKAGES" ]; then
-            pip freeze > "${LOCAL_PROJECT_DIR}requirements.txt"
-            echo -e "${GREEN}✓ Local requirements.txt updated (packages changed)${NC}"
+            pip freeze > "${LOCAL_PROJECT_DIR}requirements-common.txt.tmp"
+            # Add header comment to common requirements
+            echo "# Common requirements (Mac + Pi)" > "${LOCAL_PROJECT_DIR}requirements-common.txt"
+            cat "${LOCAL_PROJECT_DIR}requirements-common.txt.tmp" >> "${LOCAL_PROJECT_DIR}requirements-common.txt"
+            rm "${LOCAL_PROJECT_DIR}requirements-common.txt.tmp"
+            echo -e "${GREEN}✓ Local requirements-common.txt updated (packages changed)${NC}"
         else
-            echo -e "${GREEN}✓ Local requirements unchanged${NC}"
+            echo -e "${GREEN}✓ Local requirements-common.txt unchanged${NC}"
         fi
+        deactivate
     else
         echo -e "${RED}✗ Virtual environment (${LOCAL_VENV_NAME}) not found, skipping requirements update${NC}"
     fi
@@ -74,38 +84,55 @@ while true; do
     if [ $? -eq 0 ]; then
         echo -e "${GREEN}✓ Local to remote sync completed${NC}"
         
-        # Check if requirements.txt has changed to skip unnecessary updates
-        if [ -f "${LOCAL_PROJECT_DIR}requirements.txt" ]; then
+        # Check if requirements files have changed to skip unnecessary updates
+        # Combine hash from both requirements-common.txt and requirements-pi.txt
+        COMBINED_REQ_HASH=""
+        if [ -f "${LOCAL_PROJECT_DIR}requirements-common.txt" ] && [ -f "${LOCAL_PROJECT_DIR}requirements-pi.txt" ]; then
             # Cross-platform checksum (macOS uses md5, Linux uses md5sum)
             if command -v md5sum >/dev/null 2>&1; then
-                CURRENT_REQ_HASH=$(md5sum "${LOCAL_PROJECT_DIR}requirements.txt" 2>/dev/null | cut -d' ' -f1 || echo "")
+                COMMON_HASH=$(md5sum "${LOCAL_PROJECT_DIR}requirements-common.txt" 2>/dev/null | cut -d' ' -f1 || echo "")
+                PI_HASH=$(md5sum "${LOCAL_PROJECT_DIR}requirements-pi.txt" 2>/dev/null | cut -d' ' -f1 || echo "")
             elif command -v md5 >/dev/null 2>&1; then
-                CURRENT_REQ_HASH=$(md5 -q "${LOCAL_PROJECT_DIR}requirements.txt" 2>/dev/null || echo "")
+                COMMON_HASH=$(md5 -q "${LOCAL_PROJECT_DIR}requirements-common.txt" 2>/dev/null || echo "")
+                PI_HASH=$(md5 -q "${LOCAL_PROJECT_DIR}requirements-pi.txt" 2>/dev/null || echo "")
             else
-                CURRENT_REQ_HASH=$(date +%s)  # Fallback to timestamp if no md5 available
+                COMMON_HASH=$(date +%s)  # Fallback to timestamp
+                PI_HASH=$(date +%s)
             fi
+            COMBINED_REQ_HASH="${COMMON_HASH}${PI_HASH}"
             
-            if [ "$CURRENT_REQ_HASH" = "$LAST_REQ_HASH" ] && [ -n "$LAST_REQ_HASH" ]; then
+            if [ "$COMBINED_REQ_HASH" = "$LAST_REQ_HASH" ] && [ -n "$LAST_REQ_HASH" ]; then
                 echo -e "${GREEN}✓ Requirements unchanged, skipping dependency update${NC}"
                 SKIP_DEPS=true
             else
                 echo -e "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] Requirements changed, updating remote dependencies...${NC}"
-                LAST_REQ_HASH=$CURRENT_REQ_HASH
+                LAST_REQ_HASH=$COMBINED_REQ_HASH
                 SKIP_DEPS=false
             fi
         else
-            echo -e "${RED}✗ requirements.txt not found, skipping dependency update${NC}"
+            echo -e "${RED}✗ Requirements files not found, skipping dependency update${NC}"
             SKIP_DEPS=true
         fi
         
-        # Update remote virtual environment from synced requirements.txt
+        # Update remote virtual environment from combined requirements
         if [ "$SKIP_DEPS" = false ]; then
             REMOTE_HOST="${REMOTE_PROJECT_DIR%:*}"       # Extract user@host from user@host:/path format
             REMOTE_HOST_PATH="${REMOTE_PROJECT_DIR#*:}"  # Extract path from user@host:/path format
-            ssh "$REMOTE_HOST" "cd $REMOTE_HOST_PATH && ([ -d $REMOTE_VENV_NAME ] || python3 -m venv $REMOTE_VENV_NAME) && source $REMOTE_VENV_NAME/bin/activate && pip install -r requirements.txt --upgrade --quiet"
+            
+            # Create combined requirements.txt on Pi by merging both files
+            ssh "$REMOTE_HOST" "cd $REMOTE_HOST_PATH && \
+                echo '# Combined requirements - auto-generated by sync script' > requirements.txt && \
+                echo '# Common packages (Mac + Pi)' >> requirements.txt && \
+                grep -v '^#' requirements-common.txt >> requirements.txt && \
+                echo '' >> requirements.txt && \
+                echo '# Pi-specific packages' >> requirements.txt && \
+                grep -v '^#' requirements-pi.txt >> requirements.txt && \
+                ([ -d $REMOTE_VENV_NAME ] || python3 -m venv $REMOTE_VENV_NAME) && \
+                source $REMOTE_VENV_NAME/bin/activate && \
+                pip install -r requirements.txt --upgrade --quiet"
             
             if [ $? -eq 0 ]; then
-                echo -e "${GREEN}✓ Remote dependencies updated${NC}"
+                echo -e "${GREEN}✓ Remote dependencies updated (common + Pi-specific packages)${NC}"
             else
                 echo -e "${RED}✗ Failed to update remote dependencies${NC}"
             fi

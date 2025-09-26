@@ -1,17 +1,20 @@
 import hybridLogger
 import time
-
+import testingLeds
+    
 
 def runMain():
     with hybridLogger.HybridLogger("Amplifier") as logger:
         try:
             logger.info("Amplifier script started")
-            
-            while True:
-                logger.info("Processing cycle...")
-                logger.debug("debug details")
-                logger.error("something went wrong")
-                time.sleep(2)
+
+
+            testingLeds.test()
+            # while True:
+            #     logger.info("Processing cycle...")
+            #     logger.debug("debug details")
+            #     logger.error("something went wrong")
+            #     time.sleep(2)
                 
         except KeyboardInterrupt:
             logger.info("Received shutdown signal (Ctrl+C)")
@@ -23,5 +26,4 @@ def runMain():
 
 if __name__ == "__main__":
     runMain()
-#hey
 

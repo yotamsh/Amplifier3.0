@@ -7,3 +7,6 @@ venv_pi/
 __pycache__/
 *.py[cod]
 *.so
+
+# Auto-generated requirements (created on Pi by sync script)
+requirements.txt
