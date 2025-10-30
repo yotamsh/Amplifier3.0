@@ -2,6 +2,7 @@
 venv*/
 
 sync_amp.sh
+connect_pi.sh
 logs/
 .rsyncignore
 

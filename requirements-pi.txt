@@ -1,2 +1,7 @@
 # Pi-only requirements (hardware-specific)
 rpi-ws281x==5.0.0
+
+# NeoPixel CircuitPython support
+adafruit-blinka
+adafruit-circuitpython-neopixel
+

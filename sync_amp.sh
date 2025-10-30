@@ -127,6 +127,9 @@ while true; do
                 echo '' >> requirements.txt && \
                 echo '# Pi-specific packages' >> requirements.txt && \
                 grep -v '^#' requirements-pi.txt >> requirements.txt && \
+                echo '--- Generated requirements.txt contents ---' && \
+                cat requirements.txt && \
+                echo '--- End of requirements.txt ---' && \
                 ([ -d $REMOTE_VENV_NAME ] || python3 -m venv $REMOTE_VENV_NAME) && \
                 source $REMOTE_VENV_NAME/bin/activate && \
                 pip install -r requirements.txt --upgrade --quiet"

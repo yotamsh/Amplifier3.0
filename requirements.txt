@@ -1,2 +1,0 @@
-# Common requirements (Mac + Pi)
-pygame==2.6.1

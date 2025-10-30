@@ -10,11 +10,6 @@ def runMain():
 
 
             testingLeds.test()
-            # while True:
-            #     logger.info("Processing cycle...")
-            #     logger.debug("debug details")
-            #     logger.error("something went wrong")
-            #     time.sleep(2)
                 
         except KeyboardInterrupt:
             logger.info("Received shutdown signal (Ctrl+C)")
