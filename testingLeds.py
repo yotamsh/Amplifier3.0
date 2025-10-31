@@ -8,7 +8,7 @@ LED_BRIGHTNESS = 26   # 0-255 (10% brightness)
 LED_INVERT = False    # Signal inversion
 
 # Strip 1 Configuration
-LED_PIN_1 = 18
+LED_PIN_1 = 21
 LED_DMA_1 = 10     
 LED_1_PWM = 0   
 
@@ -17,18 +17,27 @@ LED_PIN_2 = 19
 LED_DMA_2 = 5     
 LED_2_PWM = 1
 
-# Initialize both strips
+# Strip 3 Configuration
+LED_PIN_3 = 18
+LED_DMA_3 = 6     
+LED_3_PWM = 0
+
+# Initialize all three strips
 strip1 = PixelStrip(LED_COUNT, LED_PIN_1, LED_FREQ_HZ, LED_DMA_1, 
                     LED_INVERT, LED_BRIGHTNESS, LED_1_PWM)
 strip2 = PixelStrip(LED_COUNT, LED_PIN_2, LED_FREQ_HZ, LED_DMA_2, 
                     LED_INVERT, LED_BRIGHTNESS, LED_2_PWM)
+strip3 = PixelStrip(LED_COUNT, LED_PIN_3, LED_FREQ_HZ, LED_DMA_3, 
+                    LED_INVERT, LED_BRIGHTNESS, LED_3_PWM)
 
 strip1.begin()
 strip2.begin()
+strip3.begin()
 
-print(f"✅ Dual LED strips initialized:")
+print(f"✅ Triple LED strips initialized:")
 print(f"   Strip 1: GPIO{LED_PIN_1} (PWM{LED_1_PWM}) - {LED_COUNT} LEDs")
 print(f"   Strip 2: GPIO{LED_PIN_2} (PWM{LED_2_PWM}) - {LED_COUNT} LEDs")
+print(f"   Strip 3: GPIO{LED_PIN_3} (PWM{LED_3_PWM}) - {LED_COUNT} LEDs")
 
 def color_wipe(strip, color, wait_ms=50):
     """Wipe color across display a pixel at a time."""
@@ -43,8 +52,24 @@ def fill_all(strip, color):
         strip.setPixelColor(i, color)
     strip.show()
 
-# Dual strip functions
-def color_wipe_both(color1, color2, wait_ms=50):
+# Triple strip functions
+def color_wipe_all(color1, color2, color3, wait_ms=20):
+    print("color wipe all three", color1, color2, color3, wait_ms)
+    """Wipe color across all three strips simultaneously."""
+    max_pixels = max(strip1.numPixels(), strip2.numPixels(), strip3.numPixels())
+    for i in range(max_pixels):
+        if i < strip1.numPixels():
+            strip1.setPixelColor(i, color1)
+        strip1.show()
+        if i < strip2.numPixels():
+            strip2.setPixelColor(i, color2)
+        strip2.show()
+        if i < strip3.numPixels():
+            strip3.setPixelColor(i, color3)
+        strip3.show()
+        time.sleep(wait_ms / 1000.0)
+
+def color_wipe_both(color1, color2, wait_ms=20):
     print("color wipe both", color1, color2, wait_ms)
     """Wipe color across both strips simultaneously."""
     max_pixels = max(strip1.numPixels(), strip2.numPixels())
@@ -54,19 +79,25 @@ def color_wipe_both(color1, color2, wait_ms=50):
         if i < strip2.numPixels():
             strip2.setPixelColor(i, color2)
         strip1.show()
-        time.sleep(wait_ms / 1000.0 / 2)
         strip2.show()
-        time.sleep(wait_ms / 1000.0 / 2)
+        time.sleep(wait_ms / 1000.0)
+
+def fill_all_three(color):
+    """Fill all three strips with the same color at once."""
+    fill_all(strip1, color)
+    fill_all(strip2, color)
+    fill_all(strip3, color)
 
 def fill_all_both(color):
     """Fill both strips with the same color at once."""
     fill_all(strip1, color)
     fill_all(strip2, color)
 
-def fill_strips_different(color1, color2):
-    """Fill strip1 with color1 and strip2 with color2."""
+def fill_strips_different(color1, color2, color3):
+    """Fill strip1 with color1, strip2 with color2, and strip3 with color3."""
     fill_all(strip1, color1)
     fill_all(strip2, color2)
+    fill_all(strip3, color3)
 
 def get_color_components(color):
     """Extract RGB components from a color integer."""
@@ -176,11 +207,31 @@ def rainbow_cycle(strip, duration_ms=5000, steps=20):
         rainbow_fill(strip, start_hue)
         time.sleep(step_delay)
 
-# Dual strip rainbow functions
+# Multi-strip rainbow functions
+def rainbow_fill_all(start_hue=0, hue_delta=None):
+    """Fill all three strips with rainbow colors."""
+    rainbow_fill(strip1, start_hue, hue_delta)
+    rainbow_fill(strip2, start_hue, hue_delta)
+    rainbow_fill(strip3, start_hue, hue_delta)
+
 def rainbow_fill_both(start_hue=0, hue_delta=None):
     """Fill both strips with rainbow colors."""
     rainbow_fill(strip1, start_hue, hue_delta)
     rainbow_fill(strip2, start_hue, hue_delta)
+
+def rainbow_cycle_all(duration_ms=5000, steps=10):
+    """Animated rainbow cycle on all three strips simultaneously."""
+    step_delay = duration_ms / steps / 1000.0
+    hue_step = 360.0 / steps
+    
+    for step in range(steps):
+        start_hue = step * hue_step
+        rainbow_fill(strip1, start_hue)
+        time.sleep(0.01)
+        rainbow_fill(strip2, start_hue)
+        time.sleep(0.01)
+        rainbow_fill(strip3, start_hue)
+        time.sleep(step_delay)
 
 def rainbow_cycle_both(duration_ms=5000, steps=10):
     """Animated rainbow cycle on both strips simultaneously."""
@@ -193,6 +244,12 @@ def rainbow_cycle_both(duration_ms=5000, steps=10):
         time.sleep(0.01)
         rainbow_fill(strip2, start_hue)
         time.sleep(step_delay)
+
+def fade_to_color_all(target_color, duration_ms, steps=50):
+    """Fade all three strips from current state to target color."""
+    fade_to_color(strip1, target_color, duration_ms, steps)
+    fade_to_color(strip2, target_color, duration_ms, steps)
+    fade_to_color(strip3, target_color, duration_ms, steps)
 
 def fade_to_color_both(target_color, duration_ms, steps=50):
     """Fade both strips from current state to target color."""
@@ -272,12 +329,38 @@ if __name__ == "__main__":
     # rainbow_cycle_both()
 
     print("color wipe 1")
-    color_wipe(strip1, Color(255, 0, 0), 10)
+    start_time = time.time()
+    color_wipe(strip1, Color(255, 0, 0), 1)
+    end_time = time.time()
+    total_time = end_time - start_time
+    print(f"color_wipe strip1 completed in {total_time:.3f} seconds")
 
     print("color wipe 2")
-    color_wipe(strip2, Color(0, 255, 0), 10)
+    start_time = time.time()
+    color_wipe(strip2, Color(0, 255, 0), 1)
+    end_time = time.time()
+    total_time = end_time - start_time
+    print(f"color_wipe strip2 completed in {total_time:.3f} seconds")
+
+    print("color wipe 3")
+    start_time = time.time()
+    color_wipe(strip3, Color(0, 0, 255), 1)
+    end_time = time.time()
+    total_time = end_time - start_time
+    print(f"color_wipe strip3 completed in {total_time:.3f} seconds")
 
     print("color wipe both")
-    color_wipe_both(Color(255, 255, 0), Color(0, 255, 255), 30)
+    start_time = time.time()
+    color_wipe_both(Color(255, 255, 0), Color(0, 255, 255), 1)
+    end_time = time.time()
+    total_time = end_time - start_time
+    print(f"color_wipe_both completed in {total_time:.3f} seconds")
+
+    print("color wipe all three")
+    start_time = time.time()
+    color_wipe_all(Color(255, 128, 0), Color(128, 255, 0), Color(255, 0, 128), 1)
+    end_time = time.time()
+    total_time = end_time - start_time
+    print(f"color_wipe_all completed in {total_time:.3f} seconds")
 
     print("End of tests")

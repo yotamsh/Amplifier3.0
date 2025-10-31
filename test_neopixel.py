@@ -10,7 +10,7 @@ import neopixel
 
 # ===== CONFIGURATION PARAMETERS (Modify these as needed) =====
 LED_COUNT = 300              # Number of LEDs on the strip
-LED_PIN = board.D18          # GPIO pin (D18 = GPIO 18)
+LED_PIN = board.D23          # GPIO pin (DX = GPIO X)
 BRIGHTNESS = 0.1             # 10% brightness (0.0 to 1.0)
 WIPE_DELAY_MS = 5           # Delay between pixels during wipe (milliseconds)
 
@@ -25,7 +25,8 @@ HOLD_TIME = 2.0             # How long to hold red color (seconds)
 
 def main():
     print("🎮 NeoPixel LED Test Starting!")
-    print(f"   Strip: {LED_COUNT} LEDs on {LED_PIN}")
+    print(f"   Strip: {LED_COUNT} LEDs")
+    print(f"   GPIO: {LED_PIN}")
     print(f"   Brightness: {int(BRIGHTNESS * 100)}%")
     print(f"   Wipe delay: {WIPE_DELAY_MS}ms per pixel")
     

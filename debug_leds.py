@@ -33,38 +33,22 @@ def test_single_strip(gpio_pin, pwm_channel, dma_channel):
         
         try:
             while True:
-                # Test 1: Turn on ALL 300 LEDs green
-                print(f"🟢 Setting ALL 300 LEDs to GREEN...")
+                # Red wipe animation from 0 to 299
+                print(f"🔴 Red wipe animation 0→299...")
+                delay_per_led = 0.01  # Fast wipe - 10ms per LED = 3 seconds total
                 for i in range(300):
-                    strip.setPixelColor(i, Color(0, 255, 0))
-                strip.show()
-                time.sleep(2)
-                
-                # Test 2: Turn on ALL 300 LEDs red  
-                print(f"🔴 Setting ALL 300 LEDs to RED...")
-                for i in range(300):
-                    strip.setPixelColor(i, Color(255, 0, 0))
-                strip.show()
-                time.sleep(2)
-                
-                # Test 3: White wipe animation from 0 to 299 over 3 seconds
-                print(f"⚪ White wipe animation 0→299 (3 seconds)...")
-                
-                # Wipe animation (overrides red)
-                delay_per_led = 3.0 / 300  # 3 seconds / 300 LEDs
-                for i in range(300):
-                    strip.setPixelColor(i, Color(255, 255, 255))  # White
+                    strip.setPixelColor(i, Color(255, 0, 0))  # Red
                     strip.show()
                     time.sleep(delay_per_led)
                 
-                # Test 4: Turn off all
-                print(f"⚫ Turning off all LEDs...")
+                # Green wipe animation from 0 to 299  
+                print(f"🟢 Green wipe animation 0→299...")
                 for i in range(300):
-                    strip.setPixelColor(i, Color(0, 0, 0))
-                strip.show()
+                    strip.setPixelColor(i, Color(0, 255, 0))  # Green
+                    strip.show()
+                    time.sleep(delay_per_led)
                 
-                # Brief pause before repeating (press Ctrl+C to stop, then ENTER for next config)
-                time.sleep(0.5)
+                # No pause - continuous wipe pattern
                 
         except KeyboardInterrupt:
             print(f"\n⏸️  Config interrupted, moving to next...")
@@ -83,20 +67,46 @@ def main():
     
     # Test configurations: (gpio, pwm_channel, dma_channel)
     test_configs = [
-        (12, 0, 10),
-        (13, 1, 5), 
-        (12, 0, 10),         
+        (10, 0, 5),
+        (12, 0, 5),
+        (13, 1, 5),
+        (18, 0, 5),   
+        (19, 1, 5),  
+        (20, 1, 5),
+        (21, 0, 5),
     ]
     
-    for gpio, pwm_ch, dma_ch in test_configs:
-        name = f"GPIO {gpio}, PWM {pwm_ch}, DMA {dma_ch}"
-        print(f"\n" + "=" * 60)
-        success = test_single_strip(gpio, pwm_ch, dma_ch)
+    try:
+        for gpio, pwm_ch, dma_ch in test_configs:
+            name = f"GPIO {gpio}, PWM {pwm_ch}, DMA {dma_ch}"
+            print(f"\n" + "=" * 60)
+            success = test_single_strip(gpio, pwm_ch, dma_ch)
+            
+            if success:
+                print(f"✅ {name} - WORKS!")
+            else:
+                print(f"❌ {name} - FAILED!")
         
-        if success:
-            print(f"✅ {name} - WORKS!")
-        else:
-            print(f"❌ {name} - FAILED!")
+        # All tests completed normally
+        print(f"\n" + "=" * 60)
+        print(f"🏁 All GPIO tests completed!")
+        print(f"🚪 Exiting debug_leds.py...")
+        
+    except KeyboardInterrupt:
+        print(f"\n\n🛑 Script terminated by user (Ctrl+C)")
+        print(f"🚪 Exiting debug_leds.py...")
+    
+    finally:
+        # Force exit regardless of how we got here
+        import sys
+        import os
+        print("🚨 Force killing process...")
+        os._exit(0)  # Nuclear exit - bypasses cleanup
         
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print(f"\n🛑 Force exit!")
+        import sys
+        sys.exit(0)
