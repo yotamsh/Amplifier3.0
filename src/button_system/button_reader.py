@@ -56,7 +56,8 @@ class ButtonReader(IButtonReader):
         # Initialize previous state (all buttons start as not-pressed)
         self._previous_state: List[bool] = [False] * len(button_pins)
         
-        # Setup GPIO hardware
+        # Setup GPIO hardware  
+        self._gpio_initialized = False  # Track if GPIO was successfully initialized
         self._setup_gpio()
         
         self._logger.info(f"ButtonReader initialized with {len(button_pins)} buttons")
@@ -78,6 +79,8 @@ class ButtonReader(IButtonReader):
             # Configure each button pin as input
             for pin in self._button_pins:
                 GPIO.setup(pin, GPIO.IN, pull_up_down=self._pull_mode)
+            
+            self._gpio_initialized = True  # Mark as successfully initialized
             
             pull_mode_name = {
                 GPIO.PUD_OFF: "no pulls",
@@ -144,10 +147,13 @@ class ButtonReader(IButtonReader):
     def _cleanup_gpio(self) -> None:
         """Internal cleanup method - safe for automatic calling"""
         try:
-            GPIO.cleanup()
-            # Only log if logger still exists (may be destroyed during shutdown)
-            if hasattr(self, '_logger') and self._logger:
-                self._logger.info("GPIO resources cleaned up successfully")
+            # Only cleanup if GPIO was actually initialized
+            if hasattr(self, '_gpio_initialized') and self._gpio_initialized:
+                GPIO.cleanup()
+                self._gpio_initialized = False  # Mark as cleaned up
+                # Only log if logger still exists (may be destroyed during shutdown)
+                if hasattr(self, '_logger') and self._logger:
+                    self._logger.info("GPIO resources cleaned up successfully")
         except Exception:
             # Silent fail during destruction - logging system may be gone
             pass

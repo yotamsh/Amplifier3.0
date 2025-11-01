@@ -1,0 +1,115 @@
+[2025-11-02 00:12:32,725] [INFO] [ButtonLedsTestRunner] Combined button + LED + strip animation test starting
+[2025-11-02 00:12:32,726] [INFO] [ButtonLedsTestRunner] Configuration: 1 button(s), 1 LED, 2 strips (300 LEDs each), ~50Hz sampling
+[2025-11-02 00:12:32,727] [INFO] [ButtonReader] GPIO setup complete: 1 pins, no pulls
+[2025-11-02 00:12:32,728] [INFO] [ButtonReader] ButtonReader initialized with 1 buttons
+[2025-11-02 00:12:32,729] [INFO] [ButtonReader] Button mapping: Button0=GPIO22
+[2025-11-02 00:12:32,730] [INFO] [ButtonReader] Button reader initialized successfully
+[2025-11-02 00:12:32,731] [INFO] [ButtonLedsTestRunner] LED initialized on GPIO26 (OFF)
+[2025-11-02 00:12:32,733] [INFO] [ButtonLedsTestRunner] Strip 1 initialized: GPIO18, PWM channel 0
+[2025-11-02 00:12:32,735] [INFO] [ButtonLedsTestRunner] Strip 2 initialized: GPIO21, PWM channel 0
+[2025-11-02 00:12:32,741] [INFO] [ButtonLedsTestRunner] LED strips ready: 300 LEDs each, GPIO18+GPIO21
+[2025-11-02 00:12:36,305] [INFO] [ButtonLedsTestRunner] Button 0 pressed (GPIO 22) - Click #1
+[2025-11-02 00:12:36,305] [INFO] [ButtonLedsTestRunner] Button 0 PRESSED - Rainbow animation jumped!
+[2025-11-02 00:12:37,433] [INFO] [ButtonLedsTestRunner] Button 0 released (GPIO 22) - Total clicks: 1
+[2025-11-02 00:12:37,434] [INFO] [ButtonLedsTestRunner] Button 0 RELEASED - Color wipe animation jumped!
+[2025-11-02 00:12:42,629] [INFO] [ButtonLedsTestRunner] Button 0 pressed (GPIO 22) - Click #2
+[2025-11-02 00:12:42,630] [INFO] [ButtonLedsTestRunner] Button 0 PRESSED - Rainbow animation jumped!
+[2025-11-02 00:12:44,151] [INFO] [ButtonLedsTestRunner] Button 0 released (GPIO 22) - Total clicks: 2
+[2025-11-02 00:12:44,152] [INFO] [ButtonLedsTestRunner] Button 0 RELEASED - Color wipe animation jumped!
+[2025-11-02 00:12:45,938] [INFO] [ButtonLedsTestRunner] Button 0 pressed (GPIO 22) - Click #3
+[2025-11-02 00:12:45,939] [INFO] [ButtonLedsTestRunner] Button 0 PRESSED - Rainbow animation jumped!
+[2025-11-02 00:12:47,060] [INFO] [ButtonLedsTestRunner] Button 0 released (GPIO 22) - Total clicks: 3
+[2025-11-02 00:12:47,061] [INFO] [ButtonLedsTestRunner] Button 0 RELEASED - Color wipe animation jumped!
+[2025-11-02 00:12:48,356] [INFO] [ButtonLedsTestRunner] Button 0 pressed (GPIO 22) - Click #4
+[2025-11-02 00:12:48,357] [INFO] [ButtonLedsTestRunner] Button 0 PRESSED - Rainbow animation jumped!
+[2025-11-02 00:12:50,299] [INFO] [ButtonLedsTestRunner] Button 0 released (GPIO 22) - Total clicks: 4
+[2025-11-02 00:12:50,300] [INFO] [ButtonLedsTestRunner] Button 0 RELEASED - Color wipe animation jumped!
+[2025-11-02 00:12:51,175] [INFO] [ButtonLedsTestRunner] Button 0 pressed (GPIO 22) - Click #5
+[2025-11-02 00:12:51,177] [INFO] [ButtonLedsTestRunner] Button 0 PRESSED - Rainbow animation jumped!
+[2025-11-02 00:12:51,652] [INFO] [ButtonLedsTestRunner] Button 0 released (GPIO 22) - Total clicks: 5
+[2025-11-02 00:12:51,653] [INFO] [ButtonLedsTestRunner] Button 0 RELEASED - Color wipe animation jumped!
+[2025-11-02 00:12:52,079] [INFO] [ButtonLedsTestRunner] Button 0 pressed (GPIO 22) - Click #6
+[2025-11-02 00:12:52,080] [INFO] [ButtonLedsTestRunner] Button 0 PRESSED - Rainbow animation jumped!
+[2025-11-02 00:12:52,444] [INFO] [ButtonLedsTestRunner] Button 0 released (GPIO 22) - Total clicks: 6
+[2025-11-02 00:12:52,446] [INFO] [ButtonLedsTestRunner] Button 0 RELEASED - Color wipe animation jumped!
+[2025-11-02 00:12:52,740] [INFO] [ButtonLedsTestRunner] Button 0 pressed (GPIO 22) - Click #7
+[2025-11-02 00:12:52,740] [INFO] [ButtonLedsTestRunner] Button 0 PRESSED - Rainbow animation jumped!
+[2025-11-02 00:12:52,977] [INFO] [ButtonLedsTestRunner] Button 0 released (GPIO 22) - Total clicks: 7
+[2025-11-02 00:12:52,978] [INFO] [ButtonLedsTestRunner] Button 0 RELEASED - Color wipe animation jumped!
+[2025-11-02 00:12:53,460] [INFO] [ButtonLedsTestRunner] Button 0 pressed (GPIO 22) - Click #8
+[2025-11-02 00:12:53,461] [INFO] [ButtonLedsTestRunner] Button 0 PRESSED - Rainbow animation jumped!
+[2025-11-02 00:12:53,590] [INFO] [ButtonLedsTestRunner] Button 0 released (GPIO 22) - Total clicks: 8
+[2025-11-02 00:12:53,591] [INFO] [ButtonLedsTestRunner] Button 0 RELEASED - Color wipe animation jumped!
+[2025-11-02 00:12:54,101] [INFO] [ButtonLedsTestRunner] Button 0 pressed (GPIO 22) - Click #9
+[2025-11-02 00:12:54,102] [INFO] [ButtonLedsTestRunner] Button 0 PRESSED - Rainbow animation jumped!
+[2025-11-02 00:12:54,228] [INFO] [ButtonLedsTestRunner] Button 0 released (GPIO 22) - Total clicks: 9
+[2025-11-02 00:12:54,229] [INFO] [ButtonLedsTestRunner] Button 0 RELEASED - Color wipe animation jumped!
+[2025-11-02 00:12:54,814] [INFO] [ButtonLedsTestRunner] Button 0 pressed (GPIO 22) - Click #10
+[2025-11-02 00:12:54,815] [INFO] [ButtonLedsTestRunner] Button 0 PRESSED - Rainbow animation jumped!
+[2025-11-02 00:12:55,021] [INFO] [ButtonLedsTestRunner] Button 0 released (GPIO 22) - Total clicks: 10
+[2025-11-02 00:12:55,023] [INFO] [ButtonLedsTestRunner] Button 0 RELEASED - Color wipe animation jumped!
+[2025-11-02 00:12:55,689] [INFO] [ButtonLedsTestRunner] Button 0 pressed (GPIO 22) - Click #11
+[2025-11-02 00:12:55,690] [INFO] [ButtonLedsTestRunner] Button 0 PRESSED - Rainbow animation jumped!
+[2025-11-02 00:12:55,868] [INFO] [ButtonLedsTestRunner] Button 0 released (GPIO 22) - Total clicks: 11
+[2025-11-02 00:12:55,869] [INFO] [ButtonLedsTestRunner] Button 0 RELEASED - Color wipe animation jumped!
+[2025-11-02 00:12:56,248] [INFO] [ButtonLedsTestRunner] Button 0 pressed (GPIO 22) - Click #12
+[2025-11-02 00:12:56,249] [INFO] [ButtonLedsTestRunner] Button 0 PRESSED - Rainbow animation jumped!
+[2025-11-02 00:12:57,422] [INFO] [ButtonLedsTestRunner] Button 0 released (GPIO 22) - Total clicks: 12
+[2025-11-02 00:12:57,422] [INFO] [ButtonLedsTestRunner] Button 0 RELEASED - Color wipe animation jumped!
+[2025-11-02 00:12:57,914] [INFO] [ButtonLedsTestRunner] Button 0 pressed (GPIO 22) - Click #13
+[2025-11-02 00:12:57,915] [INFO] [ButtonLedsTestRunner] Button 0 PRESSED - Rainbow animation jumped!
+[2025-11-02 00:12:58,731] [INFO] [ButtonLedsTestRunner] Button 0 released (GPIO 22) - Total clicks: 13
+[2025-11-02 00:12:58,732] [INFO] [ButtonLedsTestRunner] Button 0 RELEASED - Color wipe animation jumped!
+[2025-11-02 00:12:59,222] [INFO] [ButtonLedsTestRunner] Button 0 pressed (GPIO 22) - Click #14
+[2025-11-02 00:12:59,223] [INFO] [ButtonLedsTestRunner] Button 0 PRESSED - Rainbow animation jumped!
+[2025-11-02 00:12:59,629] [INFO] [ButtonLedsTestRunner] Button 0 released (GPIO 22) - Total clicks: 14
+[2025-11-02 00:12:59,630] [INFO] [ButtonLedsTestRunner] Button 0 RELEASED - Color wipe animation jumped!
+[2025-11-02 00:12:59,811] [INFO] [ButtonLedsTestRunner] Button 0 pressed (GPIO 22) - Click #15
+[2025-11-02 00:12:59,811] [INFO] [ButtonLedsTestRunner] Button 0 PRESSED - Rainbow animation jumped!
+[2025-11-02 00:13:00,059] [INFO] [ButtonLedsTestRunner] Button 0 released (GPIO 22) - Total clicks: 15
+[2025-11-02 00:13:00,060] [INFO] [ButtonLedsTestRunner] Button 0 RELEASED - Color wipe animation jumped!
+[2025-11-02 00:13:00,495] [INFO] [ButtonLedsTestRunner] Button 0 pressed (GPIO 22) - Click #16
+[2025-11-02 00:13:00,496] [INFO] [ButtonLedsTestRunner] Button 0 PRESSED - Rainbow animation jumped!
+[2025-11-02 00:13:00,907] [INFO] [ButtonLedsTestRunner] Button 0 released (GPIO 22) - Total clicks: 16
+[2025-11-02 00:13:00,908] [INFO] [ButtonLedsTestRunner] Button 0 RELEASED - Color wipe animation jumped!
+[2025-11-02 00:13:01,043] [INFO] [ButtonLedsTestRunner] Button 0 pressed (GPIO 22) - Click #17
+[2025-11-02 00:13:01,044] [INFO] [ButtonLedsTestRunner] Button 0 PRESSED - Rainbow animation jumped!
+[2025-11-02 00:13:02,177] [INFO] [ButtonLedsTestRunner] Button 0 released (GPIO 22) - Total clicks: 17
+[2025-11-02 00:13:02,178] [INFO] [ButtonLedsTestRunner] Button 0 RELEASED - Color wipe animation jumped!
+[2025-11-02 00:13:02,335] [INFO] [ButtonLedsTestRunner] Button 0 pressed (GPIO 22) - Click #18
+[2025-11-02 00:13:02,336] [INFO] [ButtonLedsTestRunner] Button 0 PRESSED - Rainbow animation jumped!
+[2025-11-02 00:13:02,868] [INFO] [ButtonLedsTestRunner] Button 0 released (GPIO 22) - Total clicks: 18
+[2025-11-02 00:13:02,869] [INFO] [ButtonLedsTestRunner] Button 0 RELEASED - Color wipe animation jumped!
+[2025-11-02 00:13:03,022] [INFO] [ButtonLedsTestRunner] Button 0 pressed (GPIO 22) - Click #19
+[2025-11-02 00:13:03,023] [INFO] [ButtonLedsTestRunner] Button 0 PRESSED - Rainbow animation jumped!
+[2025-11-02 00:13:03,470] [INFO] [ButtonLedsTestRunner] Button 0 released (GPIO 22) - Total clicks: 19
+[2025-11-02 00:13:03,471] [INFO] [ButtonLedsTestRunner] Button 0 RELEASED - Color wipe animation jumped!
+[2025-11-02 00:13:03,603] [INFO] [ButtonLedsTestRunner] Button 0 pressed (GPIO 22) - Click #20
+[2025-11-02 00:13:03,604] [INFO] [ButtonLedsTestRunner] Button 0 PRESSED - Rainbow animation jumped!
+[2025-11-02 00:13:04,136] [INFO] [ButtonLedsTestRunner] Button 0 released (GPIO 22) - Total clicks: 20
+[2025-11-02 00:13:04,137] [INFO] [ButtonLedsTestRunner] Button 0 RELEASED - Color wipe animation jumped!
+[2025-11-02 00:13:04,295] [INFO] [ButtonLedsTestRunner] Button 0 pressed (GPIO 22) - Click #21
+[2025-11-02 00:13:04,296] [INFO] [ButtonLedsTestRunner] Button 0 PRESSED - Rainbow animation jumped!
+[2025-11-02 00:13:04,940] [INFO] [ButtonLedsTestRunner] Button 0 released (GPIO 22) - Total clicks: 21
+[2025-11-02 00:13:04,941] [INFO] [ButtonLedsTestRunner] Button 0 RELEASED - Color wipe animation jumped!
+[2025-11-02 00:13:05,147] [INFO] [ButtonLedsTestRunner] Button 0 pressed (GPIO 22) - Click #22
+[2025-11-02 00:13:05,147] [INFO] [ButtonLedsTestRunner] Button 0 PRESSED - Rainbow animation jumped!
+[2025-11-02 00:13:06,274] [INFO] [ButtonLedsTestRunner] Button 0 released (GPIO 22) - Total clicks: 22
+[2025-11-02 00:13:06,275] [INFO] [ButtonLedsTestRunner] Button 0 RELEASED - Color wipe animation jumped!
+[2025-11-02 00:13:20,086] [INFO] [ButtonLedsTestRunner] LED turned ON (GPIO26) - keyboard command '1'
+[2025-11-02 00:13:20,556] [INFO] [ButtonLedsTestRunner] LED turned OFF (GPIO26) - keyboard command '0'
+[2025-11-02 00:13:20,829] [INFO] [ButtonLedsTestRunner] LED turned ON (GPIO26) - keyboard command '1'
+[2025-11-02 00:13:20,982] [INFO] [ButtonLedsTestRunner] LED turned OFF (GPIO26) - keyboard command '0'
+[2025-11-02 00:13:21,206] [INFO] [ButtonLedsTestRunner] LED turned ON (GPIO26) - keyboard command '1'
+[2025-11-02 00:13:21,361] [INFO] [ButtonLedsTestRunner] LED turned OFF (GPIO26) - keyboard command '0'
+[2025-11-02 00:13:21,539] [INFO] [ButtonLedsTestRunner] LED turned ON (GPIO26) - keyboard command '1'
+[2025-11-02 00:13:21,902] [INFO] [ButtonLedsTestRunner] LED turned OFF (GPIO26) - keyboard command '0'
+[2025-11-02 00:13:22,118] [INFO] [ButtonLedsTestRunner] LED turned ON (GPIO26) - keyboard command '1'
+[2025-11-02 00:13:22,309] [INFO] [ButtonLedsTestRunner] LED turned OFF (GPIO26) - keyboard command '0'
+[2025-11-02 00:13:22,468] [INFO] [ButtonLedsTestRunner] LED turned ON (GPIO26) - keyboard command '1'
+[2025-11-02 00:13:22,627] [INFO] [ButtonLedsTestRunner] LED turned OFF (GPIO26) - keyboard command '0'
+[2025-11-02 00:13:22,758] [INFO] [ButtonLedsTestRunner] LED turned ON (GPIO26) - keyboard command '1'
+[2025-11-02 00:13:22,922] [INFO] [ButtonLedsTestRunner] LED turned OFF (GPIO26) - keyboard command '0'
+[2025-11-02 00:13:23,270] [INFO] [ButtonLedsTestRunner] Test completed after 6773 loops
+[2025-11-02 00:13:23,290] [INFO] [ButtonLedsTestRunner] LED strips cleared
+[2025-11-02 00:13:23,291] [INFO] [ButtonLedsTestRunner] Combined test completed - GPIO, strips, and terminal will be cleaned up automatically
