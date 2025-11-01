@@ -7,10 +7,10 @@ Supports multiple buttons with edge detection and state tracking.
 
 from .button_state import ButtonState
 from .interfaces import IButtonReader
-from .gpio_reader import GPIOButtonReader
+from .button_reader import ButtonReader
 
 __all__ = [
     "ButtonState",
     "IButtonReader", 
-    "GPIOButtonReader"
+    "ButtonReader"
 ]
