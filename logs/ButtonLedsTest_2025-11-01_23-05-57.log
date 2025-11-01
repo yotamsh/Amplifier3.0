@@ -1,0 +1,19 @@
+[2025-11-01 23:05:57,022] [INFO] [ButtonLedsTestRunner] Combined button + LED test starting
+[2025-11-01 23:05:57,022] [INFO] [ButtonLedsTestRunner] Configuration: 1 button(s), 1 LED, 200Hz sampling
+[2025-11-01 23:05:57,023] [INFO] [ButtonReader] GPIO setup complete: 1 pins, no pulls
+[2025-11-01 23:05:57,023] [INFO] [ButtonReader] ButtonReader initialized with 1 buttons
+[2025-11-01 23:05:57,023] [INFO] [ButtonReader] Button mapping: Button0=GPIO22
+[2025-11-01 23:05:57,024] [INFO] [ButtonReader] Button reader initialized successfully
+[2025-11-01 23:05:57,024] [INFO] [ButtonLedsTestRunner] LED initialized on GPIO26 (OFF)
+[2025-11-01 23:06:00,780] [INFO] [ButtonLedsTestRunner] LED turned ON (GPIO26) - keyboard command '1'
+[2025-11-01 23:06:02,141] [INFO] [ButtonLedsTestRunner] LED turned OFF (GPIO26) - keyboard command '0'
+[2025-11-01 23:06:04,382] [INFO] [ButtonLedsTestRunner] LED turned ON (GPIO26) - keyboard command '1'
+[2025-11-01 23:06:05,073] [INFO] [ButtonLedsTestRunner] Button 0 pressed (GPIO 22) - Click #1
+[2025-11-01 23:06:06,061] [INFO] [ButtonLedsTestRunner] LED turned OFF (GPIO26) - keyboard command '0'
+[2025-11-01 23:06:06,749] [INFO] [ButtonLedsTestRunner] LED turned ON (GPIO26) - keyboard command '1'
+[2025-11-01 23:06:07,323] [INFO] [ButtonLedsTestRunner] Periodic status: Buttons: 1 pressed: 0(GPIO22) | Clicks: B0:1 | LED: ON
+[2025-11-01 23:06:07,350] [INFO] [ButtonLedsTestRunner] Button 0 released (GPIO 22) - Total clicks: 1
+[2025-11-01 23:06:08,249] [INFO] [ButtonLedsTestRunner] LED turned OFF (GPIO26) - keyboard command '0'
+[2025-11-01 23:06:08,599] [INFO] [ButtonLedsTestRunner] LED turned ON (GPIO26) - keyboard command '1'
+[2025-11-01 23:06:12,017] [INFO] [ButtonLedsTestRunner] Test completed after 2912 loops
+[2025-11-01 23:06:12,018] [INFO] [ButtonLedsTestRunner] Combined test completed - GPIO and terminal will be cleaned up automatically

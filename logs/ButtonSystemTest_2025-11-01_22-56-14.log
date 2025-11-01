@@ -46,3 +46,8 @@
 [2025-11-01 23:02:24,164] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
 [2025-11-01 23:02:34,421] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
 [2025-11-01 23:02:44,692] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 23:02:54,920] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 23:03:05,239] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 23:03:15,487] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 23:03:21,667] [INFO] [ButtonTestRunner] Test completed after 83207 loops
+[2025-11-01 23:03:21,668] [INFO] [ButtonTestRunner] Test completed - GPIO will be cleaned up automatically
