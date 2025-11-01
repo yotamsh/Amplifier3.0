@@ -19,7 +19,7 @@ except ImportError:
     sys.exit(1)
 
 # LED Configuration
-LED_GPIO = 16               # GPIO16 (Physical pin 36)
+LED_GPIO = 26               # GPIO26 (Physical pin 37)
 
 class ButtonLEDController:
     """Simple LED controller with cbreak mode keyboard input"""
@@ -88,7 +88,7 @@ class ButtonLEDController:
         print("🎮 BUTTON LED KEYBOARD CONTROLLER")
         print("=" * 40)
         print("Hardware Setup:")
-        print(f"  LED + → GPIO{LED_GPIO} (Physical pin 36)")
+        print(f"  LED + → GPIO{LED_GPIO} (Physical pin 37)")
         print(f"  LED - → Pi Ground (any GND pin)")
         print()
         
@@ -151,7 +151,7 @@ class ButtonLEDController:
 def main():
     """Main function"""
     print("🔌 HARDWARE SETUP CHECK:")
-    print(f"   Connect LED positive (long leg) → GPIO{LED_GPIO} (pin 36)")
+    print(f"   Connect LED positive (long leg) → GPIO{LED_GPIO} (pin 37)")
     print("   Connect LED negative (short leg) → Pi Ground (pin 34 or 39)")
     print("   Note: No resistor needed for testing (short duration)")
     print()

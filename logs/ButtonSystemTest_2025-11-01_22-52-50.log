@@ -1,0 +1,13 @@
+[2025-11-01 22:52:50,062] [INFO] [ButtonTestRunner] Button system test starting
+[2025-11-01 22:52:50,063] [INFO] [ButtonTestRunner] Testing 1 buttons at 200Hz
+[2025-11-01 22:52:50,064] [INFO] [ButtonReader] GPIO setup complete: 1 pins, no pulls
+[2025-11-01 22:52:50,064] [INFO] [ButtonReader] ButtonReader initialized with 1 buttons
+[2025-11-01 22:52:50,064] [INFO] [ButtonReader] Button mapping: Button0=GPIO16
+[2025-11-01 22:52:50,064] [INFO] [ButtonReader] Button reader initialized successfully
+[2025-11-01 22:52:52,284] [INFO] [ButtonTestRunner] Button 0 pressed (GPIO 16) - Click #1
+[2025-11-01 22:52:53,605] [INFO] [ButtonTestRunner] Button 0 released (GPIO 16) - Total clicks: 1
+[2025-11-01 22:52:54,661] [INFO] [ButtonTestRunner] Button 0 pressed (GPIO 16) - Click #2
+[2025-11-01 22:52:55,327] [INFO] [ButtonTestRunner] Button 0 released (GPIO 16) - Total clicks: 2
+[2025-11-01 22:53:00,303] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 22:53:03,723] [INFO] [ButtonTestRunner] Test completed after 2661 loops
+[2025-11-01 22:53:03,724] [INFO] [ButtonTestRunner] Test completed - GPIO will be cleaned up automatically

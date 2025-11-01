@@ -1,0 +1,48 @@
+[2025-11-01 22:56:14,662] [INFO] [ButtonTestRunner] Button system test starting
+[2025-11-01 22:56:14,663] [INFO] [ButtonTestRunner] Testing 1 buttons at 200Hz
+[2025-11-01 22:56:14,663] [INFO] [ButtonReader] GPIO setup complete: 1 pins, no pulls
+[2025-11-01 22:56:14,664] [INFO] [ButtonReader] ButtonReader initialized with 1 buttons
+[2025-11-01 22:56:14,664] [INFO] [ButtonReader] Button mapping: Button0=GPIO22
+[2025-11-01 22:56:14,664] [INFO] [ButtonReader] Button reader initialized successfully
+[2025-11-01 22:56:16,724] [INFO] [ButtonTestRunner] Button 0 pressed (GPIO 22) - Click #1
+[2025-11-01 22:56:17,708] [INFO] [ButtonTestRunner] Button 0 released (GPIO 22) - Total clicks: 1
+[2025-11-01 22:56:18,117] [INFO] [ButtonTestRunner] Button 0 pressed (GPIO 22) - Click #2
+[2025-11-01 22:56:18,836] [INFO] [ButtonTestRunner] Button 0 released (GPIO 22) - Total clicks: 2
+[2025-11-01 22:56:24,910] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 22:56:35,177] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 22:56:45,422] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 22:56:55,685] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 22:57:05,951] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 22:57:16,193] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 22:57:26,508] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 22:57:36,751] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 22:57:47,012] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 22:57:57,289] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 22:58:07,564] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 22:58:17,836] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 22:58:28,084] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 22:58:38,385] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 22:58:48,650] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 22:58:58,886] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 22:59:09,154] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 22:59:19,396] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 22:59:29,655] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 22:59:39,921] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 22:59:50,162] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 23:00:00,431] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 23:00:10,681] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 23:00:20,984] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 23:00:31,279] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 23:00:41,541] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 23:00:51,812] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 23:01:02,070] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 23:01:12,320] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 23:01:22,611] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 23:01:32,874] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 23:01:43,140] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 23:01:53,402] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 23:02:03,647] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 23:02:13,916] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 23:02:24,164] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 23:02:34,421] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
+[2025-11-01 23:02:44,692] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:2
