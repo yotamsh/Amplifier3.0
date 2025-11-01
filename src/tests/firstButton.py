@@ -193,22 +193,28 @@ class DualStripController:
                 
         except KeyboardInterrupt:
             print(f"\n\n⏹️  Animation stopped by user")
-        finally:
-            self.cleanup()
+        
+        # Automatic cleanup will happen when object is destroyed
+        print("✅ LED animation completed - strips will be cleared and GPIO cleaned up automatically")
             
     def cleanup(self):
-        """Clean up resources"""
-        print("🔄 Cleaning up...")
-        self.running = False
-        
-        # Clear both strips
-        self.clear_strip(self.strip1)
-        self.clear_strip(self.strip2)
-        
-        # Cleanup GPIO
-        GPIO.cleanup()
-        
-        print("✅ All LEDs turned off and GPIO cleaned up")
+        """Optional manual cleanup for advanced users"""
+        self._cleanup_gpio()
+    
+    def _cleanup_gpio(self):
+        """Internal cleanup method - safe for automatic calling"""
+        try:
+            # Clear both strips
+            self.clear_strip(self.strip1)
+            self.clear_strip(self.strip2)
+            GPIO.cleanup()
+            print("✅ LED strips cleared and GPIO cleaned up")
+        except Exception:
+            pass  # Silent fail during destruction
+    
+    def __del__(self):
+        """Automatic cleanup when object is destroyed"""
+        self._cleanup_gpio()
 
 def main():
     """Main function"""
@@ -229,7 +235,7 @@ def main():
         controller.run_animation()
     except Exception as e:
         print(f"❌ Error: {e}")
-        GPIO.cleanup()
+        # Automatic cleanup via __del__ will handle GPIO cleanup
 
 if __name__ == "__main__":
     main()

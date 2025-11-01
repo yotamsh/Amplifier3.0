@@ -126,21 +126,27 @@ class ButtonLEDController:
                 
         except KeyboardInterrupt:
             print("\n⏹️  Interrupted by Ctrl+C")
-        finally:
-            self.cleanup()
+        
+        # Automatic cleanup will happen when object is destroyed
+        print("✅ LED control completed - GPIO will be cleaned up automatically")
     
     def cleanup(self):
-        """Clean up resources"""
-        print("🔄 Cleaning up...")
-        self.running = False
-        
-        # Turn off LED
-        GPIO.output(LED_GPIO, GPIO.LOW)
-        
-        # Cleanup GPIO
-        GPIO.cleanup()
-        
-        print("✅ LED turned off and resources cleaned up")
+        """Optional manual cleanup for advanced users"""
+        self._cleanup_gpio()
+    
+    def _cleanup_gpio(self):
+        """Internal cleanup method - safe for automatic calling"""
+        try:
+            # Turn off LED
+            GPIO.output(LED_GPIO, GPIO.LOW)
+            GPIO.cleanup()
+            print("✅ LED turned off and GPIO cleaned up")
+        except Exception:
+            pass  # Silent fail during destruction
+    
+    def __del__(self):
+        """Automatic cleanup when object is destroyed"""
+        self._cleanup_gpio()
 
 def main():
     """Main function"""
@@ -159,9 +165,9 @@ def main():
         controller.run()
     except Exception as e:
         print(f"❌ Error: {e}")
-        # Emergency cleanup
+        # Emergency cleanup - automatic cleanup will handle this
         try:
-            GPIO.cleanup()
+            pass  # Automatic cleanup via __del__ will handle GPIO cleanup
         except:
             pass
 

@@ -111,18 +111,25 @@ class ButtonBounceDetector:
                 
         except KeyboardInterrupt:
             print(f"\n\n⏹️  Detection stopped by user")
-        finally:
-            self.cleanup()
+        
+        # Automatic cleanup will happen when object is destroyed
+        print("✅ Bounce detection completed - GPIO will be cleaned up automatically")
     
     def cleanup(self):
-        """Clean up GPIO resources"""
-        print("🔄 Cleaning up...")
-        self.running = False
-        
-        # Cleanup GPIO
-        GPIO.cleanup()
-        
-        print("✅ GPIO cleaned up")
+        """Optional manual cleanup for advanced users"""
+        self._cleanup_gpio()
+    
+    def _cleanup_gpio(self):
+        """Internal cleanup method - safe for automatic calling"""
+        try:
+            GPIO.cleanup()
+            print("✅ GPIO cleaned up")
+        except Exception:
+            pass  # Silent fail during destruction
+    
+    def __del__(self):
+        """Automatic cleanup when object is destroyed"""
+        self._cleanup_gpio()
 
 def main():
     """Main function"""
@@ -142,9 +149,9 @@ def main():
         detector.run_detection()
     except Exception as e:
         print(f"❌ Error: {e}")
-        # Emergency cleanup
+        # Emergency cleanup - automatic cleanup will handle this
         try:
-            GPIO.cleanup()
+            pass  # Automatic cleanup via __del__ will handle GPIO cleanup
         except:
             pass
 

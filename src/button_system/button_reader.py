@@ -136,14 +136,22 @@ class ButtonReader(IButtonReader):
     
     def cleanup(self) -> None:
         """
-        Clean up GPIO resources.
-        
-        Should be called before program exit to properly release GPIO pins.
+        Optional manual cleanup for advanced users.
+        Automatic cleanup happens via __del__ so this is not required.
         """
+        self._cleanup_gpio()
+    
+    def _cleanup_gpio(self) -> None:
+        """Internal cleanup method - safe for automatic calling"""
         try:
             GPIO.cleanup()
-            self._logger.info("GPIO resources cleaned up successfully")
-        except Exception as e:
-            self._logger.warning(f"GPIO cleanup warning: {e}")
+            # Only log if logger still exists (may be destroyed during shutdown)
+            if hasattr(self, '_logger') and self._logger:
+                self._logger.info("GPIO resources cleaned up successfully")
+        except Exception:
+            # Silent fail during destruction - logging system may be gone
+            pass
     
-    # No __del__ method - rely on manual cleanup only
+    def __del__(self):
+        """Automatic cleanup when object is destroyed"""
+        self._cleanup_gpio()

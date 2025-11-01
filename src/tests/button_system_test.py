@@ -28,8 +28,8 @@ except ImportError as e:
 BUTTON_PINS = [
     # 4, 
     # 5,  
-    6, 
-    # 16,
+    # 6, 
+    16,
     # 17,
     # 20,
     # 22,
@@ -119,8 +119,9 @@ class ButtonTestRunner:
             logger.info(f"Test completed after {self.loop_count} loops")
         except Exception as e:
             logger.error(f"Test error: {e}")
-        finally:
-            self.cleanup()
+        
+        # Automatic cleanup will happen when objects are destroyed
+        logger.info("Test completed - GPIO will be cleaned up automatically")
     
     def log_button_changes(self, state, logger):
         """Log individual button press/release events"""
@@ -163,15 +164,9 @@ class ButtonTestRunner:
         
         logger.info(f"Periodic status: {status_msg}")
     
-    def cleanup(self):
-        """Clean up resources"""
-        print("🔄 Cleaning up...")
+    def stop(self):
+        """Stop the test loop"""
         self.running = False
-        
-        if self.button_reader:
-            self.button_reader.cleanup()
-        
-        print("✅ Test completed and resources cleaned up")
 
 def main():
     """Main function"""
@@ -215,8 +210,8 @@ def main():
         print("❌ Failed to initialize button reader")
         test_logger.error("Test aborted due to setup failure")
     
-    # Cleanup
-    main_logger.cleanup()
+    # Automatic cleanup will happen when objects are destroyed
+    main_logger.cleanup()  # Keep this - logger cleanup is still needed
 
 # Import from shared GPIO utilities
 from gpio_utils import gpio_to_physical
