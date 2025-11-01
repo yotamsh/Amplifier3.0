@@ -4,13 +4,14 @@
 #
 
 echo "Connecting to Raspberry Pi..."
-ssh -t yotam@raspberrypi.local "./AmpSync/Amp3/setup_pi_env.sh"
+ssh -t yotam@raspberrypi.local "./AmpSync/Amp3/sync/setup_pi_env.sh"
 
 # Available commands on Pi:
-# run <script.py>        - Run Python script with sudo (for LED control)
+# run <script.py>        - Run src/script.py with sudo (for LED control)
 # python3 <script.py>    - Run Python script normally
 
-# Example: run debug_leds.py
+# Example: run main.py
+# Example: run tests/debug_leds.py
 
 # Notes:
 
@@ -30,3 +31,7 @@ ssh -t yotam@raspberrypi.local "./AmpSync/Amp3/setup_pi_env.sh"
 # dtparam=audio=off
 # # make GPIO3 to shutdown btn
 # dtoverlay=gpio-shutdown,gpio_pin=3
+
+
+# on sudo nano /etc/ssh/sshd_config, add:
+# PasswordAuthentication yes

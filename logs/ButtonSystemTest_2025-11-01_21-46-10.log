@@ -1,0 +1,22 @@
+[2025-11-01 21:46:10,965] [INFO] [ButtonTestRunner] Button system test starting
+[2025-11-01 21:46:10,966] [INFO] [ButtonTestRunner] Testing 1 buttons at 200Hz
+[2025-11-01 21:46:10,966] [INFO] [GPIOButtonReader] GPIO setup complete: 1 pins, no pulls
+[2025-11-01 21:46:10,967] [INFO] [GPIOButtonReader] GPIOButtonReader initialized with 1 buttons
+[2025-11-01 21:46:10,967] [INFO] [GPIOButtonReader] Button mapping: Button0=GPIO25
+[2025-11-01 21:46:10,968] [INFO] [GPIOButtonReader] Button reader initialized successfully
+[2025-11-01 21:46:13,517] [INFO] [ButtonTestRunner] Button 0 pressed (GPIO 25) - Click #1
+[2025-11-01 21:46:18,739] [INFO] [ButtonTestRunner] Button 0 released (GPIO 25) - Total clicks: 1
+[2025-11-01 21:46:20,775] [INFO] [ButtonTestRunner] Button 0 pressed (GPIO 25) - Click #2
+[2025-11-01 21:46:21,239] [INFO] [ButtonTestRunner] Periodic status: Status: 1 pressed: 0(GPIO25) | Clicks: B0:2
+[2025-11-01 21:46:21,395] [INFO] [ButtonTestRunner] Button 0 released (GPIO 25) - Total clicks: 2
+[2025-11-01 21:46:23,044] [INFO] [ButtonTestRunner] Button 0 pressed (GPIO 25) - Click #3
+[2025-11-01 21:46:23,879] [INFO] [ButtonTestRunner] Button 0 released (GPIO 25) - Total clicks: 3
+[2025-11-01 21:46:24,857] [INFO] [ButtonTestRunner] Button 0 pressed (GPIO 25) - Click #4
+[2025-11-01 21:46:25,296] [INFO] [ButtonTestRunner] Button 0 released (GPIO 25) - Total clicks: 4
+[2025-11-01 21:46:25,708] [INFO] [ButtonTestRunner] Button 0 pressed (GPIO 25) - Click #5
+[2025-11-01 21:46:25,940] [INFO] [ButtonTestRunner] Button 0 released (GPIO 25) - Total clicks: 5
+[2025-11-01 21:46:26,358] [INFO] [ButtonTestRunner] Button 0 pressed (GPIO 25) - Click #6
+[2025-11-01 21:46:26,597] [INFO] [ButtonTestRunner] Button 0 released (GPIO 25) - Total clicks: 6
+[2025-11-01 21:46:31,535] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:6
+[2025-11-01 21:46:32,320] [INFO] [ButtonTestRunner] Test completed after 4154 loops
+[2025-11-01 21:46:32,321] [INFO] [GPIOButtonReader] GPIO resources cleaned up successfully

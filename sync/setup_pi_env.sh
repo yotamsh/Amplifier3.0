@@ -36,7 +36,7 @@ source venv_pi/bin/activate || {
 echo -e "${GREEN}✓ Virtual environment activated${NC}"
 echo -e "${GREEN}✓ Current directory: $(pwd)${NC}"
 #echo -e "${GREEN}✓ Python path: $(which python3)${NC}"
-echo -e "${BLUE}✓ 'run' alias created for: sudo ./venv_pi/bin/python3${NC}"
+echo -e "${BLUE}✓ 'run' function created for: sudo ./venv_pi/bin/python3 src/\$1${NC}"
 echo ""
 
 # Start interactive bash with custom setup
@@ -47,15 +47,24 @@ source venv_pi/bin/activate 2>/dev/null || true
 # Load user bashrc if it exists
 source ~/.bashrc 2>/dev/null || true
 
-# Create the run alias
-alias run="sudo ./venv_pi/bin/python3"
+# Create the run function (automatically adds src/ prefix)
+run() { sudo ./venv_pi/bin/python3 "src/$1" "${@:2}"; }
+
+# Add tab completion for run function
+_run_complete() {
+    local cur="${COMP_WORDS[COMP_CWORD]}"
+    local files=$(find src -name "*.py" -type f 2>/dev/null | sed "s|^src/||")
+    COMPREPLY=($(compgen -W "$files" -- "$cur"))
+}
+complete -F _run_complete run
 
 # Show helpful commands
 echo ""
 echo "=== Amp3 Pi Environment ==="
 echo "Available commands:"
-echo "  run <script.py>         - Run with sudo (LED control)"
-echo "  python3 <script.py>     - Run without sudo"
+echo "  run <script.py>         - Run src/script.py with sudo (LED control)"
+echo "  python3 src/<script.py> - Run without sudo"
+echo "  run main.py             - Example: runs src/main.py"
 echo "  exit                    - Disconnect from Pi"
 echo "  sudo shutdown -h now    - Shutdown Pi"
 echo ""

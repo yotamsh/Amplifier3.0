@@ -10,3 +10,7 @@ __pycache__/
 
 # Auto-generated requirements (created on Pi by sync script)
 requirements.txt
+
+# OS files
+.DS_Store
+**/.DS_Store
