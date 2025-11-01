@@ -59,7 +59,7 @@ class ButtonReader(IButtonReader):
         # Setup GPIO hardware
         self._setup_gpio()
         
-        self._logger.info(f"GPIOButtonReader initialized with {len(button_pins)} buttons")
+        self._logger.info(f"ButtonReader initialized with {len(button_pins)} buttons")
         self._logger.info(f"Button mapping: {self._get_pin_mapping()}")
     
     def _get_pin_mapping(self) -> str:

@@ -1,0 +1,20 @@
+[2025-11-01 22:15:58,250] [INFO] [ButtonTestRunner] Button system test starting
+[2025-11-01 22:15:58,251] [INFO] [ButtonTestRunner] Testing 1 buttons at 200Hz
+[2025-11-01 22:15:58,251] [INFO] [ButtonReader] GPIO setup complete: 1 pins, no pulls
+[2025-11-01 22:15:58,251] [INFO] [ButtonReader] GPIOButtonReader initialized with 1 buttons
+[2025-11-01 22:15:58,252] [INFO] [ButtonReader] Button mapping: Button0=GPIO4
+[2025-11-01 22:15:58,252] [INFO] [ButtonReader] Button reader initialized successfully
+[2025-11-01 22:16:02,905] [INFO] [ButtonTestRunner] Button 0 pressed (GPIO 4) - Click #1
+[2025-11-01 22:16:04,391] [INFO] [ButtonTestRunner] Button 0 released (GPIO 4) - Total clicks: 1
+[2025-11-01 22:16:05,729] [INFO] [ButtonTestRunner] Button 0 pressed (GPIO 4) - Click #2
+[2025-11-01 22:16:06,617] [INFO] [ButtonTestRunner] Button 0 released (GPIO 4) - Total clicks: 2
+[2025-11-01 22:16:07,530] [INFO] [ButtonTestRunner] Button 0 pressed (GPIO 4) - Click #3
+[2025-11-01 22:16:08,260] [INFO] [ButtonTestRunner] Button 0 released (GPIO 4) - Total clicks: 3
+[2025-11-01 22:16:08,505] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:3
+[2025-11-01 22:16:18,776] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:3
+[2025-11-01 22:16:29,016] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:3
+[2025-11-01 22:16:39,281] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:3
+[2025-11-01 22:16:49,548] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:3
+[2025-11-01 22:16:59,787] [INFO] [ButtonTestRunner] Periodic status: Status: No buttons currently pressed | Clicks: B0:3
+[2025-11-01 22:17:04,136] [INFO] [ButtonTestRunner] Test completed after 12846 loops
+[2025-11-01 22:17:04,137] [INFO] [ButtonReader] GPIO resources cleaned up successfully
