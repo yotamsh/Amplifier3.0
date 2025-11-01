@@ -1,6 +1,7 @@
 import logging
 from datetime import datetime
 import sys
+import traceback
 from pathlib import Path
 from contextlib import suppress
 from typing import Optional, Dict
@@ -46,12 +47,14 @@ class ClassLogger:
         self.class_name = class_name
         self.level = level
     
-    def _log(self, level: int, message: str) -> None:
+    def _log(self, level: int, message: str, exc_info: bool = False) -> None:
         """Internal logging method"""
         if level >= self.level:
-            # Create log record with class name
+            # Create log record with class name  
+            import sys
+            exc_info_tuple = sys.exc_info() if exc_info else None
             record = self.main_logger.makeRecord(
-                self.main_logger.name, level, "", 0, message, (), None
+                self.main_logger.name, level, "", 0, message, (), exc_info_tuple
             )
             record.class_name = self.class_name
             self.main_logger.handle(record)
@@ -68,9 +71,17 @@ class ClassLogger:
         """Log warning message"""
         self._log(logging.WARNING, message)
     
-    def error(self, message: str) -> None:
-        """Log error message"""
-        self._log(logging.ERROR, message)
+    def error(self, message: str, exception: Optional[Exception] = None) -> None:
+        """Log error message with optional exception details"""
+        if exception:
+            # Automatically extract exception details
+            exc_type = type(exception).__name__
+            tb = traceback.extract_tb(exception.__traceback__)
+            filename, lineno, func, text = tb[-1] if tb else ("unknown", 0, "unknown", "")
+            enhanced_message = f"{message} | Type: {exc_type} | File: {filename} | Line: {lineno}"
+            self._log(logging.ERROR, enhanced_message, exc_info=True)
+        else:
+            self._log(logging.ERROR, message)
     
     def critical(self, message: str) -> None:
         """Log critical message"""
