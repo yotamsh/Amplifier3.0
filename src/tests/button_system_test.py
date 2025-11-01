@@ -26,9 +26,9 @@ except ImportError as e:
 
 # Configuration
 BUTTON_PINS = [
-     4, 
+    # 4, 
     # 5,  
-    # 6, 
+    6, 
     # 16,
     # 17,
     # 20,
@@ -218,13 +218,8 @@ def main():
     # Cleanup
     main_logger.cleanup()
 
-def gpio_to_physical(gpio_num):
-    """Convert GPIO number to physical pin number for user reference"""
-    gpio_to_pin_map = {
-        4: 7, 5: 29, 6: 31, 16: 36, 17: 11,
-        20: 38, 22: 15, 23: 16, 24: 18, 25: 22
-    }
-    return gpio_to_pin_map.get(gpio_num, "?")
+# Import from shared GPIO utilities
+from gpio_utils import gpio_to_physical
 
 if __name__ == "__main__":
     main()

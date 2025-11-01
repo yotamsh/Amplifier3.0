@@ -139,7 +139,6 @@ class ButtonReader(IButtonReader):
         Clean up GPIO resources.
         
         Should be called before program exit to properly release GPIO pins.
-        Safe to call multiple times.
         """
         try:
             GPIO.cleanup()
@@ -147,10 +146,4 @@ class ButtonReader(IButtonReader):
         except Exception as e:
             self._logger.warning(f"GPIO cleanup warning: {e}")
     
-    def __del__(self):
-        """Destructor - attempt cleanup if not done manually"""
-        try:
-            self.cleanup()
-        except:
-            # Don't raise exceptions in destructor
-            pass
+    # No __del__ method - rely on manual cleanup only
