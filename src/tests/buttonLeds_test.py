@@ -27,20 +27,20 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 # Type checking imports - only available during static analysis
 if TYPE_CHECKING:
-    from rpi_ws281x import PixelStrip, Color
     from button_system import ButtonReader
     from button_system.button_state import ButtonState
     from hybridLogger import HybridLogger, ClassLogger
+    from led_system import LedStrip
 
 try:
     from button_system import ButtonReader
     from hybridLogger import HybridLogger
     import RPi.GPIO as GPIO
     import logging
-    from rpi_ws281x import PixelStrip, Color
+    from led_system import LedStrip, PixelStripAdapter, Pixel
 except ImportError as e:
     print(f"❌ Import error: {e}")
-    print("Make sure you're running this on a Raspberry Pi with rpi_ws281x installed")
+    print("Make sure you're running this on a Raspberry Pi with required libraries installed")
     sys.exit(1)
 
 # Configuration
@@ -69,8 +69,8 @@ LED_STRIP2_CHANNEL: int = 0
 class Animation:
     """Base non-blocking animation with time-based updates"""
     
-    def __init__(self, strip: PixelStrip, speed_ms: int, logger: Optional[ClassLogger], name: str = "Animation") -> None:
-        self.strip: PixelStrip = strip
+    def __init__(self, strip: LedStrip, speed_ms: int, logger: Optional[ClassLogger], name: str = "Animation") -> None:
+        self.strip: LedStrip = strip
         self.speed_ms: int = speed_ms  # How often to advance (milliseconds)
         self.last_update: float = time.time()
         self.logger: Optional[ClassLogger] = logger
@@ -97,7 +97,7 @@ class Animation:
         """Override in subclasses - change strip colors"""
         pass
     
-    def hsv_to_color(self, h: float, s: float, v: float) -> Color:
+    def hsv_to_color(self, h: float, s: float, v: float) -> Pixel:
         """Convert HSV to rpi_ws281x Color"""
         h = h % 360  # Wrap hue
         c: float = v * s
@@ -121,12 +121,12 @@ class Animation:
         g_int: int = int((g + m) * 255)
         b_int: int = int((b + m) * 255)
         
-        return Color(r_int, g_int, b_int)
+        return Pixel(r_int, g_int, b_int)
 
 class RainbowCycleAnimation(Animation):
     """Continuously cycling rainbow animation"""
     
-    def __init__(self, strip: PixelStrip, speed_ms: int = 50, logger: Optional[ClassLogger] = None) -> None:
+    def __init__(self, strip: LedStrip, speed_ms: int = 50, logger: Optional[ClassLogger] = None) -> None:
         super().__init__(strip, speed_ms, logger, "RainbowCycle")
         self.hue_offset: int = 0
     
@@ -137,11 +137,11 @@ class RainbowCycleAnimation(Animation):
         
     def advance(self) -> None:
         """Update rainbow pattern with offset"""
-        for i in range(self.strip.numPixels()):
+        for i in range(self.strip.num_pixels()):
             # Calculate hue based on position and offset
-            hue: float = (i * 360 / self.strip.numPixels() + self.hue_offset) % 360
-            color: Color = self.hsv_to_color(hue, 1.0, 1.0)  # Full saturation and brightness
-            self.strip.setPixelColor(i, color)
+            hue: float = (i * 360 / self.strip.num_pixels() + self.hue_offset) % 360
+            color: Pixel = self.hsv_to_color(hue, 1.0, 1.0)  # Full saturation and brightness
+            self.strip[i] = color
         
         # Advance the rainbow offset with bigger steps for more dynamic motion
         self.hue_offset = (self.hue_offset + 8) % 360  # 8 degrees per frame for faster color cycling
@@ -149,15 +149,15 @@ class RainbowCycleAnimation(Animation):
 class ColorWipeAnimation(Animation):
     """Green wipe → Red wipe → repeat animation"""
     
-    def __init__(self, strip: PixelStrip, speed_ms: int = 20, logger: Optional[ClassLogger] = None) -> None:
+    def __init__(self, strip: LedStrip, speed_ms: int = 20, logger: Optional[ClassLogger] = None) -> None:
         super().__init__(strip, speed_ms, logger, "ColorWipe")
         self.position: int = 0
-        self.color_sets: List[List[Color]] = [
-            [Color(0, 255, 0), Color(255, 0, 0)],      # Green, Red (default)
-            [Color(255, 128, 0), Color(0, 255, 255)]   # Orange, Cyan (jumped)
+        self.color_sets: List[List[Pixel]] = [
+            [Pixel(0, 255, 0), Pixel(255, 0, 0)],      # Green, Red (default)
+            [Pixel(255, 128, 0), Pixel(0, 255, 255)]   # Orange, Cyan (jumped)
         ]
         self.current_color_set: int = 0  # Index into color_sets
-        self.colors: List[Color] = self.color_sets[self.current_color_set]
+        self.colors: List[Pixel] = self.color_sets[self.current_color_set]
         self.color_index: int = 0
     
     def jump(self) -> None:
@@ -175,14 +175,14 @@ class ColorWipeAnimation(Animation):
         
     def advance(self) -> None:
         """Update wipe pattern - simple color-to-color wipe, no black clearing"""
-        current_color: Color = self.colors[self.color_index]
+        current_color: Pixel = self.colors[self.color_index]
         
         # Set current position to current color
-        self.strip.setPixelColor(self.position, current_color)
+        self.strip[self.position] = current_color
         
         self.position += 1
         
-        if self.position >= self.strip.numPixels():
+        if self.position >= self.strip.num_pixels():
             # Wipe complete - switch to next color and restart from position 0
             self.color_index = (self.color_index + 1) % len(self.colors)
             self.position = 0
@@ -202,8 +202,8 @@ class ButtonLedsTestRunner:
         self.led_state: bool = False  # False = OFF, True = ON
         
         # LED strips
-        self.strip1: Optional[PixelStrip] = None  # Rainbow animation
-        self.strip2: Optional[PixelStrip] = None  # Color wipe animation
+        self.strip1: Optional[LedStrip] = None  # Rainbow animation
+        self.strip2: Optional[LedStrip] = None  # Color wipe animation
         
         # Terminal management
         self.old_terminal_settings: Optional[List[Any]] = None
@@ -239,28 +239,35 @@ class ButtonLedsTestRunner:
             return False
     
     def setup_led_strips(self, logger: ClassLogger) -> bool:
-        """Initialize both LED strips"""
+        """Initialize both LED strips using adapters"""
         try:
             # Strip 1: Rainbow animation (GPIO18, PWM channel 0)
-            self.strip1 = PixelStrip(
-                LED_COUNT, LED_STRIP1_GPIO, LED_FREQ_HZ, LED_STRIP1_DMA,
-                False, LED_BRIGHTNESS, LED_STRIP1_CHANNEL
+            self.strip1 = PixelStripAdapter(
+                led_count=LED_COUNT,
+                gpio_pin=LED_STRIP1_GPIO,
+                freq_hz=LED_FREQ_HZ,
+                dma=LED_STRIP1_DMA,
+                invert=False,
+                brightness=LED_BRIGHTNESS,
+                channel=LED_STRIP1_CHANNEL
             )
-            self.strip1.begin()
             logger.info(f"Strip 1 initialized: GPIO{LED_STRIP1_GPIO}, PWM channel {LED_STRIP1_CHANNEL}")
             
             # Strip 2: Color wipe animation (GPIO21, channel 0) - GPIO21 doesn't use PWM
-            self.strip2 = PixelStrip(
-                LED_COUNT, LED_STRIP2_GPIO, LED_FREQ_HZ, LED_STRIP2_DMA,
-                False, LED_BRIGHTNESS, LED_STRIP2_CHANNEL
+            self.strip2 = PixelStripAdapter(
+                led_count=LED_COUNT,
+                gpio_pin=LED_STRIP2_GPIO,
+                freq_hz=LED_FREQ_HZ,
+                dma=LED_STRIP2_DMA,
+                invert=False,
+                brightness=LED_BRIGHTNESS,
+                channel=LED_STRIP2_CHANNEL
             )
-            self.strip2.begin()
             logger.info(f"Strip 2 initialized: GPIO{LED_STRIP2_GPIO}, PWM channel {LED_STRIP2_CHANNEL}")
             
-            # Clear both strips initially
-            for i in range(LED_COUNT):
-                self.strip1.setPixelColor(i, Color(0, 0, 0))
-                self.strip2.setPixelColor(i, Color(0, 0, 0))
+            # Clear both strips initially using clean slice notation
+            self.strip1[:] = Pixel(0, 0, 0)
+            self.strip2[:] = Pixel(0, 0, 0)
             self.strip1.show()
             self.strip2.show()
             
@@ -429,9 +436,8 @@ class ButtonLedsTestRunner:
         finally:
             # Clear LED strips before exit
             try:
-                for i in range(LED_COUNT):
-                    self.strip1.setPixelColor(i, Color(0, 0, 0))
-                    self.strip2.setPixelColor(i, Color(0, 0, 0))
+                self.strip1[:] = Pixel(0, 0, 0)
+                self.strip2[:] = Pixel(0, 0, 0)
                 self.strip1.show()
                 self.strip2.show()
                 logger.info("LED strips cleared")
@@ -484,9 +490,8 @@ class ButtonLedsTestRunner:
             
             # Clear LED strips
             if self.strip1:
-                for i in range(LED_COUNT):
-                    self.strip1.setPixelColor(i, Color(0, 0, 0))
-                    self.strip2.setPixelColor(i, Color(0, 0, 0))
+                self.strip1[:] = Pixel(0, 0, 0)
+                self.strip2[:] = Pixel(0, 0, 0)
                 self.strip1.show()
                 self.strip2.show()
             
