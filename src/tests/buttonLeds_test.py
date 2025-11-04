@@ -52,7 +52,8 @@ BUTTON_PINS: List[int] = [
 LED_GPIO: int = 26  # GPIO26 (Physical pin 37) - no conflicts with button or other systems
 
 # LED Strip Configuration
-LED_COUNT: int = 300         # Number of LEDs per strip
+LED_STRIP1_COUNT: int = 600  # Rainbow strip LED count
+LED_STRIP2_COUNT: int = 300  # Wipe strip LED count  
 LED_BRIGHTNESS: int = 26     # 0-255 (10% brightness for testing)
 LED_FREQ_HZ: int = 800000    # 800kHz signal frequency
 
@@ -243,7 +244,7 @@ class ButtonLedsTestRunner:
         try:
             # Strip 1: Rainbow animation (GPIO18, PWM channel 0)
             self.strip1 = PixelStripAdapter(
-                led_count=LED_COUNT,
+                led_count=LED_STRIP1_COUNT,
                 gpio_pin=LED_STRIP1_GPIO,
                 freq_hz=LED_FREQ_HZ,
                 dma=LED_STRIP1_DMA,
@@ -255,7 +256,7 @@ class ButtonLedsTestRunner:
             
             # Strip 2: Color wipe animation (GPIO21, channel 0) - GPIO21 doesn't use PWM
             self.strip2 = PixelStripAdapter(
-                led_count=LED_COUNT,
+                led_count=LED_STRIP2_COUNT,
                 gpio_pin=LED_STRIP2_GPIO,
                 freq_hz=LED_FREQ_HZ,
                 dma=LED_STRIP2_DMA,
@@ -271,7 +272,7 @@ class ButtonLedsTestRunner:
             self.strip1.show()
             self.strip2.show()
             
-            logger.info(f"LED strips ready: {LED_COUNT} LEDs each, GPIO{LED_STRIP1_GPIO}+GPIO{LED_STRIP2_GPIO}")
+            logger.info(f"LED strips ready: Strip1={LED_STRIP1_COUNT} LEDs, Strip2={LED_STRIP2_COUNT} LEDs, GPIO{LED_STRIP1_GPIO}+GPIO{LED_STRIP2_GPIO}")
             return True
             
         except Exception as e:
@@ -366,7 +367,7 @@ class ButtonLedsTestRunner:
         print("Hardware Setup:")
         print("• Button: SPDT with RC circuit → GPIO22")
         print("• LED control: GPIO26 → LED positive + Ground")
-        print("• LED Strip 1: GPIO18 → Rainbow cycle animation (300 LEDs)")
+        print("• LED Strip 1: GPIO18 → Rainbow cycle animation (600 LEDs)")
         print("• LED Strip 2: GPIO21 → Green/Red wipe animation (300 LEDs)")
         print()
         
@@ -515,14 +516,14 @@ def main() -> None:
     print("Hardware Requirements:")
     print("• 1 SPDT button with RC circuit (100nF + 330Ω)")
     print("• 1 LED with appropriate current limiting")
-    print("• 2 WS2812B LED strips (300 LEDs each)")
-    print("• External 5V power supply (6A+ recommended)")
+    print("• 2 WS2812B LED strips (600 + 300 LEDs)")
+    print("• External 5V power supply (10A+ recommended for 900 LEDs)")
     print()
     print("Connection Guide:")
     print(f"  Button      → GPIO{BUTTON_PINS[0]:2d} (Physical pin 15)")  
     print(f"  LED control → GPIO{LED_GPIO:2d} (Physical pin 37)")
-    print(f"  LED Strip 1 → GPIO{LED_STRIP1_GPIO:2d} (Physical pin 12) - Rainbow animation")
-    print(f"  LED Strip 2 → GPIO{LED_STRIP2_GPIO:2d} (Physical pin 40) - Color wipe animation")
+    print(f"  LED Strip 1 → GPIO{LED_STRIP1_GPIO:2d} (Physical pin 12) - Rainbow animation (600 LEDs)")
+    print(f"  LED Strip 2 → GPIO{LED_STRIP2_GPIO:2d} (Physical pin 40) - Color wipe animation (300 LEDs)")
     print("  LED - & Strips GND → Pi Ground + External PSU Ground")
     print("  Button → Common to GPIO, NC to GND, NO to 3.3V")
     print()
@@ -560,7 +561,7 @@ def main() -> None:
     gpio_logger: ClassLogger = main_logger.get_class_logger("ButtonReader", logging.INFO)
     
     test_logger.info("Combined button + LED + strip animation test starting")
-    test_logger.info(f"Configuration: {len(BUTTON_PINS)} button(s), 1 LED, 2 strips (300 LEDs each), ~50Hz sampling")
+    test_logger.info(f"Configuration: {len(BUTTON_PINS)} button(s), 1 LED, 2 strips ({LED_STRIP1_COUNT}+{LED_STRIP2_COUNT} LEDs), ~50Hz sampling")
     
     # Run the test
     test_runner: ButtonLedsTestRunner = ButtonLedsTestRunner()

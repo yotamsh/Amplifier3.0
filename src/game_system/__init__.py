@@ -10,6 +10,7 @@ from .sequence_detector import SequenceDetector
 from .game_controller import GameController
 from .states import IdleState, AmplifyState, TestState
 from .animations import RainbowAnimation, BreathingAnimation, StaticColorAnimation
+from .config import GameConfig, LedStripConfig, ButtonConfig, create_default_config
 
 __all__ = [
     # Base classes
@@ -24,5 +25,10 @@ __all__ = [
     # Animations
     "RainbowAnimation",
     "BreathingAnimation",
-    "StaticColorAnimation"
+    "StaticColorAnimation",
+    # Configuration
+    "GameConfig",
+    "LedStripConfig", 
+    "ButtonConfig",
+    "create_default_config"
 ]

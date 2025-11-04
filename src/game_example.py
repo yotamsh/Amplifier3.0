@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 try:
     from button_system import ButtonReader
     from led_system import PixelStripAdapter
-    from game_system import GameController, IdleState
+    from game_system import GameController, create_default_config
     from hybridLogger import HybridLogger
     import RPi.GPIO as GPIO
 except ImportError as e:
@@ -32,13 +32,8 @@ def create_game_system():
     Returns:
         GameController: Configured game controller ready to run
     """
-    # Configuration (adjust these for your setup)
-    BUTTON_PINS = [22, 23, 24, 25, 26, 27, 28, 29, 30, 31]  # 10 buttons
-    LED_STRIP_1_GPIO = 18
-    LED_STRIP_2_GPIO = 21
-    LED_COUNT = 300
-    LED_BRIGHTNESS = 26  # 10% brightness for testing
-    TARGET_FPS = 30
+    # Use default configuration (can be customized here)
+    config = create_default_config()
     
     # Initialize logging
     main_logger = HybridLogger("GameSystem")
@@ -46,39 +41,26 @@ def create_game_system():
     button_logger = main_logger.get_class_logger("ButtonReader", logging.INFO)
     
     try:
-        # Initialize button reader
+        # Initialize button reader using config
         button_reader = ButtonReader(
-            button_pins=BUTTON_PINS,
+            button_pins=config.button_config.pins,
             logger=button_logger,
-            pull_mode=GPIO.PUD_OFF  # Assuming external pull circuits
+            pull_mode=config.button_config.pull_mode
         )
         
-        # Initialize LED strips
+        # Initialize LED strips using config
         led_strips = []
-        
-        # Strip 1
-        strip1 = PixelStripAdapter(
-            led_count=LED_COUNT,
-            gpio_pin=LED_STRIP_1_GPIO,
-            freq_hz=800000,
-            dma=10,
-            invert=False,
-            brightness=LED_BRIGHTNESS,
-            channel=0
-        )
-        led_strips.append(strip1)
-        
-        # Strip 2  
-        strip2 = PixelStripAdapter(
-            led_count=LED_COUNT,
-            gpio_pin=LED_STRIP_2_GPIO,
-            freq_hz=800000,
-            dma=5,
-            invert=False,
-            brightness=LED_BRIGHTNESS,
-            channel=0
-        )
-        led_strips.append(strip2)
+        for strip_config in config.led_strips:
+            strip = PixelStripAdapter(
+                led_count=strip_config.led_count,
+                gpio_pin=strip_config.gpio_pin,
+                freq_hz=strip_config.freq_hz,
+                dma=strip_config.dma,
+                invert=strip_config.invert,
+                brightness=strip_config.brightness,
+                channel=strip_config.channel
+            )
+            led_strips.append(strip)
         
         # Clear strips initially
         from led_system.pixel import Pixel
@@ -87,16 +69,16 @@ def create_game_system():
             strip[:] = black
             strip.show()
         
-        # Create game controller
+        # Create game controller with config
         game_controller = GameController(
             button_reader=button_reader,
             led_strips=led_strips,
-            target_fps=TARGET_FPS,
+            config=config,
             logger=game_logger
         )
         
         game_logger.info("Game system initialized successfully")
-        game_logger.info(f"Configuration: {len(BUTTON_PINS)} buttons, {len(led_strips)} LED strips, {TARGET_FPS} FPS")
+        game_logger.info(f"Configuration: {config.button_count} buttons, {config.strip_count} LED strips, {config.target_fps:.1f} FPS")
         
         return game_controller, main_logger
         

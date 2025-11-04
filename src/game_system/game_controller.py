@@ -8,6 +8,7 @@ from typing import List, Dict, Optional, TYPE_CHECKING
 from .base_classes import GameState
 from .sequence_detector import SequenceDetector
 from .states import IdleState
+from .config import GameConfig
 
 if TYPE_CHECKING:
     from button_system.interfaces import IButtonReader
@@ -30,7 +31,7 @@ class GameController:
     def __init__(self, 
                  button_reader: 'IButtonReader', 
                  led_strips: List['LedStrip'],
-                 target_fps: int = 30,
+                 config: GameConfig,
                  logger: Optional['ClassLogger'] = None):
         """
         Initialize the game controller.
@@ -38,22 +39,25 @@ class GameController:
         Args:
             button_reader: Interface for reading button states
             led_strips: List of LED strip controllers
-            target_fps: Target frame rate for updates and rendering
+            config: Game configuration
             logger: Optional logger for debugging and monitoring
         """
+        config.validate()  # Basic validation
+        
         self.button_reader: 'IButtonReader' = button_reader
         self.led_strips: List['LedStrip'] = led_strips
-        self.target_fps: int = target_fps
-        self.target_frame_time: float = 1.0 / target_fps
+        self.config: GameConfig = config
+        self.target_frame_time: float = config.frame_duration_ms / 1000.0
         self.logger: Optional['ClassLogger'] = logger
         
         # State management
         self.current_state: GameState = IdleState()
+        self.current_state.config = config  # Pass config to state
         self.running: bool = True
         
         # Global sequence detectors (persist across state transitions)
         self.sequence_detectors: Dict[str, SequenceDetector] = {
-            "code_mode": SequenceDetector([7, 7, 7], max_delay_ms=1500)
+            "code_mode": SequenceDetector([7, 7, 7], max_delay_ms=config.sequence_timeout_ms)
         }
         
         # Timing and performance tracking
@@ -62,7 +66,7 @@ class GameController:
         self.total_frame_time: float = 0.0
         
         if self.logger:
-            self.logger.info(f"GameController initialized: {target_fps} FPS target, {len(led_strips)} LED strips")
+            self.logger.info(f"GameController initialized: {config.target_fps:.1f} FPS target, {len(led_strips)} LED strips")
     
     def update(self) -> None:
         """
@@ -124,15 +128,19 @@ class GameController:
         for i, (was_changed, is_pressed) in enumerate(zip(button_state.was_changed, button_state.for_button)):
             if was_changed and is_pressed:  # Button just pressed
                 
+                # Basic bounds check
+                if i >= self.config.button_count:
+                    continue
+                
                 # Check code mode sequence (button 7 pressed 3 times)
                 if i == 7:
                     if self.sequence_detectors["code_mode"].add_event(7):
                         if self.logger:
                             self.logger.info("Code mode sequence detected (button 7 x3)")
-                        # Return CodeModeState() when you implement it
-                        # For now, return to TestState or stay in current
                         from .states import TestState
-                        return TestState()
+                        test_state = TestState()
+                        test_state.config = self.config
+                        return test_state
                 else:
                     # Any other button press resets the code mode sequence
                     self.sequence_detectors["code_mode"].reset()
@@ -155,6 +163,10 @@ class GameController:
         
         # Switch to new state
         self.current_state = new_state
+        
+        # Pass config to new state
+        if hasattr(self.current_state, 'config'):
+            self.current_state.config = self.config
         
         # Call enter handler on new state
         if hasattr(self.current_state, 'on_enter'):
@@ -184,8 +196,8 @@ class GameController:
                     f"(target: {self.target_frame_time*1000:.1f}ms)"
                 )
         
-        # Log periodic performance stats (every 10 seconds)
-        if self.frame_count % (self.target_fps * 10) == 0:
+        # Log periodic performance stats (every 10 seconds)  
+        if self.frame_count % (int(self.config.target_fps) * 10) == 0:
             avg_frame_time = self.total_frame_time / self.frame_count
             actual_fps = 1.0 / avg_frame_time if avg_frame_time > 0 else 0
             
@@ -203,7 +215,7 @@ class GameController:
         Call this from your main() function for automatic frame management.
         """
         if self.logger:
-            self.logger.info(f"Starting game loop at {self.target_fps} FPS")
+            self.logger.info(f"Starting game loop at {self.config.target_fps:.1f} FPS")
         
         try:
             while self.running:

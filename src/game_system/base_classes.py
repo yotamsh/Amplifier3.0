@@ -104,9 +104,12 @@ class Animation(ABC):
         Returns:
             True if animation was updated, False if skipped
         """
-        if self.should_update():
+        now = time.time()
+        elapsed_ms = (now - self.last_update) * 1000
+        
+        if elapsed_ms >= self.speed_ms:
             self.advance(dt)
-            self.last_update = time.time()
+            self.last_update = now
             return True
         return False
     

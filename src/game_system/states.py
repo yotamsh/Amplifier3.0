@@ -44,7 +44,8 @@ class IdleState(GameState):
         # Transition to Amplify if any button is pressed
         if button_state.total_buttons_pressed > 0:
             pressed_buttons = {i for i, pressed in enumerate(button_state.for_button) if pressed}
-            return AmplifyState(pressed_buttons=pressed_buttons)
+            new_state = AmplifyState(pressed_buttons=pressed_buttons, config=getattr(self, 'config', None))
+            return new_state
         
         return None
     
@@ -70,7 +71,7 @@ class AmplifyState(GameState):
     """
     Amplify state - rainbow animations for each pressed button.
     
-    Each button controls a 30-LED section with its own rainbow animation.
+    Each button controls an LED section with its own rainbow animation.
     Dynamically adds/removes animations based on button presses.
     
     Transitions:
@@ -78,12 +79,11 @@ class AmplifyState(GameState):
     - All buttons pressed → PartyState (if implemented)
     """
     
-    LEDS_PER_BUTTON = 30
-    
-    def __init__(self, pressed_buttons: Set[int] = None):
+    def __init__(self, pressed_buttons: Set[int] = None, config=None):
         super().__init__()
         self.pressed_buttons: Set[int] = pressed_buttons or set()
         self.button_animations: Dict[int, RainbowAnimation] = {}
+        self.config = config  # Will be set by GameController
         self._setup_animations()
     
     def _setup_animations(self):
@@ -93,8 +93,14 @@ class AmplifyState(GameState):
     
     def _create_button_animation(self, button_id: int):
         """Create rainbow animation for specific button"""
-        start_led = button_id * self.LEDS_PER_BUTTON
-        end_led = start_led + self.LEDS_PER_BUTTON
+        # Basic LED distribution - will be improved later
+        leds_per_button = 30  # Temporary fallback
+        if self.config:
+            total_leds = self.config.total_led_count
+            leds_per_button = total_leds // self.config.button_count
+            
+        start_led = button_id * leds_per_button
+        end_led = start_led + leds_per_button
         
         self.button_animations[button_id] = RainbowAnimation(
             led_range=(start_led, end_led),
