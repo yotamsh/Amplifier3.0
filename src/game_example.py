@@ -15,14 +15,49 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 try:
     from button_system import ButtonReader
-    from led_system import PixelStripAdapter
-    from game_system import GameController, IdleState
+    from led_system import PixelStripAdapter, Pixel
+    from game_system import GameController
+    from game_system.config import GameConfig, ButtonConfig, LedStripConfig
     from hybridLogger import HybridLogger
     import RPi.GPIO as GPIO
 except ImportError as e:
     print(f"❌ Import error: {e}")
     print("Make sure you're running this on a Raspberry Pi with required libraries installed")
     sys.exit(1)
+
+
+def create_default_config() -> GameConfig:
+    """Create default configuration for development/testing"""
+    
+    button_config = ButtonConfig(
+        pins=[22, 23, 24, 25, 26, 27, 28, 29, 30, 31],  # 10 buttons
+        pull_mode=GPIO.PUD_OFF,
+        sample_rate_hz=200
+    )
+    
+    led_strips = [
+        LedStripConfig(
+            gpio_pin=18,
+            led_count=300,
+            dma=10,
+            brightness=26,  # 10% brightness for testing
+            channel=0
+        ),
+        LedStripConfig(
+            gpio_pin=21, 
+            led_count=300,
+            dma=5,
+            brightness=26,  # 10% brightness for testing
+            channel=0
+        )
+    ]
+    
+    return GameConfig(
+        button_config=button_config,
+        led_strips=led_strips,
+        frame_duration_ms=20,  # 50 FPS
+        sequence_timeout_ms=1500
+    )
 
 
 def create_game_system():
@@ -32,13 +67,9 @@ def create_game_system():
     Returns:
         GameController: Configured game controller ready to run
     """
-    # Configuration (adjust these for your setup)
-    BUTTON_PINS = [22, 23, 24, 25, 26, 27, 28, 29, 30, 31]  # 10 buttons
-    LED_STRIP_1_GPIO = 18
-    LED_STRIP_2_GPIO = 21
-    LED_COUNT = 300
-    LED_BRIGHTNESS = 26  # 10% brightness for testing
-    FRAME_DURATION_MS = 20  # 50 FPS
+    # Create and validate configuration
+    config = create_default_config()
+    config.validate()
     
     # Initialize logging
     main_logger = HybridLogger("GameSystem")
@@ -48,60 +79,42 @@ def create_game_system():
     try:
         # Initialize button reader
         button_reader = ButtonReader(
-            button_pins=BUTTON_PINS,
+            button_pins=config.button_config.pins,
             logger=button_logger,
-            pull_mode=GPIO.PUD_OFF  # Assuming external pull circuits
+            pull_mode=config.button_config.pull_mode
         )
         
-        # Initialize LED strips
+        # Initialize LED strips from configuration
         led_strips = []
-        
-        # Strip 1
-        strip1 = PixelStripAdapter(
-            led_count=LED_COUNT,
-            gpio_pin=LED_STRIP_1_GPIO,
-            freq_hz=800000,
-            dma=10,
-            invert=False,
-            brightness=LED_BRIGHTNESS,
-            channel=0
-        )
-        led_strips.append(strip1)
-        
-        # Strip 2  
-        strip2 = PixelStripAdapter(
-            led_count=LED_COUNT,
-            gpio_pin=LED_STRIP_2_GPIO,
-            freq_hz=800000,
-            dma=5,
-            invert=False,
-            brightness=LED_BRIGHTNESS,
-            channel=0
-        )
-        led_strips.append(strip2)
+        for strip_config in config.led_strips:
+            strip = PixelStripAdapter(
+                led_count=strip_config.led_count,
+                gpio_pin=strip_config.gpio_pin,
+                freq_hz=strip_config.freq_hz,
+                dma=strip_config.dma,
+                invert=strip_config.invert,
+                brightness=strip_config.brightness,
+                channel=strip_config.channel
+            )
+            led_strips.append(strip)
         
         # Clear strips initially
-        from led_system.pixel import Pixel
         black = Pixel(0, 0, 0)
         for strip in led_strips:
             strip[:] = black
             strip.show()
         
-        # Create initial state
-        initial_state = IdleState()
-        
-        # Create game controller
+        # Create game controller (starts with IdleState by default)
         game_controller = GameController(
             button_reader=button_reader,
             led_strips=led_strips,
-            initial_state=initial_state,
             logger=game_logger,
-            frame_duration_ms=FRAME_DURATION_MS,
-            sequence_timeout_ms=1500
+            frame_duration_ms=int(config.frame_duration_ms),
+            sequence_timeout_ms=config.sequence_timeout_ms
         )
         
         game_logger.info("Game system initialized successfully")
-        game_logger.info(f"Configuration: {len(BUTTON_PINS)} buttons, {len(led_strips)} LED strips, {FRAME_DURATION_MS}ms frame duration")
+        game_logger.info(f"Configuration: {config.button_count} buttons, {config.strip_count} LED strips, {config.frame_duration_ms}ms frame duration")
         
         return game_controller, main_logger
         
@@ -146,7 +159,7 @@ def main():
         print()
         
         # Run the game with automatic frame limiting
-        game_controller.run_with_frame_limiting()
+        game_controller.run_game_loop()
         
     except KeyboardInterrupt:
         print(f"\n\n⏹️  Game stopped by user")

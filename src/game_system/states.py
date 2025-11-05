@@ -10,9 +10,10 @@ from .animations import BreathingAnimation, RainbowAnimation, StaticColorAnimati
 if TYPE_CHECKING:
     from button_system.button_state import ButtonState
     from led_system.interfaces import LedStrip
-    from led_system.pixel import Pixel
     from .animations import Animation
     from .game_controller import GameController
+else:
+    from led_system.pixel import Pixel
 
 
 class GameState(ABC):
@@ -25,9 +26,9 @@ class GameState(ABC):
     - State transition conditions
     """
     
-    def __init__(self):
+    def __init__(self, game_controller: 'GameController'):
         """Initialize the game state"""
-        pass
+        self.game_controller: 'GameController' = game_controller
     
     @abstractmethod
     def update(self, button_state: 'ButtonState') -> Optional['GameState']:
@@ -43,11 +44,23 @@ class GameState(ABC):
         pass
     
     def on_enter(self) -> None:
-        """Called when entering this state (override if needed)"""
-        pass
+        """Called when entering this state - logs state name and calls custom enter"""
+        self.game_controller.logger.info(f"Entering state: {self.__class__.__name__}")
+        self.custom_on_enter()
     
     def on_exit(self) -> None:
-        """Called when exiting this state (override if needed)"""
+        """Called when exiting this state - logs state name and calls custom exit"""
+        self.game_controller.logger.info(f"Exiting state: {self.__class__.__name__}")
+        self.custom_on_exit()
+    
+    @abstractmethod
+    def custom_on_enter(self) -> None:
+        """Custom enter logic (override in subclasses)"""
+        pass
+    
+    @abstractmethod
+    def custom_on_exit(self) -> None:
+        """Custom exit logic (override in subclasses)"""
         pass
 
 
@@ -60,37 +73,34 @@ class IdleState(GameState):
     - Button sequence (handled by GameController) → other states
     """
     
-    def __init__(self):
-        super().__init__()
-        self.game_controller: Optional['GameController'] = None
-        
+    def __init__(self, game_controller: 'GameController'):
+        super().__init__(game_controller)
         self.animations: List['Animation'] = []
     
-    def on_enter(self) -> None:
+    def custom_on_enter(self) -> None:
         """Called when entering idle state - setup breathing animations"""
-        if self.game_controller:
-            # Import here to avoid circular imports
-            from led_system.pixel import Pixel
-            
-            # Create dim blue breathing animation for each strip
-            dim_blue = Pixel(0, 50, 100)  # Dim blue color
-            self.animations = []
-            for strip in self.game_controller.led_strips:
-                breathing_anim = BreathingAnimation(
-                    strip=strip,
-                    color=dim_blue,
-                    speed_ms=100,
-                    brightness_range=(0.1, 0.6)
-                )
-                self.animations.append(breathing_anim)
+        # Create dim blue breathing animation for each strip
+        dim_blue = Pixel(0, 50, 100)  # Dim blue color
+        self.animations = []
+        for strip in self.game_controller.led_strips:
+            breathing_anim = BreathingAnimation(
+                strip=strip,
+                color=dim_blue,
+                speed_ms=100,
+                brightness_range=(0.1, 0.6)
+            )
+            self.animations.append(breathing_anim)
+    
+    def custom_on_exit(self) -> None:
+        """Called when exiting idle state - cleanup if needed"""
+        pass
     
     def update(self, button_state: 'ButtonState') -> Optional['GameState']:
         """Update idle state - handle buttons, animations, and LED rendering"""
-        # Check for state transitions
+        # Check for state transitions - any button pressed goes to Amplify
         if button_state.total_buttons_pressed > 0:
             pressed_buttons = {i for i, pressed in enumerate(button_state.for_button) if pressed}
-            new_state = AmplifyState(pressed_buttons=pressed_buttons)
-            return new_state
+            return AmplifyState(self.game_controller, pressed_buttons)
         
         # Update animations (they handle their own rendering and timing)
         for animation in self.animations:
@@ -111,15 +121,25 @@ class AmplifyState(GameState):
     - All buttons pressed → PartyState (if implemented)
     """
     
-    def __init__(self, pressed_buttons: Set[int] = None):
-        super().__init__()
-        self.game_controller: Optional['GameController'] = None
+    def __init__(self, game_controller: 'GameController', pressed_buttons: Set[int] = None):
+        super().__init__(game_controller)
         self.pressed_buttons: Set[int] = pressed_buttons or set()
         self.button_animations: Dict[int, RainbowAnimation] = {}
+        
+        # Log initial pressed buttons
+        if self.pressed_buttons:
+            button_list = sorted(list(self.pressed_buttons))
+            self.game_controller.logger.debug(f"AmplifyState initialized with buttons: {button_list}")
+        else:
+            self.game_controller.logger.debug("AmplifyState initialized with no buttons pressed")
     
-    def on_enter(self) -> None:
-        """Called when entering this state - setup animations with proper game_controller"""
+    def custom_on_enter(self) -> None:
+        """Called when entering this state - setup animations"""
         self._setup_animations()
+    
+    def custom_on_exit(self) -> None:
+        """Called when exiting this state - cleanup if needed"""
+        pass
     
     def _setup_animations(self):
         """Create rainbow animations for currently pressed buttons"""
@@ -128,9 +148,6 @@ class AmplifyState(GameState):
     
     def _create_button_animation(self, button_id: int):
         """Create rainbow animation for specific button"""
-        if not self.game_controller:
-            return
-            
         # For now, each button gets a rainbow animation on the first strip
         # In a real implementation, you might want to:
         # - Use different strips for different buttons
@@ -146,21 +163,24 @@ class AmplifyState(GameState):
     
     def update(self, button_state: 'ButtonState') -> Optional['GameState']:
         """Update amplify state - handle buttons, animations, and LED rendering"""
+        # Check for state transitions first - no buttons pressed goes back to Idle
+        if button_state.total_buttons_pressed == 0:
+            return IdleState(self.game_controller)
+        
         new_pressed = {i for i, pressed in enumerate(button_state.for_button) if pressed}
         
-        # Check for state transitions
-        if not new_pressed:
-            return IdleState()
+        # Log button changes if any buttons were changed
+        if button_state.any_changed:
+            button_list = sorted(list(new_pressed))
+            self.game_controller.logger.debug(f"AmplifyState button change - currently pressed: {button_list}")
         
         # Update button animations for changed buttons
         self._update_button_animations(new_pressed)
         
         # Clear strips first (before animations update)
-        if self.game_controller:
-            from led_system.pixel import Pixel
-            black = Pixel(0, 0, 0)
-            for strip in self.game_controller.led_strips:
-                strip[:] = black
+        black = Pixel(0, 0, 0)
+        for strip in self.game_controller.led_strips:
+            strip[:] = black
         
         # Update animations (they handle their own rendering and timing)
         for animation in self.button_animations.values():
@@ -190,38 +210,36 @@ class TestState(GameState):
     Shows static colors to verify LED functionality.
     """
     
-    def __init__(self):
-        super().__init__()
-        self.game_controller: Optional['GameController'] = None
-        
+    def __init__(self, game_controller: 'GameController'):
+        super().__init__(game_controller)
         self.animations: List['Animation'] = []
     
-    def on_enter(self) -> None:
+    def custom_on_enter(self) -> None:
         """Called when entering test state - setup static color animations"""
-        if self.game_controller:
-            # Import here to avoid circular imports
-            from led_system.pixel import Pixel
-            
-            # Create test animations for each strip
-            red = Pixel(255, 0, 0)
-            green = Pixel(0, 255, 0)
-            
-            self.animations = []
-            for i, strip in enumerate(self.game_controller.led_strips):
-                if i == 0:
-                    # First strip: red color
-                    red_anim = StaticColorAnimation(strip, red)
-                    self.animations.append(red_anim)
-                else:
-                    # Other strips: green color
-                    green_anim = StaticColorAnimation(strip, green)
-                    self.animations.append(green_anim)
+        # Create test animations for each strip
+        red = Pixel(255, 0, 0)
+        green = Pixel(0, 255, 0)
+        
+        self.animations = []
+        for i, strip in enumerate(self.game_controller.led_strips):
+            if i == 0:
+                # First strip: red color
+                red_anim = StaticColorAnimation(strip, red)
+                self.animations.append(red_anim)
+            else:
+                # Other strips: green color
+                green_anim = StaticColorAnimation(strip, green)
+                self.animations.append(green_anim)
+    
+    def custom_on_exit(self) -> None:
+        """Called when exiting test state - cleanup if needed"""
+        pass
     
     def update(self, button_state: 'ButtonState') -> Optional['GameState']:
         """Update test state - handle buttons, animations, and LED rendering"""
         # Check for state transitions
         if button_state.any_changed and button_state.total_buttons_pressed > 0:
-            return IdleState()
+            return IdleState(self.game_controller)
         
         # Update animations (they handle their own rendering and timing)
         for animation in self.animations:

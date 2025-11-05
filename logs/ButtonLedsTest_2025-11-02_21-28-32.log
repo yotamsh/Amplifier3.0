@@ -1,0 +1,28 @@
+[2025-11-02 21:28:32,942] [INFO] [ButtonLedsTestRunner] Combined button + LED + strip animation test starting
+[2025-11-02 21:28:32,943] [INFO] [ButtonLedsTestRunner] Configuration: 1 button(s), 1 LED, 2 strips (300 LEDs each), ~50Hz sampling
+[2025-11-02 21:28:32,948] [INFO] [ButtonReader] GPIO setup complete: 1 pins, no pulls
+[2025-11-02 21:28:32,949] [INFO] [ButtonReader] ButtonReader initialized with 1 buttons
+[2025-11-02 21:28:32,949] [INFO] [ButtonReader] Button mapping: Button0=GPIO22
+[2025-11-02 21:28:32,949] [INFO] [ButtonReader] Button reader initialized successfully
+[2025-11-02 21:28:32,950] [INFO] [ButtonLedsTestRunner] LED initialized on GPIO26 (OFF)
+[2025-11-02 21:28:32,951] [INFO] [ButtonLedsTestRunner] Strip 1 initialized: GPIO18, PWM channel 0
+[2025-11-02 21:28:32,953] [INFO] [ButtonLedsTestRunner] Strip 2 initialized: GPIO21, PWM channel 0
+[2025-11-02 21:28:32,959] [INFO] [ButtonLedsTestRunner] LED strips ready: 300 LEDs each, GPIO18+GPIO21
+[2025-11-02 21:29:09,235] [INFO] [ButtonLedsTestRunner] LED turned ON (GPIO26) - keyboard command '1'
+[2025-11-02 21:29:11,680] [INFO] [ButtonLedsTestRunner] LED turned OFF (GPIO26) - keyboard command '0'
+[2025-11-02 21:29:12,496] [INFO] [ButtonLedsTestRunner] LED turned ON (GPIO26) - keyboard command '1'
+[2025-11-02 21:29:13,463] [INFO] [ButtonLedsTestRunner] LED turned OFF (GPIO26) - keyboard command '0'
+[2025-11-02 21:29:14,046] [INFO] [ButtonLedsTestRunner] LED turned ON (GPIO26) - keyboard command '1'
+[2025-11-02 21:29:15,165] [INFO] [ButtonLedsTestRunner] LED turned OFF (GPIO26) - keyboard command '0'
+[2025-11-02 21:29:16,099] [INFO] [ButtonLedsTestRunner] LED turned ON (GPIO26) - keyboard command '1'
+[2025-11-02 21:29:27,482] [INFO] [ButtonLedsTestRunner] Button 0 pressed (GPIO 22) - Click #1
+[2025-11-02 21:29:27,483] [INFO] [ButtonLedsTestRunner] Button 0 PRESSED - Rainbow animation jumped!
+[2025-11-02 21:29:31,724] [INFO] [ButtonLedsTestRunner] Button 0 released (GPIO 22) - Total clicks: 1
+[2025-11-02 21:29:31,725] [INFO] [ButtonLedsTestRunner] Button 0 RELEASED - Color wipe animation jumped!
+[2025-11-02 21:29:39,643] [INFO] [ButtonLedsTestRunner] Button 0 pressed (GPIO 22) - Click #2
+[2025-11-02 21:29:39,644] [INFO] [ButtonLedsTestRunner] Button 0 PRESSED - Rainbow animation jumped!
+[2025-11-02 21:29:41,401] [INFO] [ButtonLedsTestRunner] Button 0 released (GPIO 22) - Total clicks: 2
+[2025-11-02 21:29:41,401] [INFO] [ButtonLedsTestRunner] Button 0 RELEASED - Color wipe animation jumped!
+[2025-11-02 22:33:49,506] [INFO] [ButtonLedsTestRunner] Test completed after 539072 loops
+[2025-11-02 22:33:49,526] [INFO] [ButtonLedsTestRunner] LED strips cleared
+[2025-11-02 22:33:49,527] [INFO] [ButtonLedsTestRunner] Combined test completed - GPIO, strips, and terminal will be cleaned up automatically

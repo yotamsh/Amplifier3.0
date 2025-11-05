@@ -1,0 +1,18 @@
+[2025-11-03 01:34:59,110] [INFO] [ButtonLedsTestRunner] Combined button + LED + strip animation test starting
+[2025-11-03 01:34:59,111] [INFO] [ButtonLedsTestRunner] Configuration: 1 button(s), 1 LED, 2 strips (300 LEDs each), ~50Hz sampling
+[2025-11-03 01:34:59,116] [INFO] [ButtonReader] GPIO setup complete: 1 pins, no pulls
+[2025-11-03 01:34:59,117] [INFO] [ButtonReader] ButtonReader initialized with 1 buttons
+[2025-11-03 01:34:59,117] [INFO] [ButtonReader] Button mapping: Button0=GPIO22
+[2025-11-03 01:34:59,118] [INFO] [ButtonReader] Button reader initialized successfully
+[2025-11-03 01:34:59,118] [INFO] [ButtonLedsTestRunner] LED initialized on GPIO26 (OFF)
+[2025-11-03 01:34:59,120] [INFO] [ButtonLedsTestRunner] Strip 1 initialized: GPIO18, PWM channel 0
+[2025-11-03 01:34:59,122] [INFO] [ButtonLedsTestRunner] Strip 2 initialized: GPIO21, PWM channel 0
+[2025-11-03 01:34:59,127] [INFO] [ButtonLedsTestRunner] LED strips ready: 300 LEDs each, GPIO18+GPIO21
+[2025-11-04 22:40:32,323] [WARNING] [ButtonLedsTestRunner] RainbowCycle lagging: 162324310.6ms vs 50ms target
+[2025-11-04 22:40:32,343] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 162324317.4ms vs 20ms target
+[2025-11-04 22:40:32,559] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 41.7ms vs 20ms target
+[2025-11-04 22:40:43,035] [INFO] [ButtonLedsTestRunner] LED turned ON (GPIO26) - keyboard command '1'
+[2025-11-04 22:40:43,612] [INFO] [ButtonLedsTestRunner] LED turned OFF (GPIO26) - keyboard command '0'
+[2025-11-04 22:40:46,305] [INFO] [ButtonLedsTestRunner] Test termination requested - keyboard command 'q'
+[2025-11-04 22:40:46,328] [INFO] [ButtonLedsTestRunner] LED strips cleared
+[2025-11-04 22:40:46,329] [INFO] [ButtonLedsTestRunner] Combined test completed - GPIO, strips, and terminal will be cleaned up automatically

@@ -6,6 +6,8 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from led_system.pixel import Pixel
+else:
+    from led_system.pixel import Pixel
 
 
 class AnimationHelpers:
@@ -24,8 +26,6 @@ class AnimationHelpers:
         Returns:
             Pixel with RGB values
         """
-        # Import here to avoid circular imports
-        from led_system.pixel import Pixel
         
         h = h % 360  # Wrap hue
         c = v * s

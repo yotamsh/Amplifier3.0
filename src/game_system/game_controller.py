@@ -13,6 +13,8 @@ if TYPE_CHECKING:
     from led_system.interfaces import LedStrip
     from button_system.button_state import ButtonState
     from hybridLogger import ClassLogger
+else:
+    from led_system.pixel import Pixel
 
 
 class GameController:
@@ -28,7 +30,6 @@ class GameController:
     def __init__(self, 
                  button_reader: 'IButtonReader', 
                  led_strips: List['LedStrip'],
-                 initial_state: GameState,
                  logger: 'ClassLogger',
                  frame_duration_ms: int = 20,
                  sequence_timeout_ms: int = 1500):
@@ -38,7 +39,6 @@ class GameController:
         Args:
             button_reader: Interface for reading button states
             led_strips: List of LED strip controllers
-            initial_state: Starting game state
             logger: Logger for debugging and monitoring
             frame_duration_ms: Target frame duration in milliseconds (int)
             sequence_timeout_ms: Timeout for button sequences
@@ -49,9 +49,9 @@ class GameController:
         self.logger = logger
         self.running = True
         
-        # State management
-        self.current_state = initial_state
-        self.current_state.game_controller = self
+        # State management - create initial IdleState
+        from .states import IdleState
+        self.current_state = IdleState(self)
         
         # Call on_enter for initial state
         self.current_state.on_enter()
@@ -63,7 +63,7 @@ class GameController:
         
         self.logger.info(f"GameController initialized: {frame_duration_ms}ms frame duration, {len(led_strips)} LED strips")
     
-    def run_with_frame_limiting(self) -> None:
+    def run_game_loop(self) -> None:
         """
         Run the game loop with automatic frame duration limiting.
         
@@ -120,7 +120,6 @@ class GameController:
         self.running = False
         
         # Clear all LED strips
-        from led_system.pixel import Pixel
         black = Pixel(0, 0, 0)
         for strip in self.led_strips:
             strip[:] = black
@@ -153,9 +152,7 @@ class GameController:
                     if self.sequence_detectors["code_mode"].add_event(7):
                         self.logger.info("Code mode sequence detected (button 7 x3)")
                         from .states import TestState
-                        test_state = TestState()
-                        test_state.game_controller = self
-                        return test_state
+                        return TestState(self)
                 else:
                     # Any other button press resets the code mode sequence
                     self.sequence_detectors["code_mode"].reset()
@@ -177,9 +174,6 @@ class GameController:
         
         # Switch to new state
         self.current_state = new_state
-        
-        # Pass game controller reference to new state
-        self.current_state.game_controller = self
         
         # Call enter handler on new state
         self.current_state.on_enter()

@@ -12,7 +12,7 @@ from .game_controller import GameController
 from .states import IdleState, AmplifyState, TestState
 from .animations import RainbowAnimation, BreathingAnimation, StaticColorAnimation
 from .animation_helpers import AnimationHelpers
-from .config import GameConfig, LedStripConfig, ButtonConfig, create_default_config
+from .config import GameConfig, LedStripConfig, ButtonConfig
 
 __all__ = [
     # Base classes
@@ -32,6 +32,5 @@ __all__ = [
     # Configuration
     "GameConfig",
     "LedStripConfig", 
-    "ButtonConfig",
-    "create_default_config"
+    "ButtonConfig"
 ]

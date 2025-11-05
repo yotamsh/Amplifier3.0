@@ -4,7 +4,17 @@ Game system configuration
 
 from dataclasses import dataclass
 from typing import List, Optional
-import RPi.GPIO as GPIO
+
+# Import RPi.GPIO only when available (Raspberry Pi only)
+try:
+    import RPi.GPIO as GPIO
+except ImportError:
+    # Mock GPIO for non-Pi systems (development/testing)
+    class _MockGPIO:
+        PUD_OFF = 0
+        PUD_UP = 1
+        PUD_DOWN = 2
+    GPIO = _MockGPIO()
 
 
 @dataclass
@@ -94,33 +104,4 @@ class GameConfig:
                 raise ValueError(f"LED brightness must be 0-255, got {strip.brightness}")
 
 
-def create_default_config() -> GameConfig:
-    """Create default configuration for development/testing"""
-    
-    button_config = ButtonConfig(
-        pins=[22, 23, 24, 25, 26, 27, 28, 29, 30, 31],  # 10 buttons
-        pull_mode=GPIO.PUD_OFF,
-        sample_rate_hz=200
-    )
-    
-    led_strips = [
-        LedStripConfig(
-            gpio_pin=18,
-            led_count=300,
-            dma=10,
-            channel=0
-        ),
-        LedStripConfig(
-            gpio_pin=21, 
-            led_count=300,
-            dma=5,
-            channel=0
-        )
-    ]
-    
-    return GameConfig(
-        button_config=button_config,
-        led_strips=led_strips,
-        frame_duration_ms=33.33,  # ~30 FPS
-        sequence_timeout_ms=1500
-    )
+# Default config moved to game_example.py
