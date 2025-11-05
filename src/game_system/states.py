@@ -28,18 +28,25 @@ class IdleState(GameState):
         super().__init__()
         self.game_controller: Optional['GameController'] = None
         
-        # Import here to avoid circular imports
-        from led_system.pixel import Pixel
-        
-        # Create dim blue breathing animation
-        dim_blue = Pixel(0, 50, 100)  # Dim blue color
-        self.breathing_animation = BreathingAnimation(
-            color=dim_blue,
-            speed_ms=100,
-            brightness_range=(0.1, 0.6)
-        )
-        
-        self.animations: List['Animation'] = [self.breathing_animation]
+        self.animations: List['Animation'] = []
+    
+    def on_enter(self) -> None:
+        """Called when entering idle state - setup breathing animations"""
+        if self.game_controller:
+            # Import here to avoid circular imports
+            from led_system.pixel import Pixel
+            
+            # Create dim blue breathing animation for each strip
+            dim_blue = Pixel(0, 50, 100)  # Dim blue color
+            self.animations = []
+            for strip in self.game_controller.led_strips:
+                breathing_anim = BreathingAnimation(
+                    strip=strip,
+                    color=dim_blue,
+                    speed_ms=100,
+                    brightness_range=(0.1, 0.6)
+                )
+                self.animations.append(breathing_anim)
     
     def update(self, button_state: 'ButtonState') -> Optional['GameState']:
         """Update idle state - handle buttons, animations, and LED rendering"""
@@ -49,21 +56,9 @@ class IdleState(GameState):
             new_state = AmplifyState(pressed_buttons=pressed_buttons)
             return new_state
         
-        # Update animations
+        # Update animations (they handle their own rendering and timing)
         for animation in self.animations:
-            animation.update(0)  # dt not needed for time-based animations
-        
-        # Render to LED strips
-        if self.game_controller:
-            # Clear strips first
-            from led_system.pixel import Pixel
-            black = Pixel(0, 0, 0)
-            for strip in self.game_controller.led_strips:
-                strip[:] = black
-            
-            # Render animations
-            for animation in self.animations:
-                animation.render(self.game_controller.led_strips)
+            animation.update_if_needed()
         
         return None
 
@@ -97,18 +92,18 @@ class AmplifyState(GameState):
     
     def _create_button_animation(self, button_id: int):
         """Create rainbow animation for specific button"""
-        # Calculate LED distribution
-        leds_per_button = 30  # Fallback
-        if self.game_controller:
-            total_leds = sum(strip.num_pixels() for strip in self.game_controller.led_strips)
-            button_count = self.game_controller.button_reader.get_button_count()
-            leds_per_button = total_leds // button_count
+        if not self.game_controller:
+            return
             
-        start_led = button_id * leds_per_button
-        end_led = start_led + leds_per_button
+        # For now, each button gets a rainbow animation on the first strip
+        # In a real implementation, you might want to:
+        # - Use different strips for different buttons
+        # - Create custom animations that only affect specific LED ranges
+        # - Map buttons to strip sections
+        first_strip = self.game_controller.led_strips[0]
         
         self.button_animations[button_id] = RainbowAnimation(
-            led_range=(start_led, end_led),
+            strip=first_strip,
             speed_ms=50,
             hue_shift_per_frame=8
         )
@@ -124,21 +119,16 @@ class AmplifyState(GameState):
         # Update button animations for changed buttons
         self._update_button_animations(new_pressed)
         
-        # Update animations
-        for animation in self.button_animations.values():
-            animation.update(0)  # dt not needed for time-based animations
-        
-        # Render to LED strips
+        # Clear strips first (before animations update)
         if self.game_controller:
-            # Clear strips first
             from led_system.pixel import Pixel
             black = Pixel(0, 0, 0)
             for strip in self.game_controller.led_strips:
                 strip[:] = black
-            
-            # Render each button's animation
-            for animation in self.button_animations.values():
-                animation.render(self.game_controller.led_strips)
+        
+        # Update animations (they handle their own rendering and timing)
+        for animation in self.button_animations.values():
+            animation.update_if_needed()
         
         return None
     
@@ -168,17 +158,28 @@ class TestState(GameState):
         super().__init__()
         self.game_controller: Optional['GameController'] = None
         
-        # Import here to avoid circular imports
-        from led_system.pixel import Pixel
-        
-        # Create test animations
-        red = Pixel(255, 0, 0)
-        green = Pixel(0, 255, 0)
-        
-        self.animations: List['Animation'] = [
-            StaticColorAnimation(red, led_range=(0, 150)),    # First half red
-            StaticColorAnimation(green, led_range=(150, 300)) # Second half green
-        ]
+        self.animations: List['Animation'] = []
+    
+    def on_enter(self) -> None:
+        """Called when entering test state - setup static color animations"""
+        if self.game_controller:
+            # Import here to avoid circular imports
+            from led_system.pixel import Pixel
+            
+            # Create test animations for each strip
+            red = Pixel(255, 0, 0)
+            green = Pixel(0, 255, 0)
+            
+            self.animations = []
+            for i, strip in enumerate(self.game_controller.led_strips):
+                if i == 0:
+                    # First strip: red color
+                    red_anim = StaticColorAnimation(strip, red)
+                    self.animations.append(red_anim)
+                else:
+                    # Other strips: green color
+                    green_anim = StaticColorAnimation(strip, green)
+                    self.animations.append(green_anim)
     
     def update(self, button_state: 'ButtonState') -> Optional['GameState']:
         """Update test state - handle buttons, animations, and LED rendering"""
@@ -186,13 +187,8 @@ class TestState(GameState):
         if button_state.any_changed and button_state.total_buttons_pressed > 0:
             return IdleState()
         
-        # Update animations
+        # Update animations (they handle their own rendering and timing)
         for animation in self.animations:
-            animation.update(0)  # dt not needed for time-based animations
-        
-        # Render to LED strips
-        if self.game_controller:
-            for animation in self.animations:
-                animation.render(self.game_controller.led_strips)
+            animation.update_if_needed()
         
         return None

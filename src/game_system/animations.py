@@ -3,9 +3,10 @@ Concrete animation implementations for the game system
 """
 
 import math
-from typing import List, Tuple, TYPE_CHECKING
+from typing import Tuple, TYPE_CHECKING
 
 from .base_classes import Animation
+from .animation_helpers import AnimationHelpers
 
 if TYPE_CHECKING:
     from led_system.interfaces import LedStrip
@@ -16,116 +17,67 @@ class RainbowAnimation(Animation):
     """
     Continuous rainbow cycle animation.
     
-    Creates a flowing rainbow pattern across specified LED range
+    Creates a flowing rainbow pattern across the entire LED strip
     with configurable speed and hue shifting.
     """
     
-    def __init__(self, led_range: Tuple[int, int], speed_ms: int = 50, hue_shift_per_frame: int = 8):
+    def __init__(self, strip: 'LedStrip', speed_ms: int = 50, hue_shift_per_frame: int = 8):
         """
         Initialize rainbow animation.
         
         Args:
-            led_range: (start_led, end_led) tuple defining LED range
+            strip: LED strip to operate on
             speed_ms: Animation update interval in milliseconds  
             hue_shift_per_frame: Degrees to shift hue each frame
         """
-        super().__init__(speed_ms, f"Rainbow({led_range[0]}-{led_range[1]})")
-        self.led_range: Tuple[int, int] = led_range
+        super().__init__(strip, speed_ms)
         self.hue_shift_per_frame: int = hue_shift_per_frame
         self.hue_offset: int = 0
     
-    def advance(self, dt: float) -> None:
-        """Advance rainbow hue offset"""
+    def advance(self) -> None:
+        """Advance rainbow hue offset and update strip pixels"""
         self.hue_offset = (self.hue_offset + self.hue_shift_per_frame) % 360
-    
-    def render(self, led_strips: List['LedStrip']) -> None:
-        """Render rainbow pattern to LED strips"""
-        if not led_strips:
-            return
-            
-        strip = led_strips[0]  # Use first strip
-        start_led, end_led = self.led_range
-        led_count = end_led - start_led
         
-        if led_count <= 0:
-            return
-            
-        for i in range(led_count):
-            led_index = start_led + i
-            if led_index < strip.num_pixels():
-                # Calculate hue based on position and offset
-                hue = (i * 360 / led_count + self.hue_offset) % 360
-                color = self._hsv_to_pixel(hue, 1.0, 1.0)
-                strip[led_index] = color
-    
-    def _hsv_to_pixel(self, h: float, s: float, v: float) -> 'Pixel':
-        """Convert HSV to Pixel RGB"""
-        # Import here to avoid circular imports
-        from led_system.pixel import Pixel
+        # Update all strip pixels
+        num_pixels = self.strip.num_pixels()
         
-        h = h % 360  # Wrap hue
-        c = v * s
-        x = c * (1 - abs((h / 60) % 2 - 1))
-        m = v - c
-        
-        if 0 <= h < 60:
-            r, g, b = c, x, 0
-        elif 60 <= h < 120:
-            r, g, b = x, c, 0
-        elif 120 <= h < 180:
-            r, g, b = 0, c, x
-        elif 180 <= h < 240:
-            r, g, b = 0, x, c
-        elif 240 <= h < 300:
-            r, g, b = x, 0, c
-        else:  # 300 <= h < 360
-            r, g, b = c, 0, x
-        
-        r_int = int((r + m) * 255)
-        g_int = int((g + m) * 255)
-        b_int = int((b + m) * 255)
-        
-        return Pixel(r_int, g_int, b_int)
+        for i in range(num_pixels):
+            # Calculate hue based on position and offset
+            hue = (i * 360 / num_pixels + self.hue_offset) % 360
+            color = AnimationHelpers.hsv_to_pixel(hue, 1.0, 1.0)
+            self.strip[i] = color
 
 
 class BreathingAnimation(Animation):
     """
     Smooth breathing/pulsing animation with configurable color and brightness range.
     
-    Uses sine wave for natural breathing effect across entire strip or specified range.
+    Uses sine wave for natural breathing effect across the entire LED strip.
     """
     
-    def __init__(self, color: 'Pixel', speed_ms: int = 100, 
-                 brightness_range: Tuple[float, float] = (0.1, 1.0),
-                 led_range: Tuple[int, int] = None):
+    def __init__(self, strip: 'LedStrip', color: 'Pixel', speed_ms: int = 100, 
+                 brightness_range: Tuple[float, float] = (0.1, 1.0)):
         """
         Initialize breathing animation.
         
         Args:
+            strip: LED strip to operate on
             color: Base color to pulse
             speed_ms: Animation update interval
             brightness_range: (min_brightness, max_brightness) tuple
-            led_range: LED range to affect, None for entire strip
         """
-        super().__init__(speed_ms, "Breathing")
+        super().__init__(strip, speed_ms)
         self.base_color: 'Pixel' = color
         self.brightness_range: Tuple[float, float] = brightness_range
-        self.led_range: Tuple[int, int] = led_range
         self.phase: float = 0.0
+        self.phase_speed: float = 0.1  # Phase increment per frame (adjust for breathing speed)
     
-    def advance(self, dt: float) -> None:
-        """Advance breathing phase"""
-        # Convert dt to appropriate phase increment
-        phase_speed = 2.0  # Radians per second for breathing speed
-        self.phase += phase_speed * dt
+    def advance(self) -> None:
+        """Advance breathing phase and update strip pixels"""
+        self.phase += self.phase_speed
         if self.phase > 2 * math.pi:
             self.phase -= 2 * math.pi
-    
-    def render(self, led_strips: List['LedStrip']) -> None:
-        """Render breathing effect to LED strips"""
-        if not led_strips:
-            return
-            
+        
         # Calculate current brightness using sine wave
         min_brightness, max_brightness = self.brightness_range
         brightness_range = max_brightness - min_brightness
@@ -141,15 +93,8 @@ class BreathingAnimation(Animation):
             int(self.base_color.blue * current_brightness)
         )
         
-        # Apply to all strips
-        for strip in led_strips:
-            if self.led_range:
-                start_led, end_led = self.led_range
-                for i in range(start_led, min(end_led, strip.num_pixels())):
-                    strip[i] = dimmed_color
-            else:
-                # Apply to entire strip
-                strip[:] = dimmed_color
+        # Update entire strip
+        self.strip[:] = dimmed_color
 
 
 class StaticColorAnimation(Animation):
@@ -157,28 +102,21 @@ class StaticColorAnimation(Animation):
     Simple static color animation for testing and simple effects.
     """
     
-    def __init__(self, color: 'Pixel', led_range: Tuple[int, int] = None):
+    def __init__(self, strip: 'LedStrip', color: 'Pixel'):
         """
         Initialize static color animation.
         
         Args:
+            strip: LED strip to operate on
             color: Color to display
-            led_range: LED range to affect, None for entire strip
         """
-        super().__init__(1000, "StaticColor")  # Slow update since it's static
+        super().__init__(strip, 1000)  # Slow update since it's static
         self.color: 'Pixel' = color
-        self.led_range: Tuple[int, int] = led_range
+        self._initialized: bool = False
     
-    def advance(self, dt: float) -> None:
-        """No advancement needed for static color"""
-        pass
-    
-    def render(self, led_strips: List['LedStrip']) -> None:
-        """Render static color to LED strips"""
-        for strip in led_strips:
-            if self.led_range:
-                start_led, end_led = self.led_range
-                for i in range(start_led, min(end_led, strip.num_pixels())):
-                    strip[i] = self.color
-            else:
-                strip[:] = self.color
+    def advance(self) -> None:
+        """Set static color once, then no changes needed"""
+        if not self._initialized:
+            # Update entire strip once
+            self.strip[:] = self.color
+            self._initialized = True

@@ -54,33 +54,29 @@ class Animation(ABC):
     Abstract base class for time-based animations.
     
     Provides non-blocking, time-based animation updates with configurable speed.
+    Each animation operates on a single LED strip.
     """
     
-    def __init__(self, speed_ms: int, name: str = "Animation"):
+    def __init__(self, strip: 'LedStrip', speed_ms: int):
         """
         Initialize animation with timing control.
         
         Args:
+            strip: LED strip to operate on
             speed_ms: Update interval in milliseconds
-            name: Animation name for debugging
         """
+        self.strip: 'LedStrip' = strip
         self.speed_ms: int = speed_ms
-        self.name: str = name
         self.last_update: float = time.time()
     
-    def should_update(self) -> bool:
-        """Check if enough time has passed for next animation frame"""
-        now = time.time()
-        elapsed_ms = (now - self.last_update) * 1000
-        return elapsed_ms >= self.speed_ms
+    def get_name(self) -> str:
+        """Get animation name from class name"""
+        return self.__class__.__name__
     
-    def update(self, dt: float) -> bool:
+    def update_if_needed(self) -> bool:
         """
         Update animation if enough time has passed.
         
-        Args:
-            dt: Delta time since last frame in seconds
-            
         Returns:
             True if animation was updated, False if skipped
         """
@@ -88,27 +84,17 @@ class Animation(ABC):
         elapsed_ms = (now - self.last_update) * 1000
         
         if elapsed_ms >= self.speed_ms:
-            self.advance(dt)
+            self.advance()
+            self.strip.show()
             self.last_update = now
             return True
         return False
     
     @abstractmethod
-    def advance(self, dt: float) -> None:
+    def advance(self) -> None:
         """
         Advance animation by one frame (override in subclasses).
         
-        Args:
-            dt: Delta time since last frame in seconds
-        """
-        pass
-    
-    @abstractmethod
-    def render(self, led_strips: List['LedStrip']) -> None:
-        """
-        Render animation to LED strips (override in subclasses).
-        
-        Args:
-            led_strips: List of LED strip controllers
+        Should update the strip's pixel data but not call show().
         """
         pass
