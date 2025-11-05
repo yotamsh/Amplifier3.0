@@ -5,7 +5,7 @@ Main game controller - orchestrates state machine, button input, and LED output
 import time
 from typing import List, Dict, Optional, TYPE_CHECKING
 
-from .base_classes import GameState
+from .states import GameState
 from .sequence_detector import SequenceDetector
 
 if TYPE_CHECKING:

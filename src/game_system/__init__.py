@@ -5,7 +5,8 @@ This module provides the core architecture for a state-machine-based
 interactive game with dynamic LED animations and button input.
 """
 
-from .base_classes import GameState, Animation
+from .states import GameState
+from .animations import Animation
 from .sequence_detector import SequenceDetector
 from .game_controller import GameController
 from .states import IdleState, AmplifyState, TestState

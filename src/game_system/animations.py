@@ -1,16 +1,68 @@
 """
-Concrete animation implementations for the game system
+Animation base class and concrete implementations for the game system
 """
 
 import math
+import time
+from abc import ABC, abstractmethod
 from typing import Tuple, TYPE_CHECKING
 
-from .base_classes import Animation
 from .animation_helpers import AnimationHelpers
 
 if TYPE_CHECKING:
     from led_system.interfaces import LedStrip
     from led_system.pixel import Pixel
+
+
+class Animation(ABC):
+    """
+    Abstract base class for time-based animations.
+    
+    Provides non-blocking, time-based animation updates with configurable speed.
+    Each animation operates on a single LED strip.
+    """
+    
+    def __init__(self, strip: 'LedStrip', speed_ms: int):
+        """
+        Initialize animation with timing control.
+        
+        Args:
+            strip: LED strip to operate on
+            speed_ms: Update interval in milliseconds
+        """
+        self.strip: 'LedStrip' = strip
+        self.speed_ms: int = speed_ms
+        self.last_update: float = time.time()
+    
+    def get_name(self) -> str:
+        """Get animation name from class name"""
+        return self.__class__.__name__
+    
+    def update_if_needed(self) -> bool:
+        """
+        Update animation if enough time has passed.
+        
+        Returns:
+            True if animation was updated, False if skipped
+        """
+        now = time.time()
+        elapsed_ms = (now - self.last_update) * 1000
+        
+        if elapsed_ms >= self.speed_ms:
+            self.advance()
+            self.strip.show()
+            self.last_update = now
+            return True
+        return False
+    
+    @abstractmethod
+    def advance(self) -> None:
+        """
+        Advance animation by one frame (override in subclasses).
+        
+        Should update the strip's pixel data but not call show().
+        """
+        pass
 
 
 class RainbowAnimation(Animation):

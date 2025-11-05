@@ -1,18 +1,54 @@
 """
-Concrete game state implementations
+Game state base class and concrete implementations
 """
 
+from abc import ABC, abstractmethod
 from typing import List, Set, Dict, Optional, TYPE_CHECKING
 
-from .base_classes import GameState
 from .animations import BreathingAnimation, RainbowAnimation, StaticColorAnimation
 
 if TYPE_CHECKING:
     from button_system.button_state import ButtonState
     from led_system.interfaces import LedStrip
     from led_system.pixel import Pixel
-    from .base_classes import Animation
+    from .animations import Animation
     from .game_controller import GameController
+
+
+class GameState(ABC):
+    """
+    Abstract base class for all game states.
+    
+    Each state represents a distinct game mode with its own:
+    - Button handling logic
+    - Animation management 
+    - State transition conditions
+    """
+    
+    def __init__(self):
+        """Initialize the game state"""
+        pass
+    
+    @abstractmethod
+    def update(self, button_state: 'ButtonState') -> Optional['GameState']:
+        """
+        Update state logic, handle button changes, update animations, and render LEDs.
+        
+        Args:
+            button_state: Current button state with edge detection
+            
+        Returns:
+            New GameState instance if transition needed, None to stay in current state
+        """
+        pass
+    
+    def on_enter(self) -> None:
+        """Called when entering this state (override if needed)"""
+        pass
+    
+    def on_exit(self) -> None:
+        """Called when exiting this state (override if needed)"""
+        pass
 
 
 class IdleState(GameState):
