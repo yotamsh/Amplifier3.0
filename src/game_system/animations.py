@@ -140,9 +140,9 @@ class BreathingAnimation(Animation):
         
         # Create dimmed color
         dimmed_color = Pixel(
-            int(self.base_color.red * current_brightness),
-            int(self.base_color.green * current_brightness),
-            int(self.base_color.blue * current_brightness)
+            int(self.base_color.r * current_brightness),
+            int(self.base_color.g * current_brightness),
+            int(self.base_color.b * current_brightness)
         )
         
         # Update entire strip

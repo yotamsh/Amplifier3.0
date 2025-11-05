@@ -30,7 +30,18 @@ def create_default_config() -> GameConfig:
     """Create default configuration for development/testing"""
     
     button_config = ButtonConfig(
-        pins=[22, 23, 24, 25, 26, 27, 28, 29, 30, 31],  # 10 buttons
+        pins=[
+            4, 
+            # 5, 
+            # 6, 
+            # 16, 
+            # 17, 
+            # 20, 
+            22, 
+            # 23, 
+            # 24, 
+            # 25
+            ],  # 10 buttons - tested GPIO pins
         pull_mode=GPIO.PUD_OFF,
         sample_rate_hz=200
     )
@@ -127,24 +138,33 @@ def main():
     """
     Main function - sets up and runs the game system.
     """
+    # Get actual config to show correct info
+    config = create_default_config()
+    active_pins = [pin for pin in config.button_config.pins]
+    
     print("🎮 INTERACTIVE GAME SYSTEM")
     print("=" * 50)
     print("States implemented:")
-    print("  • IdleState: Dim breathing animation")
+    print("  • IdleState: Dim blue breathing animation")
     print("  • AmplifyState: Rainbow per pressed button") 
     print("  • TestState: Static colors for testing")
     print()
     print("Controls:")
     print("  • Any button press: Idle → Amplify")
     print("  • All buttons released: Amplify → Idle")
-    print("  • Button 7 pressed 3x: Any state → Test")
+    print(f"  • Button {len(active_pins)-1} (GPIO {active_pins[-1]}) pressed 3x: Any state → Test")
     print("  • Any button in Test: Test → Idle")
     print()
-    print("Hardware requirements:")
-    print("  • 10 buttons on GPIO 22-31")
-    print("  • LED strip 1 on GPIO 18")
-    print("  • LED strip 2 on GPIO 21") 
+    print("Hardware configuration:")
+    print(f"  • {len(active_pins)} buttons on GPIO: {', '.join(map(str, active_pins))}")
+    print(f"  • LED strip 1: {config.led_strips[0].led_count} LEDs on GPIO {config.led_strips[0].gpio_pin}")
+    print(f"  • LED strip 2: {config.led_strips[1].led_count} LEDs on GPIO {config.led_strips[1].gpio_pin}")
     print("  • External 5V power for LED strips")
+    print()
+    print("Game settings:")
+    print(f"  • Frame duration: {config.frame_duration_ms}ms ({config.target_fps:.1f} FPS)")
+    print(f"  • Button sample rate: {config.button_config.sample_rate_hz}Hz")
+    print(f"  • Sequence timeout: {config.sequence_timeout_ms}ms")
     print()
     
     input("Press Enter when hardware is ready...")
