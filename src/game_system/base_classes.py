@@ -28,35 +28,15 @@ class GameState(ABC):
         pass
     
     @abstractmethod
-    def handle_button_change(self, button_state: 'ButtonState') -> Optional['GameState']:
+    def update(self, button_state: 'ButtonState') -> Optional['GameState']:
         """
-        Process button state changes and determine if state transition is needed.
+        Update state logic, handle button changes, update animations, and render LEDs.
         
         Args:
             button_state: Current button state with edge detection
             
         Returns:
             New GameState instance if transition needed, None to stay in current state
-        """
-        pass
-    
-    @abstractmethod
-    def update(self, dt: float) -> None:
-        """
-        Update state logic and animations.
-        
-        Args:
-            dt: Delta time since last update in seconds
-        """
-        pass
-    
-    @abstractmethod
-    def render(self, led_strips: List['LedStrip']) -> None:
-        """
-        Render current state to LED strips.
-        
-        Args:
-            led_strips: List of LED strip controllers to render to
         """
         pass
     
