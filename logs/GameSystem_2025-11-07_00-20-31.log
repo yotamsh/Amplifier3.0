@@ -1,0 +1,24 @@
+[2025-11-07 00:20:31,121] [INFO] [ButtonReader] GPIO setup complete: 2 pins, no pulls
+[2025-11-07 00:20:31,122] [INFO] [ButtonReader] ButtonReader initialized with 2 buttons
+[2025-11-07 00:20:31,123] [INFO] [ButtonReader] Button mapping: Button0=GPIO4, Button1=GPIO22
+[2025-11-07 00:20:31,126] [INFO] [GameController] Entering state: IdleState
+[2025-11-07 00:20:31,127] [INFO] [GameController] GameController initialized: 20ms frame duration, 2 LED strips
+[2025-11-07 00:20:31,128] [INFO] [GameController] Game system initialized successfully
+[2025-11-07 00:20:31,128] [INFO] [GameController] Configuration: 2 buttons, 2 LED strips, 20ms frame duration
+[2025-11-07 00:20:31,129] [INFO] [GameController] Starting game loop with 20ms frame duration
+[2025-11-07 00:20:31,333] [ERROR] [GameController] Game loop error: 'tuple' object has no attribute 'r' | Type: AttributeError | File: /home/yotam/AmpSync/Amp3/src/game_system/animations.py | Line: 143
+Traceback (most recent call last):
+  File "/home/yotam/AmpSync/Amp3/src/game_system/game_controller.py", line 80, in run_game_loop
+    self.update()
+  File "/home/yotam/AmpSync/Amp3/src/game_system/game_controller.py", line 114, in update
+    new_state = self.current_state.update(button_state)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yotam/AmpSync/Amp3/src/game_system/states.py", line 113, in update
+    animation.update_if_needed()
+  File "/home/yotam/AmpSync/Amp3/src/game_system/animations.py", line 52, in update_if_needed
+    self.advance()
+  File "/home/yotam/AmpSync/Amp3/src/game_system/animations.py", line 143, in advance
+    int(self.base_color.r * current_brightness),
+        ^^^^^^^^^^^^^^^^^
+AttributeError: 'tuple' object has no attribute 'r'
+[2025-11-07 00:20:31,347] [INFO] [GameController] Game stopped

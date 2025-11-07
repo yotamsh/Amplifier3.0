@@ -1,0 +1,52 @@
+[2025-11-07 00:43:56,104] [INFO] [ButtonReader] GPIO setup complete: 2 pins, no pulls
+[2025-11-07 00:43:56,105] [INFO] [ButtonReader] ButtonReader initialized with 2 buttons
+[2025-11-07 00:43:56,106] [INFO] [ButtonReader] Button mapping: Button0=GPIO4, Button1=GPIO22
+[2025-11-07 00:43:56,112] [INFO] [GameController] Entering state: IdleState
+[2025-11-07 00:43:56,113] [INFO] [GameController] GameController initialized: 20ms frame duration, 2 LED strips
+[2025-11-07 00:43:56,114] [INFO] [GameController] Game system initialized successfully
+[2025-11-07 00:43:56,115] [INFO] [GameController] Configuration: 2 buttons, 2 LED strips, 20ms frame duration
+[2025-11-07 00:43:56,117] [INFO] [GameController] Starting game loop with 20ms frame duration
+[2025-11-07 00:44:11,198] [INFO] [GameController] Exiting state: IdleState
+[2025-11-07 00:44:11,199] [INFO] [GameController] Entering state: AmplifyState
+[2025-11-07 00:44:11,200] [INFO] [GameController] State transition: IdleState → AmplifyState
+[2025-11-07 00:44:15,484] [INFO] [GameController] Exiting state: AmplifyState
+[2025-11-07 00:44:15,484] [INFO] [GameController] Entering state: IdleState
+[2025-11-07 00:44:15,485] [INFO] [GameController] State transition: AmplifyState → IdleState
+[2025-11-07 00:44:18,098] [INFO] [GameController] Exiting state: IdleState
+[2025-11-07 00:44:18,099] [INFO] [GameController] Entering state: AmplifyState
+[2025-11-07 00:44:18,099] [INFO] [GameController] State transition: IdleState → AmplifyState
+[2025-11-07 00:44:20,308] [INFO] [GameController] Exiting state: AmplifyState
+[2025-11-07 00:44:20,308] [INFO] [GameController] Entering state: IdleState
+[2025-11-07 00:44:20,309] [INFO] [GameController] State transition: AmplifyState → IdleState
+[2025-11-07 00:44:22,762] [INFO] [GameController] Exiting state: IdleState
+[2025-11-07 00:44:22,763] [INFO] [GameController] Entering state: AmplifyState
+[2025-11-07 00:44:22,764] [INFO] [GameController] State transition: IdleState → AmplifyState
+[2025-11-07 00:44:27,644] [INFO] [GameController] Exiting state: AmplifyState
+[2025-11-07 00:44:27,645] [INFO] [GameController] Entering state: IdleState
+[2025-11-07 00:44:27,645] [INFO] [GameController] State transition: AmplifyState → IdleState
+[2025-11-07 00:44:28,371] [INFO] [GameController] Exiting state: IdleState
+[2025-11-07 00:44:28,373] [INFO] [GameController] Entering state: AmplifyState
+[2025-11-07 00:44:28,374] [INFO] [GameController] State transition: IdleState → AmplifyState
+[2025-11-07 00:44:31,232] [INFO] [GameController] Exiting state: AmplifyState
+[2025-11-07 00:44:31,233] [INFO] [GameController] Entering state: IdleState
+[2025-11-07 00:44:31,234] [INFO] [GameController] State transition: AmplifyState → IdleState
+[2025-11-07 00:45:26,861] [INFO] [GameController] Exiting state: IdleState
+[2025-11-07 00:45:26,861] [INFO] [GameController] Entering state: AmplifyState
+[2025-11-07 00:45:26,861] [INFO] [GameController] State transition: IdleState → AmplifyState
+[2025-11-07 00:45:28,307] [INFO] [GameController] Exiting state: AmplifyState
+[2025-11-07 00:45:28,308] [INFO] [GameController] Entering state: IdleState
+[2025-11-07 00:45:28,308] [INFO] [GameController] State transition: AmplifyState → IdleState
+[2025-11-07 00:45:29,595] [INFO] [GameController] Exiting state: IdleState
+[2025-11-07 00:45:29,596] [INFO] [GameController] Entering state: AmplifyState
+[2025-11-07 00:45:29,597] [INFO] [GameController] State transition: IdleState → AmplifyState
+[2025-11-07 00:45:30,583] [INFO] [GameController] Exiting state: AmplifyState
+[2025-11-07 00:45:30,583] [INFO] [GameController] Entering state: IdleState
+[2025-11-07 00:45:30,585] [INFO] [GameController] State transition: AmplifyState → IdleState
+[2025-11-07 00:45:31,467] [INFO] [GameController] Exiting state: IdleState
+[2025-11-07 00:45:31,468] [INFO] [GameController] Entering state: AmplifyState
+[2025-11-07 00:45:31,469] [INFO] [GameController] State transition: IdleState → AmplifyState
+[2025-11-07 00:45:34,525] [INFO] [GameController] Exiting state: AmplifyState
+[2025-11-07 00:45:34,526] [INFO] [GameController] Entering state: IdleState
+[2025-11-07 00:45:34,526] [INFO] [GameController] State transition: AmplifyState → IdleState
+[2025-11-07 01:27:28,168] [INFO] [GameController] Game stopped by user (Ctrl+C)
+[2025-11-07 01:27:28,180] [INFO] [GameController] Game stopped

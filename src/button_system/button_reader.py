@@ -124,7 +124,9 @@ class ButtonReader(IButtonReader):
         
         # Log significant changes
         if state.any_changed:
-            changed_buttons = [i for i, changed in enumerate(state.was_changed) if changed]
+            changed_buttons = [
+                (i, "pressed" if state.for_button[i] else "released") 
+                for i, changed in enumerate(state.was_changed) if changed]
             self._logger.debug(f"Button state changed: buttons {changed_buttons}")
         
         return state

@@ -5,7 +5,7 @@ Animation base class and concrete implementations for the game system
 import math
 import time
 from abc import ABC, abstractmethod
-from typing import Tuple, TYPE_CHECKING
+from typing import List, Tuple, TYPE_CHECKING
 
 from .animation_helpers import AnimationHelpers
 
@@ -172,3 +172,67 @@ class StaticColorAnimation(Animation):
             # Update entire strip once
             self.strip[:] = self.color
             self._initialized = True
+
+
+class AmplifyAnimation(Animation):
+    """
+    Rainbow animation that only illuminates LED segments corresponding to pressed buttons.
+    
+    Each button controls a segment of the LED strip. Only pressed button segments
+    show the rainbow pattern, while unpressed segments remain black.
+    """
+    
+    def __init__(self, strip: 'LedStrip', button_count: int, speed_ms: int = 50, 
+                 hue_shift_per_frame: int = 12):
+        """
+        Initialize amplify animation.
+        
+        Args:
+            strip: LED strip to operate on
+            button_count: Number of buttons that control segments
+            speed_ms: Animation update interval in milliseconds
+            hue_shift_per_frame: Degrees to shift hue each frame (higher = faster)
+        """
+        super().__init__(strip, speed_ms)
+        self.button_count: int = button_count
+        self.hue_shift_per_frame: int = hue_shift_per_frame
+        self.hue_offset: int = 0
+        
+        # Calculate LEDs per button (constant for this animation instance)
+        self.leds_per_button: int = strip.num_pixels() // button_count
+        
+        # Track which buttons are currently pressed
+        self.pressed_buttons: List[bool] = [False] * button_count
+    
+    def set_pressed_buttons(self, pressed_buttons: List[bool]) -> None:
+        """
+        Update which buttons are currently pressed.
+        
+        Args:
+            pressed_buttons: List of boolean values indicating button press state
+        """
+        self.pressed_buttons = pressed_buttons.copy()
+    
+    def advance(self) -> None:
+        """Advance rainbow hue offset and update strip pixels based on button state"""
+        self.hue_offset = (self.hue_offset + self.hue_shift_per_frame) % 360
+        
+        # Import here to avoid circular imports
+        from led_system.pixel import Pixel
+        
+        # Update all strip pixels
+        num_pixels = self.strip.num_pixels()
+        
+        for led_pos in range(num_pixels):
+            # Calculate which button segment this LED belongs to
+            button_index = led_pos // self.leds_per_button
+            
+            # Check if this button is pressed (with bounds checking)
+            if button_index < self.button_count and self.pressed_buttons[button_index]:
+                # Calculate rainbow hue based on LED position and offset
+                hue = (led_pos * 360 / num_pixels + self.hue_offset) % 360
+                color = AnimationHelpers.hsv_to_pixel(hue, 1.0, 1.0)
+                self.strip[led_pos] = color
+            else:
+                # Button not pressed or out of bounds - set LED to black
+                self.strip[led_pos] = Pixel(0, 0, 0)

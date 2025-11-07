@@ -84,7 +84,7 @@ def create_game_system():
     
     # Initialize logging
     main_logger = HybridLogger("GameSystem")
-    game_logger = main_logger.get_class_logger("GameController", logging.INFO)
+    game_logger = main_logger.get_class_logger("GameController", logging.DEBUG)
     button_logger = main_logger.get_class_logger("ButtonReader", logging.INFO)
     
     try:

@@ -1,0 +1,41 @@
+[2025-11-07 01:27:31,893] [INFO] [ButtonReader] GPIO setup complete: 2 pins, no pulls
+[2025-11-07 01:27:31,894] [INFO] [ButtonReader] ButtonReader initialized with 2 buttons
+[2025-11-07 01:27:31,895] [INFO] [ButtonReader] Button mapping: Button0=GPIO4, Button1=GPIO22
+[2025-11-07 01:27:31,901] [INFO] [GameController] Entering state: IdleState
+[2025-11-07 01:27:31,903] [INFO] [GameController] GameController initialized: 20ms frame duration, 2 LED strips
+[2025-11-07 01:27:31,903] [INFO] [GameController] Game system initialized successfully
+[2025-11-07 01:27:31,904] [INFO] [GameController] Configuration: 2 buttons, 2 LED strips, 20ms frame duration
+[2025-11-07 01:27:31,905] [INFO] [GameController] Starting game loop with 20ms frame duration
+[2025-11-07 01:27:38,448] [DEBUG] [ButtonReader] Button state changed: buttons [0]
+[2025-11-07 01:27:38,449] [DEBUG] [AmplifyState] AmplifyState initialized with buttons: [0]
+[2025-11-07 01:27:38,449] [INFO] [GameController] Exiting state: IdleState
+[2025-11-07 01:27:38,450] [INFO] [GameController] State transition: IdleState → AmplifyState
+[2025-11-07 01:27:38,450] [INFO] [GameController] Entering state: AmplifyState
+[2025-11-07 01:27:40,696] [DEBUG] [ButtonReader] Button state changed: buttons [0]
+[2025-11-07 01:27:40,696] [INFO] [GameController] Exiting state: AmplifyState
+[2025-11-07 01:27:40,697] [INFO] [GameController] State transition: AmplifyState → IdleState
+[2025-11-07 01:27:40,697] [INFO] [GameController] Entering state: IdleState
+[2025-11-07 01:27:43,087] [DEBUG] [ButtonReader] Button state changed: buttons [1]
+[2025-11-07 01:27:43,088] [DEBUG] [AmplifyState] AmplifyState initialized with buttons: [1]
+[2025-11-07 01:27:43,088] [INFO] [GameController] Exiting state: IdleState
+[2025-11-07 01:27:43,088] [INFO] [GameController] State transition: IdleState → AmplifyState
+[2025-11-07 01:27:43,089] [INFO] [GameController] Entering state: AmplifyState
+[2025-11-07 01:27:43,631] [DEBUG] [ButtonReader] Button state changed: buttons [1]
+[2025-11-07 01:27:43,632] [INFO] [GameController] Exiting state: AmplifyState
+[2025-11-07 01:27:43,633] [INFO] [GameController] State transition: AmplifyState → IdleState
+[2025-11-07 01:27:43,634] [INFO] [GameController] Entering state: IdleState
+[2025-11-07 01:27:44,560] [DEBUG] [ButtonReader] Button state changed: buttons [0]
+[2025-11-07 01:27:44,561] [DEBUG] [AmplifyState] AmplifyState initialized with buttons: [0]
+[2025-11-07 01:27:44,561] [INFO] [GameController] Exiting state: IdleState
+[2025-11-07 01:27:44,562] [INFO] [GameController] State transition: IdleState → AmplifyState
+[2025-11-07 01:27:44,562] [INFO] [GameController] Entering state: AmplifyState
+[2025-11-07 01:27:45,143] [DEBUG] [ButtonReader] Button state changed: buttons [1]
+[2025-11-07 01:27:45,144] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [0, 1]
+[2025-11-07 01:27:46,308] [DEBUG] [ButtonReader] Button state changed: buttons [1]
+[2025-11-07 01:27:46,309] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [0]
+[2025-11-07 01:27:47,232] [DEBUG] [ButtonReader] Button state changed: buttons [0]
+[2025-11-07 01:27:47,232] [INFO] [GameController] Exiting state: AmplifyState
+[2025-11-07 01:27:47,233] [INFO] [GameController] State transition: AmplifyState → IdleState
+[2025-11-07 01:27:47,233] [INFO] [GameController] Entering state: IdleState
+[2025-11-07 01:31:39,870] [INFO] [GameController] Game stopped by user (Ctrl+C)
+[2025-11-07 01:31:39,881] [INFO] [GameController] Game stopped

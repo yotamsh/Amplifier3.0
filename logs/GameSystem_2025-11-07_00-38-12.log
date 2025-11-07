@@ -1,0 +1,26 @@
+[2025-11-07 00:38:12,671] [INFO] [ButtonReader] GPIO setup complete: 2 pins, no pulls
+[2025-11-07 00:38:12,672] [INFO] [ButtonReader] ButtonReader initialized with 2 buttons
+[2025-11-07 00:38:12,673] [INFO] [ButtonReader] Button mapping: Button0=GPIO4, Button1=GPIO22
+[2025-11-07 00:38:12,676] [INFO] [GameController] Entering state: IdleState
+[2025-11-07 00:38:12,677] [INFO] [GameController] GameController initialized: 20ms frame duration, 2 LED strips
+[2025-11-07 00:38:12,678] [INFO] [GameController] Game system initialized successfully
+[2025-11-07 00:38:12,678] [INFO] [GameController] Configuration: 2 buttons, 2 LED strips, 20ms frame duration
+[2025-11-07 00:38:12,679] [INFO] [GameController] Starting game loop with 20ms frame duration
+[2025-11-07 00:38:14,693] [ERROR] [GameController] Game loop error: BreathingAnimation.__init__() got an unexpected keyword argument 'base_color' | Type: TypeError | File: /home/yotam/AmpSync/Amp3/src/game_system/animations.py | Line: 261
+Traceback (most recent call last):
+  File "/home/yotam/AmpSync/Amp3/src/game_system/game_controller.py", line 80, in run_game_loop
+    self.update()
+  File "/home/yotam/AmpSync/Amp3/src/game_system/game_controller.py", line 114, in update
+    new_state = self.current_state.update(button_state)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yotam/AmpSync/Amp3/src/game_system/states.py", line 51, in update
+    self.update_animations()
+  File "/home/yotam/AmpSync/Amp3/src/game_system/states.py", line 67, in update_animations
+    animation.update_if_needed()
+  File "/home/yotam/AmpSync/Amp3/src/game_system/animations.py", line 52, in update_if_needed
+    self.advance()
+  File "/home/yotam/AmpSync/Amp3/src/game_system/animations.py", line 261, in advance
+    self.breathing_animation = BreathingAnimation(
+                               ^^^^^^^^^^^^^^^^^^^
+TypeError: BreathingAnimation.__init__() got an unexpected keyword argument 'base_color'
+[2025-11-07 00:38:14,706] [INFO] [GameController] Game stopped

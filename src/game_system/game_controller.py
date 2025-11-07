@@ -166,19 +166,21 @@ class GameController:
         Args:
             new_state: The new state to transition to
         """
-        old_state_name = self.current_state.__class__.__name__
-        new_state_name = new_state.__class__.__name__
         
         # Call exit handler on current state
         self.current_state.on_exit()
-        
+
+        # Log state transition
+        old_state_name = self.current_state.__class__.__name__
+        new_state_name = new_state.__class__.__name__
+        self.logger.info(f"State transition: {old_state_name} → {new_state_name}")
+
         # Switch to new state
         self.current_state = new_state
         
         # Call enter handler on new state
         self.current_state.on_enter()
         
-        self.logger.info(f"State transition: {old_state_name} → {new_state_name}")
     
     def get_current_state_name(self) -> str:
         """Get the name of the current game state."""

@@ -86,6 +86,21 @@ class ClassLogger:
     def critical(self, message: str) -> None:
         """Log critical message"""
         self._log(logging.CRITICAL, message)
+    
+    def create_class_logger(self, class_name: str, level: int = None) -> 'ClassLogger':
+        """
+        Create another class logger using the same underlying logger.
+        
+        Args:
+            class_name: Name of the new class for log identification
+            level: Minimum log level (defaults to current logger's level)
+            
+        Returns:
+            ClassLogger: New logger instance for the specified class
+        """
+        if level is None:
+            level = self.level
+        return ClassLogger(self.main_logger, class_name, level)
 
 class HybridLogger:
     """Enhanced logger factory with per-class logging and colored output"""

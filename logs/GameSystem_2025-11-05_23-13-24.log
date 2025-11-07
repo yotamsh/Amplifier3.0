@@ -48,3 +48,17 @@
 [2025-11-05 23:18:46,558] [INFO] [GameController] Exiting state: AmplifyState
 [2025-11-05 23:18:46,559] [INFO] [GameController] Entering state: IdleState
 [2025-11-05 23:18:46,559] [INFO] [GameController] State transition: AmplifyState → IdleState
+[2025-11-05 23:48:35,765] [INFO] [GameController] Exiting state: IdleState
+[2025-11-05 23:48:35,766] [INFO] [GameController] Entering state: AmplifyState
+[2025-11-05 23:48:35,767] [INFO] [GameController] State transition: IdleState → AmplifyState
+[2025-11-05 23:48:38,981] [INFO] [GameController] Exiting state: AmplifyState
+[2025-11-05 23:48:38,981] [INFO] [GameController] Entering state: IdleState
+[2025-11-05 23:48:38,982] [INFO] [GameController] State transition: AmplifyState → IdleState
+[2025-11-05 23:48:40,129] [INFO] [GameController] Exiting state: IdleState
+[2025-11-05 23:48:40,129] [INFO] [GameController] Entering state: AmplifyState
+[2025-11-05 23:48:40,130] [INFO] [GameController] State transition: IdleState → AmplifyState
+[2025-11-05 23:48:41,075] [INFO] [GameController] Exiting state: AmplifyState
+[2025-11-05 23:48:41,076] [INFO] [GameController] Entering state: IdleState
+[2025-11-05 23:48:41,077] [INFO] [GameController] State transition: AmplifyState → IdleState
+[2025-11-06 00:08:44,914] [INFO] [GameController] Game stopped by user (Ctrl+C)
+[2025-11-06 00:08:44,931] [INFO] [GameController] Game stopped

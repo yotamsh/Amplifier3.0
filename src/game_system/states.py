@@ -5,7 +5,7 @@ Game state base class and concrete implementations
 from abc import ABC, abstractmethod
 from typing import List, Set, Dict, Optional, TYPE_CHECKING
 
-from .animations import BreathingAnimation, RainbowAnimation, StaticColorAnimation
+from .animations import BreathingAnimation, RainbowAnimation, StaticColorAnimation, AmplifyAnimation
 
 if TYPE_CHECKING:
     from button_system.button_state import ButtonState
@@ -99,8 +99,7 @@ class IdleState(GameState):
         """Update idle state - handle buttons, animations, and LED rendering"""
         # Check for state transitions - any button pressed goes to Amplify
         if button_state.total_buttons_pressed > 0:
-            pressed_buttons = {i for i, pressed in enumerate(button_state.for_button) if pressed}
-            return AmplifyState(self.game_controller, pressed_buttons)
+            return AmplifyState(self.game_controller, button_state.for_button)
         
         # Update animations (they handle their own rendering and timing)
         for animation in self.animations:
@@ -121,45 +120,43 @@ class AmplifyState(GameState):
     - All buttons pressed → PartyState (if implemented)
     """
     
-    def __init__(self, game_controller: 'GameController', pressed_buttons: Set[int] = None):
+    def __init__(self, game_controller: 'GameController', pressed_buttons: List[bool] = None):
         super().__init__(game_controller)
-        self.pressed_buttons: Set[int] = pressed_buttons or set()
-        self.button_animations: Dict[int, RainbowAnimation] = {}
+        # Create class logger for this state
+        self.logger = game_controller.logger.create_class_logger("AmplifyState")
         
-        # Log initial pressed buttons
-        if self.pressed_buttons:
-            button_list = sorted(list(self.pressed_buttons))
-            self.game_controller.logger.debug(f"AmplifyState initialized with buttons: {button_list}")
+        # Initialize pressed buttons state (list of bools, same as ButtonState.for_button)
+        button_count = game_controller.button_reader.get_button_count()
+        self.pressed_buttons: List[bool] = pressed_buttons or [False] * button_count
+        
+        # Initialize animations list with an amplify animation on strip 1 (index 0)
+        self.animations: List['Animation'] = []
+        first_strip = game_controller.led_strips[0]
+        self.amplify_anim = AmplifyAnimation(
+            strip=first_strip,
+            button_count=game_controller.button_reader.get_button_count(),
+            speed_ms=50,
+            hue_shift_per_frame=12
+        )
+        self.animations.append(self.amplify_anim)
+        
+        # Initialize the animation with the current button state
+        self.amplify_anim.set_pressed_buttons(self.pressed_buttons)
+        
+        # Print pressed button indexes on init
+        pressed_indexes = [i for i, pressed in enumerate(self.pressed_buttons) if pressed]
+        if pressed_indexes:
+            self.logger.debug(f"AmplifyState initialized with buttons: {pressed_indexes}")
         else:
-            self.game_controller.logger.debug("AmplifyState initialized with no buttons pressed")
+            self.logger.debug("AmplifyState initialized with no buttons pressed")
     
     def custom_on_enter(self) -> None:
-        """Called when entering this state - setup animations"""
-        self._setup_animations()
+        """Called when entering this state - no setup needed"""
+        pass
     
     def custom_on_exit(self) -> None:
         """Called when exiting this state - cleanup if needed"""
         pass
-    
-    def _setup_animations(self):
-        """Create rainbow animations for currently pressed buttons"""
-        for button_id in self.pressed_buttons:
-            self._create_button_animation(button_id)
-    
-    def _create_button_animation(self, button_id: int):
-        """Create rainbow animation for specific button"""
-        # For now, each button gets a rainbow animation on the first strip
-        # In a real implementation, you might want to:
-        # - Use different strips for different buttons
-        # - Create custom animations that only affect specific LED ranges
-        # - Map buttons to strip sections
-        first_strip = self.game_controller.led_strips[0]
-        
-        self.button_animations[button_id] = RainbowAnimation(
-            strip=first_strip,
-            speed_ms=50,
-            hue_shift_per_frame=8
-        )
     
     def update(self, button_state: 'ButtonState') -> Optional['GameState']:
         """Update amplify state - handle buttons, animations, and LED rendering"""
@@ -167,40 +164,23 @@ class AmplifyState(GameState):
         if button_state.total_buttons_pressed == 0:
             return IdleState(self.game_controller)
         
-        new_pressed = {i for i, pressed in enumerate(button_state.for_button) if pressed}
+        # Update pressed buttons state to current button state
+        self.pressed_buttons = button_state.for_button.copy()
         
-        # Log button changes if any buttons were changed
+        # Update the amplify animation with current button state
+        self.amplify_anim.set_pressed_buttons(self.pressed_buttons)
+        
+        # Print pressed button indexes on update
         if button_state.any_changed:
-            button_list = sorted(list(new_pressed))
-            self.game_controller.logger.debug(f"AmplifyState button change - currently pressed: {button_list}")
-        
-        # Update button animations for changed buttons
-        self._update_button_animations(new_pressed)
-        
-        # Clear strips first (before animations update)
-        black = Pixel(0, 0, 0)
-        for strip in self.game_controller.led_strips:
-            strip[:] = black
+            pressed_indexes = [i for i, pressed in enumerate(button_state.for_button) if pressed]
+            self.logger.debug(f"AmplifyState button change - currently pressed: {pressed_indexes}")
         
         # Update animations (they handle their own rendering and timing)
-        for animation in self.button_animations.values():
+        for animation in self.animations:
             animation.update_if_needed()
         
         return None
     
-    def _update_button_animations(self, new_pressed: Set[int]):
-        """Update animations based on newly pressed/released buttons"""
-        # Remove animations for released buttons
-        for button_id in list(self.button_animations.keys()):
-            if button_id not in new_pressed:
-                del self.button_animations[button_id]
-        
-        # Add animations for newly pressed buttons
-        for button_id in new_pressed:
-            if button_id not in self.button_animations:
-                self._create_button_animation(button_id)
-        
-        self.pressed_buttons = new_pressed
 
 
 class TestState(GameState):
