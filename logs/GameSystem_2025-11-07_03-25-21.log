@@ -1,0 +1,24 @@
+[2025-11-07 03:25:21,462] [INFO] [ButtonReader] GPIO setup complete: 2 pins, no pulls
+[2025-11-07 03:25:21,462] [INFO] [ButtonReader] ButtonReader initialized with 2 buttons
+[2025-11-07 03:25:21,463] [INFO] [ButtonReader] Button mapping: Button0=GPIO4, Button1=GPIO22
+[2025-11-07 03:25:21,466] [INFO] [GameController] Entering state: IdleState
+[2025-11-07 03:25:21,468] [INFO] [GameController] GameController initialized: 20ms frame duration, 2 LED strips
+[2025-11-07 03:25:21,468] [INFO] [GameController] Game system initialized successfully
+[2025-11-07 03:25:21,469] [INFO] [GameController] Configuration: 2 buttons, 2 LED strips, 20ms frame duration
+[2025-11-07 03:25:21,469] [INFO] [GameController] Starting game loop with 20ms frame duration
+[2025-11-07 03:25:38,675] [DEBUG] [AmplifyState] AmplifyState initialized with buttons: [0]
+[2025-11-07 03:25:38,676] [INFO] [GameController] Exiting state: IdleState
+[2025-11-07 03:25:38,676] [INFO] [GameController] State transition: IdleState → AmplifyState
+[2025-11-07 03:25:38,677] [INFO] [GameController] Entering state: AmplifyState
+[2025-11-07 03:25:39,740] [INFO] [GameController] Exiting state: AmplifyState
+[2025-11-07 03:25:39,741] [INFO] [GameController] State transition: AmplifyState → IdleState
+[2025-11-07 03:25:39,741] [INFO] [GameController] Entering state: IdleState
+[2025-11-07 03:25:43,195] [DEBUG] [AmplifyState] AmplifyState initialized with buttons: [0]
+[2025-11-07 03:25:43,196] [INFO] [GameController] Exiting state: IdleState
+[2025-11-07 03:25:43,196] [INFO] [GameController] State transition: IdleState → AmplifyState
+[2025-11-07 03:25:43,197] [INFO] [GameController] Entering state: AmplifyState
+[2025-11-07 03:25:46,494] [INFO] [GameController] Exiting state: AmplifyState
+[2025-11-07 03:25:46,495] [INFO] [GameController] State transition: AmplifyState → IdleState
+[2025-11-07 03:25:46,496] [INFO] [GameController] Entering state: IdleState
+[2025-11-07 04:02:28,551] [INFO] [GameController] Game stopped by user (Ctrl+C)
+[2025-11-07 04:02:28,562] [INFO] [GameController] Game stopped

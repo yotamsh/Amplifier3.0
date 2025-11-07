@@ -46,7 +46,7 @@ class GameConfig:
     led_strips: List[LedStripConfig]
     
     # Timing configuration  
-    frame_duration_ms: float = 33.33  # ~30 FPS (1000ms / 30)
+    frame_duration_ms: float = 20
     
     # Sequence configuration
     sequence_timeout_ms: int = 1500

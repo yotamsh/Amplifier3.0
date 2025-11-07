@@ -5,7 +5,7 @@ Game state base class and concrete implementations
 from abc import ABC, abstractmethod
 from typing import List, Set, Dict, Optional, TYPE_CHECKING
 
-from .animations import BreathingAnimation, RainbowAnimation, StaticColorAnimation, AmplifyAnimation
+from .animations import BreathingAnimation, RainbowAnimation, StaticColorAnimation, AmplifyAnimation, AnimationDelayWrapper, IdleAnimation
 
 if TYPE_CHECKING:
     from button_system.button_state import ButtonState
@@ -78,18 +78,26 @@ class IdleState(GameState):
         self.animations: List['Animation'] = []
     
     def custom_on_enter(self) -> None:
-        """Called when entering idle state - setup breathing animations"""
-        # Create dim blue breathing animation for each strip
-        dim_blue = Pixel(0, 50, 100)  # Dim blue color
+        """Called when entering idle state - setup delayed scanner animations"""
+        # Create bouncing rainbow scanner animation for each strip, wrapped with 2-second delay
         self.animations = []
+        
         for strip in self.game_controller.led_strips:
-            breathing_anim = BreathingAnimation(
+            # Create the idle scanner animation
+            idle_anim = IdleAnimation(
                 strip=strip,
-                color=dim_blue,
-                speed_ms=100,
-                brightness_range=(0.1, 0.6)
+                speed_ms=50,      # Very fast scanner movement
+                hue_increment=3,  # Rainbow cycling speed 
+                fade_amount=20    # Trail fading strength
             )
-            self.animations.append(breathing_anim)
+            
+            # Wrap it with a 2-second delay
+            delayed_idle = AnimationDelayWrapper(
+                target_animation=idle_anim,
+                delay_ms=2000  # 2 seconds of darkness
+            )
+            
+            self.animations.append(delayed_idle)
     
     def custom_on_exit(self) -> None:
         """Called when exiting idle state - cleanup if needed"""

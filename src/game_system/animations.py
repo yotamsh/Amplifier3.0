@@ -3,6 +3,7 @@ Animation base class and concrete implementations for the game system
 """
 
 import math
+import random
 import time
 from abc import ABC, abstractmethod
 from typing import List, Tuple, TYPE_CHECKING
@@ -174,6 +175,111 @@ class StaticColorAnimation(Animation):
             self._initialized = True
 
 
+class IdleAnimation(Animation):
+    """
+    Dynamic bouncing rainbow scanner animation for idle state.
+    
+    Creates a single bright LED that bounces back and forth across the strip,
+    cycling through rainbow hues with a fading trail effect behind it.
+    Based on the classic "Cylon eye" or "scanner" effect.
+    """
+    
+    def __init__(self, strip: 'LedStrip', speed_ms: int = 50, hue_increment: int = 3, fade_amount: int = 40):
+        """
+        Initialize idle scanner animation.
+        
+        Args:
+            strip: LED strip to operate on
+            speed_ms: Animation update interval in milliseconds
+            hue_increment: Amount to increment hue each frame (higher = faster color change)
+            fade_amount: Fade strength (0-255, where 255 = fade to target completely, 0 = no fade)
+        """
+        super().__init__(strip, speed_ms)
+        
+        # Strip length
+        self.num_pixels: int = strip.num_pixels()
+        
+        # Scanner position and movement - start from random position
+        self.led_index: int = random.randint(0, self.num_pixels - 1)
+        self.reverse: bool = random.choice([True, False])  # Random initial direction
+        
+        # Color cycling - start from random hue
+        self.hue_index: int = random.randint(0, 359)
+        self.hue_increment: int = hue_increment
+        
+        # Fading effect
+        self.fade_amount: int = fade_amount
+    
+    def advance(self) -> None:
+        """Advance scanner position, update colors, and apply fading effect"""
+        # Import here to avoid circular imports
+        from led_system.pixel import Pixel
+        
+        # 1. Fade all existing pixels using HSV to preserve color (trail effect)
+        AnimationHelpers.fade_to_black_hsv(self.strip, self.fade_amount)
+        
+        # 2. Set current LED to bright rainbow color
+        current_color = AnimationHelpers.hsv_to_pixel(self.hue_index % 360, 1.0, 1.0)
+        self.strip[self.led_index] = current_color
+        
+        # 3. Move LED index (bouncing motion)
+        if self.reverse:
+            self.led_index -= 1
+        else:
+            self.led_index += 1
+        
+        # 4. Reverse direction at strip ends
+        if self.led_index >= self.num_pixels - 1 or self.led_index <= 0:
+            self.reverse = not self.reverse
+            # Ensure we stay within bounds
+            self.led_index = max(0, min(self.led_index, self.num_pixels - 1))
+        
+        # 5. Increment hue for next frame (rainbow cycling)
+        self.hue_index += self.hue_increment
+
+
+class AnimationDelayWrapper(Animation):
+    """
+    Generic wrapper that adds a delay before starting a target animation.
+    
+    During the delay period, keeps the LED strip black. After the delay,
+    delegates all animation behavior to the wrapped target animation.
+    """
+    
+    def __init__(self, target_animation: 'Animation', delay_ms: int):
+        """
+        Initialize delay wrapper.
+        
+        Args:
+            target_animation: Animation to run after delay
+            delay_ms: Delay duration in milliseconds before starting target animation
+        """
+        super().__init__(target_animation.strip, target_animation.speed_ms)
+        self.target_animation: 'Animation' = target_animation
+        self.delay_ms: int = delay_ms
+        self.start_time: float = time.time() * 1000  # Current time in milliseconds
+        self.delay_finished: bool = False
+    
+    def advance(self) -> None:
+        """Either maintain black strip during delay or delegate to target animation"""
+        if not self.delay_finished:
+            # Check if delay period is over
+            current_time = time.time() * 1000
+            if current_time - self.start_time >= self.delay_ms:
+                self.delay_finished = True
+                # Delay finished, start delegating to target animation
+                self.target_animation.advance()
+            else:
+                # Still in delay - keep strip black
+                # Import here to avoid circular imports
+                from led_system.pixel import Pixel
+                black = Pixel(0, 0, 0)
+                self.strip[:] = black
+        else:
+            # Delay finished - delegate to target animation
+            self.target_animation.advance()
+
+
 class AmplifyAnimation(Animation):
     """
     Rainbow animation that only illuminates LED segments corresponding to pressed buttons.
@@ -214,13 +320,16 @@ class AmplifyAnimation(Animation):
         self.pressed_buttons = pressed_buttons.copy()
     
     def advance(self) -> None:
-        """Advance rainbow hue offset and update strip pixels based on button state"""
+        """Advance rainbow hue offset and update strip pixels based button state"""
         self.hue_offset = (self.hue_offset + self.hue_shift_per_frame) % 360
         
         # Import here to avoid circular imports
         from led_system.pixel import Pixel
         
-        # Update all strip pixels
+        # 1. First, apply HSV fading to create trails for released button segments
+        AnimationHelpers.fade_to_black_hsv(self.strip, fade_amount=30, min_brightness=0.1)
+        
+        # 2. Update all strip pixels based on current button state
         num_pixels = self.strip.num_pixels()
         
         for led_pos in range(num_pixels):
@@ -233,6 +342,4 @@ class AmplifyAnimation(Animation):
                 hue = (led_pos * 360 / num_pixels + self.hue_offset) % 360
                 color = AnimationHelpers.hsv_to_pixel(hue, 1.0, 1.0)
                 self.strip[led_pos] = color
-            else:
-                # Button not pressed or out of bounds - set LED to black
-                self.strip[led_pos] = Pixel(0, 0, 0)
+            # Note: No explicit "else" - let fading handle unpressed segments

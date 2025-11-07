@@ -1,0 +1,10 @@
+[2025-11-07 04:15:20,113] [INFO] [ButtonReader] GPIO setup complete: 2 pins, no pulls
+[2025-11-07 04:15:20,114] [INFO] [ButtonReader] ButtonReader initialized with 2 buttons
+[2025-11-07 04:15:20,114] [INFO] [ButtonReader] Button mapping: Button0=GPIO4, Button1=GPIO22
+[2025-11-07 04:15:20,119] [INFO] [GameController] Entering state: IdleState
+[2025-11-07 04:15:20,120] [INFO] [GameController] GameController initialized: 20ms frame duration, 2 LED strips
+[2025-11-07 04:15:20,120] [INFO] [GameController] Game system initialized successfully
+[2025-11-07 04:15:20,121] [INFO] [GameController] Configuration: 2 buttons, 2 LED strips, 20ms frame duration
+[2025-11-07 04:15:20,122] [INFO] [GameController] Starting game loop with 20ms frame duration
+[2025-11-07 04:24:41,747] [INFO] [GameController] Game stopped by user (Ctrl+C)
+[2025-11-07 04:24:41,765] [INFO] [GameController] Game stopped

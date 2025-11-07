@@ -1,0 +1,17 @@
+[2025-11-07 04:02:31,163] [INFO] [ButtonReader] GPIO setup complete: 2 pins, no pulls
+[2025-11-07 04:02:31,163] [INFO] [ButtonReader] ButtonReader initialized with 2 buttons
+[2025-11-07 04:02:31,165] [INFO] [ButtonReader] Button mapping: Button0=GPIO4, Button1=GPIO22
+[2025-11-07 04:02:31,170] [INFO] [GameController] Entering state: IdleState
+[2025-11-07 04:02:31,172] [INFO] [GameController] GameController initialized: 20ms frame duration, 2 LED strips
+[2025-11-07 04:02:31,173] [INFO] [GameController] Game system initialized successfully
+[2025-11-07 04:02:31,174] [INFO] [GameController] Configuration: 2 buttons, 2 LED strips, 20ms frame duration
+[2025-11-07 04:02:31,175] [INFO] [GameController] Starting game loop with 20ms frame duration
+[2025-11-07 04:07:30,800] [DEBUG] [AmplifyState] AmplifyState initialized with buttons: [0]
+[2025-11-07 04:07:30,800] [INFO] [GameController] Exiting state: IdleState
+[2025-11-07 04:07:30,800] [INFO] [GameController] State transition: IdleState → AmplifyState
+[2025-11-07 04:07:30,801] [INFO] [GameController] Entering state: AmplifyState
+[2025-11-07 04:07:32,426] [INFO] [GameController] Exiting state: AmplifyState
+[2025-11-07 04:07:32,427] [INFO] [GameController] State transition: AmplifyState → IdleState
+[2025-11-07 04:07:32,428] [INFO] [GameController] Entering state: IdleState
+[2025-11-07 04:13:52,934] [INFO] [GameController] Game stopped by user (Ctrl+C)
+[2025-11-07 04:13:52,946] [INFO] [GameController] Game stopped
