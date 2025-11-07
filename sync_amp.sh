@@ -79,7 +79,7 @@ while true; do
     echo -e "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] Syncing to remote...${NC}"
     
     # Sync local project to remote (excluding files in .rsyncignore)
-    rsync -avz --exclude-from="$EXCLUDE_FILE" "$LOCAL_PROJECT_DIR" "$REMOTE_PROJECT_DIR"
+    rsync -avz --delete --exclude-from="$EXCLUDE_FILE" "$LOCAL_PROJECT_DIR" "$REMOTE_PROJECT_DIR"
     
     if [ $? -eq 0 ]; then
         echo -e "${GREEN}✓ Local to remote sync completed${NC}"
