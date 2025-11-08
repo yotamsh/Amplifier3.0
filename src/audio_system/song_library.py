@@ -5,7 +5,7 @@ Song Library - Runtime song management for the game system
 import os
 import random
 from datetime import datetime
-from typing import Dict, List, Optional, Set
+from typing import Dict, List, Optional, Set, Any
 
 try:
     import eyed3
@@ -14,7 +14,7 @@ try:
 except ImportError:
     eyed3 = None
 
-from .collections import Collection, Schedule
+from .collections import Collection, Schedule, ALL_COLLECTIONS
 
 
 class SongLibrary:
@@ -53,9 +53,6 @@ class SongLibrary:
     
     def _initialize_system(self) -> None:
         """Initialize collections discovery, code dictionary, and schedule"""
-        # First, discover folders for Collection enum
-        Collection.initialize_discovered_folders(self.songs_folder)
-        
         # Load code dictionary from ID3 tags
         self._create_codes_dict()
         
@@ -74,9 +71,8 @@ class SongLibrary:
             self.logger.error("eyed3 library not available - cannot load song codes")
             return
         
-        discovered_collections = Collection.get_all_discovered()
-        
-        for collection in discovered_collections:
+        # Process all hardcoded collections
+        for collection in ALL_COLLECTIONS:
             collection_path = os.path.join(self.songs_folder, collection.value)
             
             if not os.path.exists(collection_path):
@@ -113,7 +109,7 @@ class SongLibrary:
             except Exception as e:
                 self.logger.error(f"Failed to process collection {collection.value}: {e}")
         
-        self.logger.info(f"Loaded {len(self.codes_dict)} song codes from {len(discovered_collections)} collections")
+        self.logger.info(f"Loaded {len(self.codes_dict)} song codes from {len(ALL_COLLECTIONS)} collections")
     
     def _is_valid_code(self, code: Optional[str]) -> bool:
         """
@@ -192,7 +188,7 @@ class SongLibrary:
             
         return random.choice(self.current_songs_basket)
     
-    def is_valid_code(self, code: str) -> bool:
+    def is_code_supported(self, code: str) -> bool:
         """
         Check if a code exists in the song library.
         
@@ -204,16 +200,22 @@ class SongLibrary:
         """
         return code in self.codes_dict
     
-    def get_stats(self) -> Dict[str, int]:
+    def get_stats(self) -> Dict[str, Any]:
         """
         Get library statistics for debugging.
         
         Returns:
-            Dictionary with library statistics
+            Dictionary with library statistics including:
+            - songs_folder: Path to songs directory
+            - all_collections: Names of all available collections
+            - total_codes: Number of loaded song codes
+            - daily_schedule_entries: Number of daily schedule entries
+            - special_schedule_entries: Number of special schedule entries
         """
         return {
+            "songs_folder": self.songs_folder,
+            "all_collections": [c.name for c in ALL_COLLECTIONS],
             "total_codes": len(self.codes_dict),
-            "current_collections": len(self.current_collections),
-            "available_songs": len(self.current_songs_basket),
-            "discovered_folders": len(Collection.get_discovered_folder_names())
+            "daily_schedule_entries": len(self.schedule.daily_schedule),
+            "special_schedule_entries": len(self.schedule.special_schedule)
         }

@@ -13,7 +13,7 @@ class Collection(Enum):
     """
     Audio collections - each corresponds to a folder in the songs directory.
     
-    Manual definitions allow these to be referenced in schedules.
+    Hardcoded collection definitions.
     """
     GENERAL = "general"
     MORNING = "morning"
@@ -21,49 +21,10 @@ class Collection(Enum):
     TV = "tv"
     CLASSIC = "classic"
     DISNEY = "disney"
-    
-    # Class variable to hold discovered folders (set during initialization)
-    _discovered_folders: Set[str] = set()
-    
-    @classmethod
-    def initialize_discovered_folders(cls, songs_folder: str) -> None:
-        """
-        Discover and store all folders in songs directory.
-        
-        Args:
-            songs_folder: Path to songs directory
-        """
-        if not os.path.exists(songs_folder):
-            cls._discovered_folders = set()
-            return
-            
-        cls._discovered_folders = {
-            name for name in os.listdir(songs_folder) 
-            if os.path.isdir(os.path.join(songs_folder, name))
-        }
-    
-    @classmethod
-    def get_all_discovered(cls) -> Set['Collection']:
-        """
-        Return all enum values that match discovered folders.
-        
-        Returns:
-            Set of Collection enums that have matching folders
-        """
-        return {
-            collection for collection in cls 
-            if collection.value in cls._discovered_folders
-        }
-    
-    @classmethod
-    def get_discovered_folder_names(cls) -> Set[str]:
-        """
-        Get the raw discovered folder names.
-        
-        Returns:
-            Set of folder names found in songs directory
-        """
-        return cls._discovered_folders.copy()
+
+
+# Constant with all collections
+ALL_COLLECTIONS = set(Collection)
 
 
 @dataclass
@@ -89,37 +50,59 @@ class Schedule:
     """
     
     def __init__(self, daily_schedule: List[DailyScheduleEntry], 
-                 special_schedule: Optional[List[SpecialScheduleEntry]] = None):
+                 special_schedule: Optional[List[SpecialScheduleEntry]] = None,
+                 songs_folder: str = "songs"):
         """
         Initialize schedule with validation.
         
         Args:
             daily_schedule: List of daily recurring schedule entries
             special_schedule: Optional list of special date-specific entries
+            songs_folder: Path to songs directory for validation
         """
         self.daily_schedule = daily_schedule or []
         self.special_schedule = special_schedule or []
-        self._validate_schedule()
+        self._validate_schedule(songs_folder)
     
-    def _validate_schedule(self) -> None:
+    def _validate_schedule(self, songs_folder: str = "songs") -> None:
         """
-        Validate that all collections in schedule exist in discovered folders.
+        Validate schedule entries and collection folder existence.
         
-        This validation happens after Collection.initialize_discovered_folders() is called.
+        Validates:
+        - Daily schedule times are monotonically increasing
+        - Special schedule entries have start < end
+        - Collection folders exist in songs directory
+        
+        Args:
+            songs_folder: Path to songs directory for validation
         """
-        discovered = Collection.get_discovered_folder_names()
+        # Validate daily schedule monotonic ordering
+        for i in range(1, len(self.daily_schedule)):
+            prev_time = self.daily_schedule[i-1].time
+            curr_time = self.daily_schedule[i].time
+            if prev_time >= curr_time:
+                print(f"❌ Error: Daily schedule times must be monotonically increasing")
+                print(f"    Entry {i-1}: {prev_time} >= Entry {i}: {curr_time}")
         
-        # Check daily schedule
+        # Validate special schedule start < end
+        for i, entry in enumerate(self.special_schedule):
+            if entry.start >= entry.end:
+                print(f"❌ Error: Special schedule entry {i} has start >= end")
+                print(f"    Start: {entry.start}, End: {entry.end}")
+        
+        # Check daily schedule collection folders
         for entry in self.daily_schedule:
             for collection in entry.collections:
-                if collection.value not in discovered:
-                    print(f"⚠️  Warning: Collection '{collection.value}' in daily schedule not found in songs folder")
+                collection_path = os.path.join(songs_folder, collection.value)
+                if not os.path.exists(collection_path):
+                    print(f"⚠️  Warning: Collection '{collection.value}' in daily schedule - folder not found: {collection_path}")
         
-        # Check special schedule  
+        # Check special schedule collection folders
         for entry in self.special_schedule:
             for collection in entry.collections:
-                if collection.value not in discovered:
-                    print(f"⚠️  Warning: Collection '{collection.value}' in special schedule not found in songs folder")
+                collection_path = os.path.join(songs_folder, collection.value)
+                if not os.path.exists(collection_path):
+                    print(f"⚠️  Warning: Collection '{collection.value}' in special schedule - folder not found: {collection_path}")
     
     def get_collections_by_time(self, current_time: datetime) -> Set[Collection]:
         """
@@ -139,9 +122,6 @@ class Schedule:
                 return special_entry.collections
         
         # Fall back to daily schedule
-        if not self.daily_schedule:
-            return set()
-        
         # Find the active daily schedule entry
         schedule_index = 0
         current_time_only = current_time.time()
@@ -151,4 +131,9 @@ class Schedule:
                current_time_only >= self.daily_schedule[schedule_index + 1].time):
             schedule_index += 1
         
-        return self.daily_schedule[schedule_index].collections
+        # Return scheduled collections, or all collections as fallback
+        if schedule_index < len(self.daily_schedule):
+            return self.daily_schedule[schedule_index].collections
+        else:
+            # Fallback to all collections if no schedule found
+            return ALL_COLLECTIONS

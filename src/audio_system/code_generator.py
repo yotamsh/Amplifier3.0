@@ -15,7 +15,8 @@ try:
 except ImportError:
     eyed3 = None
 
-from .collections import Collection
+from .collections import Collection, ALL_COLLECTIONS
+from ..game_system.config import AudioConfig
 
 
 class CodeGeneratorHelper:
@@ -32,8 +33,7 @@ class CodeGeneratorHelper:
     CODE_LENGTH = 5
     
     @staticmethod
-    def generate_missing_codes(songs_folder: str = "songs", 
-                              csv_output_path: str = "AmplifierSongCodes.csv") -> None:
+    def generate_missing_codes(audio_config: AudioConfig) -> None:
         """
         Generate codes for songs missing them and create CSV database.
         
@@ -44,9 +44,10 @@ class CodeGeneratorHelper:
         4. Create/overwrite CSV database with all songs
         
         Args:
-            songs_folder: Path to songs directory
-            csv_output_path: Path for CSV output file
+            audio_config: AudioConfig instance with songs_folder and csv_output_path
         """
+        songs_folder = audio_config.songs_folder
+        csv_output_path = audio_config.csv_output_path
         if eyed3 is None:
             print("❌ Error: eyed3 library not available")
             print("Install with: pip install eyed3")
@@ -61,15 +62,8 @@ class CodeGeneratorHelper:
         print(f"📄 CSV output: {csv_output_path}")
         print()
         
-        # Discover collections
-        Collection.initialize_discovered_folders(songs_folder)
-        discovered_collections = Collection.get_all_discovered()
-        
-        if not discovered_collections:
-            print("⚠️  No valid collection folders found")
-            return
-        
-        print(f"📂 Found collections: {[c.name for c in discovered_collections]}")
+        # Use all hardcoded collections
+        print(f"📂 Processing collections: {[c.name for c in ALL_COLLECTIONS]}")
         print()
         
         # Statistics tracking
@@ -85,7 +79,7 @@ class CodeGeneratorHelper:
             
             # Phase 1: Collect all existing codes
             print("🔍 Phase 1: Scanning existing codes...")
-            for collection in discovered_collections:
+            for collection in ALL_COLLECTIONS:
                 collection_path = os.path.join(songs_folder, collection.value)
                 
                 print(f"  Scanning {collection.name}...", end=" ", flush=True)
@@ -134,7 +128,7 @@ class CodeGeneratorHelper:
             
             # Phase 2: Generate new codes
             print("🔧 Phase 2: Generating new codes...")
-            for collection in discovered_collections:
+            for collection in ALL_COLLECTIONS:
                 collection_path = os.path.join(songs_folder, collection.value)
                 
                 print(f"  Processing {collection.name}...", end=" ", flush=True)
@@ -264,17 +258,16 @@ if __name__ == "__main__":
     print("=" * 40)
     
     # Simple CLI interface (can be enhanced later with argparse)
-    songs_folder = "songs"
-    csv_output = "AmplifierSongCodes.csv"
+    audio_config = AudioConfig()  # Use default config
     
-    # Check for command line arguments
+    # Check for command line arguments to override defaults
     if len(sys.argv) > 1:
-        songs_folder = sys.argv[1]
+        audio_config.songs_folder = sys.argv[1]
     if len(sys.argv) > 2:
-        csv_output = sys.argv[2]
+        audio_config.csv_output_path = sys.argv[2]
     
     try:
-        CodeGeneratorHelper.generate_missing_codes(songs_folder, csv_output)
+        CodeGeneratorHelper.generate_missing_codes(audio_config)
     except KeyboardInterrupt:
         print("\n\n⏹️  Cancelled by user")
     except Exception as e:

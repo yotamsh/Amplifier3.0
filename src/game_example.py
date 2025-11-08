@@ -19,7 +19,7 @@ try:
     from led_system import PixelStripAdapter, Pixel
     from game_system import GameController
     from game_system.config import GameConfig, ButtonConfig, LedStripConfig, AudioConfig
-    from audio_system import Schedule, DailyScheduleEntry, SpecialScheduleEntry, Collection, SongLibrary
+    from audio_system import Schedule, DailyScheduleEntry, SpecialScheduleEntry, Collection, SongLibrary, ALL_COLLECTIONS
     from hybridLogger import HybridLogger
     import RPi.GPIO as GPIO
 except ImportError as e:
@@ -68,13 +68,12 @@ def create_default_config() -> GameConfig:
     # Audio configuration with default schedule
     audio_config = AudioConfig(
         songs_folder="songs",
-        csv_output_path="AmplifierSongCodes.csv",
         daily_schedule=[
             DailyScheduleEntry(time(0, 0), {Collection.PARTY}),
-            DailyScheduleEntry(time(2, 0), Collection.get_all_discovered()),
+            DailyScheduleEntry(time(2, 0), ALL_COLLECTIONS),
             DailyScheduleEntry(time(4, 0), {Collection.CLASSIC}),
             DailyScheduleEntry(time(7, 0), {Collection.MORNING}),
-            DailyScheduleEntry(time(10, 0), Collection.get_all_discovered()),
+            DailyScheduleEntry(time(10, 0), ALL_COLLECTIONS),
             DailyScheduleEntry(time(14, 0), {Collection.TV}),
             DailyScheduleEntry(time(16, 0), {Collection.TV, Collection.GENERAL, Collection.DISNEY, Collection.PARTY, Collection.MORNING}),
             DailyScheduleEntry(time(17, 0), {Collection.GENERAL, Collection.PARTY}),
@@ -148,7 +147,8 @@ def create_game_system():
         # Create schedule from config (validates collections)
         schedule = Schedule(
             daily_schedule=config.audio_config.daily_schedule,
-            special_schedule=config.audio_config.special_schedule
+            special_schedule=config.audio_config.special_schedule,
+            songs_folder=config.audio_config.songs_folder
         )
         
         # Create song library with validated schedule
