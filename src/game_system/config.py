@@ -38,12 +38,24 @@ class ButtonConfig:
 
 
 @dataclass
+class AudioConfig:
+    """Audio system configuration"""
+    songs_folder: str = "songs"
+    csv_output_path: str = "AmplifierSongCodes.csv"
+    daily_schedule: List = None  # List[DailyScheduleEntry] - set in game_example
+    special_schedule: List = None  # List[SpecialScheduleEntry] - set in game_example
+
+
+@dataclass
 class GameConfig:
     """Main game system configuration"""
     
     # Hardware configuration
     button_config: ButtonConfig
     led_strips: List[LedStripConfig]
+    
+    # Audio configuration
+    audio_config: AudioConfig = None  # Will be set in game_example
     
     # Timing configuration  
     frame_duration_ms: float = 20

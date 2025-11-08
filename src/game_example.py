@@ -9,6 +9,7 @@ with your existing button and LED infrastructure.
 import sys
 import logging
 from pathlib import Path
+from datetime import datetime, time
 
 # Add src to path for imports
 sys.path.insert(0, str(Path(__file__).parent))
@@ -17,7 +18,8 @@ try:
     from button_system import ButtonReader
     from led_system import PixelStripAdapter, Pixel
     from game_system import GameController
-    from game_system.config import GameConfig, ButtonConfig, LedStripConfig
+    from game_system.config import GameConfig, ButtonConfig, LedStripConfig, AudioConfig
+    from audio_system import Schedule, DailyScheduleEntry, SpecialScheduleEntry, Collection, SongLibrary
     from hybridLogger import HybridLogger
     import RPi.GPIO as GPIO
 except ImportError as e:
@@ -63,9 +65,36 @@ def create_default_config() -> GameConfig:
         )
     ]
     
+    # Audio configuration with default schedule
+    audio_config = AudioConfig(
+        songs_folder="songs",
+        csv_output_path="AmplifierSongCodes.csv",
+        daily_schedule=[
+            DailyScheduleEntry(time(0, 0), {Collection.PARTY}),
+            DailyScheduleEntry(time(2, 0), Collection.get_all_discovered()),
+            DailyScheduleEntry(time(4, 0), {Collection.CLASSIC}),
+            DailyScheduleEntry(time(7, 0), {Collection.MORNING}),
+            DailyScheduleEntry(time(10, 0), Collection.get_all_discovered()),
+            DailyScheduleEntry(time(14, 0), {Collection.TV}),
+            DailyScheduleEntry(time(16, 0), {Collection.TV, Collection.GENERAL, Collection.DISNEY, Collection.PARTY, Collection.MORNING}),
+            DailyScheduleEntry(time(17, 0), {Collection.GENERAL, Collection.PARTY}),
+            DailyScheduleEntry(time(20, 0), {Collection.DISNEY}),
+            DailyScheduleEntry(time(20, 30), {Collection.GENERAL, Collection.DISNEY, Collection.PARTY}),
+        ],
+        special_schedule=[
+            # Example special schedule entry
+            SpecialScheduleEntry(
+                start=datetime(2024, 12, 25, 16, 0),
+                end=datetime(2024, 12, 25, 18, 0),
+                collections={Collection.CLASSIC}
+            ),
+        ]
+    )
+    
     return GameConfig(
         button_config=button_config,
         led_strips=led_strips,
+        audio_config=audio_config,
         frame_duration_ms=20,  # 50 FPS
         sequence_timeout_ms=1500
     )
@@ -86,6 +115,7 @@ def create_game_system():
     main_logger = HybridLogger("GameSystem")
     game_logger = main_logger.get_class_logger("GameController", logging.DEBUG)
     button_logger = main_logger.get_class_logger("ButtonReader", logging.INFO)
+    audio_logger = main_logger.get_class_logger("SongLibrary", logging.INFO)
     
     try:
         # Initialize button reader
@@ -115,17 +145,32 @@ def create_game_system():
             strip[:] = black
             strip.show()
         
+        # Create schedule from config (validates collections)
+        schedule = Schedule(
+            daily_schedule=config.audio_config.daily_schedule,
+            special_schedule=config.audio_config.special_schedule
+        )
+        
+        # Create song library with validated schedule
+        song_library = SongLibrary(
+            songs_folder=config.audio_config.songs_folder,
+            schedule=schedule,
+            logger=audio_logger
+        )
+        
         # Create game controller (starts with IdleState by default)
         game_controller = GameController(
             button_reader=button_reader,
             led_strips=led_strips,
             logger=game_logger,
+            song_library=song_library,
             frame_duration_ms=int(config.frame_duration_ms),
             sequence_timeout_ms=config.sequence_timeout_ms
         )
         
         game_logger.info("Game system initialized successfully")
         game_logger.info(f"Configuration: {config.button_count} buttons, {config.strip_count} LED strips, {config.frame_duration_ms}ms frame duration")
+        game_logger.info(f"Audio system: {song_library.get_stats()}")
         
         return game_controller, main_logger
         
@@ -148,6 +193,7 @@ def main():
     print("  • IdleState: Dim blue breathing animation")
     print("  • AmplifyState: Rainbow per pressed button") 
     print("  • TestState: Static colors for testing")
+    print("  • Audio System: Song management with scheduled collections")
     print()
     print("Controls:")
     print("  • Any button press: Idle → Amplify")
@@ -165,6 +211,11 @@ def main():
     print(f"  • Frame duration: {config.frame_duration_ms}ms ({config.target_fps:.1f} FPS)")
     print(f"  • Button sample rate: {config.button_config.sample_rate_hz}Hz")
     print(f"  • Sequence timeout: {config.sequence_timeout_ms}ms")
+    print()
+    print("Audio settings:")
+    print(f"  • Songs folder: {config.audio_config.songs_folder}")
+    print(f"  • Daily schedule entries: {len(config.audio_config.daily_schedule)}")
+    print(f"  • Special schedule entries: {len(config.audio_config.special_schedule)}")
     print()
     
     input("Press Enter when hardware is ready...")

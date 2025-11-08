@@ -31,6 +31,7 @@ class GameController:
                  button_reader: 'IButtonReader', 
                  led_strips: List['LedStrip'],
                  logger: 'ClassLogger',
+                 song_library,  # SongLibrary instance
                  frame_duration_ms: int = 20,
                  sequence_timeout_ms: int = 1500):
         """
@@ -40,11 +41,13 @@ class GameController:
             button_reader: Interface for reading button states
             led_strips: List of LED strip controllers
             logger: Logger for debugging and monitoring
+            song_library: SongLibrary instance for audio management
             frame_duration_ms: Target frame duration in milliseconds (int)
             sequence_timeout_ms: Timeout for button sequences
         """
         self.button_reader = button_reader
         self.led_strips = led_strips
+        self.song_library = song_library
         self.target_frame_duration = frame_duration_ms / 1000.0
         self.logger = logger
         self.running = True
