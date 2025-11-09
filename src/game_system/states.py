@@ -5,7 +5,7 @@ Game state base class and concrete implementations
 from abc import ABC, abstractmethod
 from typing import List, Optional, TYPE_CHECKING
 
-from game_system.animations import AmplifyAnimation, AnimationDelayWrapper, IdleAnimation
+from game_system.animations import AmplifyAnimation, AnimationDelayWrapper, IdleAnimation, PartyAnimation
 
 if TYPE_CHECKING:
     from button_system.button_state import ButtonState
@@ -143,7 +143,7 @@ class AmplifyState(GameState):
             strip=first_strip,
             button_count=game_manager.button_reader.get_button_count(),
             speed_ms=50,
-            hue_shift_per_frame=12
+            hue_shift_per_frame=18
         )
         self.animations: List['Animation'] = [self.amplify_anim]
         
@@ -152,6 +152,13 @@ class AmplifyState(GameState):
     
     def custom_on_enter(self) -> None:
         """Actions when entering amplify state"""
+        # Clear all LED strips from previous animations
+        from led_system.pixel import Pixel
+        black = Pixel(0, 0, 0)
+        for strip in self.game_manager.led_strips:
+            strip[:] = black
+            strip.show()
+        
         # Update animation with current button state
         self.amplify_anim.set_pressed_buttons(self.pressed_buttons)
         
@@ -172,7 +179,17 @@ class AmplifyState(GameState):
     
     def update(self, button_state: 'ButtonState') -> Optional['GameState']:
         """Update amplify state - handle buttons, animations, and LED rendering"""
-        # Check for state transitions first - no buttons pressed goes back to Idle
+        # Check for party mode - all buttons pressed
+        button_count = self.game_manager.button_reader.get_button_count()
+        if button_state.total_buttons_pressed == button_count:
+            return PartyState(self.game_manager)
+        
+        # Check if song finished playing
+        if not self.game_manager.sound_controller.is_song_playing():
+            self.game_manager.sound_controller.stop_music()
+            return IdleState(self.game_manager)
+        
+        # Check for state transitions - no buttons pressed goes back to Idle
         if button_state.total_buttons_pressed == 0:
             self.game_manager.sound_controller.stop_music()
             return IdleState(self.game_manager)
@@ -194,4 +211,70 @@ class AmplifyState(GameState):
             animation.update_if_needed()
         
         return None
+
+
+class PartyState(GameState):
+    """
+    Party state - triggered when all buttons are pressed.
     
+    Features:
+    - Plays win sound
+    - Sets music to maximum volume
+    - Crazy multi-effect animation
+    - Returns to idle when song ends
+    
+    Transitions:
+    - Song finished → IdleState
+    """
+    
+    def __init__(self, game_manager: 'GameManager'):
+        super().__init__(game_manager)
+        
+        # Create logger
+        self.logger = game_manager.logger.create_class_logger("PartyState")
+        
+        # Create party animation - crazy multi-effect on strip 1
+        first_strip = game_manager.led_strips[0]
+        self.party_anim = PartyAnimation(
+            strip=first_strip,
+            speed_ms=20  # Very fast updates
+        )
+        self.animations: List['Animation'] = [self.party_anim]
+    
+    def custom_on_enter(self) -> None:
+        """Actions when entering party mode"""
+        # Clear all LED strips from previous animations
+        from led_system.pixel import Pixel
+        black = Pixel(0, 0, 0)
+        for strip in self.game_manager.led_strips:
+            strip[:] = black
+            strip.show()
+        
+        # Play win sound effect
+        from audio_system.sound_controller import GameSounds
+        self.game_manager.sound_controller.play_sound_with_volume(
+            GameSounds.WIN_SOUND, 
+            volume=1.0
+        )
+        
+        # Set music to maximum volume
+        self.game_manager.sound_controller.mixer.music.set_volume(1.0)
+        
+        self.logger.info("🎉 PARTY MODE ACTIVATED!")
+    
+    def custom_on_exit(self) -> None:
+        """Stop music when exiting"""
+        self.game_manager.sound_controller.stop_music()
+    
+    def update(self, button_state: 'ButtonState') -> Optional['GameState']:
+        """Update party state"""
+        # Check if song finished playing
+        if not self.game_manager.sound_controller.is_song_playing():
+            self.logger.info("Song finished, returning to idle")
+            return IdleState(self.game_manager)
+        
+        # Update animations
+        for animation in self.animations:
+            animation.update_if_needed()
+        
+        return None

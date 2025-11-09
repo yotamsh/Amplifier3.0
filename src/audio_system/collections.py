@@ -16,12 +16,13 @@ class Collection(Enum):
     Hardcoded collection definitions.
     """
     # GENERAL = "general"
-    MORNING = "morning"
+    # MORNING = "morning"
     # PARTY = "party"
     # TV = "tv"
     # CLASSIC = "classic"
     # DISNEY = "disney"
-    SPANISH = "spanish"
+    # SPANISH = "spanish"
+    TESTS = "tests"
 
 
 # Constant with all collections

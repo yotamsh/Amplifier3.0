@@ -2,6 +2,8 @@
 Helper utilities for animations
 """
 
+import math
+import time
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -12,6 +14,54 @@ else:
 
 class AnimationHelpers:
     """Static helper methods for animations"""
+    
+    # Color constants
+    ORANGE_RED = None  # Will be initialized after Pixel import
+    BLACK = None
+    WHITE = None
+    
+    @staticmethod
+    def _init_colors():
+        """Initialize color constants (called once)"""
+        if AnimationHelpers.ORANGE_RED is None:
+            from led_system.pixel import Pixel
+            AnimationHelpers.ORANGE_RED = Pixel(255, 69, 0)
+            AnimationHelpers.BLACK = Pixel(0, 0, 0)
+            AnimationHelpers.WHITE = Pixel(255, 255, 255)
+    
+    @staticmethod
+    def beat8(bpm: int) -> int:
+        """
+        FastLED-style beat wave generator.
+        
+        Returns a sine wave value between 0-255 based on current time and BPM.
+        Useful for creating rhythmic blinking effects.
+        
+        Args:
+            bpm: Beats per minute (higher = faster oscillation)
+        
+        Returns:
+            Value between 0-255 following sine wave
+            
+        Example:
+            # Short blink every ~3 seconds (20 BPM)
+            if AnimationHelpers.beat8(20) > 240:
+                pixel = Pixel(255, 69, 0)  # OrangeRed blink
+            else:
+                pixel = Pixel(0, 0, 0)     # Off
+        """
+        # Convert BPM to frequency in Hz
+        frequency = bpm / 60.0
+        
+        # Get current time in seconds
+        current_time = time.time()
+        
+        # Calculate sine wave value (0 to 1)
+        phase = 2 * math.pi * frequency * current_time
+        sine_value = (math.sin(phase) + 1) / 2  # Normalize to 0-1
+        
+        # Scale to 0-255
+        return int(sine_value * 255)
     
     @staticmethod
     def hsv_to_pixel(h: float, s: float, v: float) -> 'Pixel':

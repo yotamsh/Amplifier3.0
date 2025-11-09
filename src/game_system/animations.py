@@ -285,11 +285,11 @@ class AmplifyAnimation(Animation):
     Rainbow animation that only illuminates LED segments corresponding to pressed buttons.
     
     Each button controls a segment of the LED strip. Only pressed button segments
-    show the rainbow pattern, while unpressed segments remain black.
+    show the rainbow pattern, while unpressed segments have a blinking OrangeRed indicator.
     """
     
     def __init__(self, strip: 'LedStrip', button_count: int, speed_ms: int = 50, 
-                 hue_shift_per_frame: int = 12):
+                 hue_shift_per_frame: int = 18):
         """
         Initialize amplify animation.
         
@@ -309,6 +309,9 @@ class AmplifyAnimation(Animation):
         
         # Track which buttons are currently pressed
         self.pressed_buttons: List[bool] = [False] * button_count
+        
+        # Initialize color constants
+        AnimationHelpers._init_colors()
     
     def set_pressed_buttons(self, pressed_buttons: List[bool]) -> None:
         """
@@ -319,6 +322,22 @@ class AmplifyAnimation(Animation):
         """
         self.pressed_buttons = pressed_buttons.copy()
     
+    def _get_button_center_pixel(self, button_index: int) -> int:
+        """
+        Get the center pixel index for a button segment.
+        
+        Formula: totalLeds/buttonsCount*(button_index+0.5)-1
+        
+        Args:
+            button_index: Index of the button (0-based)
+            
+        Returns:
+            Center pixel index for that button's segment
+        """
+        num_pixels = self.strip.num_pixels()
+        center = int(num_pixels / self.button_count * (button_index + 0.5) - 1)
+        return max(0, min(center, num_pixels - 1))  # Clamp to valid range
+    
     def advance(self) -> None:
         """Advance rainbow hue offset and update strip pixels based button state"""
         self.hue_offset = (self.hue_offset + self.hue_shift_per_frame) % 360
@@ -327,7 +346,7 @@ class AmplifyAnimation(Animation):
         from led_system.pixel import Pixel
         
         # 1. First, apply HSV fading to create trails for released button segments
-        AnimationHelpers.fade_to_black_hsv(self.strip, fade_amount=30, min_brightness=0.1)
+        AnimationHelpers.fade_to_black_hsv(self.strip, fade_amount=30, min_brightness=0.0)
         
         # 2. Update all strip pixels based on current button state
         num_pixels = self.strip.num_pixels()
@@ -343,3 +362,101 @@ class AmplifyAnimation(Animation):
                 color = AnimationHelpers.hsv_to_pixel(hue, 1.0, 1.0)
                 self.strip[led_pos] = color
             # Note: No explicit "else" - let fading handle unpressed segments
+        
+        # 3. Add blinking OrangeRed indicators on unpressed button centers
+        # Using beat8-style blinking: on when beat > 240 (short blink every ~3 seconds)
+        beat_value = AnimationHelpers.beat8(20)  # 20 BPM = blink every 3 seconds
+        
+        for button_index in range(self.button_count):
+            if not self.pressed_buttons[button_index]:
+                center_pixel = self._get_button_center_pixel(button_index)
+                if beat_value > 240:
+                    # Blink on - show OrangeRed
+                    self.strip[center_pixel] = AnimationHelpers.ORANGE_RED
+                else:
+                    # Blink off - force to black (override fade)
+                    self.strip[center_pixel] = AnimationHelpers.BLACK
+
+
+class PartyAnimation(Animation):
+    """
+    Energetic party animation with multiple simultaneous effects.
+    
+    Combines:
+    - Fast rainbow wave traveling across strip
+    - Random sparkles/glitter overlay
+    - Brightness pulsing
+    - Color zones that shift (creates sections of different colors)
+    """
+    
+    def __init__(self, strip: 'LedStrip', speed_ms: int = 20):
+        """
+        Initialize party animation.
+        
+        Args:
+            strip: LED strip to operate on
+            speed_ms: Animation update interval in milliseconds
+        """
+        super().__init__(strip, speed_ms)
+        self.num_pixels: int = strip.num_pixels()
+        
+        # Rainbow wave parameters
+        self.hue_offset: int = 0
+        self.wave_speed: int = 15  # Degrees per frame
+        
+        # Sparkle parameters
+        self.sparkle_probability: float = 0.12  # 12% chance per LED per frame
+        self.sparkle_positions: set = set()
+        
+        # Pulse parameters
+        self.pulse_phase: float = 0.0
+        self.pulse_speed: float = 0.25
+        
+        # Color zone parameters (creates shifting color sections)
+        self.zone_hue: int = 0
+        self.zone_shift_speed: int = 5
+        self.zone_size: int = 30  # LEDs per zone
+    
+    def advance(self) -> None:
+        """Energetic party effect with multiple layers"""
+        # Initialize color constants if needed
+        AnimationHelpers._init_colors()
+        
+        # 1. Base layer: Fast traveling rainbow wave
+        self.hue_offset = (self.hue_offset + self.wave_speed) % 360
+        
+        for i in range(self.num_pixels):
+            # Calculate base rainbow hue with wave effect
+            position_factor = i / self.num_pixels
+            hue = (position_factor * 360 + self.hue_offset) % 360
+            
+            # 2. Color zones - create alternating color sections that shift
+            # This creates visible "bands" of different colors moving along the strip
+            zone_index = (i // self.zone_size) % 3  # 3 different zones
+            if zone_index == 0:
+                hue = (hue + self.zone_hue) % 360
+            elif zone_index == 1:
+                hue = (hue + self.zone_hue + 120) % 360  # 120° offset = complementary
+            else:
+                hue = (hue + self.zone_hue + 240) % 360  # 240° offset = triad
+            
+            # 3. Pulsing brightness (0.6 to 1.0)
+            brightness = 0.6 + 0.4 * (0.5 + 0.5 * math.sin(self.pulse_phase + position_factor * 2 * math.pi))
+            
+            # Convert to pixel
+            color = AnimationHelpers.hsv_to_pixel(hue, 1.0, brightness)
+            self.strip[i] = color
+        
+        # 4. Add random sparkles (white flashes)
+        # Clear old sparkles
+        self.sparkle_positions.clear()
+        
+        # Create new sparkles
+        for i in range(self.num_pixels):
+            if random.random() < self.sparkle_probability:
+                self.sparkle_positions.add(i)
+                self.strip[i] = AnimationHelpers.WHITE  # Bright white
+        
+        # Update animation parameters for next frame
+        self.pulse_phase = (self.pulse_phase + self.pulse_speed) % (2 * math.pi)
+        self.zone_hue = (self.zone_hue + self.zone_shift_speed) % 360

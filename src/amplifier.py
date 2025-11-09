@@ -24,8 +24,11 @@ try:
     from hybridLogger import HybridLogger
     import RPi.GPIO as GPIO
 except ImportError as e:
+    import traceback
     print(f"❌ Import error: {e}")
-    print("Make sure you're running this on a Raspberry Pi with required libraries installed")
+    print("\nFull traceback:")
+    traceback.print_exc()
+    print("\nMake sure you're running this on a Raspberry Pi with required libraries installed")
     sys.exit(1)
 
 
@@ -35,7 +38,7 @@ def create_amplifier_config() -> GameConfig:
     button_config = ButtonConfig(
         pins=[
             4, 
-            # 5, 
+            5, 
             # 6, 
             # 16, 
             # 17, 
@@ -73,8 +76,8 @@ def create_amplifier_config() -> GameConfig:
             DailyScheduleEntry(time(0, 0), ALL_COLLECTIONS),
             DailyScheduleEntry(time(2, 0), ALL_COLLECTIONS),
             # DailyScheduleEntry(time(4, 0), {Collection.CLASSIC}),
-            DailyScheduleEntry(time(7, 0), {Collection.MORNING}),
-            DailyScheduleEntry(time(10, 0), ALL_COLLECTIONS),
+            # DailyScheduleEntry(time(7, 0), {Collection.MORNING}),
+            # DailyScheduleEntry(time(10, 0), ALL_COLLECTIONS),
             # DailyScheduleEntry(time(14, 0), {Collection.TV}),
             # DailyScheduleEntry(time(16, 0), {Collection.TV, Collection.GENERAL, Collection.DISNEY, Collection.PARTY, Collection.MORNING}),
             # DailyScheduleEntry(time(17, 0), {Collection.GENERAL, Collection.PARTY}),
@@ -86,7 +89,7 @@ def create_amplifier_config() -> GameConfig:
             SpecialScheduleEntry(
                 start=datetime(2024, 12, 25, 16, 0),
                 end=datetime(2024, 12, 25, 18, 0),
-                collections={Collection.SPANISH}
+                collections=ALL_COLLECTIONS
             ),
         ]
     )
