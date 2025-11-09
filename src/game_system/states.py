@@ -3,9 +3,9 @@ Game state base class and concrete implementations
 """
 
 from abc import ABC, abstractmethod
-from typing import List, Set, Dict, Optional, TYPE_CHECKING
+from typing import List, Optional, TYPE_CHECKING
 
-from game_system.animations import BreathingAnimation, RainbowAnimation, StaticColorAnimation, AmplifyAnimation, AnimationDelayWrapper, IdleAnimation
+from game_system.animations import AmplifyAnimation, AnimationDelayWrapper, IdleAnimation
 
 if TYPE_CHECKING:
     from button_system.button_state import ButtonState
@@ -70,17 +70,13 @@ class IdleState(GameState):
     
     Transitions:
     - Any button press → AmplifyState
-    - Button sequence (handled by GameController) → other states
     """
     
-    def __init__(self, game_controller: 'GameController'):
-        super().__init__(game_controller)
-        self.animations: List['Animation'] = []
-    
-    def custom_on_enter(self) -> None:
-        """Called when entering idle state - setup delayed scanner animations"""
+    def __init__(self, game_manager: 'GameManager'):
+        super().__init__(game_manager)
+        
         # Create bouncing rainbow scanner animation for each strip, wrapped with 2-second delay
-        self.animations = []
+        self.animations: List['Animation'] = []
         
         for strip in self.game_manager.led_strips:
             # Create the idle scanner animation
@@ -99,6 +95,11 @@ class IdleState(GameState):
             
             self.animations.append(delayed_idle)
     
+    def custom_on_enter(self) -> None:
+        """Actions when entering idle state"""
+        # Load next random song to be ready for AmplifyState
+        self.game_manager.sound_controller.load_next_song()
+    
     def custom_on_exit(self) -> None:
         """Called when exiting idle state - cleanup if needed"""
         pass
@@ -107,7 +108,7 @@ class IdleState(GameState):
         """Update idle state - handle buttons, animations, and LED rendering"""
         # Check for state transitions - any button pressed goes to Amplify
         if button_state.total_buttons_pressed > 0:
-            return AmplifyState(self.game_manager, button_state.for_button)
+            return AmplifyState(self.game_manager, button_state)
         
         # Update animations (they handle their own rendering and timing)
         for animation in self.animations:
@@ -125,20 +126,18 @@ class AmplifyState(GameState):
     
     Transitions:
     - No buttons pressed → IdleState  
-    - All buttons pressed → PartyState (if implemented)
     """
     
-    def __init__(self, game_manager: 'GameManager', pressed_buttons: List[bool] = None):
+    def __init__(self, game_manager: 'GameManager', button_state: 'ButtonState'):
         super().__init__(game_manager)
+        
         # Create class logger for this state
         self.logger = game_manager.logger.create_class_logger("AmplifyState")
         
-        # Initialize pressed buttons state (list of bools, same as ButtonState.for_button)
-        button_count = game_manager.button_reader.get_button_count()
-        self.pressed_buttons: List[bool] = pressed_buttons or [False] * button_count
+        # Set initial pressed buttons state
+        self.pressed_buttons: List[bool] = button_state.for_button
         
-        # Initialize animations list with an amplify animation on strip 1 (index 0)
-        self.animations: List['Animation'] = []
+        # Create amplify animation object on strip 1 (index 0)
         first_strip = game_manager.led_strips[0]
         self.amplify_anim = AmplifyAnimation(
             strip=first_strip,
@@ -146,22 +145,27 @@ class AmplifyState(GameState):
             speed_ms=50,
             hue_shift_per_frame=12
         )
-        self.animations.append(self.amplify_anim)
+        self.animations: List['Animation'] = [self.amplify_anim]
         
-        # Initialize the animation with the current button state
-        self.amplify_anim.set_pressed_buttons(self.pressed_buttons)
-        
-        # Print pressed button indexes on init
-        pressed_indexes = [i for i, pressed in enumerate(self.pressed_buttons) if pressed]
-        if pressed_indexes:
-            self.logger.debug(f"AmplifyState initialized with buttons: {pressed_indexes}")
-        else:
-            self.logger.debug("AmplifyState initialized with no buttons pressed")
+        # Store initial button state for custom_on_enter
+        self.initial_button_state = button_state
     
     def custom_on_enter(self) -> None:
-        """Called when entering this state - no setup needed"""
-        pass
-    
+        """Actions when entering amplify state"""
+        # Update animation with current button state
+        self.amplify_anim.set_pressed_buttons(self.pressed_buttons)
+        
+        # Start music with initial volume
+        self.game_manager.sound_controller.set_music_volume_by_buttons(
+            self.initial_button_state.total_buttons_pressed
+        )
+        self.game_manager.sound_controller.start_loaded_song()
+        
+        # Debug logging
+        pressed_indexes = [i for i, pressed in enumerate(self.pressed_buttons) if pressed]
+        if pressed_indexes:
+            self.logger.debug(f"AmplifyState activated with buttons: {pressed_indexes}")
+        
     def custom_on_exit(self) -> None:
         """Called when exiting this state - cleanup if needed"""
         pass
@@ -170,16 +174,18 @@ class AmplifyState(GameState):
         """Update amplify state - handle buttons, animations, and LED rendering"""
         # Check for state transitions first - no buttons pressed goes back to Idle
         if button_state.total_buttons_pressed == 0:
+            self.game_manager.sound_controller.stop_music()
             return IdleState(self.game_manager)
         
         # Update pressed buttons state to current button state
-        self.pressed_buttons = button_state.for_button.copy()
+        self.pressed_buttons = button_state.for_button
         
-        # Update the amplify animation with current button state
-        self.amplify_anim.set_pressed_buttons(self.pressed_buttons)
         
-        # Print pressed button indexes on update
+        # Update if button state changed
         if button_state.any_changed:
+            # Update the amplify animation and volume with current button state
+            self.amplify_anim.set_pressed_buttons(self.pressed_buttons)
+            self.game_manager.sound_controller.set_music_volume_by_buttons(button_state.total_buttons_pressed)
             pressed_indexes = [i for i, pressed in enumerate(button_state.for_button) if pressed]
             self.logger.debug(f"AmplifyState button change - currently pressed: {pressed_indexes}")
         
@@ -189,48 +195,3 @@ class AmplifyState(GameState):
         
         return None
     
-
-
-class TestState(GameState):
-    """
-    Simple test state for development and debugging.
-    
-    Shows static colors to verify LED functionality.
-    """
-    
-    def __init__(self, game_controller: 'GameController'):
-        super().__init__(game_controller)
-        self.animations: List['Animation'] = []
-    
-    def custom_on_enter(self) -> None:
-        """Called when entering test state - setup static color animations"""
-        # Create test animations for each strip
-        red = Pixel(255, 0, 0)
-        green = Pixel(0, 255, 0)
-        
-        self.animations = []
-        for i, strip in enumerate(self.game_manager.led_strips):
-            if i == 0:
-                # First strip: red color
-                red_anim = StaticColorAnimation(strip, red)
-                self.animations.append(red_anim)
-            else:
-                # Other strips: green color
-                green_anim = StaticColorAnimation(strip, green)
-                self.animations.append(green_anim)
-    
-    def custom_on_exit(self) -> None:
-        """Called when exiting test state - cleanup if needed"""
-        pass
-    
-    def update(self, button_state: 'ButtonState') -> Optional['GameState']:
-        """Update test state - handle buttons, animations, and LED rendering"""
-        # Check for state transitions
-        if button_state.any_changed and button_state.total_buttons_pressed > 0:
-            return IdleState(self.game_manager)
-        
-        # Update animations (they handle their own rendering and timing)
-        for animation in self.animations:
-            animation.update_if_needed()
-        
-        return None

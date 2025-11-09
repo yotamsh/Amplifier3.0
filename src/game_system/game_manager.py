@@ -3,10 +3,9 @@ Main game manager - orchestrates state machine, button input, and LED output
 """
 
 import time
-from typing import List, Dict, Optional, TYPE_CHECKING
+from typing import List, Optional, TYPE_CHECKING
 
 from game_system.states import GameState
-from game_system.sequence_detector import SequenceDetector
 
 if TYPE_CHECKING:
     from button_system.interfaces import IButtonReader
@@ -59,11 +58,6 @@ class GameManager:
         # Call on_enter for initial state
         self.current_state.on_enter()
         
-        # Global sequence detectors (persist across state transitions)
-        self.sequence_detectors: Dict[str, SequenceDetector] = {
-            "code_mode": SequenceDetector([7, 7, 7], max_delay_ms=sequence_timeout_ms)
-        }
-        
         self.logger.info(f"GameManager initialized: {frame_duration_ms}ms frame duration, {len(led_strips)} LED strips")
     
     def run_game_loop(self) -> None:
@@ -106,14 +100,7 @@ class GameManager:
         # 1. Sample button state
         button_state = self.button_reader.read_buttons()
         
-        # 2. Check global sequences (before state-specific handling)
-        if button_state.any_changed:
-            sequence_state = self._check_global_sequences(button_state)
-            if sequence_state:
-                self._transition_to_state(sequence_state)
-                return  # Skip normal state handling after sequence transition
-        
-        # 3. Let state handle everything and check for state transitions
+        # 2. Let state handle everything and check for state transitions
         new_state = self.current_state.update(button_state)
         if new_state:
             self._transition_to_state(new_state)
@@ -129,38 +116,6 @@ class GameManager:
             strip.show()
         
         self.logger.info("Game stopped")
-    
-    def _check_global_sequences(self, button_state) -> Optional[GameState]:
-        """
-        Check for global button sequences that work across all states.
-        
-        Args:
-            button_state: Current button state with change detection
-            
-        Returns:
-            New GameState if sequence completed, None otherwise
-        """
-        button_count = self.button_reader.get_button_count()
-        
-        # Process all button press events
-        for i, (was_changed, is_pressed) in enumerate(zip(button_state.was_changed, button_state.for_button)):
-            if was_changed and is_pressed:  # Button just pressed
-                
-                # Basic bounds check
-                if i >= button_count:
-                    continue
-                
-                # Check code mode sequence (button 7 pressed 3 times)
-                if i == 7:
-                    if self.sequence_detectors["code_mode"].add_event(7):
-                        self.logger.info("Code mode sequence detected (button 7 x3)")
-                        from game_system.states import TestState
-                        return TestState(self)
-                else:
-                    # Any other button press resets the code mode sequence
-                    self.sequence_detectors["code_mode"].reset()
-        
-        return None
     
     def _transition_to_state(self, new_state: GameState) -> None:
         """
