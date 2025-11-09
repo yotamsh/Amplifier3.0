@@ -5,3 +5,6 @@ rpi-ws281x==5.0.0
 adafruit-blinka
 adafruit-circuitpython-neopixel
 
+# Audio ID3 tag support
+eyed3>=0.9.6
+

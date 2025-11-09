@@ -35,3 +35,9 @@ ssh -t yotam@raspberrypi.local "./AmpSync/Amp3/sync/setup_pi_env.sh"
 
 # on sudo nano /etc/ssh/sshd_config, add:
 # PasswordAuthentication yes
+
+# see running processes:
+# sudo ps aux | grep python
+
+# kill a process:
+# sudo kill -9 <process_id>

@@ -1,12 +1,12 @@
 """
-Main game controller - orchestrates state machine, button input, and LED output
+Main game manager - orchestrates state machine, button input, and LED output
 """
 
 import time
 from typing import List, Dict, Optional, TYPE_CHECKING
 
-from .states import GameState
-from .sequence_detector import SequenceDetector
+from game_system.states import GameState
+from game_system.sequence_detector import SequenceDetector
 
 if TYPE_CHECKING:
     from button_system.interfaces import IButtonReader
@@ -17,9 +17,9 @@ else:
     from led_system.pixel import Pixel
 
 
-class GameController:
+class GameManager:
     """
-    Main game controller that orchestrates the entire game system.
+    Main game manager that orchestrates the entire game system.
     
     Responsibilities:
     - Manage state transitions
@@ -31,29 +31,29 @@ class GameController:
                  button_reader: 'IButtonReader', 
                  led_strips: List['LedStrip'],
                  logger: 'ClassLogger',
-                 song_library,  # SongLibrary instance
+                 sound_controller,  # SoundController instance
                  frame_duration_ms: int = 20,
                  sequence_timeout_ms: int = 1500):
         """
-        Initialize the game controller.
+        Initialize the game manager.
         
         Args:
             button_reader: Interface for reading button states
             led_strips: List of LED strip controllers
             logger: Logger for debugging and monitoring
-            song_library: SongLibrary instance for audio management
+            sound_controller: SoundController instance for audio management
             frame_duration_ms: Target frame duration in milliseconds (int)
             sequence_timeout_ms: Timeout for button sequences
         """
         self.button_reader = button_reader
         self.led_strips = led_strips
-        self.song_library = song_library
+        self.sound_controller = sound_controller
         self.target_frame_duration = frame_duration_ms / 1000.0
         self.logger = logger
         self.running = True
         
         # State management - create initial IdleState
-        from .states import IdleState
+        from game_system.states import IdleState
         self.current_state = IdleState(self)
         
         # Call on_enter for initial state
@@ -64,7 +64,7 @@ class GameController:
             "code_mode": SequenceDetector([7, 7, 7], max_delay_ms=sequence_timeout_ms)
         }
         
-        self.logger.info(f"GameController initialized: {frame_duration_ms}ms frame duration, {len(led_strips)} LED strips")
+        self.logger.info(f"GameManager initialized: {frame_duration_ms}ms frame duration, {len(led_strips)} LED strips")
     
     def run_game_loop(self) -> None:
         """
@@ -154,7 +154,7 @@ class GameController:
                 if i == 7:
                     if self.sequence_detectors["code_mode"].add_event(7):
                         self.logger.info("Code mode sequence detected (button 7 x3)")
-                        from .states import TestState
+                        from game_system.states import TestState
                         return TestState(self)
                 else:
                     # Any other button press resets the code mode sequence

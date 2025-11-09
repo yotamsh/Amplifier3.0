@@ -5,9 +5,10 @@ Provides song management, collection scheduling, and code generation
 for the Amp3 interactive game system.
 """
 
-from .collections import Collection, Schedule, DailyScheduleEntry, SpecialScheduleEntry, ALL_COLLECTIONS
-from .song_library import SongLibrary
-from .code_generator import CodeGeneratorHelper
+from audio_system.collections import Collection, Schedule, DailyScheduleEntry, SpecialScheduleEntry, ALL_COLLECTIONS
+from audio_system.song_library import SongLibrary
+from audio_system.code_generator import CodeGeneratorHelper
+from audio_system.sound_controller import SoundController, GameSounds
 
 __all__ = [
     'Collection',
@@ -16,5 +17,7 @@ __all__ = [
     'DailyScheduleEntry',
     'SpecialScheduleEntry',
     'SongLibrary',
-    'CodeGeneratorHelper'
+    'CodeGeneratorHelper',
+    'SoundController',
+    'GameSounds'
 ]

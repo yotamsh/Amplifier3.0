@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """
-Game System Integration Example
+Amp3 Interactive Game System
 
-This example shows how to use the new game state machine system
-with your existing button and LED infrastructure.
+Main application for the Amp3 interactive LED and audio game system.
+Provides a state-machine-based game with button input, LED animations,
+and scheduled audio playback.
 """
 
 import sys
@@ -17,9 +18,9 @@ sys.path.insert(0, str(Path(__file__).parent))
 try:
     from button_system import ButtonReader
     from led_system import PixelStripAdapter, Pixel
-    from game_system import GameController
+    from game_system import GameManager
     from game_system.config import GameConfig, ButtonConfig, LedStripConfig, AudioConfig
-    from audio_system import Schedule, DailyScheduleEntry, SpecialScheduleEntry, Collection, SongLibrary, ALL_COLLECTIONS
+    from audio_system import Schedule, DailyScheduleEntry, SpecialScheduleEntry, Collection, SongLibrary, SoundController, ALL_COLLECTIONS
     from hybridLogger import HybridLogger
     import RPi.GPIO as GPIO
 except ImportError as e:
@@ -69,23 +70,23 @@ def create_default_config() -> GameConfig:
     audio_config = AudioConfig(
         songs_folder="songs",
         daily_schedule=[
-            DailyScheduleEntry(time(0, 0), {Collection.PARTY}),
+            DailyScheduleEntry(time(0, 0), ALL_COLLECTIONS),
             DailyScheduleEntry(time(2, 0), ALL_COLLECTIONS),
-            DailyScheduleEntry(time(4, 0), {Collection.CLASSIC}),
+            # DailyScheduleEntry(time(4, 0), {Collection.CLASSIC}),
             DailyScheduleEntry(time(7, 0), {Collection.MORNING}),
             DailyScheduleEntry(time(10, 0), ALL_COLLECTIONS),
-            DailyScheduleEntry(time(14, 0), {Collection.TV}),
-            DailyScheduleEntry(time(16, 0), {Collection.TV, Collection.GENERAL, Collection.DISNEY, Collection.PARTY, Collection.MORNING}),
-            DailyScheduleEntry(time(17, 0), {Collection.GENERAL, Collection.PARTY}),
-            DailyScheduleEntry(time(20, 0), {Collection.DISNEY}),
-            DailyScheduleEntry(time(20, 30), {Collection.GENERAL, Collection.DISNEY, Collection.PARTY}),
+            # DailyScheduleEntry(time(14, 0), {Collection.TV}),
+            # DailyScheduleEntry(time(16, 0), {Collection.TV, Collection.GENERAL, Collection.DISNEY, Collection.PARTY, Collection.MORNING}),
+            # DailyScheduleEntry(time(17, 0), {Collection.GENERAL, Collection.PARTY}),
+            # DailyScheduleEntry(time(20, 0), {Collection.DISNEY}),
+            # DailyScheduleEntry(time(20, 30), {Collection.GENERAL, Collection.DISNEY, Collection.PARTY}),
         ],
         special_schedule=[
             # Example special schedule entry
             SpecialScheduleEntry(
                 start=datetime(2024, 12, 25, 16, 0),
                 end=datetime(2024, 12, 25, 18, 0),
-                collections={Collection.CLASSIC}
+                collections={Collection.SPANISH}
             ),
         ]
     )
@@ -104,15 +105,15 @@ def create_game_system():
     Create and configure the complete game system.
     
     Returns:
-        GameController: Configured game controller ready to run
+        GameManager: Configured game manager ready to run
     """
     # Create and validate configuration
     config = create_default_config()
     config.validate()
     
     # Initialize logging
-    main_logger = HybridLogger("GameSystem")
-    game_logger = main_logger.get_class_logger("GameController", logging.DEBUG)
+    main_logger = HybridLogger("Amp3System")
+    game_logger = main_logger.get_class_logger("GameManager", logging.DEBUG)
     button_logger = main_logger.get_class_logger("ButtonReader", logging.INFO)
     audio_logger = main_logger.get_class_logger("SongLibrary", logging.INFO)
     
@@ -158,36 +159,43 @@ def create_game_system():
             logger=audio_logger
         )
         
-        # Create game controller (starts with IdleState by default)
-        game_controller = GameController(
+        # Create sound controller with song library
+        sound_controller = SoundController(
+            song_library=song_library,
+            num_buttons=config.button_count
+        )
+        
+        # Create game manager (starts with IdleState by default)
+        game_manager = GameManager(
             button_reader=button_reader,
             led_strips=led_strips,
             logger=game_logger,
-            song_library=song_library,
+            sound_controller=sound_controller,
             frame_duration_ms=int(config.frame_duration_ms),
             sequence_timeout_ms=config.sequence_timeout_ms
         )
         
-        game_logger.info("Game system initialized successfully")
+        game_logger.info("Amp3 system initialized successfully")
         game_logger.info(f"Configuration: {config.button_count} buttons, {config.strip_count} LED strips, {config.frame_duration_ms}ms frame duration")
         game_logger.info(f"Audio system: {song_library.get_stats()}")
+        game_logger.info("Sound controller initialized successfully")
         
-        return game_controller, main_logger
+        return game_manager, main_logger
         
     except Exception as e:
-        main_logger.get_main_logger().error(f"Failed to initialize game system: {e}", exception=e)
+        main_logger.get_main_logger().error(f"Failed to initialize Amp3 system: {e}", exception=e)
         raise
 
 
 def main():
     """
-    Main function - sets up and runs the game system.
+    Main function - sets up and runs the Amp3 system.
     """
     # Get actual config to show correct info
     config = create_default_config()
     active_pins = [pin for pin in config.button_config.pins]
     
-    print("🎮 INTERACTIVE GAME SYSTEM")
+    print("🎵 AMP3 INTERACTIVE SYSTEM")
     print("=" * 50)
     print("States implemented:")
     print("  • IdleState: Dim blue breathing animation")
@@ -223,23 +231,23 @@ def main():
     
     try:
         # Create game system
-        game_controller, logger = create_game_system()
+        game_manager, logger = create_game_system()
         
-        print("🚀 Starting game system...")
+        print("🚀 Starting Amp3 system...")
         print("Press Ctrl+C to stop")
         print()
         
         # Run the game with automatic frame limiting
-        game_controller.run_game_loop()
+        game_manager.run_game_loop()
         
     except KeyboardInterrupt:
-        print(f"\n\n⏹️  Game stopped by user")
+        print(f"\n\n⏹️  Amp3 stopped by user")
     except Exception as e:
-        print(f"\n❌ Game system error: {e}")
+        print(f"\n❌ Amp3 system error: {e}")
         raise
     finally:
-        # Cleanup will be handled by GameController.stop()
-        print("✅ Game system shut down")
+        # Cleanup will be handled by GameManager.stop()
+        print("✅ Amp3 system shut down")
         if 'logger' in locals():
             logger.cleanup()
 

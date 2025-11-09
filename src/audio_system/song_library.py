@@ -14,7 +14,7 @@ try:
 except ImportError:
     eyed3 = None
 
-from .collections import Collection, Schedule, ALL_COLLECTIONS
+from audio_system.collections import Collection, Schedule, ALL_COLLECTIONS
 
 
 class SongLibrary:
@@ -30,15 +30,30 @@ class SongLibrary:
     
     def __init__(self, songs_folder: str, schedule: Schedule, logger):
         """
-        Initialize song library with validation and collection loading.
+        Initialize song library with strict validation and collection loading.
         
         Args:
             songs_folder: Path to songs directory
-            schedule: Schedule instance for time-based collection management
+            schedule: Schedule instance for time-based collection management (already validated)
             logger: ClassLogger instance for logging
+            
+        Raises:
+            ImportError: If eyed3 library not available
+            FileNotFoundError: If songs folder doesn't exist
+            ValueError: If no songs are available after initialization
         """
+        # Validate critical dependencies first
+        if eyed3 is None:
+            raise ImportError(
+                "eyed3 library not available - required for song code management. "
+                "Install with: pip install eyed3"
+            )
+            
+        if not os.path.exists(songs_folder):
+            raise FileNotFoundError(f"Songs folder not found: {songs_folder}")
+        
         self.songs_folder = songs_folder
-        self.schedule = schedule
+        self.schedule = schedule  # Pre-validated by caller
         self.logger = logger
         
         # Current active collections and song basket
@@ -48,37 +63,46 @@ class SongLibrary:
         # Code to filepath mapping
         self.codes_dict: Dict[str, str] = {}
         
-        # Initialize the system
+        # Initialize the system with validation
         self._initialize_system()
+        
+        # Validate that we have songs available
+        self._validate_songs_available()
     
     def _initialize_system(self) -> None:
-        """Initialize collections discovery, code dictionary, and schedule"""
-        # Load code dictionary from ID3 tags
+        """Initialize code dictionary and collection schedule"""
+        # Load code dictionary from ID3 tags (eyed3 guaranteed available)
         self._create_codes_dict()
         
-        # Initialize collection schedule
+        # Initialize collection schedule (schedule already validated)
         self.update_collection_schedule(datetime.now())
+    
+    def _validate_songs_available(self) -> None:
+        """
+        Validate that songs are available after initialization.
+        
+        Raises:
+            ValueError: If no songs available in any collections
+        """
+        if not self.current_songs_basket:
+            available_collections = [c.name for c in self.current_collections]
+            raise ValueError(
+                f"No songs available in current collections: {available_collections}. "
+                f"Add audio files to collection folders or check schedule configuration."
+            )
     
     def _create_codes_dict(self) -> None:
         """
         Create mapping from codes to song file paths by reading ID3 tags.
         
         Logs warnings for missing collections and duplicate codes.
+        eyed3 availability already validated in __init__.
         """
         self.logger.info("Creating song codes dictionary")
         
-        if eyed3 is None:
-            self.logger.error("eyed3 library not available - cannot load song codes")
-            return
-        
-        # Process all hardcoded collections
+        # Process all hardcoded collections (folders already validated by Schedule)
         for collection in ALL_COLLECTIONS:
             collection_path = os.path.join(self.songs_folder, collection.value)
-            
-            if not os.path.exists(collection_path):
-                self.logger.warning(f"Collection folder not found: {collection_path}")
-                continue
-                
             self.logger.debug(f"Processing collection: {collection.name}")
             
             try:
@@ -148,6 +172,7 @@ class SongLibrary:
             for collection in self.current_collections:
                 collection_path = os.path.join(self.songs_folder, collection.value)
                 
+                # Collection folders already validated by Schedule, but double-check for safety
                 if not os.path.exists(collection_path):
                     self.logger.warning(f"Skipping missing collection folder: {collection_path}")
                     continue

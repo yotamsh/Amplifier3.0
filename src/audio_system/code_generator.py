@@ -15,8 +15,8 @@ try:
 except ImportError:
     eyed3 = None
 
-from .collections import Collection, ALL_COLLECTIONS
-from ..game_system.config import AudioConfig
+from audio_system.collections import Collection, ALL_COLLECTIONS
+from game_system.config import AudioConfig
 
 
 class CodeGeneratorHelper:

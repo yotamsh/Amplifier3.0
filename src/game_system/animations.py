@@ -8,7 +8,7 @@ import time
 from abc import ABC, abstractmethod
 from typing import List, Tuple, TYPE_CHECKING
 
-from .animation_helpers import AnimationHelpers
+from game_system.animation_helpers import AnimationHelpers
 
 if TYPE_CHECKING:
     from led_system.interfaces import LedStrip

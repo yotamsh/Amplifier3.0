@@ -1,25 +1,25 @@
 """
-Game System - State machine based interactive game controller
+Game System - State machine based interactive game manager
 
 This module provides the core architecture for a state-machine-based
 interactive game with dynamic LED animations and button input.
 """
 
-from .states import GameState
-from .animations import Animation
-from .sequence_detector import SequenceDetector
-from .game_controller import GameController
-from .states import IdleState, AmplifyState, TestState
-from .animations import RainbowAnimation, BreathingAnimation, StaticColorAnimation
-from .animation_helpers import AnimationHelpers
-from .config import GameConfig, LedStripConfig, ButtonConfig
+from game_system.states import GameState
+from game_system.animations import Animation
+from game_system.sequence_detector import SequenceDetector
+from game_system.game_manager import GameManager
+from game_system.states import IdleState, AmplifyState, TestState
+from game_system.animations import RainbowAnimation, BreathingAnimation, StaticColorAnimation
+from game_system.animation_helpers import AnimationHelpers
+from game_system.config import GameConfig, LedStripConfig, ButtonConfig
 
 __all__ = [
     # Base classes
     "GameState",
     "Animation", 
     "SequenceDetector",
-    "GameController",
+    "GameManager",
     # States
     "IdleState",
     "AmplifyState", 

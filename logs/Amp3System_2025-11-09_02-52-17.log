@@ -1,0 +1,23 @@
+[2025-11-09 02:52:17,399] [INFO] [ButtonReader] GPIO setup complete: 2 pins, no pulls
+[2025-11-09 02:52:17,400] [INFO] [ButtonReader] ButtonReader initialized with 2 buttons
+[2025-11-09 02:52:17,400] [INFO] [ButtonReader] Button mapping: Button0=GPIO4, Button1=GPIO22
+[2025-11-09 02:52:17,407] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-09 02:52:17,408] [ERROR] [SongLibrary] eyed3 library not available - cannot load song codes
+[2025-11-09 02:52:17,408] [INFO] [SongLibrary] Collections updated: ['GENERAL', 'MORNING', 'TV', 'CLASSIC', 'DISNEY', 'PARTY']
+[2025-11-09 02:52:17,409] [WARNING] [SongLibrary] Skipping missing collection folder: songs/general
+[2025-11-09 02:52:17,410] [WARNING] [SongLibrary] Skipping missing collection folder: songs/tv
+[2025-11-09 02:52:17,411] [WARNING] [SongLibrary] Skipping missing collection folder: songs/classic
+[2025-11-09 02:52:17,411] [WARNING] [SongLibrary] Skipping missing collection folder: songs/disney
+[2025-11-09 02:52:17,412] [WARNING] [SongLibrary] Skipping missing collection folder: songs/party
+[2025-11-09 02:52:17,551] [ERROR] [Main] Failed to initialize Amp3 system: No file 'sounds/win.mp3' found in working directory '/home/yotam/AmpSync/Amp3'. | Type: FileNotFoundError | File: /home/yotam/AmpSync/Amp3/src/audio_system/sound_controller.py | Line: 82
+Traceback (most recent call last):
+  File "/home/yotam/AmpSync/Amp3/src/amplifier.py", line 163, in create_game_system
+    sound_controller = SoundController(
+                       ^^^^^^^^^^^^^^^^
+  File "/home/yotam/AmpSync/Amp3/src/audio_system/sound_controller.py", line 68, in __init__
+    self._load_sound_objects()
+  File "/home/yotam/AmpSync/Amp3/src/audio_system/sound_controller.py", line 82, in _load_sound_objects
+    self._sound_objects[sound_enum] = pygame.mixer.Sound(sound_path)
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: No file 'sounds/win.mp3' found in working directory '/home/yotam/AmpSync/Amp3'.
+[2025-11-09 02:52:17,894] [INFO] [ButtonReader] GPIO resources cleaned up successfully

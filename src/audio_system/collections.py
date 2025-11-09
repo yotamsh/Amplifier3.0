@@ -15,12 +15,13 @@ class Collection(Enum):
     
     Hardcoded collection definitions.
     """
-    GENERAL = "general"
+    # GENERAL = "general"
     MORNING = "morning"
-    PARTY = "party"
-    TV = "tv"
-    CLASSIC = "classic"
-    DISNEY = "disney"
+    # PARTY = "party"
+    # TV = "tv"
+    # CLASSIC = "classic"
+    # DISNEY = "disney"
+    SPANISH = "spanish"
 
 
 # Constant with all collections
@@ -68,41 +69,57 @@ class Schedule:
         """
         Validate schedule entries and collection folder existence.
         
-        Validates:
+        Validates (strict - raises exceptions for any issues):
         - Daily schedule times are monotonically increasing
         - Special schedule entries have start < end
-        - Collection folders exist in songs directory
+        - All referenced collection folders exist in songs directory
         
         Args:
             songs_folder: Path to songs directory for validation
+            
+        Raises:
+            ValueError: If schedule configuration is invalid
+            FileNotFoundError: If referenced collection folders don't exist
         """
         # Validate daily schedule monotonic ordering
         for i in range(1, len(self.daily_schedule)):
             prev_time = self.daily_schedule[i-1].time
             curr_time = self.daily_schedule[i].time
             if prev_time >= curr_time:
-                print(f"❌ Error: Daily schedule times must be monotonically increasing")
-                print(f"    Entry {i-1}: {prev_time} >= Entry {i}: {curr_time}")
+                raise ValueError(
+                    f"Daily schedule times must be monotonically increasing. "
+                    f"Entry {i-1}: {prev_time} >= Entry {i}: {curr_time}"
+                )
         
         # Validate special schedule start < end
         for i, entry in enumerate(self.special_schedule):
             if entry.start >= entry.end:
-                print(f"❌ Error: Special schedule entry {i} has start >= end")
-                print(f"    Start: {entry.start}, End: {entry.end}")
+                raise ValueError(
+                    f"Special schedule entry {i} has invalid time range: "
+                    f"start {entry.start} >= end {entry.end}"
+                )
         
-        # Check daily schedule collection folders
+        # Check daily schedule collection folders (strict)
+        missing_collections = []
         for entry in self.daily_schedule:
             for collection in entry.collections:
                 collection_path = os.path.join(songs_folder, collection.value)
                 if not os.path.exists(collection_path):
-                    print(f"⚠️  Warning: Collection '{collection.value}' in daily schedule - folder not found: {collection_path}")
+                    missing_collections.append(f"{collection.value} (daily schedule)")
         
-        # Check special schedule collection folders
+        # Check special schedule collection folders (strict)
         for entry in self.special_schedule:
             for collection in entry.collections:
                 collection_path = os.path.join(songs_folder, collection.value)
                 if not os.path.exists(collection_path):
-                    print(f"⚠️  Warning: Collection '{collection.value}' in special schedule - folder not found: {collection_path}")
+                    missing_collections.append(f"{collection.value} (special schedule)")
+        
+        # Fail if any collections are missing
+        if missing_collections:
+            raise FileNotFoundError(
+                f"Schedule references missing collection folders: {missing_collections}. "
+                f"Create these folders in {songs_folder}/ or update schedule configuration."
+            )
     
     def get_collections_by_time(self, current_time: datetime) -> Set[Collection]:
         """
