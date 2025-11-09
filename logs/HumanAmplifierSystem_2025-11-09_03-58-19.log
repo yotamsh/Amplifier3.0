@@ -1,0 +1,48 @@
+[2025-11-09 03:58:19,178] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-09 03:58:19,179] [INFO] [Amplifier] Button configuration: 2 buttons on GPIO [4, 22]
+[2025-11-09 03:58:19,180] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-09 03:58:19,180] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 18
+[2025-11-09 03:58:19,181] [INFO] [Amplifier]   Strip 2: 300 LEDs on GPIO 21
+[2025-11-09 03:58:19,181] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-09 03:58:19,182] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-09 03:58:19,182] [INFO] [Amplifier] Audio folder: songs
+[2025-11-09 03:58:19,183] [INFO] [Amplifier] Schedule: 4 daily, 1 special entries
+[2025-11-09 03:58:22,259] [INFO] [ButtonReader] GPIO setup complete: 2 pins, no pulls
+[2025-11-09 03:58:22,260] [INFO] [ButtonReader] ButtonReader initialized with 2 buttons
+[2025-11-09 03:58:22,260] [INFO] [ButtonReader] Button mapping: Button0=GPIO4, Button1=GPIO22
+[2025-11-09 03:58:22,264] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-09 03:58:22,509] [INFO] [SongLibrary] Loaded 40 song codes from 2 collections
+[2025-11-09 03:58:22,510] [INFO] [SongLibrary] Collections updated: ['MORNING', 'SPANISH']
+[2025-11-09 03:58:22,765] [INFO] [GameManager] Entering state: IdleState
+[2025-11-09 03:58:22,766] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-09 03:58:22,767] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-09 03:58:22,768] [INFO] [Amplifier] Hardware: 2 buttons, 2 LED strips, 20ms frame duration
+[2025-11-09 03:58:22,769] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['MORNING', 'SPANISH'], 'total_codes': 40, 'daily_schedule_entries': 4, 'special_schedule_entries': 1}
+[2025-11-09 03:58:22,769] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-09 03:58:22,770] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-09 03:58:22,771] [INFO] [Amplifier] Hardware status: 2 buttons, 2 LED strips
+[2025-11-09 03:58:22,771] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-09 03:58:22,772] [INFO] [Amplifier]   Strip 2: 300 LEDs active
+[2025-11-09 03:58:22,773] [INFO] [Amplifier] Audio system: 40 song codes, 9 sound effects
+[2025-11-09 03:58:22,774] [INFO] [Amplifier] Available collections: MORNING, SPANISH
+[2025-11-09 03:58:22,775] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-09 03:58:22,776] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-09 03:58:32,864] [DEBUG] [AmplifyState] AmplifyState initialized with buttons: [0]
+[2025-11-09 03:58:32,865] [INFO] [GameManager] Exiting state: IdleState
+[2025-11-09 03:58:32,865] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-09 03:58:32,866] [INFO] [GameManager] Entering state: AmplifyState
+[2025-11-09 03:58:37,416] [INFO] [GameManager] Exiting state: AmplifyState
+[2025-11-09 03:58:37,418] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-09 03:58:37,420] [INFO] [GameManager] Entering state: IdleState
+[2025-11-09 03:58:38,487] [DEBUG] [AmplifyState] AmplifyState initialized with buttons: [0]
+[2025-11-09 03:58:38,488] [INFO] [GameManager] Exiting state: IdleState
+[2025-11-09 03:58:38,489] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-09 03:58:38,490] [INFO] [GameManager] Entering state: AmplifyState
+[2025-11-09 03:58:44,025] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [0, 1]
+[2025-11-09 03:58:46,072] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [1]
+[2025-11-09 03:58:46,122] [INFO] [GameManager] Exiting state: AmplifyState
+[2025-11-09 03:58:46,123] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-09 03:58:46,124] [INFO] [GameManager] Entering state: IdleState
+[2025-11-09 03:58:52,710] [INFO] [GameManager] Game stopped by user (Ctrl+C)
+[2025-11-09 03:58:52,731] [INFO] [GameManager] Game stopped
+[2025-11-09 03:58:52,732] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

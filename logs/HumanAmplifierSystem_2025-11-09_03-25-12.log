@@ -1,0 +1,13 @@
+[2025-11-09 03:25:12,920] [INFO] [ButtonReader] GPIO setup complete: 2 pins, no pulls
+[2025-11-09 03:25:12,921] [INFO] [ButtonReader] ButtonReader initialized with 2 buttons
+[2025-11-09 03:25:12,921] [INFO] [ButtonReader] Button mapping: Button0=GPIO4, Button1=GPIO22
+[2025-11-09 03:25:12,928] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-09 03:25:13,203] [INFO] [SongLibrary] Loaded 40 song codes from 2 collections
+[2025-11-09 03:25:13,204] [INFO] [SongLibrary] Collections updated: ['SPANISH', 'MORNING']
+[2025-11-09 03:25:13,206] [ERROR] [Main] Failed to initialize HumanAmplifier system: 'ButtonReader' object has no attribute 'button_pins' | Type: AttributeError | File: /home/yotam/AmpSync/Amp3/src/amplifier.py | Line: 165
+Traceback (most recent call last):
+  File "/home/yotam/AmpSync/Amp3/src/amplifier.py", line 165, in create_game_system
+    num_buttons=len(button_reader.button_pins)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ButtonReader' object has no attribute 'button_pins'
+[2025-11-09 03:25:13,272] [INFO] [ButtonReader] GPIO resources cleaned up successfully

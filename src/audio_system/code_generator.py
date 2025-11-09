@@ -254,8 +254,8 @@ class CodeGeneratorHelper:
 if __name__ == "__main__":
     import sys
     
-    print("🎵 Amp3 Song Code Generator")
-    print("=" * 40)
+    print("🎵 HumanAmplifier Song Code Generator")
+    print("=" * 45)
     
     # Simple CLI interface (can be enhanced later with argparse)
     audio_config = AudioConfig()  # Use default config

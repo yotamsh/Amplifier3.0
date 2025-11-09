@@ -1,1 +1,1 @@
-# Amp3 Source Package
+# HumanAmplifier Source Package

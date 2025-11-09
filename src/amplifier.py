@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Amp3 Interactive Game System
+HumanAmplifier Interactive Game System
 
-Main application for the Amp3 interactive LED and audio game system.
+Main application for the HumanAmplifier interactive LED and audio game system.
 Provides a state-machine-based game with button input, LED animations,
 and scheduled audio playback.
 """
@@ -29,7 +29,7 @@ except ImportError as e:
     sys.exit(1)
 
 
-def create_default_config() -> GameConfig:
+def create_amplifier_config() -> GameConfig:
     """Create default configuration for development/testing"""
     
     button_config = ButtonConfig(
@@ -100,28 +100,30 @@ def create_default_config() -> GameConfig:
     )
 
 
-def create_game_system():
+def create_game_system(config: GameConfig, amplifier_logger):
     """
-    Create and configure the complete game system.
+    Create and configure the complete game system using provided config.
     
+    Args:
+        config: GameConfig instance with all system configuration
+        amplifier_logger: ClassLogger instance for logging initialization steps
+        
     Returns:
         GameManager: Configured game manager ready to run
     """
-    # Create and validate configuration
-    config = create_default_config()
+    # Validate the provided configuration
     config.validate()
     
-    # Initialize logging
-    main_logger = HybridLogger("Amp3System")
-    game_logger = main_logger.get_class_logger("GameManager", logging.DEBUG)
-    button_logger = main_logger.get_class_logger("ButtonReader", logging.INFO)
-    audio_logger = main_logger.get_class_logger("SongLibrary", logging.INFO)
+    # Create class loggers for components
+    game_manager_logger = amplifier_logger.create_class_logger("GameManager", logging.DEBUG)
+    button_reader_logger = amplifier_logger.create_class_logger("ButtonReader", logging.INFO)
+    song_library_logger = amplifier_logger.create_class_logger("SongLibrary", logging.INFO)
     
     try:
         # Initialize button reader
         button_reader = ButtonReader(
             button_pins=config.button_config.pins,
-            logger=button_logger,
+            logger=button_reader_logger,
             pull_mode=config.button_config.pull_mode
         )
         
@@ -156,7 +158,7 @@ def create_game_system():
         song_library = SongLibrary(
             songs_folder=config.audio_config.songs_folder,
             schedule=schedule,
-            logger=audio_logger
+            logger=song_library_logger
         )
         
         # Create sound controller with song library
@@ -169,87 +171,77 @@ def create_game_system():
         game_manager = GameManager(
             button_reader=button_reader,
             led_strips=led_strips,
-            logger=game_logger,
+            logger=game_manager_logger,
             sound_controller=sound_controller,
             frame_duration_ms=int(config.frame_duration_ms),
             sequence_timeout_ms=config.sequence_timeout_ms
         )
         
-        game_logger.info("Amp3 system initialized successfully")
-        game_logger.info(f"Configuration: {config.button_count} buttons, {config.strip_count} LED strips, {config.frame_duration_ms}ms frame duration")
-        game_logger.info(f"Audio system: {song_library.get_stats()}")
-        game_logger.info("Sound controller initialized successfully")
+        amplifier_logger.info("HumanAmplifier system initialized successfully")
+        amplifier_logger.info(f"Hardware: {button_reader.get_button_count()} buttons, {len(led_strips)} LED strips, {config.frame_duration_ms}ms frame duration")
+        amplifier_logger.info(f"Audio system: {song_library.get_stats()}")
+        amplifier_logger.info("Sound controller initialized successfully")
         
-        return game_manager, main_logger
+        return game_manager
         
     except Exception as e:
-        main_logger.get_main_logger().error(f"Failed to initialize Amp3 system: {e}", exception=e)
+        amplifier_logger.error(f"Failed to initialize HumanAmplifier system: {e}", exception=e)
         raise
 
 
 def main():
     """
-    Main function - sets up and runs the Amp3 system.
+    Main function - sets up and runs the HumanAmplifier system.
     """
-    # Get actual config to show correct info
-    config = create_default_config()
-    active_pins = [pin for pin in config.button_config.pins]
+    # Initialize main logger first
+    main_logger = HybridLogger("HumanAmplifierSystem")
+    amplifier_logger = main_logger.get_class_logger("Amplifier")
     
-    print("🎵 AMP3 INTERACTIVE SYSTEM")
-    print("=" * 50)
-    print("States implemented:")
-    print("  • IdleState: Dim blue breathing animation")
-    print("  • AmplifyState: Rainbow per pressed button") 
-    print("  • TestState: Static colors for testing")
-    print("  • Audio System: Song management with scheduled collections")
-    print()
-    print("Controls:")
-    print("  • Any button press: Idle → Amplify")
-    print("  • All buttons released: Amplify → Idle")
-    print(f"  • Button {len(active_pins)-1} (GPIO {active_pins[-1]}) pressed 3x: Any state → Test")
-    print("  • Any button in Test: Test → Idle")
-    print()
-    print("Hardware configuration:")
-    print(f"  • {len(active_pins)} buttons on GPIO: {', '.join(map(str, active_pins))}")
-    print(f"  • LED strip 1: {config.led_strips[0].led_count} LEDs on GPIO {config.led_strips[0].gpio_pin}")
-    print(f"  • LED strip 2: {config.led_strips[1].led_count} LEDs on GPIO {config.led_strips[1].gpio_pin}")
-    print("  • External 5V power for LED strips")
-    print()
-    print("Game settings:")
-    print(f"  • Frame duration: {config.frame_duration_ms}ms ({config.target_fps:.1f} FPS)")
-    print(f"  • Button sample rate: {config.button_config.sample_rate_hz}Hz")
-    print(f"  • Sequence timeout: {config.sequence_timeout_ms}ms")
-    print()
-    print("Audio settings:")
-    print(f"  • Songs folder: {config.audio_config.songs_folder}")
-    print(f"  • Daily schedule entries: {len(config.audio_config.daily_schedule)}")
-    print(f"  • Special schedule entries: {len(config.audio_config.special_schedule)}")
-    print()
+    amplifier_logger.info("🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM")
+    
+    # Create configuration
+    config = create_amplifier_config()
+    
+    # Log important configuration details
+    amplifier_logger.info(f"Button configuration: {config.button_count} buttons on GPIO {config.button_config.pins}")
+    amplifier_logger.info(f"LED configuration: {len(config.led_strips)} strips")
+    for i, led_config in enumerate(config.led_strips):
+        amplifier_logger.info(f"  Strip {i+1}: {led_config.led_count} LEDs on GPIO {led_config.gpio_pin}")
+    amplifier_logger.info(f"Game settings: {config.frame_duration_ms}ms frame duration ({config.target_fps:.1f} FPS)")
+    amplifier_logger.info(f"Button sample rate: {config.button_config.sample_rate_hz}Hz")
+    amplifier_logger.info(f"Audio folder: {config.audio_config.songs_folder}")
+    amplifier_logger.info(f"Schedule: {len(config.audio_config.daily_schedule)} daily, {len(config.audio_config.special_schedule)} special entries")
     
     input("Press Enter when hardware is ready...")
-    print()
     
     try:
-        # Create game system
-        game_manager, logger = create_game_system()
+        # Create game system using the configured values
+        game_manager = create_game_system(config, amplifier_logger)
         
-        print("🚀 Starting Amp3 system...")
-        print("Press Ctrl+C to stop")
-        print()
+        # Log post-initialization details (new information calculated during init)
+        audio_stats = game_manager.sound_controller.song_library.get_stats()
+        
+        amplifier_logger.info("✅ System initialized successfully!")
+        amplifier_logger.info(f"Hardware status: {game_manager.button_reader.get_button_count()} buttons, {len(game_manager.led_strips)} LED strips")
+        for i, strip in enumerate(game_manager.led_strips):
+            amplifier_logger.info(f"  Strip {i+1}: {strip.num_pixels()} LEDs active")
+        amplifier_logger.info(f"Audio system: {audio_stats['total_codes']} song codes, {len(game_manager.sound_controller._sound_objects)} sound effects")
+        amplifier_logger.info(f"Available collections: {', '.join(audio_stats['all_collections'])}")
+        
+        amplifier_logger.info("🚀 Starting HumanAmplifier system...")
         
         # Run the game with automatic frame limiting
         game_manager.run_game_loop()
         
     except KeyboardInterrupt:
-        print(f"\n\n⏹️  Amp3 stopped by user")
+        amplifier_logger.info("⏹️  HumanAmplifier stopped by user")
     except Exception as e:
-        print(f"\n❌ Amp3 system error: {e}")
+        amplifier_logger.error(f"HumanAmplifier system error: {e}", exception=e)
         raise
     finally:
         # Cleanup will be handled by GameManager.stop()
-        print("✅ Amp3 system shut down")
-        if 'logger' in locals():
-            logger.cleanup()
+        amplifier_logger.info("✅ HumanAmplifier system shut down")
+        main_logger.cleanup()
 
 
 if __name__ == "__main__":

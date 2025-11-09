@@ -14,3 +14,6 @@ requirements.txt
 # OS files
 .DS_Store
 **/.DS_Store
+
+# Song collections (ignore all folders inside songs/)
+songs/*/

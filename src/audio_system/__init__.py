@@ -2,7 +2,7 @@
 Audio System Module
 
 Provides song management, collection scheduling, and code generation
-for the Amp3 interactive game system.
+for the HumanAmplifier interactive game system.
 """
 
 from audio_system.collections import Collection, Schedule, DailyScheduleEntry, SpecialScheduleEntry, ALL_COLLECTIONS

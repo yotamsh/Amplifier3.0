@@ -32,3 +32,5 @@
 [2025-11-09 03:11:21,286] [INFO] [GameManager] Exiting state: AmplifyState
 [2025-11-09 03:11:21,287] [INFO] [GameManager] State transition: AmplifyState → IdleState
 [2025-11-09 03:11:21,288] [INFO] [GameManager] Entering state: IdleState
+[2025-11-09 03:24:56,843] [INFO] [GameManager] Game stopped by user (Ctrl+C)
+[2025-11-09 03:24:56,855] [INFO] [GameManager] Game stopped
