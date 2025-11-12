@@ -20,6 +20,12 @@ class AnimationHelpers:
     BLACK = None
     WHITE = None
     
+    # Party mode color palette
+    RED_WINE = None     # Deep red wine color
+    GREEN_GRASS = None  # Vibrant grass green
+    PURPLE = None       # Rich purple
+    SOFT_WHITE = None   # Soft warm white
+    
     @staticmethod
     def _init_colors():
         """Initialize color constants (called once)"""
@@ -28,6 +34,12 @@ class AnimationHelpers:
             AnimationHelpers.ORANGE_RED = Pixel(255, 69, 0)
             AnimationHelpers.BLACK = Pixel(0, 0, 0)
             AnimationHelpers.WHITE = Pixel(255, 255, 255)
+            
+            # Party mode color palette
+            AnimationHelpers.RED_WINE = Pixel(139, 0, 45)      # Deep red wine
+            AnimationHelpers.GREEN_GRASS = Pixel(34, 139, 34)  # Vibrant grass green
+            AnimationHelpers.PURPLE = Pixel(138, 43, 226)      # Rich purple (blue-violet)
+            AnimationHelpers.SOFT_WHITE = Pixel(255, 248, 220) # Soft warm white (cornsilk)
     
     @staticmethod
     def beat8(bpm: int) -> int:

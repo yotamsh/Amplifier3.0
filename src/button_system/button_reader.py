@@ -56,6 +56,9 @@ class ButtonReader(IButtonReader):
         # Initialize previous state (all buttons start as not-pressed)
         self._previous_state: List[bool] = [False] * len(button_pins)
         
+        # Track buttons to ignore until released
+        self._ignored_buttons: List[bool] = [False] * len(button_pins)  # True = ignore this button
+        
         # Setup GPIO hardware  
         self._gpio_initialized = False  # Track if GPIO was successfully initialized
         self._setup_gpio()
@@ -94,40 +97,77 @@ class ButtonReader(IButtonReader):
             self._logger.error(f"GPIO setup failed: {e}")
             raise
     
+    def ignore_pressed_until_released(self) -> None:
+        """
+        Mark currently pressed buttons to be ignored until they are released.
+        
+        Uses the current raw button state to determine which buttons to ignore.
+        Once ignored, a button will report as "not pressed" in read_buttons()
+        until it is physically released, then it will work normally again.
+        
+        Example:
+            # After entering PartyState with buttons still held:
+            button_reader.ignore_pressed_until_released()
+            # Now those held buttons won't trigger transitions until released and re-pressed
+        """
+        # Read current raw GPIO state
+        for i, pin in enumerate(self._button_pins):
+            gpio_value = GPIO.input(pin)
+            button_pressed = (gpio_value == GPIO.HIGH)
+            
+            if button_pressed:
+                self._ignored_buttons[i] = True
+                self._logger.debug(f"Button {i} will be ignored until released")
+    
     def read_buttons(self) -> ButtonState:
         """
-        Read current state of all buttons and return comprehensive state.
+        Read current state of all buttons with ignore filtering.
         
-        Performs raw GPIO reads with no software debouncing.
-        Edge detection is provided through comparison with previous state.
+        Buttons marked as "ignored" will report as not pressed until they are
+        physically released, then they return to normal behavior.
         
         Returns:
             ButtonState: Complete state with current/previous values and edge detection
         """
-        # Read current state from all GPIO pins
-        current_state: List[bool] = []
+        # Read current state from all GPIO pins (raw hardware state)
+        raw_current_state: List[bool] = []
         for pin in self._button_pins:
-            # Read GPIO and convert to boolean (HIGH = True, LOW = False)
             gpio_value = GPIO.input(pin)
             button_pressed = (gpio_value == GPIO.HIGH)
-            current_state.append(button_pressed)
+            raw_current_state.append(button_pressed)
         
-        # Create comprehensive state object 
-        # (calculations happen automatically in ButtonState.__post_init__)
+        # Apply ignore filtering
+        filtered_current_state: List[bool] = []
+        for i, is_pressed in enumerate(raw_current_state):
+            if self._ignored_buttons[i]:
+                # This button is being ignored
+                if not is_pressed:
+                    # Button was released! Stop ignoring it
+                    self._ignored_buttons[i] = False
+                    self._logger.debug(f"Button {i} released, no longer ignored")
+                    filtered_current_state.append(False)
+                else:
+                    # Button still pressed, keep ignoring (report as not pressed)
+                    filtered_current_state.append(False)
+            else:
+                # Not ignored, report actual state
+                filtered_current_state.append(is_pressed)
+        
+        # Create comprehensive state object using filtered state
         state = ButtonState(
-            for_button=current_state,
-            previous_state_of=self._previous_state.copy()  # Defensive copy
+            for_button=filtered_current_state,
+            previous_state_of=self._previous_state.copy()
         )
         
-        # Update previous state for next read
-        self._previous_state = current_state.copy()
+        # Update previous state with FILTERED state (important!)
+        self._previous_state = filtered_current_state.copy()
         
         # Log significant changes
         if state.any_changed:
             changed_buttons = [
                 (i, "pressed" if state.for_button[i] else "released") 
                 for i, changed in enumerate(state.was_changed) if changed]
-            self._logger.debug(f"Button state changed: buttons {changed_buttons}")
+            self._logger.debug(f"Button state changed: {changed_buttons}")
         
         return state
     

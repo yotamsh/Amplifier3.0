@@ -103,3 +103,6 @@
 [2025-11-10 01:40:52,266] [INFO] [GameManager] Exiting state: AmplifyState
 [2025-11-10 01:40:52,268] [INFO] [GameManager] State transition: AmplifyState → IdleState
 [2025-11-10 01:40:52,269] [INFO] [GameManager] Entering state: IdleState
+[2025-11-10 01:45:11,883] [INFO] [GameManager] Game stopped by user (Ctrl+C)
+[2025-11-10 01:45:11,898] [INFO] [GameManager] Game stopped
+[2025-11-10 01:45:11,899] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

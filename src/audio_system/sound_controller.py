@@ -59,8 +59,10 @@ class SoundController:
         self.current_song: Optional[str] = None
         
         # Initialize pygame mixer
+        # Force quit any existing mixer to release audio locks from crashed sessions
         self.mixer = pygame.mixer
-        self.mixer.pre_init()
+        self.mixer.quit()  # Release any existing audio device locks
+        self.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=512)
         self.mixer.init()
         
         # Load and validate all sound files (strict - fail if any missing)

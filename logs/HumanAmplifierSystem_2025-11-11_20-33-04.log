@@ -1,0 +1,9 @@
+[2025-11-11 20:33:04,877] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-11 20:33:04,878] [INFO] [Amplifier] Button configuration: 3 buttons on GPIO [23, 24, 25]
+[2025-11-11 20:33:04,879] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-11 20:33:04,879] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-11 20:33:04,880] [INFO] [Amplifier]   Strip 2: 300 LEDs on GPIO 18
+[2025-11-11 20:33:04,881] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-11 20:33:04,881] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-11 20:33:04,882] [INFO] [Amplifier] Audio folder: songs
+[2025-11-11 20:33:04,882] [INFO] [Amplifier] Schedule: 2 daily, 1 special entries

@@ -37,11 +37,11 @@ def create_amplifier_config() -> GameConfig:
     
     button_config = ButtonConfig(
         pins=[
-            4, 
+            # 4, 
             5, 
-            # 6, 
+            6, 
             # 16, 
-            # 17, 
+            17, 
             # 20, 
             22, 
             # 23, 
@@ -53,17 +53,19 @@ def create_amplifier_config() -> GameConfig:
     )
     
     led_strips = [
-        LedStripConfig(
-            gpio_pin=18,
-            led_count=300,
-            dma=10,
-            brightness=26,  # 10% brightness for testing
-            channel=0
-        ),
+        # Strip 1 - main strip
         LedStripConfig(
             gpio_pin=21, 
             led_count=300,
             dma=5,
+            brightness=26,  # 10% brightness for testing
+            channel=0
+        ),
+        # Strip 2 - pyramid strip
+        LedStripConfig(
+            gpio_pin=18,
+            led_count=300,
+            dma=10,
             brightness=26,  # 10% brightness for testing
             channel=0
         )

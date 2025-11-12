@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from __future__ import annotations
 """
 Button + LED Combined Test - Button Reading with LED Keyboard Control
 
@@ -6,7 +7,7 @@ Combines real-time button edge detection with immediate LED keyboard control:
 - Button system: 5ms sampling, full logging, edge detection
 - LED control: Non-blocking keyboard input ('1'=ON, '0'=OFF, 'q'=quit)
 - Terminal: Full cbreak mode for immediate response
-- Hardware: GPIO22 (button) + GPIO26 (LED) - no conflicts
+- Hardware: GPIO23 (button) + GPIO26 (LED) + GPIO18/21 (LED strips)
 
 Features:
 - 200Hz button sampling with press/release detection
@@ -45,7 +46,7 @@ except ImportError as e:
 
 # Configuration
 BUTTON_PINS: List[int] = [
-    22,  # Single button for this test - avoiding all conflicts
+    23,  # Single button for this test
 ]
 
 # LED Configuration 
@@ -365,7 +366,7 @@ class ButtonLedsTestRunner:
         print("🎮 COMBINED BUTTON + LED + STRIP ANIMATION TEST")
         print("=" * 60)
         print("Hardware Setup:")
-        print("• Button: SPDT with RC circuit → GPIO22")
+        print("• Button: SPDT with RC circuit → GPIO23")
         print("• LED control: GPIO26 → LED positive + Ground")
         print("• LED Strip 1: GPIO18 → Rainbow cycle animation (600 LEDs)")
         print("• LED Strip 2: GPIO21 → Green/Red wipe animation (300 LEDs)")
@@ -520,7 +521,7 @@ def main() -> None:
     print("• External 5V power supply (10A+ recommended for 900 LEDs)")
     print()
     print("Connection Guide:")
-    print(f"  Button      → GPIO{BUTTON_PINS[0]:2d} (Physical pin 15)")  
+    print(f"  Button      → GPIO{BUTTON_PINS[0]:2d} (Physical pin 16)")  
     print(f"  LED control → GPIO{LED_GPIO:2d} (Physical pin 37)")
     print(f"  LED Strip 1 → GPIO{LED_STRIP1_GPIO:2d} (Physical pin 12) - Rainbow animation (600 LEDs)")
     print(f"  LED Strip 2 → GPIO{LED_STRIP2_GPIO:2d} (Physical pin 40) - Color wipe animation (300 LEDs)")

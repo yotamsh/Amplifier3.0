@@ -1,0 +1,225 @@
+[2025-11-11 17:36:09,413] [INFO] [ButtonLedsTestRunner] Combined button + LED + strip animation test starting
+[2025-11-11 17:36:09,413] [INFO] [ButtonLedsTestRunner] Configuration: 1 button(s), 1 LED, 2 strips (600+300 LEDs), ~50Hz sampling
+[2025-11-11 17:36:09,414] [INFO] [ButtonReader] GPIO setup complete: 1 pins, no pulls
+[2025-11-11 17:36:09,414] [INFO] [ButtonReader] ButtonReader initialized with 1 buttons
+[2025-11-11 17:36:09,415] [INFO] [ButtonReader] Button mapping: Button0=GPIO23
+[2025-11-11 17:36:09,415] [INFO] [ButtonReader] Button reader initialized successfully
+[2025-11-11 17:36:09,416] [INFO] [ButtonLedsTestRunner] LED initialized on GPIO26 (OFF)
+[2025-11-11 17:36:09,417] [INFO] [ButtonLedsTestRunner] Strip 1 initialized: GPIO18, PWM channel 0
+[2025-11-11 17:36:09,419] [INFO] [ButtonLedsTestRunner] Strip 2 initialized: GPIO21, PWM channel 0
+[2025-11-11 17:36:09,422] [INFO] [ButtonLedsTestRunner] LED strips ready: Strip1=600 LEDs, Strip2=300 LEDs, GPIO18+GPIO21
+[2025-11-11 17:36:11,366] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 59.2ms vs 20ms target
+[2025-11-11 17:36:11,411] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 44.6ms vs 20ms target
+[2025-11-11 17:36:11,458] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 47.3ms vs 20ms target
+[2025-11-11 17:36:11,625] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 56.3ms vs 20ms target
+[2025-11-11 17:36:11,641] [INFO] [ButtonLedsTestRunner] LED turned ON (GPIO26) - keyboard command '1'
+[2025-11-11 17:36:11,673] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 48.1ms vs 20ms target
+[2025-11-11 17:36:11,720] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 47.9ms vs 20ms target
+[2025-11-11 17:36:11,887] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.8ms vs 20ms target
+[2025-11-11 17:36:11,930] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 42.9ms vs 20ms target
+[2025-11-11 17:36:12,135] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.5ms vs 20ms target
+[2025-11-11 17:36:12,248] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.2ms vs 20ms target
+[2025-11-11 17:36:12,291] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 43.1ms vs 20ms target
+[2025-11-11 17:36:12,451] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.7ms vs 20ms target
+[2025-11-11 17:36:12,497] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.3ms vs 20ms target
+[2025-11-11 17:36:12,558] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 41.0ms vs 20ms target
+[2025-11-11 17:36:12,670] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 56.4ms vs 20ms target
+[2025-11-11 17:36:12,713] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 43.0ms vs 20ms target
+[2025-11-11 17:36:12,774] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 40.2ms vs 20ms target
+[2025-11-11 17:36:12,879] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 47.5ms vs 20ms target
+[2025-11-11 17:36:13,043] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.6ms vs 20ms target
+[2025-11-11 17:36:13,086] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 43.0ms vs 20ms target
+[2025-11-11 17:36:13,189] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:13,244] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.7ms vs 20ms target
+[2025-11-11 17:36:13,291] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.3ms vs 20ms target
+[2025-11-11 17:36:13,342] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.0ms vs 20ms target
+[2025-11-11 17:36:13,393] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:13,449] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.7ms vs 20ms target
+[2025-11-11 17:36:13,495] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.2ms vs 20ms target
+[2025-11-11 17:36:13,546] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:13,597] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.2ms vs 20ms target
+[2025-11-11 17:36:13,653] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.6ms vs 20ms target
+[2025-11-11 17:36:13,699] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.2ms vs 20ms target
+[2025-11-11 17:36:13,750] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.0ms vs 20ms target
+[2025-11-11 17:36:13,801] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.3ms vs 20ms target
+[2025-11-11 17:36:13,857] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.7ms vs 20ms target
+[2025-11-11 17:36:13,903] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.2ms vs 20ms target
+[2025-11-11 17:36:13,954] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.2ms vs 20ms target
+[2025-11-11 17:36:14,005] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:14,107] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 45.9ms vs 20ms target
+[2025-11-11 17:36:14,158] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.0ms vs 20ms target
+[2025-11-11 17:36:14,209] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.0ms vs 20ms target
+[2025-11-11 17:36:14,265] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.8ms vs 20ms target
+[2025-11-11 17:36:14,311] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.2ms vs 20ms target
+[2025-11-11 17:36:14,362] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.0ms vs 20ms target
+[2025-11-11 17:36:14,413] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:14,469] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.6ms vs 20ms target
+[2025-11-11 17:36:14,515] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.4ms vs 20ms target
+[2025-11-11 17:36:14,566] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 50.9ms vs 20ms target
+[2025-11-11 17:36:14,617] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 50.9ms vs 20ms target
+[2025-11-11 17:36:15,721] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 54.0ms vs 20ms target
+[2025-11-11 17:36:15,772] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.0ms vs 20ms target
+[2025-11-11 17:36:15,823] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.3ms vs 20ms target
+[2025-11-11 17:36:15,833] [INFO] [ButtonLedsTestRunner] LED turned OFF (GPIO26) - keyboard command '0'
+[2025-11-11 17:36:15,925] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.0ms vs 20ms target
+[2025-11-11 17:36:15,976] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:16,037] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 61.6ms vs 20ms target
+[2025-11-11 17:36:16,079] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 41.1ms vs 20ms target
+[2025-11-11 17:36:16,134] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.9ms vs 20ms target
+[2025-11-11 17:36:16,181] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.7ms vs 20ms target
+[2025-11-11 17:36:16,284] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.0ms vs 20ms target
+[2025-11-11 17:36:16,339] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.7ms vs 20ms target
+[2025-11-11 17:36:16,385] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.0ms vs 20ms target
+[2025-11-11 17:36:16,437] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.2ms vs 20ms target
+[2025-11-11 17:36:16,488] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:16,591] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 45.9ms vs 20ms target
+[2025-11-11 17:36:16,642] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.0ms vs 20ms target
+[2025-11-11 17:36:16,694] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:16,797] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 45.9ms vs 20ms target
+[2025-11-11 17:36:16,849] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.2ms vs 20ms target
+[2025-11-11 17:36:16,955] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.6ms vs 20ms target
+[2025-11-11 17:36:17,001] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.0ms vs 20ms target
+[2025-11-11 17:36:17,053] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:17,160] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.7ms vs 20ms target
+[2025-11-11 17:36:17,206] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.1ms vs 20ms target
+[2025-11-11 17:36:17,257] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:17,308] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:17,364] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.7ms vs 20ms target
+[2025-11-11 17:36:17,410] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.1ms vs 20ms target
+[2025-11-11 17:36:17,461] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:17,568] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.7ms vs 20ms target
+[2025-11-11 17:36:17,614] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.1ms vs 20ms target
+[2025-11-11 17:36:17,665] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:17,716] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.2ms vs 20ms target
+[2025-11-11 17:36:17,823] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:17,874] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.2ms vs 20ms target
+[2025-11-11 17:36:17,930] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.7ms vs 20ms target
+[2025-11-11 17:36:17,976] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.0ms vs 20ms target
+[2025-11-11 17:36:18,027] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:18,078] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:18,134] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.7ms vs 20ms target
+[2025-11-11 17:36:18,180] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.4ms vs 20ms target
+[2025-11-11 17:36:18,388] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.3ms vs 20ms target
+[2025-11-11 17:36:18,440] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.2ms vs 20ms target
+[2025-11-11 17:36:18,716] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 56.9ms vs 20ms target
+[2025-11-11 17:36:18,761] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 44.5ms vs 20ms target
+[2025-11-11 17:36:18,927] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 56.1ms vs 20ms target
+[2025-11-11 17:36:18,972] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 44.8ms vs 20ms target
+[2025-11-11 17:36:19,133] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.5ms vs 20ms target
+[2025-11-11 17:36:19,344] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 56.3ms vs 20ms target
+[2025-11-11 17:36:19,393] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 48.7ms vs 20ms target
+[2025-11-11 17:36:19,598] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.3ms vs 20ms target
+[2025-11-11 17:36:19,806] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 48.8ms vs 20ms target
+[2025-11-11 17:36:19,869] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 42.4ms vs 20ms target
+[2025-11-11 17:36:19,925] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.7ms vs 20ms target
+[2025-11-11 17:36:19,973] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 47.7ms vs 20ms target
+[2025-11-11 17:36:20,090] [INFO] [ButtonLedsTestRunner] LED turned ON (GPIO26) - keyboard command '1'
+[2025-11-11 17:36:20,182] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.2ms vs 20ms target
+[2025-11-11 17:36:20,284] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.0ms vs 20ms target
+[2025-11-11 17:36:20,340] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 56.2ms vs 20ms target
+[2025-11-11 17:36:20,386] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.1ms vs 20ms target
+[2025-11-11 17:36:20,489] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:20,591] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.1ms vs 20ms target
+[2025-11-11 17:36:20,642] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:20,693] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.2ms vs 20ms target
+[2025-11-11 17:36:20,749] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.7ms vs 20ms target
+[2025-11-11 17:36:20,795] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.5ms vs 20ms target
+[2025-11-11 17:36:20,846] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:20,953] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.7ms vs 20ms target
+[2025-11-11 17:36:20,999] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.1ms vs 20ms target
+[2025-11-11 17:36:21,051] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.4ms vs 20ms target
+[2025-11-11 17:36:21,102] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.5ms vs 20ms target
+[2025-11-11 17:36:21,158] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.7ms vs 20ms target
+[2025-11-11 17:36:21,204] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.1ms vs 20ms target
+[2025-11-11 17:36:21,255] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.3ms vs 20ms target
+[2025-11-11 17:36:21,266] [INFO] [ButtonLedsTestRunner] LED turned OFF (GPIO26) - keyboard command '0'
+[2025-11-11 17:36:21,409] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.1ms vs 20ms target
+[2025-11-11 17:36:21,419] [INFO] [ButtonLedsTestRunner] LED turned ON (GPIO26) - keyboard command '1'
+[2025-11-11 17:36:21,511] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:21,591] [INFO] [ButtonLedsTestRunner] LED turned OFF (GPIO26) - keyboard command '0'
+[2025-11-11 17:36:21,618] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 47.7ms vs 20ms target
+[2025-11-11 17:36:21,670] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.2ms vs 20ms target
+[2025-11-11 17:36:21,721] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.0ms vs 20ms target
+[2025-11-11 17:36:21,736] [INFO] [ButtonLedsTestRunner] LED turned ON (GPIO26) - keyboard command '1'
+[2025-11-11 17:36:21,822] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 45.9ms vs 20ms target
+[2025-11-11 17:36:21,924] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:21,980] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.8ms vs 20ms target
+[2025-11-11 17:36:22,026] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.0ms vs 20ms target
+[2025-11-11 17:36:22,128] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 50.9ms vs 20ms target
+[2025-11-11 17:36:22,184] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.7ms vs 20ms target
+[2025-11-11 17:36:22,230] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.2ms vs 20ms target
+[2025-11-11 17:36:22,281] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:22,333] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.2ms vs 20ms target
+[2025-11-11 17:36:22,388] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.7ms vs 20ms target
+[2025-11-11 17:36:22,434] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.1ms vs 20ms target
+[2025-11-11 17:36:22,536] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 50.9ms vs 20ms target
+[2025-11-11 17:36:22,592] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.7ms vs 20ms target
+[2025-11-11 17:36:22,638] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.1ms vs 20ms target
+[2025-11-11 17:36:22,689] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:22,740] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.2ms vs 20ms target
+[2025-11-11 17:36:22,843] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.8ms vs 20ms target
+[2025-11-11 17:36:22,853] [INFO] [ButtonLedsTestRunner] LED turned OFF (GPIO26) - keyboard command '0'
+[2025-11-11 17:36:22,894] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.4ms vs 20ms target
+[2025-11-11 17:36:23,001] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.7ms vs 20ms target
+[2025-11-11 17:36:23,011] [INFO] [ButtonLedsTestRunner] LED turned ON (GPIO26) - keyboard command '1'
+[2025-11-11 17:36:23,047] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.1ms vs 20ms target
+[2025-11-11 17:36:23,098] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.2ms vs 20ms target
+[2025-11-11 17:36:23,150] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:23,170] [INFO] [ButtonLedsTestRunner] LED turned OFF (GPIO26) - keyboard command '0'
+[2025-11-11 17:36:23,251] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 45.9ms vs 20ms target
+[2025-11-11 17:36:23,302] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 50.9ms vs 20ms target
+[2025-11-11 17:36:23,353] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:23,455] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.0ms vs 20ms target
+[2025-11-11 17:36:23,506] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:23,557] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:23,613] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.7ms vs 20ms target
+[2025-11-11 17:36:23,659] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.0ms vs 20ms target
+[2025-11-11 17:36:23,669] [INFO] [ButtonLedsTestRunner] LED turned ON (GPIO26) - keyboard command '1'
+[2025-11-11 17:36:23,710] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:23,761] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.0ms vs 20ms target
+[2025-11-11 17:36:23,816] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.7ms vs 20ms target
+[2025-11-11 17:36:23,826] [INFO] [ButtonLedsTestRunner] LED turned OFF (GPIO26) - keyboard command '0'
+[2025-11-11 17:36:23,863] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.2ms vs 20ms target
+[2025-11-11 17:36:23,914] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:23,965] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.2ms vs 20ms target
+[2025-11-11 17:36:23,975] [INFO] [ButtonLedsTestRunner] LED turned ON (GPIO26) - keyboard command '1'
+[2025-11-11 17:36:24,020] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.7ms vs 20ms target
+[2025-11-11 17:36:24,066] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 45.9ms vs 20ms target
+[2025-11-11 17:36:24,117] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 50.9ms vs 20ms target
+[2025-11-11 17:36:24,168] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.0ms vs 20ms target
+[2025-11-11 17:36:24,224] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.8ms vs 20ms target
+[2025-11-11 17:36:24,270] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.1ms vs 20ms target
+[2025-11-11 17:36:24,373] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:24,428] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.7ms vs 20ms target
+[2025-11-11 17:36:24,474] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.2ms vs 20ms target
+[2025-11-11 17:36:24,526] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.2ms vs 20ms target
+[2025-11-11 17:36:24,577] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.0ms vs 20ms target
+[2025-11-11 17:36:24,632] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.7ms vs 20ms target
+[2025-11-11 17:36:24,678] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.1ms vs 20ms target
+[2025-11-11 17:36:24,729] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.0ms vs 20ms target
+[2025-11-11 17:36:24,781] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:24,836] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.6ms vs 20ms target
+[2025-11-11 17:36:24,882] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.1ms vs 20ms target
+[2025-11-11 17:36:24,933] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.2ms vs 20ms target
+[2025-11-11 17:36:24,984] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.0ms vs 20ms target
+[2025-11-11 17:36:25,040] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.7ms vs 20ms target
+[2025-11-11 17:36:25,086] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.1ms vs 20ms target
+[2025-11-11 17:36:25,137] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.1ms vs 20ms target
+[2025-11-11 17:36:25,189] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.2ms vs 20ms target
+[2025-11-11 17:36:25,244] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.6ms vs 20ms target
+[2025-11-11 17:36:25,290] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.2ms vs 20ms target
+[2025-11-11 17:36:25,497] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 47.0ms vs 20ms target
+[2025-11-11 17:36:25,548] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 51.2ms vs 20ms target
+[2025-11-11 17:36:25,704] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 48.6ms vs 20ms target
+[2025-11-11 17:36:25,770] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 45.4ms vs 20ms target
+[2025-11-11 17:36:25,828] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 58.5ms vs 20ms target
+[2025-11-11 17:36:25,871] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 43.0ms vs 20ms target
+[2025-11-11 17:36:25,936] [DEBUG] [ButtonLedsTestRunner] Unknown keyboard command: 'c'
+[2025-11-11 17:36:25,981] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 55.1ms vs 20ms target
+[2025-11-11 17:36:26,027] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 45.7ms vs 20ms target
+[2025-11-11 17:36:26,133] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 50.4ms vs 20ms target
+[2025-11-11 17:36:26,206] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 72.7ms vs 20ms target
+[2025-11-11 17:36:26,292] [WARNING] [ButtonLedsTestRunner] ColorWipe lagging: 46.4ms vs 20ms target
+[2025-11-11 17:36:26,444] [INFO] [ButtonLedsTestRunner] Test completed after 1341 loops
+[2025-11-11 17:36:26,458] [INFO] [ButtonLedsTestRunner] LED strips cleared
+[2025-11-11 17:36:26,459] [INFO] [ButtonLedsTestRunner] Combined test completed - GPIO, strips, and terminal will be cleaned up automatically

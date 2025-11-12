@@ -82,8 +82,8 @@ class IdleState(GameState):
             # Create the idle scanner animation
             idle_anim = IdleAnimation(
                 strip=strip,
-                speed_ms=50,      # Very fast scanner movement
-                hue_increment=3,  # Rainbow cycling speed 
+                speed_ms=30,      # Faster scanner movement (was 50)
+                hue_increment=5,  # More hue change per frame (was 3)
                 fade_amount=20    # Trail fading strength
             )
             
@@ -107,6 +107,7 @@ class IdleState(GameState):
     def update(self, button_state: 'ButtonState') -> Optional['GameState']:
         """Update idle state - handle buttons, animations, and LED rendering"""
         # Check for state transitions - any button pressed goes to Amplify
+        # ButtonReader handles ignore logic, so this is simple
         if button_state.total_buttons_pressed > 0:
             return AmplifyState(self.game_manager, button_state)
         
@@ -142,8 +143,8 @@ class AmplifyState(GameState):
         self.amplify_anim = AmplifyAnimation(
             strip=first_strip,
             button_count=game_manager.button_reader.get_button_count(),
-            speed_ms=50,
-            hue_shift_per_frame=18
+            speed_ms=100,  # Slower animation (100ms vs 50ms)
+            hue_shift_per_frame=10  # Slower hue rotation
         )
         self.animations: List['Animation'] = [self.amplify_anim]
         
@@ -174,8 +175,10 @@ class AmplifyState(GameState):
             self.logger.debug(f"AmplifyState activated with buttons: {pressed_indexes}")
         
     def custom_on_exit(self) -> None:
-        """Called when exiting this state - cleanup if needed"""
-        pass
+        """Called when exiting amplify state"""
+        # Ignore any currently pressed buttons until they're released
+        # This prevents immediately re-entering Amplify if buttons are still held
+        self.game_manager.button_reader.ignore_pressed_until_released()
     
     def update(self, button_state: 'ButtonState') -> Optional['GameState']:
         """Update amplify state - handle buttons, animations, and LED rendering"""
@@ -243,6 +246,9 @@ class PartyState(GameState):
     
     def custom_on_enter(self) -> None:
         """Actions when entering party mode"""
+        # Ignore any currently pressed buttons until they're released
+        self.game_manager.button_reader.ignore_pressed_until_released()
+        
         # Clear all LED strips from previous animations
         from led_system.pixel import Pixel
         black = Pixel(0, 0, 0)

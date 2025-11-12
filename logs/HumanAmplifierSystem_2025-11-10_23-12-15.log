@@ -1,0 +1,110 @@
+[2025-11-10 23:12:15,497] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-10 23:12:15,499] [INFO] [Amplifier] Button configuration: 3 buttons on GPIO [4, 5, 22]
+[2025-11-10 23:12:15,501] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-10 23:12:15,502] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 18
+[2025-11-10 23:12:15,503] [INFO] [Amplifier]   Strip 2: 300 LEDs on GPIO 21
+[2025-11-10 23:12:15,504] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-10 23:12:15,504] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-10 23:12:15,505] [INFO] [Amplifier] Audio folder: songs
+[2025-11-10 23:12:15,506] [INFO] [Amplifier] Schedule: 2 daily, 1 special entries
+[2025-11-10 23:12:41,243] [INFO] [ButtonReader] GPIO setup complete: 3 pins, no pulls
+[2025-11-10 23:12:41,245] [INFO] [ButtonReader] ButtonReader initialized with 3 buttons
+[2025-11-10 23:12:41,246] [INFO] [ButtonReader] Button mapping: Button0=GPIO4, Button1=GPIO5, Button2=GPIO22
+[2025-11-10 23:12:41,254] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-10 23:12:41,532] [INFO] [SongLibrary] Loaded 1 song codes from 1 collections
+[2025-11-10 23:12:41,533] [INFO] [SongLibrary] Collections updated: ['TESTS']
+[2025-11-10 23:12:42,117] [INFO] [GameManager] Entering state: IdleState
+[2025-11-10 23:12:42,120] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-10 23:12:42,122] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-10 23:12:42,124] [INFO] [Amplifier] Hardware: 3 buttons, 2 LED strips, 20ms frame duration
+[2025-11-10 23:12:42,125] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['TESTS'], 'total_codes': 1, 'daily_schedule_entries': 2, 'special_schedule_entries': 1}
+[2025-11-10 23:12:42,126] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-10 23:12:42,127] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-10 23:12:42,128] [INFO] [Amplifier] Hardware status: 3 buttons, 2 LED strips
+[2025-11-10 23:12:42,129] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-10 23:12:42,130] [INFO] [Amplifier]   Strip 2: 300 LEDs active
+[2025-11-10 23:12:42,131] [INFO] [Amplifier] Audio system: 1 song codes, 9 sound effects
+[2025-11-10 23:12:42,132] [INFO] [Amplifier] Available collections: TESTS
+[2025-11-10 23:12:42,133] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-10 23:12:42,134] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-10 23:12:43,264] [INFO] [GameManager] Exiting state: IdleState
+[2025-11-10 23:12:43,265] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-10 23:12:43,266] [INFO] [GameManager] Entering state: AmplifyState
+[2025-11-10 23:12:43,277] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [0]
+[2025-11-10 23:12:43,989] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [0, 2]
+[2025-11-10 23:12:44,009] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [0]
+[2025-11-10 23:12:44,090] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [0, 2]
+[2025-11-10 23:12:44,111] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [0]
+[2025-11-10 23:12:44,133] [INFO] [GameManager] Exiting state: AmplifyState
+[2025-11-10 23:12:44,136] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-10 23:12:44,140] [INFO] [GameManager] Entering state: IdleState
+[2025-11-10 23:12:45,323] [INFO] [GameManager] Exiting state: IdleState
+[2025-11-10 23:12:45,324] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-10 23:12:45,325] [INFO] [GameManager] Entering state: AmplifyState
+[2025-11-10 23:12:45,337] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [0]
+[2025-11-10 23:12:45,755] [INFO] [GameManager] Exiting state: AmplifyState
+[2025-11-10 23:12:45,756] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-10 23:12:45,758] [INFO] [GameManager] Entering state: IdleState
+[2025-11-10 23:12:46,543] [INFO] [GameManager] Exiting state: IdleState
+[2025-11-10 23:12:46,544] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-10 23:12:46,544] [INFO] [GameManager] Entering state: AmplifyState
+[2025-11-10 23:12:46,556] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [0]
+[2025-11-10 23:12:47,168] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [0, 2]
+[2025-11-10 23:12:47,188] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [0]
+[2025-11-10 23:12:47,209] [INFO] [GameManager] Exiting state: AmplifyState
+[2025-11-10 23:12:47,211] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-10 23:12:47,212] [INFO] [GameManager] Entering state: IdleState
+[2025-11-10 23:12:48,343] [INFO] [GameManager] Exiting state: IdleState
+[2025-11-10 23:12:48,344] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-10 23:12:48,345] [INFO] [GameManager] Entering state: AmplifyState
+[2025-11-10 23:12:48,358] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [0]
+[2025-11-10 23:12:48,766] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [0, 2]
+[2025-11-10 23:12:48,786] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [0]
+[2025-11-10 23:12:48,866] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [0, 2]
+[2025-11-10 23:12:48,887] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [0]
+[2025-11-10 23:12:49,028] [INFO] [GameManager] Exiting state: AmplifyState
+[2025-11-10 23:12:49,029] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-10 23:12:49,030] [INFO] [GameManager] Entering state: IdleState
+[2025-11-10 23:12:50,860] [INFO] [GameManager] Exiting state: IdleState
+[2025-11-10 23:12:50,861] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-10 23:12:50,861] [INFO] [GameManager] Entering state: AmplifyState
+[2025-11-10 23:12:50,872] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [0]
+[2025-11-10 23:12:51,486] [INFO] [GameManager] Exiting state: AmplifyState
+[2025-11-10 23:12:51,488] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-10 23:12:51,489] [INFO] [GameManager] Entering state: IdleState
+[2025-11-10 23:12:52,839] [INFO] [GameManager] Exiting state: IdleState
+[2025-11-10 23:12:52,840] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-10 23:12:52,840] [INFO] [GameManager] Entering state: AmplifyState
+[2025-11-10 23:12:52,852] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [0]
+[2025-11-10 23:12:53,364] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [0, 2]
+[2025-11-10 23:12:53,384] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [0]
+[2025-11-10 23:12:53,464] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [0, 2]
+[2025-11-10 23:12:53,485] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [0]
+[2025-11-10 23:12:53,566] [INFO] [GameManager] Exiting state: AmplifyState
+[2025-11-10 23:12:53,567] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-10 23:12:53,569] [INFO] [GameManager] Entering state: IdleState
+[2025-11-10 23:12:55,078] [INFO] [GameManager] Exiting state: IdleState
+[2025-11-10 23:12:55,079] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-10 23:12:55,080] [INFO] [GameManager] Entering state: AmplifyState
+[2025-11-10 23:12:55,091] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [0]
+[2025-11-10 23:12:55,804] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [0, 2]
+[2025-11-10 23:12:55,824] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [0]
+[2025-11-10 23:12:55,846] [INFO] [GameManager] Exiting state: AmplifyState
+[2025-11-10 23:12:55,848] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-10 23:12:55,851] [INFO] [GameManager] Entering state: IdleState
+[2025-11-10 23:12:57,258] [INFO] [GameManager] Exiting state: IdleState
+[2025-11-10 23:12:57,259] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-10 23:12:57,259] [INFO] [GameManager] Entering state: AmplifyState
+[2025-11-10 23:12:57,270] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [0]
+[2025-11-10 23:12:57,782] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [0, 2]
+[2025-11-10 23:12:57,802] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [0]
+[2025-11-10 23:12:57,883] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [0, 2]
+[2025-11-10 23:12:57,903] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [0]
+[2025-11-10 23:12:57,983] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [0, 2]
+[2025-11-10 23:12:58,003] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [0]
+[2025-11-10 23:12:58,084] [INFO] [GameManager] Exiting state: AmplifyState
+[2025-11-10 23:12:58,086] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-10 23:12:58,087] [INFO] [GameManager] Entering state: IdleState
+[2025-11-10 23:12:58,986] [INFO] [GameManager] Game stopped by user (Ctrl+C)
+[2025-11-10 23:12:59,000] [INFO] [GameManager] Game stopped
+[2025-11-10 23:12:59,002] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

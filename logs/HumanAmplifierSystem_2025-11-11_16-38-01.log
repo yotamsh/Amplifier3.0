@@ -1,0 +1,35 @@
+[2025-11-11 16:38:01,381] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-11 16:38:01,382] [INFO] [Amplifier] Button configuration: 3 buttons on GPIO [23, 24, 25]
+[2025-11-11 16:38:01,383] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-11 16:38:01,383] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-11 16:38:01,384] [INFO] [Amplifier]   Strip 2: 300 LEDs on GPIO 18
+[2025-11-11 16:38:01,384] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-11 16:38:01,385] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-11 16:38:01,385] [INFO] [Amplifier] Audio folder: songs
+[2025-11-11 16:38:01,385] [INFO] [Amplifier] Schedule: 2 daily, 1 special entries
+[2025-11-11 16:38:02,546] [INFO] [ButtonReader] GPIO setup complete: 3 pins, no pulls
+[2025-11-11 16:38:02,546] [INFO] [ButtonReader] ButtonReader initialized with 3 buttons
+[2025-11-11 16:38:02,547] [INFO] [ButtonReader] Button mapping: Button0=GPIO23, Button1=GPIO24, Button2=GPIO25
+[2025-11-11 16:38:02,551] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-11 16:38:02,759] [INFO] [SongLibrary] Loaded 30 song codes from 1 collections
+[2025-11-11 16:38:02,760] [INFO] [SongLibrary] Collections updated: ['MORNING']
+[2025-11-11 16:38:02,973] [ERROR] [Amplifier] Failed to initialize HumanAmplifier system: ALSA: Couldn't open audio device: Unknown error 524 | Type: error | File: /home/yotam/AmpSync/Amp3/src/audio_system/sound_controller.py | Line: 64
+Traceback (most recent call last):
+  File "/home/yotam/AmpSync/Amp3/src/amplifier.py", line 170, in create_game_system
+    sound_controller = SoundController(
+                       ^^^^^^^^^^^^^^^^
+  File "/home/yotam/AmpSync/Amp3/src/audio_system/sound_controller.py", line 64, in __init__
+    self.mixer.init()
+pygame.error: ALSA: Couldn't open audio device: Unknown error 524
+[2025-11-11 16:38:02,976] [ERROR] [Amplifier] HumanAmplifier system error: ALSA: Couldn't open audio device: Unknown error 524 | Type: error | File: /home/yotam/AmpSync/Amp3/src/audio_system/sound_controller.py | Line: 64
+Traceback (most recent call last):
+  File "/home/yotam/AmpSync/Amp3/src/amplifier.py", line 224, in main
+    game_manager = create_game_system(config, amplifier_logger)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yotam/AmpSync/Amp3/src/amplifier.py", line 170, in create_game_system
+    sound_controller = SoundController(
+                       ^^^^^^^^^^^^^^^^
+  File "/home/yotam/AmpSync/Amp3/src/audio_system/sound_controller.py", line 64, in __init__
+    self.mixer.init()
+pygame.error: ALSA: Couldn't open audio device: Unknown error 524
+[2025-11-11 16:38:02,979] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

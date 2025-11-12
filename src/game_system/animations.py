@@ -186,7 +186,7 @@ class IdleAnimation(Animation):
     
     def __init__(self, strip: 'LedStrip', speed_ms: int = 50, hue_increment: int = 3, fade_amount: int = 40):
         """
-        Initialize idle scanner animation.
+        Initialize idle scanner animation with random starting position and hue.
         
         Args:
             strip: LED strip to operate on
@@ -199,11 +199,11 @@ class IdleAnimation(Animation):
         # Strip length
         self.num_pixels: int = strip.num_pixels()
         
-        # Scanner position and movement - start from random position
+        # Scanner position and movement - ALWAYS start from random position
         self.led_index: int = random.randint(0, self.num_pixels - 1)
         self.reverse: bool = random.choice([True, False])  # Random initial direction
         
-        # Color cycling - start from random hue
+        # Color cycling - ALWAYS start from random hue
         self.hue_index: int = random.randint(0, 359)
         self.hue_increment: int = hue_increment
         
@@ -288,21 +288,22 @@ class AmplifyAnimation(Animation):
     show the rainbow pattern, while unpressed segments have a blinking OrangeRed indicator.
     """
     
-    def __init__(self, strip: 'LedStrip', button_count: int, speed_ms: int = 50, 
-                 hue_shift_per_frame: int = 18):
+    def __init__(self, strip: 'LedStrip', button_count: int, speed_ms: int = 100, 
+                 hue_shift_per_frame: int = 10):
         """
         Initialize amplify animation.
         
         Args:
             strip: LED strip to operate on
             button_count: Number of buttons that control segments
-            speed_ms: Animation update interval in milliseconds
+            speed_ms: Animation update interval in milliseconds (higher = slower)
             hue_shift_per_frame: Degrees to shift hue each frame (higher = faster)
         """
         super().__init__(strip, speed_ms)
         self.button_count: int = button_count
         self.hue_shift_per_frame: int = hue_shift_per_frame
         self.hue_offset: int = 0
+        self.hue_spread: float = 6.7  # Higher value = more color variation between pixels (1/3 more dense)
         
         # Calculate LEDs per button (constant for this animation instance)
         self.leds_per_button: int = strip.num_pixels() // button_count
@@ -357,15 +358,15 @@ class AmplifyAnimation(Animation):
             
             # Check if this button is pressed (with bounds checking)
             if button_index < self.button_count and self.pressed_buttons[button_index]:
-                # Calculate rainbow hue based on LED position and offset
-                hue = (led_pos * 360 / num_pixels + self.hue_offset) % 360
+                # Calculate rainbow hue with higher spread between pixels
+                hue = (led_pos * self.hue_spread + self.hue_offset) % 360
                 color = AnimationHelpers.hsv_to_pixel(hue, 1.0, 1.0)
                 self.strip[led_pos] = color
             # Note: No explicit "else" - let fading handle unpressed segments
         
         # 3. Add blinking OrangeRed indicators on unpressed button centers
-        # Using beat8-style blinking: on when beat > 240 (short blink every ~3 seconds)
-        beat_value = AnimationHelpers.beat8(20)  # 20 BPM = blink every 3 seconds
+        # Using beat8-style blinking: on when beat > 240 (short blink every ~1.5 seconds)
+        beat_value = AnimationHelpers.beat8(40)  # 40 BPM = blink every 1.5 seconds (double speed)
         
         for button_index in range(self.button_count):
             if not self.pressed_buttons[button_index]:
@@ -380,83 +381,103 @@ class AmplifyAnimation(Animation):
 
 class PartyAnimation(Animation):
     """
-    Energetic party animation with multiple simultaneous effects.
+    Elegant pushing wave party animation.
     
-    Combines:
-    - Fast rainbow wave traveling across strip
-    - Random sparkles/glitter overlay
-    - Brightness pulsing
-    - Color zones that shift (creates sections of different colors)
+    Creates color bands that appear in the center and push outward symmetrically.
+    New colors enter at the center, pushing previous colors toward the edges.
+    Like a wave emanating from the center.
     """
     
-    def __init__(self, strip: 'LedStrip', speed_ms: int = 20):
+    def __init__(self, strip: 'LedStrip', speed_ms: int = None):
         """
-        Initialize party animation.
+        Initialize party pushing wave animation.
         
         Args:
             strip: LED strip to operate on
-            speed_ms: Animation update interval in milliseconds
+            speed_ms: Animation update interval in milliseconds (random if None)
         """
+        # Pick random speed if not provided (faster range)
+        if speed_ms is None:
+            speed_ms = random.randint(10, 20)
+        
         super().__init__(strip, speed_ms)
         self.num_pixels: int = strip.num_pixels()
         
-        # Rainbow wave parameters
-        self.hue_offset: int = 0
-        self.wave_speed: int = 15  # Degrees per frame
+        # Determine center position(s)
+        # For even pixel count, we have two centers
+        self.center1: int = self.num_pixels // 2 - 1
+        self.center2: int = self.num_pixels // 2
+        self.is_even: bool = (self.num_pixels % 2 == 0)
         
-        # Sparkle parameters
-        self.sparkle_probability: float = 0.12  # 12% chance per LED per frame
-        self.sparkle_positions: set = set()
+        # Color palette
+        self.color_palette = []  # Will be initialized in advance()
+        self.color_index: int = 0  # Track current color in sequence
         
-        # Pulse parameters
-        self.pulse_phase: float = 0.0
-        self.pulse_speed: float = 0.25
-        
-        # Color zone parameters (creates shifting color sections)
-        self.zone_hue: int = 0
-        self.zone_shift_speed: int = 5
-        self.zone_size: int = 30  # LEDs per zone
+        # Current band state
+        self.current_color = None
+        self.current_band_length: int = 0
+        self.current_band_speed: int = speed_ms  # Track current speed
+        self.leds_in_current_band: int = 0
     
     def advance(self) -> None:
-        """Energetic party effect with multiple layers"""
+        """Pushing wave effect - new colors push from center outward"""
         # Initialize color constants if needed
         AnimationHelpers._init_colors()
         
-        # 1. Base layer: Fast traveling rainbow wave
-        self.hue_offset = (self.hue_offset + self.wave_speed) % 360
+        # Initialize color palette (only once)
+        if not self.color_palette:
+            self.color_palette = [
+                AnimationHelpers.RED_WINE,
+                AnimationHelpers.GREEN_GRASS,
+                AnimationHelpers.PURPLE,
+                AnimationHelpers.SOFT_WHITE
+            ]
+            # Pick first color in sequence, random length and speed
+            self.current_color = self.color_palette[self.color_index]
+            self.current_band_length = random.randint(15, 35)
+            self.current_band_speed = random.randint(10, 20)  # Faster: 10-20ms
+            self.speed_ms = self.current_band_speed
+            self.leds_in_current_band = 0
         
-        for i in range(self.num_pixels):
-            # Calculate base rainbow hue with wave effect
-            position_factor = i / self.num_pixels
-            hue = (position_factor * 360 + self.hue_offset) % 360
+        # Shift all pixels outward from center using efficient slice notation
+        if self.is_even:
+            # Even pixel count: two centers at center1 and center2
+            # Left side: shift left (positions 0 to center1-1)
+            if self.center1 > 0:
+                self.strip[:self.center1] = self.strip[1:self.center1+1]
             
-            # 2. Color zones - create alternating color sections that shift
-            # This creates visible "bands" of different colors moving along the strip
-            zone_index = (i // self.zone_size) % 3  # 3 different zones
-            if zone_index == 0:
-                hue = (hue + self.zone_hue) % 360
-            elif zone_index == 1:
-                hue = (hue + self.zone_hue + 120) % 360  # 120° offset = complementary
-            else:
-                hue = (hue + self.zone_hue + 240) % 360  # 240° offset = triad
+            # Right side: shift right (positions center2+1 to end)
+            if self.center2 < self.num_pixels - 1:
+                self.strip[self.center2+1:] = self.strip[self.center2:-1]
             
-            # 3. Pulsing brightness (0.6 to 1.0)
-            brightness = 0.6 + 0.4 * (0.5 + 0.5 * math.sin(self.pulse_phase + position_factor * 2 * math.pi))
+            # Add current color at both center positions
+            self.strip[self.center1] = self.current_color
+            self.strip[self.center2] = self.current_color
             
-            # Convert to pixel
-            color = AnimationHelpers.hsv_to_pixel(hue, 1.0, brightness)
-            self.strip[i] = color
+        else:
+            # Odd pixel count: single center at center2
+            # Left side: shift left (positions 0 to center2-1)
+            if self.center2 > 0:
+                self.strip[:self.center2] = self.strip[1:self.center2+1]
+            
+            # Right side: shift right (positions center2+1 to end)
+            if self.center2 < self.num_pixels - 1:
+                self.strip[self.center2+1:] = self.strip[self.center2:-1]
+            
+            # Add current color at center
+            self.strip[self.center2] = self.current_color
         
-        # 4. Add random sparkles (white flashes)
-        # Clear old sparkles
-        self.sparkle_positions.clear()
+        # Count LEDs added for this color
+        self.leds_in_current_band += 1
         
-        # Create new sparkles
-        for i in range(self.num_pixels):
-            if random.random() < self.sparkle_probability:
-                self.sparkle_positions.add(i)
-                self.strip[i] = AnimationHelpers.WHITE  # Bright white
-        
-        # Update animation parameters for next frame
-        self.pulse_phase = (self.pulse_phase + self.pulse_speed) % (2 * math.pi)
-        self.zone_hue = (self.zone_hue + self.zone_shift_speed) % 360
+        # Check if we've added enough LEDs for this color band
+        if self.leds_in_current_band >= self.current_band_length:
+            # Move to next color in sequence
+            self.color_index = (self.color_index + 1) % len(self.color_palette)
+            self.current_color = self.color_palette[self.color_index]
+            
+            # Pick random length and speed for next band
+            self.current_band_length = random.randint(15, 35)
+            self.current_band_speed = random.randint(10, 20)  # Faster: 10-20ms
+            self.speed_ms = self.current_band_speed  # Update animation speed
+            self.leds_in_current_band = 0
