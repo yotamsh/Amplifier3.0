@@ -45,12 +45,12 @@ class GameState(ABC):
     
     def on_enter(self) -> None:
         """Called when entering this state - logs state name and calls custom enter"""
-        self.game_manager.logger.info(f"Entering state: {self.__class__.__name__}")
+        self.game_manager.logger.debug(f"Entering state: {self.__class__.__name__}")
         self.custom_on_enter()
     
     def on_exit(self) -> None:
         """Called when exiting this state - logs state name and calls custom exit"""
-        self.game_manager.logger.info(f"Exiting state: {self.__class__.__name__}")
+        self.game_manager.logger.debug(f"Exiting state: {self.__class__.__name__}")
         self.custom_on_exit()
     
     @abstractmethod

@@ -1,0 +1,36 @@
+[2025-11-12 16:11:32,493] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-12 16:11:32,494] [INFO] [Amplifier] Button configuration: 4 buttons on GPIO [5, 6, 17, 22]
+[2025-11-12 16:11:32,494] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-12 16:11:32,495] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-12 16:11:32,495] [INFO] [Amplifier]   Strip 2: 300 LEDs on GPIO 18
+[2025-11-12 16:11:32,496] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-12 16:11:32,496] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-12 16:11:32,496] [INFO] [Amplifier] Audio folder: songs
+[2025-11-12 16:11:32,497] [INFO] [Amplifier] Schedule: 2 daily, 1 special entries
+[2025-11-12 16:11:33,999] [INFO] [ButtonReader] GPIO setup complete: 4 pins, no pulls
+[2025-11-12 16:11:34,001] [INFO] [ButtonReader] ButtonReader initialized with 4 buttons
+[2025-11-12 16:11:34,006] [INFO] [ButtonReader] Button mapping: Button0=GPIO5, Button1=GPIO6, Button2=GPIO17, Button3=GPIO22
+[2025-11-12 16:11:34,013] [ERROR] [Amplifier] Failed to initialize HumanAmplifier system: 'Collection' object is not iterable | Type: TypeError | File: /home/yotam/AmpSync/Amp3/src/audio_system/collections.py | Line: 107
+Traceback (most recent call last):
+  File "/home/yotam/AmpSync/Amp3/src/amplifier.py", line 156, in create_game_system
+    schedule = Schedule(
+               ^^^^^^^^^
+  File "/home/yotam/AmpSync/Amp3/src/audio_system/collections.py", line 68, in __init__
+    self._validate_schedule(songs_folder)
+  File "/home/yotam/AmpSync/Amp3/src/audio_system/collections.py", line 107, in _validate_schedule
+    for collection in entry.collections:
+TypeError: 'Collection' object is not iterable
+[2025-11-12 16:11:34,021] [ERROR] [Amplifier] HumanAmplifier system error: 'Collection' object is not iterable | Type: TypeError | File: /home/yotam/AmpSync/Amp3/src/audio_system/collections.py | Line: 107
+Traceback (most recent call last):
+  File "/home/yotam/AmpSync/Amp3/src/amplifier.py", line 224, in main
+    game_manager = create_game_system(config, amplifier_logger)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yotam/AmpSync/Amp3/src/amplifier.py", line 156, in create_game_system
+    schedule = Schedule(
+               ^^^^^^^^^
+  File "/home/yotam/AmpSync/Amp3/src/audio_system/collections.py", line 68, in __init__
+    self._validate_schedule(songs_folder)
+  File "/home/yotam/AmpSync/Amp3/src/audio_system/collections.py", line 107, in _validate_schedule
+    for collection in entry.collections:
+TypeError: 'Collection' object is not iterable
+[2025-11-12 16:11:34,026] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

@@ -23,6 +23,7 @@ class Collection(Enum):
     # DISNEY = "disney"
     # SPANISH = "spanish"
     # TESTS = "tests"
+    MAIJAM = "maijam"
 
 
 # Constant with all collections

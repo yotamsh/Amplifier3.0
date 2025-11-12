@@ -1,0 +1,48 @@
+[2025-11-12 16:25:59,763] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-12 16:25:59,764] [INFO] [Amplifier] Button configuration: 4 buttons on GPIO [5, 6, 17, 22]
+[2025-11-12 16:25:59,764] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-12 16:25:59,765] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-12 16:25:59,766] [INFO] [Amplifier]   Strip 2: 300 LEDs on GPIO 18
+[2025-11-12 16:25:59,766] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-12 16:25:59,767] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-12 16:25:59,767] [INFO] [Amplifier] Audio folder: songs
+[2025-11-12 16:25:59,768] [INFO] [Amplifier] Schedule: 2 daily, 1 special entries
+[2025-11-12 16:26:02,582] [INFO] [ButtonReader] GPIO setup complete: 4 pins, no pulls
+[2025-11-12 16:26:02,582] [INFO] [ButtonReader] ButtonReader initialized with 4 buttons
+[2025-11-12 16:26:02,582] [INFO] [ButtonReader] Button mapping: Button0=GPIO5, Button1=GPIO6, Button2=GPIO17, Button3=GPIO22
+[2025-11-12 16:26:02,586] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-12 16:26:02,910] [INFO] [SongLibrary] Loaded 30 song codes from 2 collections
+[2025-11-12 16:26:02,911] [INFO] [SongLibrary] Collections updated: ['MORNING']
+[2025-11-12 16:26:03,129] [INFO] [GameManager] Entering state: IdleState
+[2025-11-12 16:26:03,130] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-12 16:26:03,131] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-12 16:26:03,132] [INFO] [Amplifier] Hardware: 4 buttons, 2 LED strips, 20ms frame duration
+[2025-11-12 16:26:03,133] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['MORNING', 'MAIJAM'], 'total_codes': 30, 'daily_schedule_entries': 2, 'special_schedule_entries': 1}
+[2025-11-12 16:26:03,134] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-12 16:26:03,135] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-12 16:26:03,135] [INFO] [Amplifier] Hardware status: 4 buttons, 2 LED strips
+[2025-11-12 16:26:03,136] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-12 16:26:03,137] [INFO] [Amplifier]   Strip 2: 300 LEDs active
+[2025-11-12 16:26:03,138] [INFO] [Amplifier] Audio system: 30 song codes, 9 sound effects
+[2025-11-12 16:26:03,139] [INFO] [Amplifier] Available collections: MORNING, MAIJAM
+[2025-11-12 16:26:03,140] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-12 16:26:03,141] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-12 16:26:09,780] [INFO] [GameManager] Exiting state: IdleState
+[2025-11-12 16:26:09,780] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-12 16:26:09,780] [INFO] [GameManager] Entering state: AmplifyState
+[2025-11-12 16:26:09,792] [INFO] [SoundController] Playing song: אחינועם ניני - בוקר.mp3
+[2025-11-12 16:26:09,793] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [2]
+[2025-11-12 16:26:12,351] [INFO] [GameManager] Exiting state: AmplifyState
+[2025-11-12 16:26:12,351] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-12 16:26:12,352] [INFO] [GameManager] Entering state: IdleState
+[2025-11-12 16:26:13,094] [INFO] [GameManager] Exiting state: IdleState
+[2025-11-12 16:26:13,094] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-12 16:26:13,095] [INFO] [GameManager] Entering state: AmplifyState
+[2025-11-12 16:26:13,106] [INFO] [SoundController] Playing song: Aretha Franklin - Say A Little Prayer For You.mp3
+[2025-11-12 16:26:13,107] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [2]
+[2025-11-12 16:26:14,160] [INFO] [GameManager] Exiting state: AmplifyState
+[2025-11-12 16:26:14,161] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-12 16:26:14,162] [INFO] [GameManager] Entering state: IdleState
+[2025-11-12 16:28:12,825] [INFO] [GameManager] Game stopped by user (Ctrl+C)
+[2025-11-12 16:28:12,836] [INFO] [GameManager] Game stopped
+[2025-11-12 16:28:12,837] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

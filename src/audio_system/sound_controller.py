@@ -42,13 +42,14 @@ class SoundController:
     based on button interactions.
     """
     
-    def __init__(self, song_library, num_buttons: int):
+    def __init__(self, song_library, num_buttons: int, logger):
         """
         Initialize sound controller with pygame mixer and validate sound files.
         
         Args:
             song_library: SongLibrary instance for music management
             num_buttons: Number of buttons for volume calculation
+            logger: ClassLogger instance for logging
             
         Raises:
             FileNotFoundError: If any required sound files are missing
@@ -56,6 +57,7 @@ class SoundController:
         """
         self.song_library = song_library
         self.num_buttons = num_buttons
+        self.logger = logger
         self.current_song: Optional[str] = None
         
         # Initialize pygame mixer
@@ -130,6 +132,11 @@ class SoundController:
     def start_loaded_song(self) -> None:
         """Start playing the currently loaded song"""
         self.mixer.music.play()
+        
+        # Log song name
+        if self.current_song:
+            song_name = os.path.basename(self.current_song)
+            self.logger.info(f"Song {song_name} was randomly started")
     
     def stop_music(self) -> None:
         """Stop the currently playing music"""

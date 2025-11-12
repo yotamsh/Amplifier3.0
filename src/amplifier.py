@@ -76,7 +76,7 @@ def create_amplifier_config() -> GameConfig:
         songs_folder="songs",
         daily_schedule=[
             DailyScheduleEntry(time(0, 0), ALL_COLLECTIONS),
-            DailyScheduleEntry(time(2, 0), ALL_COLLECTIONS),
+            DailyScheduleEntry(time(16, 17), {Collection.MAIJAM}),
             # DailyScheduleEntry(time(4, 0), {Collection.CLASSIC}),
             # DailyScheduleEntry(time(7, 0), {Collection.MORNING}),
             # DailyScheduleEntry(time(10, 0), ALL_COLLECTIONS),
@@ -89,9 +89,9 @@ def create_amplifier_config() -> GameConfig:
         special_schedule=[
             # Example special schedule entry
             SpecialScheduleEntry(
-                start=datetime(2024, 12, 25, 16, 0),
-                end=datetime(2024, 12, 25, 18, 0),
-                collections=ALL_COLLECTIONS
+                start=datetime(2025, 11, 12, 16, 18),
+                end=datetime(2025, 11, 12, 18, 0),
+                collections={Collection.MORNING}
             ),
         ]
     )
@@ -120,9 +120,10 @@ def create_game_system(config: GameConfig, amplifier_logger):
     config.validate()
     
     # Create class loggers for components
-    game_manager_logger = amplifier_logger.create_class_logger("GameManager", logging.DEBUG)
+    game_manager_logger = amplifier_logger.create_class_logger("GameManager", logging.INFO)
     button_reader_logger = amplifier_logger.create_class_logger("ButtonReader", logging.INFO)
     song_library_logger = amplifier_logger.create_class_logger("SongLibrary", logging.INFO)
+    sound_controller_logger = amplifier_logger.create_class_logger("SoundController", logging.INFO)
     
     try:
         # Initialize button reader
@@ -169,7 +170,8 @@ def create_game_system(config: GameConfig, amplifier_logger):
         # Create sound controller with song library
         sound_controller = SoundController(
             song_library=song_library,
-            num_buttons=config.button_count
+            num_buttons=config.button_count,
+            logger=sound_controller_logger
         )
         
         # Create game manager (starts with IdleState by default)
