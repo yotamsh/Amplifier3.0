@@ -30,12 +30,12 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 if TYPE_CHECKING:
     from button_system import ButtonReader
     from button_system.button_state import ButtonState
-    from hybridLogger import HybridLogger, ClassLogger
+    from utils import HybridLogger, ClassLogger
     from led_system import LedStrip
 
 try:
     from button_system import ButtonReader
-    from hybridLogger import HybridLogger
+    from utils import HybridLogger
     import RPi.GPIO as GPIO
     import logging
     from led_system import LedStrip, PixelStripAdapter, Pixel
@@ -582,7 +582,7 @@ def main() -> None:
     main_logger.cleanup()
 
 # Import shared utilities
-from gpio_utils import gpio_to_physical
+from utils import gpio_to_physical
 
 if __name__ == "__main__":
     main()

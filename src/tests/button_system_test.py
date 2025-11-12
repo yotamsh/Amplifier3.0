@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 try:
     from button_system import ButtonReader
-    from hybridLogger import HybridLogger
+    from utils import HybridLogger
     import RPi.GPIO as GPIO
     import logging
 except ImportError as e:
@@ -214,7 +214,7 @@ def main():
     main_logger.cleanup()  # Keep this - logger cleanup is still needed
 
 # Import from shared GPIO utilities
-from gpio_utils import gpio_to_physical
+from utils import gpio_to_physical
 
 if __name__ == "__main__":
     main()

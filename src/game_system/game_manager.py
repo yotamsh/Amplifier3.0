@@ -11,7 +11,7 @@ if TYPE_CHECKING:
     from button_system.interfaces import IButtonReader
     from led_system.interfaces import LedStrip
     from button_system.button_state import ButtonState
-    from hybridLogger import ClassLogger
+    from utils import ClassLogger
 else:
     from led_system.pixel import Pixel
 
@@ -97,6 +97,9 @@ class GameManager:
         
         Handles button input, state transitions, and state updates.
         """
+        # 0. Update schedule if needed (once per minute)
+        self.sound_controller.song_library.update_schedule_if_needed()
+        
         # 1. Sample button state
         button_state = self.button_reader.read_buttons()
         

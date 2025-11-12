@@ -15,6 +15,7 @@ except ImportError:
     eyed3 = None
 
 from audio_system.collections import Collection, Schedule, ALL_COLLECTIONS
+from utils import OnceInMs
 
 
 class SongLibrary:
@@ -63,19 +64,136 @@ class SongLibrary:
         # Code to filepath mapping
         self.codes_dict: Dict[str, str] = {}
         
+        # Schedule updater - check once per minute
+        self._schedule_updater = OnceInMs(60000)
+        
         # Initialize the system with validation
         self._initialize_system()
         
         # Validate that we have songs available
         self._validate_songs_available()
     
+    # ============================================================================
+    # PUBLIC METHODS
+    # ============================================================================
+    
+    def get_song_by_code(self, code: str) -> Optional[str]:
+        """
+        Get song file path for a given code.
+        
+        Args:
+            code: 5-digit song code
+            
+        Returns:
+            File path to song if code exists, None otherwise
+        """
+        return self.codes_dict.get(code)
+    
+    def get_random_song(self) -> Optional[str]:
+        """
+        Get a random song from currently available collections.
+        
+        Returns:
+            Random song file path, or None if no songs available
+        """
+        if not self.current_songs_basket:
+            self.logger.warning("No songs available in current collections")
+            return None
+            
+        return random.choice(self.current_songs_basket)
+    
+    def is_code_supported(self, code: str) -> bool:
+        """
+        Check if a code exists in the song library.
+        
+        Args:
+            code: 5-digit code to check
+            
+        Returns:
+            True if code exists in library
+        """
+        return code in self.codes_dict
+    
+    def update_collection_schedule(self, current_time: datetime) -> None:
+        """
+        Update available collections based on schedule.
+        
+        Args:
+            current_time: Current datetime for schedule evaluation
+        """
+        new_collections = self.schedule.get_collections_by_time(current_time)
+        
+        if new_collections != self.current_collections:
+            self.current_collections = new_collections
+            self.logger.info(f"Collections updated: {[c.name for c in self.current_collections]}")
+            
+            # Rebuild songs basket
+            self.current_songs_basket = []
+            
+            for collection in self.current_collections:
+                collection_path = os.path.join(self.songs_folder, collection.value)
+                
+                # Collection folders already validated by Schedule, but double-check for safety
+                if not os.path.exists(collection_path):
+                    self.logger.warning(f"Skipping missing collection folder: {collection_path}")
+                    continue
+                
+                try:
+                    for filename in os.listdir(collection_path):
+                        if filename.lower().endswith(('.mp3', '.wav', '.m4a', '.flac')):
+                            song_path = os.path.join(collection_path, filename)
+                            self.current_songs_basket.append(song_path)
+                            
+                except Exception as e:
+                    self.logger.warning(f"Failed to load songs from {collection_path}: {e}")
+            
+            self.logger.debug(f"Songs basket updated: {len(self.current_songs_basket)} songs available")
+    
+    def update_schedule_if_needed(self) -> None:
+        """
+        Update collection schedule if enough time has passed.
+        
+        Checks schedule at most once per minute. Call this from game loop
+        to automatically update available collections based on time of day.
+        
+        This method is safe to call every frame - it internally throttles
+        the actual schedule update to once per minute.
+        """
+        if self._schedule_updater.should_execute():
+            self.update_collection_schedule(datetime.now())
+    
+    def get_stats(self) -> Dict[str, Any]:
+        """
+        Get library statistics for debugging.
+        
+        Returns:
+            Dictionary with library statistics including:
+            - songs_folder: Path to songs directory
+            - all_collections: Names of all available collections
+            - total_codes: Number of loaded song codes
+            - daily_schedule_entries: Number of daily schedule entries
+            - special_schedule_entries: Number of special schedule entries
+        """
+        return {
+            "songs_folder": self.songs_folder,
+            "all_collections": [c.name for c in ALL_COLLECTIONS],
+            "total_codes": len(self.codes_dict),
+            "daily_schedule_entries": len(self.schedule.daily_schedule),
+            "special_schedule_entries": len(self.schedule.special_schedule)
+        }
+    
+    # ============================================================================
+    # PRIVATE METHODS
+    # ============================================================================
+    
     def _initialize_system(self) -> None:
         """Initialize code dictionary and collection schedule"""
         # Load code dictionary from ID3 tags (eyed3 guaranteed available)
         self._create_codes_dict()
         
-        # Initialize collection schedule (schedule already validated)
-        self.update_collection_schedule(datetime.now())
+        # Initialize collection schedule using throttled method
+        # This ensures we don't update twice on initialization
+        self.update_schedule_if_needed()
     
     def _validate_songs_available(self) -> None:
         """
@@ -152,95 +270,3 @@ class SongLibrary:
             code.isdigit() and
             code[0] != '0'
         )
-    
-    def update_collection_schedule(self, current_time: datetime) -> None:
-        """
-        Update available collections based on schedule.
-        
-        Args:
-            current_time: Current datetime for schedule evaluation
-        """
-        new_collections = self.schedule.get_collections_by_time(current_time)
-        
-        if new_collections != self.current_collections:
-            self.current_collections = new_collections
-            self.logger.info(f"Collections updated: {[c.name for c in self.current_collections]}")
-            
-            # Rebuild songs basket
-            self.current_songs_basket = []
-            
-            for collection in self.current_collections:
-                collection_path = os.path.join(self.songs_folder, collection.value)
-                
-                # Collection folders already validated by Schedule, but double-check for safety
-                if not os.path.exists(collection_path):
-                    self.logger.warning(f"Skipping missing collection folder: {collection_path}")
-                    continue
-                
-                try:
-                    for filename in os.listdir(collection_path):
-                        if filename.lower().endswith(('.mp3', '.wav', '.m4a', '.flac')):
-                            song_path = os.path.join(collection_path, filename)
-                            self.current_songs_basket.append(song_path)
-                            
-                except Exception as e:
-                    self.logger.warning(f"Failed to load songs from {collection_path}: {e}")
-            
-            self.logger.debug(f"Songs basket updated: {len(self.current_songs_basket)} songs available")
-    
-    def get_song_by_code(self, code: str) -> Optional[str]:
-        """
-        Get song file path for a given code.
-        
-        Args:
-            code: 5-digit song code
-            
-        Returns:
-            File path to song if code exists, None otherwise
-        """
-        return self.codes_dict.get(code)
-    
-    def get_random_song(self) -> Optional[str]:
-        """
-        Get a random song from currently available collections.
-        
-        Returns:
-            Random song file path, or None if no songs available
-        """
-        if not self.current_songs_basket:
-            self.logger.warning("No songs available in current collections")
-            return None
-            
-        return random.choice(self.current_songs_basket)
-    
-    def is_code_supported(self, code: str) -> bool:
-        """
-        Check if a code exists in the song library.
-        
-        Args:
-            code: 5-digit code to check
-            
-        Returns:
-            True if code exists in library
-        """
-        return code in self.codes_dict
-    
-    def get_stats(self) -> Dict[str, Any]:
-        """
-        Get library statistics for debugging.
-        
-        Returns:
-            Dictionary with library statistics including:
-            - songs_folder: Path to songs directory
-            - all_collections: Names of all available collections
-            - total_codes: Number of loaded song codes
-            - daily_schedule_entries: Number of daily schedule entries
-            - special_schedule_entries: Number of special schedule entries
-        """
-        return {
-            "songs_folder": self.songs_folder,
-            "all_collections": [c.name for c in ALL_COLLECTIONS],
-            "total_codes": len(self.codes_dict),
-            "daily_schedule_entries": len(self.schedule.daily_schedule),
-            "special_schedule_entries": len(self.schedule.special_schedule)
-        }

@@ -21,7 +21,7 @@ try:
     from game_system import GameManager
     from game_system.config import GameConfig, ButtonConfig, LedStripConfig, AudioConfig
     from audio_system import Schedule, DailyScheduleEntry, SpecialScheduleEntry, Collection, SongLibrary, SoundController, ALL_COLLECTIONS
-    from hybridLogger import HybridLogger
+    from utils import HybridLogger
     import RPi.GPIO as GPIO
 except ImportError as e:
     import traceback
