@@ -18,7 +18,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 try:
     from button_system import ButtonReader
     from led_system import PixelStripAdapter, Pixel
-    from game_system import GameManager
+    from game_system import GameManager, ButtonsSequenceTracker
     from game_system.config import GameConfig, ButtonConfig, LedStripConfig, AudioConfig
     from audio_system import Schedule, DailyScheduleEntry, SpecialScheduleEntry, Collection, SongLibrary, SoundController, ALL_COLLECTIONS
     from utils import HybridLogger
@@ -43,7 +43,7 @@ def create_amplifier_config() -> GameConfig:
             # 16, 
             17, 
             # 20, 
-            22, 
+            # 22, 
             # 23, 
             # 24, 
             # 25
@@ -120,7 +120,7 @@ def create_game_system(config: GameConfig, amplifier_logger):
     config.validate()
     
     # Create class loggers for components
-    game_manager_logger = amplifier_logger.create_class_logger("GameManager", logging.INFO)
+    game_manager_logger = amplifier_logger.create_class_logger("GameManager", logging.DEBUG)
     button_reader_logger = amplifier_logger.create_class_logger("ButtonReader", logging.INFO)
     song_library_logger = amplifier_logger.create_class_logger("SongLibrary", logging.INFO)
     sound_controller_logger = amplifier_logger.create_class_logger("SoundController", logging.INFO)
@@ -174,14 +174,17 @@ def create_game_system(config: GameConfig, amplifier_logger):
             logger=sound_controller_logger
         )
         
+        # Create button sequence tracker
+        sequence_tracker = ButtonsSequenceTracker(max_sequence_length=10)
+        
         # Create game manager (starts with IdleState by default)
         game_manager = GameManager(
             button_reader=button_reader,
             led_strips=led_strips,
             logger=game_manager_logger,
             sound_controller=sound_controller,
-            frame_duration_ms=int(config.frame_duration_ms),
-            sequence_timeout_ms=config.sequence_timeout_ms
+            sequence_tracker=sequence_tracker,
+            frame_duration_ms=int(config.frame_duration_ms)
         )
         
         amplifier_logger.info("HumanAmplifier system initialized successfully")

@@ -67,13 +67,9 @@ def main():
     
     # Test configurations: (gpio, pwm_channel, dma_channel)
     test_configs = [
-        (10, 0, 5),
-        (12, 0, 5),
-        (13, 1, 5),
+        (21, 0, 10),  # GPIO21, PWM channel 0, DMA 10
         (18, 0, 5),   
-        (19, 1, 5),  
-        (20, 1, 5),
-        (21, 0, 5),
+
     ]
     
     try:

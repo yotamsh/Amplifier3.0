@@ -12,6 +12,7 @@ if TYPE_CHECKING:
     from led_system.interfaces import LedStrip
     from button_system.button_state import ButtonState
     from utils import ClassLogger
+    from game_system.sequence_tracker import ButtonsSequenceTracker
 else:
     from led_system.pixel import Pixel
 
@@ -31,8 +32,8 @@ class GameManager:
                  led_strips: List['LedStrip'],
                  logger: 'ClassLogger',
                  sound_controller,  # SoundController instance
-                 frame_duration_ms: int = 20,
-                 sequence_timeout_ms: int = 1500):
+                 sequence_tracker: 'ButtonsSequenceTracker',
+                 frame_duration_ms: int = 20):
         """
         Initialize the game manager.
         
@@ -41,12 +42,13 @@ class GameManager:
             led_strips: List of LED strip controllers
             logger: Logger for debugging and monitoring
             sound_controller: SoundController instance for audio management
+            sequence_tracker: ButtonsSequenceTracker instance for tracking button sequences
             frame_duration_ms: Target frame duration in milliseconds (int)
-            sequence_timeout_ms: Timeout for button sequences
         """
         self.button_reader = button_reader
         self.led_strips = led_strips
         self.sound_controller = sound_controller
+        self.sequence_tracker = sequence_tracker
         self.target_frame_duration = frame_duration_ms / 1000.0
         self.logger = logger
         self.running = True
@@ -103,7 +105,18 @@ class GameManager:
         # 1. Sample button state
         button_state = self.button_reader.read_buttons()
         
-        # 2. Let state handle everything and check for state transitions
+        # 2. Update sequence tracker
+        self.sequence_tracker.update(button_state)
+        
+        # Debug log sequence when new buttons are pressed
+        has_new_press = any(
+            button_state.was_changed[i] and button_state.for_button[i]
+            for i in range(button_state.get_button_count())
+        )
+        if has_new_press:
+            self.logger.debug(f"Button sequence: {self.sequence_tracker.get_sequence()}")
+        
+        # 3. Let state handle everything and check for state transitions
         new_state = self.current_state.update(button_state)
         if new_state:
             self._transition_to_state(new_state)

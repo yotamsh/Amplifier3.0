@@ -45,12 +45,12 @@ class GameState(ABC):
     
     def on_enter(self) -> None:
         """Called when entering this state - logs state name and calls custom enter"""
-        self.game_manager.logger.debug(f"Entering state: {self.__class__.__name__}")
+        #self.game_manager.logger.debug(f"Entering state: {self.__class__.__name__}")
         self.custom_on_enter()
     
     def on_exit(self) -> None:
         """Called when exiting this state - logs state name and calls custom exit"""
-        self.game_manager.logger.debug(f"Exiting state: {self.__class__.__name__}")
+        #self.game_manager.logger.debug(f"Exiting state: {self.__class__.__name__}")
         self.custom_on_exit()
     
     @abstractmethod
@@ -106,6 +106,21 @@ class IdleState(GameState):
     
     def update(self, button_state: 'ButtonState') -> Optional['GameState']:
         """Update idle state - handle buttons, animations, and LED rendering"""
+        
+        # Handle sequence timeout and pattern detection when all buttons released
+        if button_state.total_buttons_pressed == 0:
+            time_elapsed = self.game_manager.sequence_tracker.get_time_since_first_char()
+            
+            # Reset sequence if timed out (>2 seconds)
+            if time_elapsed is not None and time_elapsed > 2.0:
+                self.game_manager.sequence_tracker.reset()
+            
+            # Check for "111" pattern
+            elif self.game_manager.sequence_tracker.get_sequence() == "111":
+                self.game_manager.logger.info("Triple 1 pattern detected!")
+                self.game_manager.sequence_tracker.reset()
+                # TODO: Add special action for triple 1 pattern
+        
         # Check for state transitions - any button pressed goes to Amplify
         # ButtonReader handles ignore logic, so this is simple
         if button_state.total_buttons_pressed > 0:

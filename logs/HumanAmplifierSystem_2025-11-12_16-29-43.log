@@ -32,3 +32,6 @@
 [2025-11-12 16:29:56,316] [INFO] [GameManager] State transition: IdleState → AmplifyState
 [2025-11-12 16:29:56,327] [INFO] [SoundController] Playing song: Aqua - Good Morning Sunshine.mp3
 [2025-11-12 16:29:57,623] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-12 17:40:46,061] [INFO] [GameManager] Game stopped by user (Ctrl+C)
+[2025-11-12 17:40:46,072] [INFO] [GameManager] Game stopped
+[2025-11-12 17:40:46,073] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

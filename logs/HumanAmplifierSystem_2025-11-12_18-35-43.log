@@ -1,0 +1,53 @@
+[2025-11-12 18:35:43,544] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-12 18:35:43,545] [INFO] [Amplifier] Button configuration: 3 buttons on GPIO [5, 6, 17]
+[2025-11-12 18:35:43,546] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-12 18:35:43,546] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-12 18:35:43,547] [INFO] [Amplifier]   Strip 2: 300 LEDs on GPIO 18
+[2025-11-12 18:35:43,547] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-12 18:35:43,548] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-12 18:35:43,548] [INFO] [Amplifier] Audio folder: songs
+[2025-11-12 18:35:43,549] [INFO] [Amplifier] Schedule: 2 daily, 1 special entries
+[2025-11-12 18:35:44,111] [INFO] [ButtonReader] GPIO setup complete: 3 pins, no pulls
+[2025-11-12 18:35:44,112] [INFO] [ButtonReader] ButtonReader initialized with 3 buttons
+[2025-11-12 18:35:44,112] [INFO] [ButtonReader] Button mapping: Button0=GPIO5, Button1=GPIO6, Button2=GPIO17
+[2025-11-12 18:35:44,116] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-12 18:35:44,441] [INFO] [SongLibrary] Loaded 30 song codes from 2 collections
+[2025-11-12 18:35:44,442] [INFO] [SongLibrary] Collections updated: ['MAIJAM']
+[2025-11-12 18:35:44,658] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-12 18:35:44,659] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-12 18:35:44,659] [INFO] [Amplifier] Hardware: 3 buttons, 2 LED strips, 20ms frame duration
+[2025-11-12 18:35:44,659] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['MAIJAM', 'MORNING'], 'total_codes': 30, 'daily_schedule_entries': 2, 'special_schedule_entries': 1}
+[2025-11-12 18:35:44,660] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-12 18:35:44,660] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-12 18:35:44,661] [INFO] [Amplifier] Hardware status: 3 buttons, 2 LED strips
+[2025-11-12 18:35:44,661] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-12 18:35:44,662] [INFO] [Amplifier]   Strip 2: 300 LEDs active
+[2025-11-12 18:35:44,662] [INFO] [Amplifier] Audio system: 30 song codes, 9 sound effects
+[2025-11-12 18:35:44,662] [INFO] [Amplifier] Available collections: MAIJAM, MORNING
+[2025-11-12 18:35:44,662] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-12 18:35:44,663] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-12 18:35:47,658] [DEBUG] [GameManager] Button sequence: 1
+[2025-11-12 18:35:47,659] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-12 18:35:47,671] [INFO] [SoundController] Song Baccara - Yes Sir, I Can Boogie (Starparade 02.06.1977) (1).mp3 was randomly started
+[2025-11-12 18:35:47,672] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [1]
+[2025-11-12 18:35:48,963] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-12 18:35:50,289] [DEBUG] [GameManager] Button sequence: 0
+[2025-11-12 18:35:50,290] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-12 18:35:50,300] [INFO] [SoundController] Song יהודית רביץ - הכל בסדר - עמרי סמדר רמיקס  Yehudit Ravitz - Hakol Beseder - Omri Smadar RMX.mp3 was randomly started
+[2025-11-12 18:35:50,301] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [0]
+[2025-11-12 18:35:52,679] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-12 18:36:24,323] [DEBUG] [GameManager] Button sequence: 0
+[2025-11-12 18:36:24,324] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-12 18:36:24,336] [INFO] [SoundController] Song Boney M. - Daddy Cool (Sopot Festival 1979).mp3 was randomly started
+[2025-11-12 18:36:24,337] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [0]
+[2025-11-12 18:36:30,754] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-12 18:36:39,857] [DEBUG] [GameManager] Button sequence: 0
+[2025-11-12 18:36:39,858] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-12 18:36:39,870] [INFO] [SoundController] Song Lizzo - Boys (Official Video).mp3 was randomly started
+[2025-11-12 18:36:39,870] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [0]
+[2025-11-12 18:38:24,398] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-12 20:29:46,087] [DEBUG] [GameManager] Button sequence: 2
+[2025-11-12 20:29:46,087] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-12 20:29:46,099] [INFO] [SoundController] Song Queen - I Want to Break Free (Official Lyric Video).mp3 was randomly started
+[2025-11-12 20:29:46,100] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [2]
+[2025-11-12 20:29:49,768] [INFO] [GameManager] State transition: AmplifyState → IdleState
