@@ -115,11 +115,11 @@ class IdleState(GameState):
             if time_elapsed is not None and time_elapsed > 2.0:
                 self.game_manager.sequence_tracker.reset()
             
-            # Check for "111" pattern
-            elif self.game_manager.sequence_tracker.get_sequence() == "111":
-                self.game_manager.logger.info("Triple 1 pattern detected!")
-                self.game_manager.sequence_tracker.reset()
-                # TODO: Add special action for triple 1 pattern
+        # Check for "111" pattern - enter code mode
+        if self.game_manager.sequence_tracker.get_sequence() == "111":
+            self.game_manager.logger.info("Triple 1 detected - entering code mode!")
+            self.game_manager.sequence_tracker.reset()
+            return CodeModeState(self.game_manager)
         
         # Check for state transitions - any button pressed goes to Amplify
         # ButtonReader handles ignore logic, so this is simple
@@ -293,6 +293,140 @@ class PartyState(GameState):
         if not self.game_manager.sound_controller.is_song_playing():
             self.logger.info("Song finished, returning to idle")
             return IdleState(self.game_manager)
+        
+        # Update animations
+        for animation in self.animations:
+            animation.update_if_needed()
+        
+        return None
+
+
+class CodeModeState(GameState):
+    """
+    Code input mode - user enters a 5-digit code by pressing buttons.
+    
+    Features:
+    - Plays CODE_INPUT_MUSIC on enter
+    - Shows pure green light on button segments for entered digits
+    - After 5 digits: validates code
+    - Valid code → PartyState
+    - Any failure → stop music, play fail sound, return to IdleState
+    
+    Failure conditions:
+    1. Invalid/unsupported code
+    2. Song ends (timeout)
+    3. Any button released
+    
+    Transitions:
+    - Code complete + valid → PartyState
+    - Any failure → IdleState
+    """
+    
+    def __init__(self, game_manager: 'GameManager'):
+        super().__init__(game_manager)
+        
+        # Create logger
+        self.logger = game_manager.logger.create_class_logger("CodeModeState")
+        
+        # Create code mode animation on strip 1
+        first_strip = game_manager.led_strips[0]
+        from game_system.animations import CodeModeAnimation
+        self.code_anim = CodeModeAnimation(
+            strip=first_strip,
+            button_count=game_manager.button_reader.get_button_count(),
+            speed_ms=50
+        )
+        self.animations: List['Animation'] = [self.code_anim]
+    
+    def custom_on_enter(self) -> None:
+        """Actions when entering code mode"""
+        # Play code sound effect
+        from audio_system.sound_controller import GameSounds
+        self.game_manager.sound_controller.play_sound_with_volume(
+            GameSounds.CODE_SOUND,
+            volume=0.8
+        )
+        
+        # Reset sequence to start fresh
+        self.game_manager.sequence_tracker.reset()
+        
+        # Clear LEDs initially (no digits entered yet)
+        from led_system.pixel import Pixel
+        black = Pixel(0, 0, 0)
+        for strip in self.game_manager.led_strips:
+            strip[:] = black
+            strip.show()
+        
+        # Load and start code input music
+        from audio_system.sound_controller import CODE_INPUT_MUSIC_PATH
+        self.game_manager.sound_controller.mixer.music.load(CODE_INPUT_MUSIC_PATH)
+        self.game_manager.sound_controller.mixer.music.set_volume(0.6)
+        self.game_manager.sound_controller.mixer.music.play()
+        
+        self.logger.info("Entered code mode - awaiting 5-digit code")
+    
+    def custom_on_exit(self) -> None:
+        """Actions when exiting code mode"""
+        # Ignore currently pressed buttons until released
+        self.game_manager.button_reader.ignore_pressed_until_released()
+    
+    def _fail_and_return_to_idle(self, reason: str) -> 'GameState':
+        """
+        Handle code mode failure - stop music, play fail sound, return to idle.
+        
+        Args:
+            reason: Description of why code mode failed (for logging)
+            
+        Returns:
+            IdleState instance
+        """
+        self.logger.info(f"Code mode failed: {reason}")
+        
+        # Stop code input music
+        self.game_manager.sound_controller.stop_music()
+        
+        # Play random fail sound
+        self.game_manager.sound_controller.play_random_fail_sound(volume=0.8)
+        
+        # Return to idle
+        return IdleState(self.game_manager)
+    
+    def update(self, button_state: 'ButtonState') -> Optional['GameState']:
+        """Update code mode - track sequence, check for completion and failures"""
+        
+        # FAILURE CONDITION 1: Check if any button was released
+        # (If a button went from pressed to not pressed)
+        for i, currently_pressed in enumerate(button_state.for_button):
+            prev_pressed = button_state.previous_state_of[i]
+            if prev_pressed and not currently_pressed:
+                return self._fail_and_return_to_idle("Button was released")
+        
+        # FAILURE CONDITION 2: Check if song ended (timeout)
+        if not self.game_manager.sound_controller.is_song_playing():
+            return self._fail_and_return_to_idle("Timeout - song ended")
+        
+        # Get current sequence
+        sequence = self.game_manager.sequence_tracker.get_sequence()
+        
+        # Update animation to show entered digits
+        self.code_anim.set_active_digits(sequence)
+        
+        # Check if code is complete (5 digits)
+        from audio_system.code_generator import CodeGeneratorHelper
+        if len(sequence) == CodeGeneratorHelper.CODE_LENGTH:
+            self.logger.info(f"Code entered: {sequence}")
+            
+            # Validate code
+            is_valid = self.game_manager.sound_controller.handle_code(sequence)
+            
+            if is_valid:
+                self.logger.info("Valid code! Transitioning to PartyState")
+                # Stop code input music before transitioning
+                self.game_manager.sound_controller.stop_music()
+                return PartyState(self.game_manager)
+            else:
+                # FAILURE CONDITION 3: Invalid/unsupported code
+                return self._fail_and_return_to_idle(f"Invalid code: {sequence}")
         
         # Update animations
         for animation in self.animations:

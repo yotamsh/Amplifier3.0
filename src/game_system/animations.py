@@ -481,3 +481,61 @@ class PartyAnimation(Animation):
             self.current_band_speed = random.randint(10, 20)  # Faster: 10-20ms
             self.speed_ms = self.current_band_speed  # Update animation speed
             self.leds_in_current_band = 0
+
+
+class CodeModeAnimation(Animation):
+    """
+    Animation for code input mode - shows pure green light on button segments 
+    whose digits appear in the current sequence.
+    
+    All other segments are black.
+    """
+    
+    def __init__(self, strip: 'LedStrip', button_count: int, speed_ms: int = 50):
+        """
+        Initialize code mode animation.
+        
+        Args:
+            strip: LED strip to operate on
+            button_count: Number of buttons (for segment calculation)
+            speed_ms: Animation update interval
+        """
+        super().__init__(strip, speed_ms)
+        self.button_count: int = button_count
+        self.leds_per_button: int = strip.num_pixels() // button_count
+        self.active_digits: set = set()  # Button indices currently in sequence
+        
+        # Initialize colors
+        AnimationHelpers._init_colors()
+    
+    def set_active_digits(self, sequence: str) -> None:
+        """
+        Update which button digits should be lit based on sequence.
+        
+        Args:
+            sequence: Current sequence string (e.g., "314")
+        """
+        # Convert sequence chars to digit set
+        self.active_digits = set()
+        for char in sequence:
+            if char.isdigit():
+                self.active_digits.add(int(char))
+    
+    def advance(self) -> None:
+        """Update strip - pure green for active digits, black for others"""
+        from led_system.pixel import Pixel
+        
+        green = Pixel(0, 255, 0)  # Pure green
+        black = Pixel(0, 0, 0)
+        
+        num_pixels = self.strip.num_pixels()
+        
+        for led_pos in range(num_pixels):
+            # Calculate which button segment this LED belongs to
+            button_index = led_pos // self.leds_per_button
+            
+            # Light up if this button's digit is in the sequence
+            if button_index < self.button_count and button_index in self.active_digits:
+                self.strip[led_pos] = green
+            else:
+                self.strip[led_pos] = black

@@ -1,0 +1,55 @@
+[2025-11-14 16:43:33,478] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-14 16:43:33,479] [INFO] [Amplifier] Button configuration: 3 buttons on GPIO [5, 6, 17]
+[2025-11-14 16:43:33,479] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-14 16:43:33,480] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-14 16:43:33,480] [INFO] [Amplifier]   Strip 2: 300 LEDs on GPIO 18
+[2025-11-14 16:43:33,481] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-14 16:43:33,482] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-14 16:43:33,482] [INFO] [Amplifier] Audio folder: songs
+[2025-11-14 16:43:33,482] [INFO] [Amplifier] Schedule: 2 daily, 1 special entries
+[2025-11-14 16:43:35,453] [INFO] [ButtonReader] GPIO setup complete: 3 pins, no pulls
+[2025-11-14 16:43:35,453] [INFO] [ButtonReader] ButtonReader initialized with 3 buttons
+[2025-11-14 16:43:35,454] [INFO] [ButtonReader] Button mapping: Button0=GPIO5, Button1=GPIO6, Button2=GPIO17
+[2025-11-14 16:43:35,458] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-14 16:43:36,040] [INFO] [SongLibrary] Loaded 30 song codes from 2 collections
+[2025-11-14 16:43:36,040] [INFO] [SongLibrary] Collections updated: ['MAIJAM']
+[2025-11-14 16:43:36,315] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-14 16:43:36,316] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-14 16:43:36,316] [INFO] [Amplifier] Hardware: 3 buttons, 2 LED strips, 20ms frame duration
+[2025-11-14 16:43:36,317] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['MORNING', 'MAIJAM'], 'total_codes': 30, 'daily_schedule_entries': 2, 'special_schedule_entries': 1}
+[2025-11-14 16:43:36,317] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-14 16:43:36,317] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-14 16:43:36,318] [INFO] [Amplifier] Hardware status: 3 buttons, 2 LED strips
+[2025-11-14 16:43:36,318] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-14 16:43:36,319] [INFO] [Amplifier]   Strip 2: 300 LEDs active
+[2025-11-14 16:43:36,319] [INFO] [Amplifier] Audio system: 30 song codes, 9 sound effects
+[2025-11-14 16:43:36,319] [INFO] [Amplifier] Available collections: MORNING, MAIJAM
+[2025-11-14 16:43:36,320] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-14 16:43:36,320] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-14 16:46:21,776] [DEBUG] [GameManager] Button sequence: 2
+[2025-11-14 16:46:21,777] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-14 16:46:21,788] [INFO] [SoundController] Song Abba - Money, Money, Money (Official Music Video).mp3 was randomly started
+[2025-11-14 16:46:21,789] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [2]
+[2025-11-14 16:46:23,524] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-14 16:46:23,905] [DEBUG] [GameManager] Button sequence: 2
+[2025-11-14 16:46:23,906] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-14 16:46:23,916] [INFO] [SoundController] Song Dua Lipa - Levitating Featuring DaBaby (Official Music Video).mp3 was randomly started
+[2025-11-14 16:46:23,917] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [2]
+[2025-11-14 16:46:28,745] [DEBUG] [GameManager] Button sequence: 21
+[2025-11-14 16:46:28,746] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [1, 2]
+[2025-11-14 16:46:32,296] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [2]
+[2025-11-14 16:46:34,346] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-14 16:46:35,311] [DEBUG] [GameManager] Button sequence: 1
+[2025-11-14 16:46:35,312] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-14 16:46:35,324] [INFO] [SoundController] Song Whitney Houston - I Wanna Dance With Somebody.mp3 was randomly started
+[2025-11-14 16:46:35,325] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [1]
+[2025-11-14 16:46:37,481] [DEBUG] [GameManager] Button sequence: 12
+[2025-11-14 16:46:37,481] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [1, 2]
+[2025-11-14 16:46:38,987] [DEBUG] [GameManager] Button sequence: 120
+[2025-11-14 16:46:38,987] [INFO] [GameManager] State transition: AmplifyState → PartyState
+[2025-11-14 16:46:38,998] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED!
+[2025-11-14 16:51:21,116] [INFO] [PartyState] Song finished, returning to idle
+[2025-11-14 16:51:21,117] [INFO] [GameManager] State transition: PartyState → IdleState
+[2025-11-14 17:29:13,815] [INFO] [GameManager] Game stopped by user (Ctrl+C)
+[2025-11-14 17:29:13,826] [INFO] [GameManager] Game stopped
+[2025-11-14 17:29:13,827] [INFO] [Amplifier] ✅ HumanAmplifier system shut down
