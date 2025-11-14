@@ -284,6 +284,8 @@ class PartyState(GameState):
         # Button hold state
         self.button_A_held = False
         self.button_B_held = False
+        self.button_A_spread_blocked = False  # Blocked due to interference
+        self.button_B_spread_blocked = False  # Blocked due to interference
         
         # Last button applause feature (enabled after 15 seconds)
         self.last_button_index = button_count - 1
@@ -377,47 +379,75 @@ class PartyState(GameState):
             GameState to transition to, or None to stay in party
         """
         # Track button states
+        button_count = len(button_state.for_button)
         button_A_pressed = button_state.for_button[self.button_A]
         button_B_pressed = button_state.for_button[self.button_B]
         
-        # Button A released - clear its red
+        # Check for interference with button A spread (buttons A+1 to end)
+        if self.button_A_held and not self.button_A_spread_blocked:
+            for i in range(self.button_A + 1, button_count):
+                if button_state.for_button[i]:
+                    # Interference detected - clear spread but keep held
+                    self.a_red_pixels = 0
+                    self.button_A_spread_blocked = True
+                    self.logger.debug(f"Button A spread blocked by button {i}")
+                    break
+        
+        # Check for interference with button B spread (buttons 0 to B-1)
+        if self.button_B_held and not self.button_B_spread_blocked:
+            for i in range(0, self.button_B):
+                if button_state.for_button[i]:
+                    # Interference detected - clear spread but keep held
+                    self.b_red_pixels = 0
+                    self.button_B_spread_blocked = True
+                    self.logger.debug(f"Button B spread blocked by button {i}")
+                    break
+        
+        # Button A released - clear its red and reset block
         if self.button_A_held and not button_A_pressed:
             self.a_red_pixels = 0
             self.button_A_held = False
+            self.button_A_spread_blocked = False  # Reset block on release
             self.last_spread_time_A = 0
         
-        # Button B released - clear its red
+        # Button B released - clear its red and reset block
         if self.button_B_held and not button_B_pressed:
             self.b_red_pixels = 0
             self.button_B_held = False
+            self.button_B_spread_blocked = False  # Reset block on release
             self.last_spread_time_B = 0
         
         # Button A pressed - spread right (segment always red, spread is additional)
         if button_A_pressed:
             if not self.button_A_held:
                 self.button_A_held = True
+                self.button_A_spread_blocked = False  # Reset block on new press
                 self.last_spread_time_A = current_time * 1000
                 self.a_red_pixels = 0  # Start at 0 additional spread pixels
             
-            # Spread additional pixels every 50ms
-            current_time_ms = current_time * 1000
-            if self.a_red_pixels < self.max_spread:
-                if current_time_ms - self.last_spread_time_A >= self.spread_interval_ms:
-                    self.a_red_pixels += 1
-                    self.last_spread_time_A = current_time_ms
+            # Spread additional pixels every 50ms (only if not blocked)
+            if not self.button_A_spread_blocked:
+                current_time_ms = current_time * 1000
+                if self.a_red_pixels < self.max_spread:
+                    if current_time_ms - self.last_spread_time_A >= self.spread_interval_ms:
+                        self.a_red_pixels += 1
+                        self.last_spread_time_A = current_time_ms
         
         # Button B pressed - spread left (segment always red, spread is additional)
         if button_B_pressed:
             if not self.button_B_held:
                 self.button_B_held = True
+                self.button_B_spread_blocked = False  # Reset block on new press
                 self.last_spread_time_B = current_time * 1000
                 self.b_red_pixels = 0  # Start at 0 additional spread pixels
             
-            current_time_ms = current_time * 1000
-            if self.b_red_pixels < self.max_spread:
-                if current_time_ms - self.last_spread_time_B >= self.spread_interval_ms:
-                    self.b_red_pixels += 1
-                    self.last_spread_time_B = current_time_ms
+            # Spread additional pixels every 50ms (only if not blocked)
+            if not self.button_B_spread_blocked:
+                current_time_ms = current_time * 1000
+                if self.b_red_pixels < self.max_spread:
+                    if current_time_ms - self.last_spread_time_B >= self.spread_interval_ms:
+                        self.b_red_pixels += 1
+                        self.last_spread_time_B = current_time_ms
         
         # Volume control: both pressed AND (n+m) % 10 == 0
         # n+m is ONLY the additional spread pixels, not including segments

@@ -1,0 +1,101 @@
+[2025-11-14 23:43:49,933] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-14 23:43:49,934] [INFO] [Amplifier] Button configuration: 3 buttons on GPIO [5, 6, 17]
+[2025-11-14 23:43:49,935] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-14 23:43:49,935] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-14 23:43:49,936] [INFO] [Amplifier]   Strip 2: 300 LEDs on GPIO 18
+[2025-11-14 23:43:49,936] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-14 23:43:49,936] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-14 23:43:49,937] [INFO] [Amplifier] Audio folder: songs
+[2025-11-14 23:43:49,937] [INFO] [Amplifier] Schedule: 2 daily, 1 special entries
+[2025-11-14 23:43:52,308] [INFO] [ButtonReader] GPIO setup complete: 3 pins, no pulls
+[2025-11-14 23:43:52,308] [INFO] [ButtonReader] ButtonReader initialized with 3 buttons
+[2025-11-14 23:43:52,308] [INFO] [ButtonReader] Button mapping: Button0=GPIO5, Button1=GPIO6, Button2=GPIO17
+[2025-11-14 23:43:52,312] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-14 23:43:52,605] [INFO] [SongLibrary] Loaded 1 song codes from 2 collections
+[2025-11-14 23:43:52,605] [INFO] [SongLibrary] Collections updated: ['MAIJAM']
+[2025-11-14 23:43:54,532] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-14 23:43:54,533] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-14 23:43:54,539] [INFO] [Amplifier] Hardware: 3 buttons, 2 LED strips, 20ms frame duration
+[2025-11-14 23:43:54,539] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['MAIJAM', 'MORNING'], 'total_codes': 1, 'daily_schedule_entries': 2, 'special_schedule_entries': 1}
+[2025-11-14 23:43:54,540] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-14 23:43:54,540] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-14 23:43:54,541] [INFO] [Amplifier] Hardware status: 3 buttons, 2 LED strips
+[2025-11-14 23:43:54,542] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-14 23:43:54,543] [INFO] [Amplifier]   Strip 2: 300 LEDs active
+[2025-11-14 23:43:54,544] [INFO] [Amplifier] Audio system: 1 song codes, 11 sound effects
+[2025-11-14 23:43:54,544] [INFO] [Amplifier] Available collections: MAIJAM, MORNING
+[2025-11-14 23:43:54,545] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-14 23:43:54,545] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-14 23:43:56,840] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-14 23:43:56,840] [DEBUG] [GameManager] Button sequence: 1
+[2025-11-14 23:43:56,841] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-14 23:43:56,852] [INFO] [SoundController] Song "Lady Gaga - Bad Romance (Official Music Video).mp3" was randomly started
+[2025-11-14 23:43:56,852] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [1]
+[2025-11-14 23:44:01,528] [DEBUG] [ButtonReader] Button state changed: [(0, 'pressed')]
+[2025-11-14 23:44:01,529] [DEBUG] [GameManager] Button sequence: 10
+[2025-11-14 23:44:01,529] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [0, 1]
+[2025-11-14 23:44:02,494] [DEBUG] [ButtonReader] Button state changed: [(2, 'pressed')]
+[2025-11-14 23:44:02,495] [DEBUG] [GameManager] Button sequence: 102
+[2025-11-14 23:44:02,496] [DEBUG] [ButtonReader] Button 0 will be ignored until released
+[2025-11-14 23:44:02,496] [DEBUG] [ButtonReader] Button 1 will be ignored until released
+[2025-11-14 23:44:02,496] [DEBUG] [ButtonReader] Button 2 will be ignored until released
+[2025-11-14 23:44:02,497] [INFO] [GameManager] State transition: AmplifyState → PartyState
+[2025-11-14 23:44:02,497] [DEBUG] [ButtonReader] Button 0 will be ignored until released
+[2025-11-14 23:44:02,498] [DEBUG] [ButtonReader] Button 1 will be ignored until released
+[2025-11-14 23:44:02,498] [DEBUG] [ButtonReader] Button 2 will be ignored until released
+[2025-11-14 23:44:02,509] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED!
+[2025-11-14 23:44:02,976] [DEBUG] [ButtonReader] Button 2 released, no longer ignored
+[2025-11-14 23:44:03,137] [DEBUG] [ButtonReader] Button 1 released, no longer ignored
+[2025-11-14 23:44:03,218] [DEBUG] [ButtonReader] Button 0 released, no longer ignored
+[2025-11-14 23:44:17,527] [DEBUG] [PartyState] Reduction feature enabled!
+[2025-11-14 23:44:19,837] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-14 23:44:19,838] [DEBUG] [GameManager] Button sequence: 1021
+[2025-11-14 23:44:23,397] [DEBUG] [ButtonReader] Button state changed: [(0, 'pressed')]
+[2025-11-14 23:44:23,398] [DEBUG] [GameManager] Button sequence: 10210
+[2025-11-14 23:44:23,398] [DEBUG] [PartyState] Button B spread blocked by button 0
+[2025-11-14 23:44:23,618] [DEBUG] [ButtonReader] Button state changed: [(0, 'released')]
+[2025-11-14 23:44:27,661] [DEBUG] [ButtonReader] Button state changed: [(0, 'pressed')]
+[2025-11-14 23:44:27,661] [DEBUG] [GameManager] Button sequence: 102100
+[2025-11-14 23:44:27,964] [DEBUG] [ButtonReader] Button state changed: [(0, 'released')]
+[2025-11-14 23:44:30,656] [DEBUG] [ButtonReader] Button state changed: [(2, 'pressed')]
+[2025-11-14 23:44:30,657] [DEBUG] [GameManager] Button sequence: 1021002
+[2025-11-14 23:44:30,657] [DEBUG] [PartyState] Button A spread blocked by button 2
+[2025-11-14 23:44:30,657] [DEBUG] [PartyState] Applause started
+[2025-11-14 23:44:31,339] [DEBUG] [ButtonReader] Button state changed: [(2, 'released')]
+[2025-11-14 23:44:31,340] [DEBUG] [PartyState] Applause stopped
+[2025-11-14 23:44:32,927] [DEBUG] [ButtonReader] Button state changed: [(2, 'pressed')]
+[2025-11-14 23:44:32,928] [DEBUG] [GameManager] Button sequence: 10210022
+[2025-11-14 23:44:32,928] [DEBUG] [PartyState] Applause started
+[2025-11-14 23:44:33,974] [DEBUG] [ButtonReader] Button state changed: [(2, 'released')]
+[2025-11-14 23:44:33,974] [DEBUG] [PartyState] Applause stopped
+[2025-11-14 23:44:35,863] [DEBUG] [ButtonReader] Button state changed: [(1, 'released')]
+[2025-11-14 23:44:36,023] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-14 23:44:36,024] [DEBUG] [GameManager] Button sequence: 102100221
+[2025-11-14 23:44:39,017] [DEBUG] [ButtonReader] Button state changed: [(1, 'released')]
+[2025-11-14 23:44:39,419] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-14 23:44:39,420] [DEBUG] [GameManager] Button sequence: 1021002211
+[2025-11-14 23:44:41,614] [DEBUG] [ButtonReader] Button state changed: [(0, 'pressed')]
+[2025-11-14 23:44:41,615] [DEBUG] [GameManager] Button sequence: 0210022110
+[2025-11-14 23:44:41,617] [DEBUG] [PartyState] Button B spread blocked by button 0
+[2025-11-14 23:44:41,895] [DEBUG] [ButtonReader] Button state changed: [(0, 'released')]
+[2025-11-14 23:44:44,807] [DEBUG] [ButtonReader] Button state changed: [(0, 'pressed')]
+[2025-11-14 23:44:44,808] [DEBUG] [GameManager] Button sequence: 2100221100
+[2025-11-14 23:44:45,149] [DEBUG] [ButtonReader] Button state changed: [(0, 'released')]
+[2025-11-14 23:44:45,874] [DEBUG] [ButtonReader] Button state changed: [(0, 'pressed')]
+[2025-11-14 23:44:45,875] [DEBUG] [GameManager] Button sequence: 1002211000
+[2025-11-14 23:44:46,155] [DEBUG] [ButtonReader] Button state changed: [(0, 'released')]
+[2025-11-14 23:44:47,547] [DEBUG] [ButtonReader] Button state changed: [(2, 'pressed')]
+[2025-11-14 23:44:47,547] [DEBUG] [GameManager] Button sequence: 0022110002
+[2025-11-14 23:44:47,548] [DEBUG] [PartyState] Button A spread blocked by button 2
+[2025-11-14 23:44:47,548] [DEBUG] [PartyState] Applause started
+[2025-11-14 23:44:48,049] [DEBUG] [ButtonReader] Button state changed: [(2, 'released')]
+[2025-11-14 23:44:48,050] [DEBUG] [PartyState] Applause stopped
+[2025-11-14 23:44:49,094] [DEBUG] [ButtonReader] Button state changed: [(2, 'pressed')]
+[2025-11-14 23:44:49,094] [DEBUG] [GameManager] Button sequence: 0221100022
+[2025-11-14 23:44:49,095] [DEBUG] [PartyState] Applause started
+[2025-11-14 23:44:51,826] [DEBUG] [ButtonReader] Button state changed: [(2, 'released')]
+[2025-11-14 23:44:51,826] [DEBUG] [PartyState] Applause stopped
+[2025-11-14 23:44:52,529] [DEBUG] [ButtonReader] Button state changed: [(1, 'released')]
+[2025-11-14 23:44:56,707] [INFO] [GameManager] Game stopped by user (Ctrl+C)
+[2025-11-14 23:44:56,718] [INFO] [GameManager] Game stopped
+[2025-11-14 23:44:56,719] [INFO] [Amplifier] ✅ HumanAmplifier system shut down
