@@ -1,0 +1,102 @@
+[2025-11-14 23:26:49,459] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-14 23:26:49,460] [INFO] [Amplifier] Button configuration: 3 buttons on GPIO [5, 6, 17]
+[2025-11-14 23:26:49,461] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-14 23:26:49,462] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-14 23:26:49,462] [INFO] [Amplifier]   Strip 2: 300 LEDs on GPIO 18
+[2025-11-14 23:26:49,463] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-14 23:26:49,463] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-14 23:26:49,464] [INFO] [Amplifier] Audio folder: songs
+[2025-11-14 23:26:49,464] [INFO] [Amplifier] Schedule: 2 daily, 1 special entries
+[2025-11-14 23:26:53,729] [INFO] [ButtonReader] GPIO setup complete: 3 pins, no pulls
+[2025-11-14 23:26:53,730] [INFO] [ButtonReader] ButtonReader initialized with 3 buttons
+[2025-11-14 23:26:53,731] [INFO] [ButtonReader] Button mapping: Button0=GPIO5, Button1=GPIO6, Button2=GPIO17
+[2025-11-14 23:26:53,737] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-14 23:26:54,061] [INFO] [SongLibrary] Loaded 1 song codes from 2 collections
+[2025-11-14 23:26:54,062] [INFO] [SongLibrary] Collections updated: ['MAIJAM']
+[2025-11-14 23:26:55,854] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-14 23:26:55,855] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-14 23:26:55,855] [INFO] [Amplifier] Hardware: 3 buttons, 2 LED strips, 20ms frame duration
+[2025-11-14 23:26:55,855] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['MAIJAM', 'MORNING'], 'total_codes': 1, 'daily_schedule_entries': 2, 'special_schedule_entries': 1}
+[2025-11-14 23:26:55,855] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-14 23:26:55,856] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-14 23:26:55,856] [INFO] [Amplifier] Hardware status: 3 buttons, 2 LED strips
+[2025-11-14 23:26:55,856] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-14 23:26:55,856] [INFO] [Amplifier]   Strip 2: 300 LEDs active
+[2025-11-14 23:26:55,857] [INFO] [Amplifier] Audio system: 1 song codes, 11 sound effects
+[2025-11-14 23:26:55,857] [INFO] [Amplifier] Available collections: MAIJAM, MORNING
+[2025-11-14 23:26:55,857] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-14 23:26:55,857] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-14 23:27:02,670] [DEBUG] [ButtonReader] Button state changed: [(0, 'pressed')]
+[2025-11-14 23:27:02,671] [DEBUG] [GameManager] Button sequence: 0
+[2025-11-14 23:27:02,671] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-14 23:27:02,683] [INFO] [SoundController] Song "Blondie - Call me.mp3" was randomly started
+[2025-11-14 23:27:02,683] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [0]
+[2025-11-14 23:27:02,992] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-14 23:27:02,993] [DEBUG] [GameManager] Button sequence: 01
+[2025-11-14 23:27:02,994] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [0, 1]
+[2025-11-14 23:27:04,765] [DEBUG] [ButtonReader] Button state changed: [(2, 'pressed')]
+[2025-11-14 23:27:04,765] [DEBUG] [GameManager] Button sequence: 012
+[2025-11-14 23:27:04,766] [DEBUG] [ButtonReader] Button 0 will be ignored until released
+[2025-11-14 23:27:04,766] [DEBUG] [ButtonReader] Button 1 will be ignored until released
+[2025-11-14 23:27:04,767] [DEBUG] [ButtonReader] Button 2 will be ignored until released
+[2025-11-14 23:27:04,767] [INFO] [GameManager] State transition: AmplifyState → PartyState
+[2025-11-14 23:27:04,767] [DEBUG] [ButtonReader] Button 0 will be ignored until released
+[2025-11-14 23:27:04,768] [DEBUG] [ButtonReader] Button 1 will be ignored until released
+[2025-11-14 23:27:04,768] [DEBUG] [ButtonReader] Button 2 will be ignored until released
+[2025-11-14 23:27:04,778] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED!
+[2025-11-14 23:27:05,327] [DEBUG] [ButtonReader] Button 2 released, no longer ignored
+[2025-11-14 23:27:05,508] [DEBUG] [ButtonReader] Button 1 released, no longer ignored
+[2025-11-14 23:27:05,648] [DEBUG] [ButtonReader] Button 0 released, no longer ignored
+[2025-11-14 23:27:10,873] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-14 23:27:10,874] [DEBUG] [GameManager] Button sequence: 0121
+[2025-11-14 23:27:11,616] [DEBUG] [ButtonReader] Button state changed: [(1, 'released')]
+[2025-11-14 23:27:13,203] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-14 23:27:13,203] [DEBUG] [GameManager] Button sequence: 01211
+[2025-11-14 23:27:14,186] [DEBUG] [ButtonReader] Button state changed: [(1, 'released')]
+[2025-11-14 23:27:14,407] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-14 23:27:14,408] [DEBUG] [GameManager] Button sequence: 012111
+[2025-11-14 23:27:15,010] [DEBUG] [ButtonReader] Button state changed: [(1, 'released')]
+[2025-11-14 23:27:15,291] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-14 23:27:15,292] [DEBUG] [GameManager] Button sequence: 0121111
+[2025-11-14 23:27:15,774] [DEBUG] [ButtonReader] Button state changed: [(1, 'released')]
+[2025-11-14 23:27:16,056] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-14 23:27:16,057] [DEBUG] [GameManager] Button sequence: 01211111
+[2025-11-14 23:27:16,521] [DEBUG] [ButtonReader] Button state changed: [(1, 'released')]
+[2025-11-14 23:27:16,863] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-14 23:27:16,863] [DEBUG] [GameManager] Button sequence: 012111111
+[2025-11-14 23:27:17,224] [DEBUG] [ButtonReader] Button state changed: [(1, 'released')]
+[2025-11-14 23:27:18,309] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-14 23:27:18,310] [DEBUG] [GameManager] Button sequence: 0121111111
+[2025-11-14 23:27:18,931] [DEBUG] [ButtonReader] Button state changed: [(1, 'released')]
+[2025-11-14 23:27:19,132] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-14 23:27:19,133] [DEBUG] [GameManager] Button sequence: 1211111111
+[2025-11-14 23:27:19,595] [DEBUG] [ButtonReader] Button state changed: [(1, 'released')]
+[2025-11-14 23:27:19,795] [DEBUG] [PartyState] Reduction feature enabled!
+[2025-11-14 23:27:19,856] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-14 23:27:19,856] [DEBUG] [GameManager] Button sequence: 2111111111
+[2025-11-14 23:27:22,366] [DEBUG] [ButtonReader] Button state changed: [(1, 'released')]
+[2025-11-14 23:27:24,678] [DEBUG] [ButtonReader] Button state changed: [(2, 'pressed')]
+[2025-11-14 23:27:24,679] [DEBUG] [GameManager] Button sequence: 1111111112
+[2025-11-14 23:27:24,680] [DEBUG] [PartyState] Applause started
+[2025-11-14 23:27:28,057] [DEBUG] [ButtonReader] Button state changed: [(2, 'released')]
+[2025-11-14 23:27:28,057] [DEBUG] [PartyState] Applause stopped
+[2025-11-14 23:27:28,620] [DEBUG] [ButtonReader] Button state changed: [(2, 'pressed')]
+[2025-11-14 23:27:28,621] [DEBUG] [GameManager] Button sequence: 1111111122
+[2025-11-14 23:27:28,621] [DEBUG] [PartyState] Applause started
+[2025-11-14 23:27:31,336] [DEBUG] [ButtonReader] Button state changed: [(2, 'released')]
+[2025-11-14 23:27:31,337] [DEBUG] [PartyState] Applause stopped
+[2025-11-14 23:27:32,461] [DEBUG] [ButtonReader] Button state changed: [(0, 'pressed')]
+[2025-11-14 23:27:32,461] [DEBUG] [GameManager] Button sequence: 1111111220
+[2025-11-14 23:27:33,465] [DEBUG] [ButtonReader] Button state changed: [(0, 'released')]
+[2025-11-14 23:27:34,852] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-14 23:27:34,853] [DEBUG] [GameManager] Button sequence: 1111112201
+[2025-11-14 23:27:40,882] [INFO] [PartyState] Reduction complete!
+[2025-11-14 23:27:40,883] [INFO] [GameManager] State transition: PartyState → IdleState
+[2025-11-14 23:27:40,902] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-14 23:27:40,914] [INFO] [SoundController] Song "The Offspring - Pretty Fly (For A White Guy) (Official Music Video) [QtTR-_Klcq8].mp3" was randomly started
+[2025-11-14 23:27:40,915] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [1]
+[2025-11-14 23:27:41,485] [DEBUG] [ButtonReader] Button state changed: [(1, 'released')]
+[2025-11-14 23:27:41,487] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-14 23:28:45,435] [INFO] [GameManager] Game stopped by user (Ctrl+C)
+[2025-11-14 23:28:45,452] [INFO] [GameManager] Game stopped
+[2025-11-14 23:28:45,453] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

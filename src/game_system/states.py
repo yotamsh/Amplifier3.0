@@ -285,6 +285,11 @@ class PartyState(GameState):
         self.button_A_held = False
         self.button_B_held = False
         
+        # Last button applause feature (enabled after 15 seconds)
+        self.last_button_index = button_count - 1
+        self.last_button_held = False
+        self.applause_channel = None
+        
         # Create party animation with reduction support
         self.party_anim = PartyAnimation(
             strip=first_strip,
@@ -314,8 +319,13 @@ class PartyState(GameState):
         self.logger.info("🎉 PARTY MODE ACTIVATED!")
     
     def custom_on_exit(self) -> None:
-        """Stop music when exiting"""
+        """Stop music and applause when exiting"""
         self.game_manager.sound_controller.stop_music()
+        
+        # Stop applause if playing
+        if self.applause_channel:
+            self.applause_channel.stop()
+            self.applause_channel = None
     
     def update(self, button_state: 'ButtonState') -> Optional['GameState']:
         """Update party state"""
@@ -334,6 +344,9 @@ class PartyState(GameState):
             end_state = self._handle_reduction(button_state, current_time)
             if end_state:
                 return end_state
+            
+            # Handle last button applause (also enabled after 15 seconds)
+            self._handle_applause_button(button_state)
         
         # Check if song finished playing
         if not self.game_manager.sound_controller.is_song_playing():
@@ -431,6 +444,31 @@ class PartyState(GameState):
             return IdleState(self.game_manager)
         
         return None
+    
+    def _handle_applause_button(self, button_state: 'ButtonState') -> None:
+        """
+        Handle applause sound for last button.
+        When last button is pressed, play applause. When released, stop it.
+        """
+        last_button_pressed = button_state.for_button[self.last_button_index]
+        
+        # Button pressed - play applause
+        if last_button_pressed and not self.last_button_held:
+            self.last_button_held = True
+            from audio_system.sound_controller import GameSounds
+            self.applause_channel = self.game_manager.sound_controller.play_sound_with_volume(
+                GameSounds.APPLAUSE_SOUND,
+                volume=1.0
+            )
+            self.logger.debug("Applause started")
+        
+        # Button released - stop applause
+        elif not last_button_pressed and self.last_button_held:
+            self.last_button_held = False
+            if self.applause_channel:
+                self.applause_channel.stop()
+                self.applause_channel = None
+            self.logger.debug("Applause stopped")
 
 
 class CodeModeState(GameState):
