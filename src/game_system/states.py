@@ -349,6 +349,9 @@ class CodeModeState(GameState):
         
         # Reset sequence to start fresh
         self.game_manager.sequence_tracker.reset()
+        # ignore pressed buttons (the sequence button)
+        self.game_manager.button_reader.ignore_pressed_until_released()
+
         
         # Clear LEDs initially (no digits entered yet)
         from led_system.pixel import Pixel
@@ -411,9 +414,9 @@ class CodeModeState(GameState):
         # Update animation to show entered digits
         self.code_anim.set_active_digits(sequence)
         
-        # Check if code is complete (5 digits)
-        from audio_system.code_generator import CodeGeneratorHelper
-        if len(sequence) == CodeGeneratorHelper.CODE_LENGTH:
+        # Check if code is complete (using configured code length)
+        code_length = self.game_manager.sound_controller.song_library.code_length
+        if len(sequence) == code_length:
             self.logger.info(f"Code entered: {sequence}")
             
             # Validate code

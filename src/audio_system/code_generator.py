@@ -30,7 +30,7 @@ class CodeGeneratorHelper:
     - Avoid duplicate codes and preserve existing ones
     """
     
-    CODE_LENGTH = 5
+    CODE_LENGTH = 5  # Production code length (for generating new codes)
     
     @staticmethod
     def generate_missing_codes(audio_config: AudioConfig) -> None:
@@ -64,6 +64,14 @@ class CodeGeneratorHelper:
         
         # Use all hardcoded collections
         print(f"📂 Processing collections: {[c.name for c in ALL_COLLECTIONS]}")
+        print()
+        
+        # Safety confirmation prompt
+        print(f"⚠️  WARNING: This will keep only {CodeGeneratorHelper.CODE_LENGTH}-digit codes and override the rest!")
+        response = input(f"ARE YOU SURE YOU WANT TO KEEP ONLY {CodeGeneratorHelper.CODE_LENGTH}-DIGIT CODES AND OVERRIDE THE REST FOR ALL SONGS? (y/n): ")
+        if response.lower() != 'y':
+            print("❌ Operation cancelled by user")
+            return
         print()
         
         # Statistics tracking

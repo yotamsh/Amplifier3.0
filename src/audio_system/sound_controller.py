@@ -19,7 +19,7 @@ class GameSounds(enum.Enum):
     """Game sound effects - stores file paths, loads sounds when needed"""
     WIN_SOUND = "win.mp3"
     CODE_SOUND = "code.mp3"
-    INTRO_SOUND = "one_two_three.mp3"
+    ONE_TWO_THREE_SOUND = "one_two_three.mp3"
     QUITE_SOUND = "quite.mp3"
     BOOM_SOUND = "boom.mp3"
     
@@ -136,7 +136,7 @@ class SoundController:
         # Log song name
         if self.current_song:
             song_name = os.path.basename(self.current_song)
-            self.logger.info(f"Song {song_name} was randomly started")
+            self.logger.info(f'Song "{song_name}" was randomly started')
     
     def stop_music(self) -> None:
         """Stop the currently playing music"""

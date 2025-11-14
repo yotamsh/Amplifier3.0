@@ -117,6 +117,7 @@ class ButtonReader(IButtonReader):
             
             if button_pressed:
                 self._ignored_buttons[i] = True
+                self._previous_state[i] = False  # Prevent false "release" detection
                 self._logger.debug(f"Button {i} will be ignored until released")
     
     def read_buttons(self) -> ButtonState:

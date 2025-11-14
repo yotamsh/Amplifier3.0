@@ -1,2 +1,6 @@
 # Common requirements (Mac + Pi)
+deprecation==2.1.0
+eyeD3==0.9.8
+filetype==1.2.0
+packaging==25.0
 pygame==2.6.1

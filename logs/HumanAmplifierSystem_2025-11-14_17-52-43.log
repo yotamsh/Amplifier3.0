@@ -76,3 +76,6 @@
 [2025-11-14 17:53:25,422] [DEBUG] [GameManager] Button sequence: 2
 [2025-11-14 17:53:26,486] [INFO] [CodeModeState] Code mode failed: Button was released
 [2025-11-14 17:53:26,487] [INFO] [GameManager] State transition: CodeModeState → IdleState
+[2025-11-14 17:58:57,343] [INFO] [GameManager] Game stopped by user (Ctrl+C)
+[2025-11-14 17:58:57,362] [INFO] [GameManager] Game stopped
+[2025-11-14 17:58:57,362] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

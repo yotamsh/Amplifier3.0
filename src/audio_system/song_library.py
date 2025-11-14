@@ -29,13 +29,14 @@ class SongLibrary:
     - Updating available collections based on schedule
     """
     
-    def __init__(self, songs_folder: str, schedule: Schedule, logger):
+    def __init__(self, songs_folder: str, schedule: Schedule, code_length: int, logger):
         """
         Initialize song library with strict validation and collection loading.
         
         Args:
             songs_folder: Path to songs directory
             schedule: Schedule instance for time-based collection management (already validated)
+            code_length: Required length of song codes (e.g., 3 for testing, 5 for production)
             logger: ClassLogger instance for logging
             
         Raises:
@@ -55,6 +56,7 @@ class SongLibrary:
         
         self.songs_folder = songs_folder
         self.schedule = schedule  # Pre-validated by caller
+        self.code_length = code_length
         self.logger = logger
         
         # Current active collections and song basket
@@ -255,18 +257,18 @@ class SongLibrary:
     
     def _is_valid_code(self, code: Optional[str]) -> bool:
         """
-        Validate that a code meets the 5-digit requirements.
+        Validate that a code meets the required digit length requirements.
         
         Args:
             code: Code string to validate
             
         Returns:
-            True if code is valid (5 digits, not starting with 0)
+            True if code is valid (self.code_length digits, not starting with 0)
         """
         return (
             code is not None and
             isinstance(code, str) and
-            len(code) == 5 and
+            len(code) == self.code_length and
             code.isdigit() and
             code[0] != '0'
         )
