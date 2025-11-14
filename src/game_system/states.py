@@ -242,13 +242,15 @@ class PartyState(GameState):
     Party state - triggered when all buttons are pressed.
     
     Features:
-    - Plays win sound
+    - Plays win sound (in AmplifyState before transition)
     - Sets music to maximum volume
     - Crazy multi-effect animation
+    - After 15 seconds: Reduction feature enabled (center buttons can reduce volume/end party)
     - Returns to idle when song ends
     
     Transitions:
     - Song finished → IdleState
+    - Reduction complete → IdleState (with BOOM sound)
     """
     
     def __init__(self, game_manager: 'GameManager'):
@@ -257,11 +259,37 @@ class PartyState(GameState):
         # Create logger
         self.logger = game_manager.logger.create_class_logger("PartyState")
         
-        # Create party animation - crazy multi-effect on strip 1
+        # Calculate center buttons for reduction feature
+        button_count = game_manager.button_reader.get_button_count()
+        self.button_A = button_count // 2
+        self.button_B = (button_count - 1) // 2
         first_strip = game_manager.led_strips[0]
+        self.leds_per_button = first_strip.num_pixels() // button_count
+        
+        # Reduction feature state
+        self.reduction_enabled = False
+        self.party_start_time = None
+        self.reduction_enable_delay = 15.0  # seconds
+        
+        # Red spreading state (number of red pixels from each button)
+        self.a_red_pixels = 0  # Red pixels from A side
+        self.b_red_pixels = 0  # Red pixels from B side
+        self.max_spread = self.button_B * self.leds_per_button
+        
+        # Spreading timing
+        self.spread_interval_ms = 50  # 50ms per pixel
+        self.last_spread_time_A = 0
+        self.last_spread_time_B = 0
+        
+        # Button hold state
+        self.button_A_held = False
+        self.button_B_held = False
+        
+        # Create party animation with reduction support
         self.party_anim = PartyAnimation(
             strip=first_strip,
-            speed_ms=20  # Very fast updates
+            speed_ms=20,  # Very fast updates
+            button_count=button_count
         )
         self.animations: List['Animation'] = [self.party_anim]
     
@@ -271,14 +299,17 @@ class PartyState(GameState):
         self.game_manager.button_reader.ignore_pressed_until_released()
         
         # Clear all LED strips from previous animations
-        from led_system.pixel import Pixel
-        black = Pixel(0, 0, 0)
+        from game_system.animation_helpers import AnimationHelpers
         for strip in self.game_manager.led_strips:
-            strip[:] = black
+            strip[:] = AnimationHelpers.BLACK
             strip.show()
         
         # Set music to maximum volume
         self.game_manager.sound_controller.mixer.music.set_volume(1.0)
+        
+        # Start party timer
+        import time
+        self.party_start_time = time.time()
         
         self.logger.info("🎉 PARTY MODE ACTIVATED!")
     
@@ -288,14 +319,116 @@ class PartyState(GameState):
     
     def update(self, button_state: 'ButtonState') -> Optional['GameState']:
         """Update party state"""
+        import time
+        current_time = time.time()
+        
+        # Check if reduction should be enabled
+        if not self.reduction_enabled:
+            if current_time - self.party_start_time >= self.reduction_enable_delay:
+                self.reduction_enabled = True
+                self.logger.debug("Reduction feature enabled!")
+        
+        # Handle reduction logic if enabled
+        end_state = None
+        if self.reduction_enabled:
+            end_state = self._handle_reduction(button_state, current_time)
+            if end_state:
+                return end_state
+        
         # Check if song finished playing
         if not self.game_manager.sound_controller.is_song_playing():
             self.logger.info("Song finished, returning to idle")
             return IdleState(self.game_manager)
         
-        # Update animations
+        # Update party animation with red override info
+        self.party_anim.set_red_override(
+            self.button_A,
+            self.button_B,
+            self.a_red_pixels,
+            self.b_red_pixels,
+            self.button_A_held,
+            self.button_B_held
+        )
+        
+        # Update animations (they handle rendering and show())
         for animation in self.animations:
             animation.update_if_needed()
+        
+        return None
+    
+    def _handle_reduction(self, button_state: 'ButtonState', current_time: float) -> Optional['GameState']:
+        """
+        Handle reduction feature logic.
+        
+        Returns:
+            GameState to transition to, or None to stay in party
+        """
+        # Track button states
+        button_A_pressed = button_state.for_button[self.button_A]
+        button_B_pressed = button_state.for_button[self.button_B]
+        
+        # Button A released - clear its red
+        if self.button_A_held and not button_A_pressed:
+            self.a_red_pixels = 0
+            self.button_A_held = False
+            self.last_spread_time_A = 0
+        
+        # Button B released - clear its red
+        if self.button_B_held and not button_B_pressed:
+            self.b_red_pixels = 0
+            self.button_B_held = False
+            self.last_spread_time_B = 0
+        
+        # Button A pressed - spread right (segment always red, spread is additional)
+        if button_A_pressed:
+            if not self.button_A_held:
+                self.button_A_held = True
+                self.last_spread_time_A = current_time * 1000
+                self.a_red_pixels = 0  # Start at 0 additional spread pixels
+            
+            # Spread additional pixels every 50ms
+            current_time_ms = current_time * 1000
+            if self.a_red_pixels < self.max_spread:
+                if current_time_ms - self.last_spread_time_A >= self.spread_interval_ms:
+                    self.a_red_pixels += 1
+                    self.last_spread_time_A = current_time_ms
+        
+        # Button B pressed - spread left (segment always red, spread is additional)
+        if button_B_pressed:
+            if not self.button_B_held:
+                self.button_B_held = True
+                self.last_spread_time_B = current_time * 1000
+                self.b_red_pixels = 0  # Start at 0 additional spread pixels
+            
+            current_time_ms = current_time * 1000
+            if self.b_red_pixels < self.max_spread:
+                if current_time_ms - self.last_spread_time_B >= self.spread_interval_ms:
+                    self.b_red_pixels += 1
+                    self.last_spread_time_B = current_time_ms
+        
+        # Volume control: both pressed AND (n+m) % 10 == 0
+        # n+m is ONLY the additional spread pixels, not including segments
+        total_spread = self.a_red_pixels + self.b_red_pixels
+        both_pressed = button_A_pressed and button_B_pressed
+        
+        if both_pressed and total_spread % 10 == 0:
+            # Volume decreases as spread increases: 1.0 → 0.0
+            volume = 1.0 - (total_spread / (2 * self.max_spread))
+            self.game_manager.sound_controller.mixer.music.set_volume(volume)
+        elif not both_pressed:
+            # One or none pressed: reset to full volume
+            self.game_manager.sound_controller.mixer.music.set_volume(1.0)
+        
+        # End condition: total spread == 2*max_spread
+        if total_spread >= 2 * self.max_spread:
+            self.logger.info("Reduction complete!")
+            from audio_system.sound_controller import GameSounds
+            self.game_manager.sound_controller.play_sound_with_volume(
+                GameSounds.BOOM_SOUND,
+                volume=1.0
+            )
+            self.game_manager.sound_controller.stop_music()
+            return IdleState(self.game_manager)
         
         return None
 

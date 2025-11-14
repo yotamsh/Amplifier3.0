@@ -386,13 +386,14 @@ class PartyAnimation(Animation):
     Like a wave emanating from the center.
     """
     
-    def __init__(self, strip: 'LedStrip', speed_ms: int = None):
+    def __init__(self, strip: 'LedStrip', speed_ms: int = None, button_count: int = None):
         """
         Initialize party pushing wave animation.
         
         Args:
             strip: LED strip to operate on
             speed_ms: Animation update interval in milliseconds (random if None)
+            button_count: Number of buttons for reduction feature (optional)
         """
         # Pick random speed if not provided (faster range)
         if speed_ms is None:
@@ -407,75 +408,117 @@ class PartyAnimation(Animation):
         self.center2: int = self.num_pixels // 2
         self.is_even: bool = (self.num_pixels % 2 == 0)
         
-        # Color palette
-        self.color_palette = []  # Will be initialized in advance()
-        self.color_index: int = 0  # Track current color in sequence
+        # Color palette (initialized immediately)
+        self.colors = [
+            AnimationHelpers.RED_WINE,
+            AnimationHelpers.GREEN_GRASS,
+            AnimationHelpers.PURPLE,
+            AnimationHelpers.SOFT_WHITE
+        ]
         
-        # Current band state
-        self.current_color = None
-        self.current_band_length: int = 0
-        self.current_band_speed: int = speed_ms  # Track current speed
-        self.leds_in_current_band: int = 0
+        # Wave state: track position with fixed band width for smooth animation
+        self.wave_position: int = 0  # How far the wave has traveled from center
+        self.band_width: int = 25  # Fixed width for consistent, smooth bands
+        self.speed_change_interval: int = self.band_width * len(self.colors)  # Change speed after full color cycle
+        
+        # Reduction red override state
+        self.button_count = button_count
+        self.leds_per_button = strip.num_pixels() // button_count if button_count else 0
+        self.button_A = None
+        self.button_B = None
+        self.a_red_pixels = 0  # Additional spread pixels (not including segment)
+        self.b_red_pixels = 0  # Additional spread pixels (not including segment)
+        self.button_A_held = False
+        self.button_B_held = False
     
     def advance(self) -> None:
-        """Pushing wave effect - new colors push from center outward"""
-        # Initialize color palette (only once)
-        if not self.color_palette:
-            self.color_palette = [
-                AnimationHelpers.RED_WINE,
-                AnimationHelpers.GREEN_GRASS,
-                AnimationHelpers.PURPLE,
-                AnimationHelpers.SOFT_WHITE
-            ]
-            # Pick first color in sequence, random length and speed
-            self.current_color = self.color_palette[self.color_index]
-            self.current_band_length = random.randint(15, 35)
-            self.current_band_speed = random.randint(10, 20)  # Faster: 10-20ms
-            self.speed_ms = self.current_band_speed
-            self.leds_in_current_band = 0
+        """
+        Stateless wave effect - calculates each pixel's color independently
+        based on distance from center and current wave position.
+        This prevents the animation from interfering with red override pixels.
+        Uses fixed band_width for smooth, jump-free animation.
+        """
+        # Advance wave position
+        self.wave_position += 1
         
-        # Shift all pixels outward from center using efficient slice notation
-        if self.is_even:
-            # Even pixel count: two centers at center1 and center2
-            # Left side: shift left (positions 0 to center1-1)
-            if self.center1 > 0:
-                self.strip[:self.center1] = self.strip[1:self.center1+1]
-            
-            # Right side: shift right (positions center2+1 to end)
-            if self.center2 < self.num_pixels - 1:
-                self.strip[self.center2+1:] = self.strip[self.center2:-1]
-            
-            # Add current color at both center positions
-            self.strip[self.center1] = self.current_color
-            self.strip[self.center2] = self.current_color
-            
-        else:
-            # Odd pixel count: single center at center2
-            # Left side: shift left (positions 0 to center2-1)
-            if self.center2 > 0:
-                self.strip[:self.center2] = self.strip[1:self.center2+1]
-            
-            # Right side: shift right (positions center2+1 to end)
-            if self.center2 < self.num_pixels - 1:
-                self.strip[self.center2+1:] = self.strip[self.center2:-1]
-            
-            # Add current color at center
-            self.strip[self.center2] = self.current_color
+        # Optionally vary speed after full color cycle (smooth transitions)
+        if self.wave_position % self.speed_change_interval == 0:
+            self.speed_ms = random.randint(10, 20)
         
-        # Count LEDs added for this color
-        self.leds_in_current_band += 1
-        
-        # Check if we've added enough LEDs for this color band
-        if self.leds_in_current_band >= self.current_band_length:
-            # Move to next color in sequence
-            self.color_index = (self.color_index + 1) % len(self.color_palette)
-            self.current_color = self.color_palette[self.color_index]
+        # Calculate color for each pixel based on distance from center
+        for i in range(self.num_pixels):
+            # Calculate distance from center
+            if self.is_even:
+                # Distance from nearest center
+                dist = min(abs(i - self.center1), abs(i - self.center2))
+            else:
+                dist = abs(i - self.center2)
             
-            # Pick random length and speed for next band
-            self.current_band_length = random.randint(15, 35)
-            self.current_band_speed = random.randint(10, 20)  # Faster: 10-20ms
-            self.speed_ms = self.current_band_speed  # Update animation speed
-            self.leds_in_current_band = 0
+            # Determine which color band this pixel is in
+            # Subtract wave_position to create outward movement effect
+            band_position = (dist - self.wave_position) // self.band_width
+            
+            # Use modulo to cycle through colors, handle negative with abs
+            color_idx = abs(band_position) % len(self.colors)
+            self.strip[i] = self.colors[color_idx]
+        
+        # Apply red override on top (after generating base animation)
+        self._apply_red_override()
+    
+    def set_red_override(self, button_A: int, button_B: int, 
+                         a_red_pixels: int, b_red_pixels: int,
+                         button_A_held: bool, button_B_held: bool) -> None:
+        """
+        Set red override information for reduction feature.
+        
+        Args:
+            button_A: Index of button A (right center)
+            button_B: Index of button B (left center)
+            a_red_pixels: Number of additional spread pixels from A (not including segment)
+            b_red_pixels: Number of additional spread pixels from B (not including segment)
+            button_A_held: Whether button A is currently held
+            button_B_held: Whether button B is currently held
+        """
+        self.button_A = button_A
+        self.button_B = button_B
+        self.a_red_pixels = a_red_pixels
+        self.b_red_pixels = b_red_pixels
+        self.button_A_held = button_A_held
+        self.button_B_held = button_B_held
+    
+    def _apply_red_override(self) -> None:
+        """Apply red color override for reduction feature"""
+        if not self.button_A_held and not self.button_B_held:
+            return  # No buttons held, no override needed
+        
+        from led_system.pixel import Pixel
+        red = Pixel(255, 0, 0)
+        
+        # Button A held: segment + spread right
+        if self.button_A_held:
+            # Segment always red when held
+            segment_start = self.button_A * self.leds_per_button
+            segment_end = (self.button_A + 1) * self.leds_per_button
+            self.strip[segment_start:segment_end] = red
+            
+            # Additional spread pixels beyond segment
+            if self.a_red_pixels > 0:
+                spread_start = segment_end
+                spread_end = spread_start + self.a_red_pixels
+                self.strip[spread_start:spread_end] = red
+        
+        # Button B held: segment + spread left
+        if self.button_B_held:
+            # Segment always red when held
+            segment_start = self.button_B * self.leds_per_button
+            segment_end = (self.button_B + 1) * self.leds_per_button
+            self.strip[segment_start:segment_end] = red
+            
+            # Additional spread pixels before segment
+            if self.b_red_pixels > 0:
+                spread_end = segment_start
+                spread_start = max(0, spread_end - self.b_red_pixels)
+                self.strip[spread_start:spread_end] = red
 
 
 class CodeModeAnimation(Animation):
