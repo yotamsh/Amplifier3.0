@@ -377,3 +377,6 @@
 [2025-11-14 18:51:02,820] [DEBUG] [ButtonReader] Button 1 will be ignored until released
 [2025-11-14 18:51:02,821] [INFO] [GameManager] State transition: CodeModeState → IdleState
 [2025-11-14 18:51:03,803] [DEBUG] [ButtonReader] Button 1 released, no longer ignored
+[2025-11-14 19:10:50,830] [INFO] [GameManager] Game stopped by user (Ctrl+C)
+[2025-11-14 19:10:50,841] [INFO] [GameManager] Game stopped
+[2025-11-14 19:10:50,841] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

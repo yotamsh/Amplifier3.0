@@ -74,7 +74,7 @@ class IdleState(GameState):
     
     def __init__(self, game_manager: 'GameManager'):
         super().__init__(game_manager)
-        
+    
         # Create bouncing rainbow scanner animation for each strip, wrapped with 2-second delay
         self.animations: List['Animation'] = []
         
@@ -188,7 +188,7 @@ class AmplifyState(GameState):
         pressed_indexes = [i for i, pressed in enumerate(self.pressed_buttons) if pressed]
         if pressed_indexes:
             self.logger.debug(f"AmplifyState activated with buttons: {pressed_indexes}")
-        
+    
     def custom_on_exit(self) -> None:
         """Called when exiting amplify state"""
         # Ignore any currently pressed buttons until they're released
@@ -200,6 +200,12 @@ class AmplifyState(GameState):
         # Check for party mode - all buttons pressed
         button_count = self.game_manager.button_reader.get_button_count()
         if button_state.total_buttons_pressed == button_count:
+            # Play win sound before transitioning
+            from audio_system.sound_controller import GameSounds
+            self.game_manager.sound_controller.play_sound_with_volume(
+                GameSounds.WIN_SOUND, 
+                volume=1.0
+            )
             return PartyState(self.game_manager)
         
         # Check if song finished playing
@@ -229,7 +235,7 @@ class AmplifyState(GameState):
             animation.update_if_needed()
         
         return None
-
+    
 
 class PartyState(GameState):
     """
@@ -270,13 +276,6 @@ class PartyState(GameState):
         for strip in self.game_manager.led_strips:
             strip[:] = black
             strip.show()
-        
-        # Play win sound effect
-        from audio_system.sound_controller import GameSounds
-        self.game_manager.sound_controller.play_sound_with_volume(
-            GameSounds.WIN_SOUND, 
-            volume=1.0
-        )
         
         # Set music to maximum volume
         self.game_manager.sound_controller.mixer.music.set_volume(1.0)
@@ -411,6 +410,20 @@ class CodeModeState(GameState):
         # Get current sequence
         sequence = self.game_manager.sequence_tracker.get_sequence()
         
+        # Play digit sound if a new button was pressed
+        if button_state.any_changed:
+            # Check if any button was newly pressed (prev=False, current=True)
+            for i, currently_pressed in enumerate(button_state.for_button):
+                prev_pressed = button_state.previous_state_of[i]
+                if not prev_pressed and currently_pressed:
+                    # New button press detected
+                    from audio_system.sound_controller import GameSounds
+                    self.game_manager.sound_controller.play_sound_with_volume(
+                        GameSounds.CODE_DIGIT_SOUND,
+                        volume=0.7
+                    )
+                    break  # Only play once even if multiple buttons pressed
+        
         # Update animation to show entered digits
         self.code_anim.set_active_digits(sequence)
         
@@ -420,16 +433,136 @@ class CodeModeState(GameState):
             self.logger.info(f"Code entered: {sequence}")
             
             # Validate code
-            is_valid = self.game_manager.sound_controller.handle_code(sequence)
+            is_valid = self.game_manager.sound_controller.is_code_supported(sequence)
             
             if is_valid:
-                self.logger.info("Valid code! Transitioning to PartyState")
+                self.logger.info("Valid code! Transitioning to CodeRevealState")
                 # Stop code input music before transitioning
                 self.game_manager.sound_controller.stop_music()
-                return PartyState(self.game_manager)
+                return CodeRevealState(self.game_manager, sequence, sequence)
             else:
                 # FAILURE CONDITION 3: Invalid/unsupported code
                 return self._fail_and_return_to_idle(f"Invalid code: {sequence}")
+        
+        # Update animations
+        for animation in self.animations:
+            animation.update_if_needed()
+        
+        return None
+
+
+class CodeRevealState(GameState):
+    """
+    Code reveal state - animated transition from valid code entry to party mode.
+    
+    Sequence:
+    1. Play CODE_SOUND on enter, animate code reveal (fill digits progressively)
+    2. When CODE_SOUND finishes, play ONE_TWO_THREE_SOUND and switch to blink animation
+    3. When ONE_TWO_THREE_SOUND finishes, play song by code and transition to PartyState
+    
+    Transitions:
+    - Song loaded successfully → PartyState
+    - Song load failed → IdleState
+    """
+    
+    def __init__(self, game_manager: 'GameManager', code_sequence: str, code: str,
+                 fill_speed_ms: int = 200, blink_speed_ms: int = 400):
+        """
+        Initialize code reveal state.
+        
+        Args:
+            game_manager: GameManager instance
+            code_sequence: The button sequence entered (e.g., "314")
+            code: The validated code (same as sequence for now)
+            fill_speed_ms: Speed of filling animation (ms per digit)
+            blink_speed_ms: Speed of blinking animation (ms per cycle)
+        """
+        super().__init__(game_manager)
+        
+        # Create logger
+        self.logger = game_manager.logger.create_class_logger("CodeRevealState")
+        
+        # Store code for playing song later
+        self.code = code
+        self.code_sequence = code_sequence
+        
+        # Create code reveal animation
+        first_strip = game_manager.led_strips[0]
+        from game_system.animations import CodeRevealAnimation
+        self.reveal_anim = CodeRevealAnimation(
+            strip=first_strip,
+            button_count=game_manager.button_reader.get_button_count(),
+            code_sequence=code_sequence,
+            fill_speed_ms=fill_speed_ms,
+            blink_speed_ms=blink_speed_ms
+        )
+        self.animations: List['Animation'] = [self.reveal_anim]
+        
+        # Sound channel tracking
+        self.code_sound_channel = None
+        self.one_two_three_channel = None
+        
+        # Phase tracking
+        self.phase = "CODE_SOUND"  # "CODE_SOUND" → "ONE_TWO_THREE" → "LOADING_SONG"
+    
+    def custom_on_enter(self) -> None:
+        """Actions when entering code reveal state"""
+        # Clear all LED strips
+        from game_system.animation_helpers import AnimationHelpers
+        for strip in self.game_manager.led_strips:
+            strip[:] = AnimationHelpers.BLACK
+            strip.show()
+        
+        # Play CODE_SOUND and store channel
+        from audio_system.sound_controller import GameSounds
+        self.code_sound_channel = self.game_manager.sound_controller.play_sound_with_volume(
+            GameSounds.CODE_SOUND,
+            volume=0.9
+        )
+        
+        self.logger.info(f"Code reveal started for code: {self.code}")
+    
+    def custom_on_exit(self) -> None:
+        """Actions when exiting code reveal state"""
+        # Ignore currently pressed buttons until released
+        self.game_manager.button_reader.ignore_pressed_until_released()
+    
+    def update(self, button_state: 'ButtonState') -> Optional['GameState']:
+        """Update code reveal - manage animation phases and sound timing"""
+        
+        if self.phase == "CODE_SOUND":
+            # Phase 1: Wait for CODE_SOUND to finish
+            if self.code_sound_channel and not self.code_sound_channel.get_busy():
+                # CODE_SOUND finished - play ONE_TWO_THREE_SOUND
+                from audio_system.sound_controller import GameSounds
+                self.one_two_three_channel = self.game_manager.sound_controller.play_sound_with_volume(
+                    GameSounds.ONE_TWO_THREE_SOUND,
+                    volume=0.9
+                )
+                
+                # Switch animation to blink mode
+                self.reveal_anim.start_blinking()
+                
+                # Move to next phase
+                self.phase = "ONE_TWO_THREE"
+                self.logger.debug("CODE_SOUND finished, playing ONE_TWO_THREE sound")
+        
+        elif self.phase == "ONE_TWO_THREE":
+            # Phase 2: Wait for ONE_TWO_THREE_SOUND to finish
+            if self.one_two_three_channel and not self.one_two_three_channel.get_busy():
+                # Sound finished - play song by code and transition
+                self.logger.info(f"Loading song by code: {self.code}")
+                
+                success = self.game_manager.sound_controller.play_song_by_code(self.code)
+                
+                self.phase = "LOADING_SONG"
+                
+                if success:
+                    self.logger.info("Song loaded successfully, transitioning to PartyState")
+                    return PartyState(self.game_manager)
+                else:
+                    self.logger.error("Failed to load song, returning to IdleState")
+                    return IdleState(self.game_manager)
         
         # Update animations
         for animation in self.animations:

@@ -19,6 +19,7 @@ class GameSounds(enum.Enum):
     """Game sound effects - stores file paths, loads sounds when needed"""
     WIN_SOUND = "win.mp3"
     CODE_SOUND = "code.mp3"
+    CODE_DIGIT_SOUND = "codeDigit.mp3"
     ONE_TWO_THREE_SOUND = "one_two_three.mp3"
     QUITE_SOUND = "quite.mp3"
     BOOM_SOUND = "boom.mp3"
@@ -151,17 +152,54 @@ class SoundController:
         """
         return self.mixer.music.get_busy()
     
-    def handle_code(self, code: str) -> bool:
+    def is_code_supported(self, code: str) -> bool:
         """
         Check if a code is supported by the song library.
         
         Args:
-            code: 5-digit song code to check
+            code: Song code to check
             
         Returns:
             True if code is supported, False otherwise
         """
         return self.song_library.is_code_supported(code)
+    
+    def play_song_by_code(self, code: str) -> bool:
+        """
+        Play a specific song by its code at full volume.
+        
+        Stops current music, loads the song by code, and plays it at volume 1.0.
+        
+        Args:
+            code: Song code to play
+            
+        Returns:
+            True if song was loaded and started successfully, False on error
+        """
+        try:
+            # Stop current music
+            self.stop_music()
+            
+            # Get song path from library
+            song_path = self.song_library.get_song_by_code(code)
+            if not song_path:
+                self.logger.error(f"Song with code {code} not found")
+                return False
+            
+            # Load and play the song
+            self.current_song = song_path
+            self.mixer.music.load(song_path)
+            self.mixer.music.set_volume(1.0)
+            self.mixer.music.play()
+            
+            # Log success
+            song_name = os.path.basename(song_path)
+            self.logger.info(f'Playing song by code {code}: "{song_name}"')
+            return True
+            
+        except Exception as e:
+            self.logger.error(f"Failed to play song by code {code}: {e}")
+            return False
     
     def update_schedule(self, current_time: datetime) -> None:
         """
@@ -172,17 +210,20 @@ class SoundController:
         """
         self.song_library.update_collection_schedule(current_time)
     
-    def play_sound_with_volume(self, sound: GameSounds, volume: float) -> None:
+    def play_sound_with_volume(self, sound: GameSounds, volume: float) -> pygame.mixer.Channel:
         """
-        Play a game sound with specified volume.
+        Play a game sound with specified volume and return the channel.
         
         Args:
             sound: GameSounds enum value to play
             volume: Volume level (0.0 to 1.0)
+            
+        Returns:
+            pygame.mixer.Channel object that can be used to check if sound is still playing
         """
         sound_obj = self._sound_objects[sound]
         sound_obj.set_volume(volume)
-        sound_obj.play()
+        return sound_obj.play()
     
     def play_random_fail_sound(self, volume: float = 1.0) -> None:
         """

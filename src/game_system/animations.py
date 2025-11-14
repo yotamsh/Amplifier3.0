@@ -311,8 +311,6 @@ class AmplifyAnimation(Animation):
         # Track which buttons are currently pressed
         self.pressed_buttons: List[bool] = [False] * button_count
         
-        # Initialize color constants
-        AnimationHelpers._init_colors()
     
     def set_pressed_buttons(self, pressed_buttons: List[bool]) -> None:
         """
@@ -421,9 +419,6 @@ class PartyAnimation(Animation):
     
     def advance(self) -> None:
         """Pushing wave effect - new colors push from center outward"""
-        # Initialize color constants if needed
-        AnimationHelpers._init_colors()
-        
         # Initialize color palette (only once)
         if not self.color_palette:
             self.color_palette = [
@@ -504,9 +499,6 @@ class CodeModeAnimation(Animation):
         self.button_count: int = button_count
         self.leds_per_button: int = strip.num_pixels() // button_count
         self.active_digits: set = set()  # Button indices currently in sequence
-        
-        # Initialize colors
-        AnimationHelpers._init_colors()
     
     def set_active_digits(self, sequence: str) -> None:
         """
@@ -539,3 +531,76 @@ class CodeModeAnimation(Animation):
                 self.strip[led_pos] = green
             else:
                 self.strip[led_pos] = black
+
+
+class CodeRevealAnimation(Animation):
+    """
+    Animation for code reveal - progressively lights up code digits, then blinks them.
+    
+    Phases:
+    1. Fill phase: Light up each digit segment one by one (fill_speed_ms interval)
+    2. Blink phase: Blink all revealed digits (blink_speed_ms interval)
+    """
+    
+    def __init__(self, strip: 'LedStrip', button_count: int, code_sequence: str,
+                 fill_speed_ms: int = 200, blink_speed_ms: int = 400):
+        """
+        Initialize code reveal animation.
+        
+        Args:
+            strip: LED strip to operate on
+            button_count: Number of buttons (for segment calculation)
+            code_sequence: The code to reveal (e.g., "314")
+            fill_speed_ms: Milliseconds between revealing each digit
+            blink_speed_ms: Milliseconds for blink cycle
+        """
+        super().__init__(strip, fill_speed_ms)
+        
+        # Pre-calculate constants
+        self.button_count: int = button_count
+        self.num_pixels: int = strip.num_pixels()
+        self.leds_per_button: int = self.num_pixels // button_count
+        self.fill_speed_ms: int = fill_speed_ms
+        self.blink_speed_ms: int = blink_speed_ms
+        
+        # Parse code sequence into list of digit integers
+        self.code_digits: List[int] = [int(char) for char in code_sequence]
+        
+        # Animation state
+        self.revealed_count: int = 0  # How many digits have been revealed
+        self.is_filling: bool = True  # True during fill phase, False during blink
+        self.blink_state: bool = True  # True = on, False = off
+        
+        # Clear strip once on init
+        self.strip[:] = AnimationHelpers.BLACK
+    
+    def start_blinking(self) -> None:
+        """Transition from fill phase to blink phase"""
+        self.is_filling = False
+        self.speed_ms = self.blink_speed_ms
+        self.last_update = time.time()  # Reset timing for blink
+    
+    def is_fill_complete(self) -> bool:
+        """Check if all digits have been revealed"""
+        return self.revealed_count >= len(self.code_digits)
+    
+    def advance(self) -> None:
+        """Update animation - fill or blink based on current phase"""
+        if self.is_filling:
+            # Fill phase: reveal one more digit
+            if not self.is_fill_complete():
+                digit = self.code_digits[self.revealed_count]
+                start_idx = digit * self.leds_per_button
+                end_idx = (digit + 1) * self.leds_per_button
+                self.strip[start_idx:end_idx] = AnimationHelpers.GREEN
+                self.revealed_count += 1
+        else:
+            # Blink phase: toggle all code digit segments
+            self.blink_state = not self.blink_state
+            color = AnimationHelpers.GREEN if self.blink_state else AnimationHelpers.BLACK
+            
+            # Update all code digit segments using slices
+            for digit in self.code_digits:
+                start_idx = digit * self.leds_per_button
+                end_idx = (digit + 1) * self.leds_per_button
+                self.strip[start_idx:end_idx] = color

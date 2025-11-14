@@ -9,8 +9,8 @@ from game_system.states import GameState
 from game_system.animations import Animation
 from game_system.sequence_tracker import ButtonsSequenceTracker
 from game_system.game_manager import GameManager
-from game_system.states import IdleState, AmplifyState, PartyState, CodeModeState
-from game_system.animations import RainbowAnimation, BreathingAnimation, StaticColorAnimation, CodeModeAnimation
+from game_system.states import IdleState, AmplifyState, PartyState, CodeModeState, CodeRevealState
+from game_system.animations import RainbowAnimation, BreathingAnimation, StaticColorAnimation, CodeModeAnimation, CodeRevealAnimation
 from game_system.animation_helpers import AnimationHelpers
 from game_system.config import GameConfig, LedStripConfig, ButtonConfig, AudioConfig
 
@@ -25,11 +25,13 @@ __all__ = [
     "AmplifyState",
     "PartyState",
     "CodeModeState",
+    "CodeRevealState",
     # Animations
     "RainbowAnimation",
     "BreathingAnimation",
     "StaticColorAnimation",
     "CodeModeAnimation",
+    "CodeRevealAnimation",
     "AnimationHelpers",
     # Configuration
     "GameConfig",
