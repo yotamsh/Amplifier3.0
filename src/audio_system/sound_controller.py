@@ -23,7 +23,8 @@ class GameSounds(enum.Enum):
     ONE_TWO_THREE_SOUND = "one_two_three.mp3"
     QUITE_SOUND = "quite.mp3"
     BOOM_SOUND = "boom.mp3"
-    APPLAUSE_SOUND = "ApplauseLoud.mp3"
+    APPLAUSE_SOUND = "applauseLoud.mp3"
+    AMAZING_SOUND = "amazingLoud.mp3"
     
     # Individual fail sounds
     FAIL_SOUND_1 = "fail1.mp3"

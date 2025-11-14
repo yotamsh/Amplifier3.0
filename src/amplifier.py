@@ -43,7 +43,7 @@ def create_amplifier_config() -> GameConfig:
             # 16, 
             17, 
             # 20, 
-            # 22, 
+            22, 
             # 23, 
             # 24, 
             # 25
@@ -222,8 +222,6 @@ def main():
     amplifier_logger.info(f"Button sample rate: {config.button_config.sample_rate_hz}Hz")
     amplifier_logger.info(f"Audio folder: {config.audio_config.songs_folder}")
     amplifier_logger.info(f"Schedule: {len(config.audio_config.daily_schedule)} daily, {len(config.audio_config.special_schedule)} special entries")
-    
-    input("Press Enter when hardware is ready...")
     
     try:
         # Create game system using the configured values

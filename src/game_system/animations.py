@@ -345,7 +345,7 @@ class AmplifyAnimation(Animation):
         from led_system.pixel import Pixel
         
         # 1. First, apply HSV fading to create trails for released button segments
-        AnimationHelpers.fade_to_black_hsv(self.strip, fade_amount=30, min_brightness=0.0)
+        AnimationHelpers.fade_to_black_hsv(self.strip, fade_amount=60, min_brightness=0.0)
         
         # 2. Update all strip pixels based on current button state
         num_pixels = self.strip.num_pixels()
