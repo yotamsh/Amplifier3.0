@@ -16,7 +16,7 @@ from datetime import datetime, time
 sys.path.insert(0, str(Path(__file__).parent))
 
 try:
-    from button_system import ButtonReader, GPIOSampler
+    from button_system import ButtonReader, GPIOSampler, GPIOWithKeyboardSampler
     from led_system import PixelStripAdapter, Pixel
     from game_system import GameManager, ButtonsSequenceTracker
     from game_system.config import GameConfig, ButtonConfig, LedStripConfig, AudioConfig
@@ -126,8 +126,13 @@ def create_game_system(config: GameConfig, amplifier_logger):
     sound_controller_logger = amplifier_logger.create_class_logger("SoundController", logging.INFO)
     
     try:
+        
         # Initialize button sampler (GPIO hardware abstraction)
-        button_sampler = GPIOSampler(
+        # button_sampler = GPIOSampler(
+# Initialize button sampler (GPIO + keyboard for debugging)
+        # Use GPIOWithKeyboardSampler for debug mode (keyboard toggles work over SSH)
+        # Use GPIOSampler for production (pure GPIO, no keyboard)
+        button_sampler = GPIOWithKeyboardSampler(
             button_pins=config.button_config.pins,
             pull_mode=config.button_config.pull_mode,
             logger=button_reader_logger

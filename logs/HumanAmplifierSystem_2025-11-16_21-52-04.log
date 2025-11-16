@@ -27,3 +27,6 @@
 [2025-11-16 21:52:07,182] [INFO] [Amplifier] Available collections: MORNING, MAIJAM
 [2025-11-16 21:52:07,183] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
 [2025-11-16 21:52:07,184] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-16 22:16:16,570] [INFO] [GameManager] Game stopped by user (Ctrl+C)
+[2025-11-16 22:16:16,589] [INFO] [GameManager] Game stopped
+[2025-11-16 22:16:16,589] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

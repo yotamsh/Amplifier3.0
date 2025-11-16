@@ -9,11 +9,13 @@ from .button_state import ButtonState
 from .interfaces import IButtonReader, IButtonSampler
 from .button_reader import ButtonReader
 from .gpio_sampler import GPIOSampler
+from .gpio_keyboard_sampler import GPIOWithKeyboardSampler
 
 __all__ = [
     "ButtonState",
     "IButtonReader",
     "IButtonSampler",
     "ButtonReader",
-    "GPIOSampler"
+    "GPIOSampler",
+    "GPIOWithKeyboardSampler"
 ]
