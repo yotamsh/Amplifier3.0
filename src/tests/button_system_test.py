@@ -15,7 +15,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 try:
-    from button_system import ButtonReader
+    from button_system import ButtonReader, GPIOSampler
     from utils import HybridLogger
     import RPi.GPIO as GPIO
     import logging
@@ -60,10 +60,17 @@ class ButtonTestRunner:
     def setup_button_reader(self, logger):
         """Initialize button reader with selected GPIOs"""
         try:
-            self.button_reader = ButtonReader(
+            # Create GPIO sampler
+            sampler = GPIOSampler(
                 button_pins=BUTTON_PINS,
-                logger=logger,
-                pull_mode=GPIO.PUD_OFF  # No internal pulls (external circuits)
+                pull_mode=GPIO.PUD_OFF,  # No internal pulls (external circuits)
+                logger=logger
+            )
+            
+            # Create button reader with sampler
+            self.button_reader = ButtonReader(
+                sampler=sampler,
+                logger=logger
             )
             
             logger.info("Button reader initialized successfully")

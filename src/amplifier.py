@@ -16,7 +16,7 @@ from datetime import datetime, time
 sys.path.insert(0, str(Path(__file__).parent))
 
 try:
-    from button_system import ButtonReader
+    from button_system import ButtonReader, GPIOSampler
     from led_system import PixelStripAdapter, Pixel
     from game_system import GameManager, ButtonsSequenceTracker
     from game_system.config import GameConfig, ButtonConfig, LedStripConfig, AudioConfig
@@ -38,8 +38,8 @@ def create_amplifier_config() -> GameConfig:
     button_config = ButtonConfig(
         pins=[
             # 4, 
-            5, 
             6, 
+            5, 
             # 16, 
             17, 
             # 20, 
@@ -126,11 +126,17 @@ def create_game_system(config: GameConfig, amplifier_logger):
     sound_controller_logger = amplifier_logger.create_class_logger("SoundController", logging.INFO)
     
     try:
-        # Initialize button reader
-        button_reader = ButtonReader(
+        # Initialize button sampler (GPIO hardware abstraction)
+        button_sampler = GPIOSampler(
             button_pins=config.button_config.pins,
-            logger=button_reader_logger,
-            pull_mode=config.button_config.pull_mode
+            pull_mode=config.button_config.pull_mode,
+            logger=button_reader_logger
+        )
+        
+        # Initialize button reader (state management)
+        button_reader = ButtonReader(
+            sampler=button_sampler,
+            logger=button_reader_logger
         )
         
         # Initialize LED strips from configuration

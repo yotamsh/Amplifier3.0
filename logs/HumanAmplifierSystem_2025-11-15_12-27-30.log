@@ -1,0 +1,45 @@
+[2025-11-15 12:27:30,186] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-15 12:27:30,186] [INFO] [Amplifier] Button configuration: 4 buttons on GPIO [5, 6, 17, 22]
+[2025-11-15 12:27:30,190] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-15 12:27:30,191] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-15 12:27:30,192] [INFO] [Amplifier]   Strip 2: 300 LEDs on GPIO 18
+[2025-11-15 12:27:30,192] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-15 12:27:30,193] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-15 12:27:30,193] [INFO] [Amplifier] Audio folder: songs
+[2025-11-15 12:27:30,194] [INFO] [Amplifier] Schedule: 2 daily, 1 special entries
+[2025-11-15 12:27:30,195] [INFO] [ButtonReader] GPIO setup complete: 4 pins, no pulls
+[2025-11-15 12:27:30,196] [INFO] [ButtonReader] ButtonReader initialized with 4 buttons
+[2025-11-15 12:27:30,196] [INFO] [ButtonReader] Button mapping: Button0=GPIO5, Button1=GPIO6, Button2=GPIO17, Button3=GPIO22
+[2025-11-15 12:27:30,200] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-15 12:27:30,821] [INFO] [SongLibrary] Loaded 1 song codes from 2 collections
+[2025-11-15 12:27:30,822] [INFO] [SongLibrary] Collections updated: ['MAIJAM', 'MORNING']
+[2025-11-15 12:27:32,836] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-15 12:27:32,837] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-15 12:27:32,838] [INFO] [Amplifier] Hardware: 4 buttons, 2 LED strips, 20ms frame duration
+[2025-11-15 12:27:32,838] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['MAIJAM', 'MORNING'], 'total_codes': 1, 'daily_schedule_entries': 2, 'special_schedule_entries': 1}
+[2025-11-15 12:27:32,839] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-15 12:27:32,839] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-15 12:27:32,840] [INFO] [Amplifier] Hardware status: 4 buttons, 2 LED strips
+[2025-11-15 12:27:32,841] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-15 12:27:32,841] [INFO] [Amplifier]   Strip 2: 300 LEDs active
+[2025-11-15 12:27:32,842] [INFO] [Amplifier] Audio system: 1 song codes, 12 sound effects
+[2025-11-15 12:27:32,842] [INFO] [Amplifier] Available collections: MAIJAM, MORNING
+[2025-11-15 12:27:32,842] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-15 12:27:32,843] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-15 12:57:29,637] [DEBUG] [ButtonReader] Button state changed: [(3, 'pressed')]
+[2025-11-15 12:57:29,637] [DEBUG] [GameManager] Button sequence: 3
+[2025-11-15 12:57:29,638] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-15 12:57:29,649] [INFO] [SoundController] Song "The Offspring - Pretty Fly (For A White Guy) (Official Music Video) [QtTR-_Klcq8].mp3" was randomly started
+[2025-11-15 12:57:29,650] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [3]
+[2025-11-15 12:57:31,866] [DEBUG] [ButtonReader] Button state changed: [(3, 'released')]
+[2025-11-15 12:57:31,867] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-15 12:57:31,926] [DEBUG] [ButtonReader] Button state changed: [(3, 'pressed')]
+[2025-11-15 12:57:31,927] [DEBUG] [GameManager] Button sequence: 3
+[2025-11-15 12:57:31,928] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-15 12:57:31,939] [INFO] [SoundController] Song "ABBA - Gimme! Gimme! Gimme! (A Man After Midnight).mp3" was randomly started
+[2025-11-15 12:57:31,940] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [3]
+[2025-11-15 12:57:35,102] [DEBUG] [ButtonReader] Button state changed: [(3, 'released')]
+[2025-11-15 12:57:35,102] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-15 13:54:36,253] [INFO] [GameManager] Game stopped by user (Ctrl+C)
+[2025-11-15 13:54:36,271] [INFO] [GameManager] Game stopped
+[2025-11-15 13:54:36,271] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

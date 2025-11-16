@@ -41,3 +41,6 @@ ssh -t yotam@raspberrypi.local "./AmpSync/Amp3/sync/setup_pi_env.sh"
 
 # kill a process:
 # sudo kill -9 <process_id>
+
+# see CPU usage:
+# top -d 1

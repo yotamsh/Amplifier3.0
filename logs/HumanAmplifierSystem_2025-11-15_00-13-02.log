@@ -174,3 +174,6 @@
 [2025-11-15 00:15:09,958] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [2]
 [2025-11-15 00:15:11,548] [DEBUG] [ButtonReader] Button state changed: [(2, 'released')]
 [2025-11-15 00:15:11,551] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-15 00:21:31,935] [INFO] [GameManager] Game stopped by user (Ctrl+C)
+[2025-11-15 00:21:31,950] [INFO] [GameManager] Game stopped
+[2025-11-15 00:21:31,951] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

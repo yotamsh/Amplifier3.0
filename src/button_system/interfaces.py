@@ -3,7 +3,50 @@ Abstract interfaces for button reading systems
 """
 
 from abc import ABC, abstractmethod
+from typing import List
 from .button_state import ButtonState
+
+class IButtonSampler(ABC):
+    """
+    Abstract interface for sampling individual button states.
+    
+    Separates the concern of reading hardware state from button state management.
+    Allows different implementations: pure GPIO, GPIO+keyboard, mock, network, etc.
+    """
+    
+    @abstractmethod
+    def read_button(self, button_index: int) -> bool:
+        """
+        Read current state of a single button.
+        
+        Args:
+            button_index: Button number (0-based)
+            
+        Returns:
+            True if button is currently pressed, False otherwise
+        """
+        pass
+    
+    @abstractmethod
+    def get_button_count(self) -> int:
+        """
+        Get the number of buttons this sampler handles.
+        
+        Returns:
+            int: Number of buttons (0-based indexing)
+        """
+        pass
+    
+    @abstractmethod
+    def setup(self) -> None:
+        """Initialize the sampler hardware/resources"""
+        pass
+    
+    @abstractmethod
+    def cleanup(self) -> None:
+        """Cleanup sampler resources"""
+        pass
+
 
 class IButtonReader(ABC):
     """

@@ -1,30 +1,25 @@
 """
-GPIO-based button reader implementation using RPi.GPIO
+Button reader implementation with state management and edge detection
 """
 
-import sys
 from typing import List
 
-try:
-    import RPi.GPIO as GPIO
-except ImportError:
-    print("⚠️  RPi.GPIO not available - this module is for Raspberry Pi only")
-    # Don't exit here - allow imports for testing/development on other platforms
-
-from .interfaces import IButtonReader
+from .interfaces import IButtonReader, IButtonSampler
 from .button_state import ButtonState
 
 class ButtonReader(IButtonReader):
     """
-    RPi.GPIO implementation of button reader with no software debouncing.
+    Button reader with state management and edge detection.
     
-    Reads raw GPIO states and provides edge detection through state comparison.
-    Follows Dependency Inversion Principle by accepting logger abstraction.
+    Uses IButtonSampler for hardware abstraction (GPIO, keyboard, mock, etc.).
+    Manages button state, edge detection, and ignore filtering.
+    Follows Dependency Inversion Principle - depends on sampler abstraction.
     
     Example:
         main_logger = HybridLogger("buttons")
         logger = main_logger.get_class_logger("ButtonReader", logging.INFO)
-        reader = ButtonReader([25, 24, 23], logger)
+        sampler = GPIOSampler([25, 24, 23], GPIO.PUD_OFF, logger)
+        reader = ButtonReader(sampler, logger)
         
         while True:
             state = reader.read_buttons()
@@ -33,69 +28,29 @@ class ButtonReader(IButtonReader):
     """
     
     def __init__(self, 
-                 button_pins: List[int], 
-                 logger,  # ClassLogger instance from HybridLogger.get_class_logger()
-                 pull_mode: int = None):
+                 sampler: IButtonSampler,
+                 logger):
         """
-        Initialize GPIO button reader.
+        Initialize button reader with injected sampler.
         
         Args:
-            button_pins: List of GPIO pin numbers (BCM mode) 
-                        e.g., [25, 24, 23] means button 0=GPIO25, button 1=GPIO24, etc.
+            sampler: IButtonSampler instance for reading button hardware
             logger: ClassLogger instance from HybridLogger.get_class_logger()
-            pull_mode: GPIO pull resistor mode (GPIO.PUD_OFF, GPIO.PUD_UP, GPIO.PUD_DOWN)
-                      Defaults to GPIO.PUD_OFF (no internal pulls)
         """
-        if 'RPi.GPIO' not in sys.modules:
-            raise ImportError("RPi.GPIO is required but not available")
-            
-        self._button_pins = button_pins.copy()  # Defensive copy
+        self._sampler = sampler
         self._logger = logger
-        self._pull_mode = pull_mode if pull_mode is not None else GPIO.PUD_OFF
         
         # Initialize previous state (all buttons start as not-pressed)
-        self._previous_state: List[bool] = [False] * len(button_pins)
+        button_count = sampler.get_button_count()
+        self._previous_state: List[bool] = [False] * button_count
         
         # Track buttons to ignore until released
-        self._ignored_buttons: List[bool] = [False] * len(button_pins)  # True = ignore this button
+        self._ignored_buttons: List[bool] = [False] * button_count  # True = ignore this button
         
-        # Setup GPIO hardware  
-        self._gpio_initialized = False  # Track if GPIO was successfully initialized
-        self._setup_gpio()
+        # Setup sampler hardware
+        self._sampler.setup()
         
-        self._logger.info(f"ButtonReader initialized with {len(button_pins)} buttons")
-        self._logger.info(f"Button mapping: {self._get_pin_mapping()}")
-    
-    def _get_pin_mapping(self) -> str:
-        """Get human-readable pin mapping for logging"""
-        mapping = []
-        for idx, pin in enumerate(self._button_pins):
-            mapping.append(f"Button{idx}=GPIO{pin}")
-        return ", ".join(mapping)
-    
-    def _setup_gpio(self) -> None:
-        """Initialize GPIO pins for button input"""
-        try:
-            # Set BCM mode (using GPIO pin numbers, not physical pin numbers)
-            GPIO.setmode(GPIO.BCM)
-            
-            # Configure each button pin as input
-            for pin in self._button_pins:
-                GPIO.setup(pin, GPIO.IN, pull_up_down=self._pull_mode)
-            
-            self._gpio_initialized = True  # Mark as successfully initialized
-            
-            pull_mode_name = {
-                GPIO.PUD_OFF: "no pulls",
-                GPIO.PUD_UP: "pull-up", 
-                GPIO.PUD_DOWN: "pull-down"
-            }.get(self._pull_mode, f"mode_{self._pull_mode}")
-            
-            self._logger.info(f"GPIO setup complete: {len(self._button_pins)} pins, {pull_mode_name}")
-            
-        except Exception as e:
-            self._logger.error(f"GPIO setup failed: {e}")
-            raise
+        self._logger.info(f"ButtonReader initialized with {button_count} buttons")
     
     def ignore_pressed_until_released(self) -> None:
         """
@@ -110,10 +65,9 @@ class ButtonReader(IButtonReader):
             button_reader.ignore_pressed_until_released()
             # Now those held buttons won't trigger transitions until released and re-pressed
         """
-        # Read current raw GPIO state
-        for i, pin in enumerate(self._button_pins):
-            gpio_value = GPIO.input(pin)
-            button_pressed = (gpio_value == GPIO.HIGH)
+        # Read current state from sampler
+        for i in range(self._sampler.get_button_count()):
+            button_pressed = self._sampler.read_button(i)
             
             if button_pressed:
                 self._ignored_buttons[i] = True
@@ -130,11 +84,10 @@ class ButtonReader(IButtonReader):
         Returns:
             ButtonState: Complete state with current/previous values and edge detection
         """
-        # Read current state from all GPIO pins (raw hardware state)
+        # Read current state from all buttons via sampler
         raw_current_state: List[bool] = []
-        for pin in self._button_pins:
-            gpio_value = GPIO.input(pin)
-            button_pressed = (gpio_value == GPIO.HIGH)
+        for i in range(self._sampler.get_button_count()):
+            button_pressed = self._sampler.read_button(i)
             raw_current_state.append(button_pressed)
         
         # Apply ignore filtering
@@ -174,33 +127,21 @@ class ButtonReader(IButtonReader):
     
     def get_button_count(self) -> int:
         """Get number of buttons configured in this reader"""
-        return len(self._button_pins)
-    
-    def get_button_pins(self) -> List[int]:
-        """Get copy of GPIO pin list for debugging/inspection"""
-        return self._button_pins.copy()
+        return self._sampler.get_button_count()
     
     def cleanup(self) -> None:
         """
-        Optional manual cleanup for advanced users.
+        Cleanup button reader and sampler resources.
         Automatic cleanup happens via __del__ so this is not required.
         """
-        self._cleanup_gpio()
-    
-    def _cleanup_gpio(self) -> None:
-        """Internal cleanup method - safe for automatic calling"""
         try:
-            # Only cleanup if GPIO was actually initialized
-            if hasattr(self, '_gpio_initialized') and self._gpio_initialized:
-                GPIO.cleanup()
-                self._gpio_initialized = False  # Mark as cleaned up
-                # Only log if logger still exists (may be destroyed during shutdown)
+            if hasattr(self, '_sampler'):
+                self._sampler.cleanup()
                 if hasattr(self, '_logger') and self._logger:
-                    self._logger.info("GPIO resources cleaned up successfully")
+                    self._logger.info("ButtonReader cleaned up successfully")
         except Exception:
-            # Silent fail during destruction - logging system may be gone
-            pass
+            pass  # Silent fail during cleanup
     
     def __del__(self):
         """Automatic cleanup when object is destroyed"""
-        self._cleanup_gpio()
+        self.cleanup()

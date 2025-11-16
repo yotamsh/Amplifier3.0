@@ -34,7 +34,7 @@ if TYPE_CHECKING:
     from led_system import LedStrip
 
 try:
-    from button_system import ButtonReader
+    from button_system import ButtonReader, GPIOSampler
     from utils import HybridLogger
     import RPi.GPIO as GPIO
     import logging
@@ -283,10 +283,17 @@ class ButtonLedsTestRunner:
     def setup_button_reader(self, logger: ClassLogger) -> bool:
         """Initialize button reader with selected GPIO"""
         try:
-            self.button_reader = ButtonReader(
+            # Create GPIO sampler
+            sampler = GPIOSampler(
                 button_pins=BUTTON_PINS,
-                logger=logger,
-                pull_mode=GPIO.PUD_OFF  # External circuits
+                pull_mode=GPIO.PUD_OFF,  # External circuits
+                logger=logger
+            )
+            
+            # Create button reader with sampler
+            self.button_reader = ButtonReader(
+                sampler=sampler,
+                logger=logger
             )
             
             logger.info("Button reader initialized successfully")
