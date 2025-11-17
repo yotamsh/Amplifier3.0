@@ -105,3 +105,4 @@ python src/amplifier.py
 - **Thread-safe**: Single-threaded, no race conditions
 - **Graceful fallback**: If stdin unavailable, logs warning and continues with GPIO-only
 
+

@@ -145,3 +145,4 @@ class GPIOWithKeyboardSampler(IButtonSampler):
         """Automatic cleanup when object is destroyed"""
         self.cleanup()
 
+

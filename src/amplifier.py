@@ -37,16 +37,16 @@ def create_amplifier_config() -> GameConfig:
     
     button_config = ButtonConfig(
         pins=[
-            # 4, 
             6, 
             5, 
-            # 16, 
-            17, 
-            # 20, 
             22, 
-            # 23, 
-            # 24, 
-            # 25
+            17, 
+            4, 
+            23, 
+            24, 
+            25,
+            16, 
+            20, 
             ],  # 10 buttons - tested GPIO pins
         pull_mode=GPIO.PUD_OFF,
         sample_rate_hz=200
@@ -125,8 +125,7 @@ def create_game_system(config: GameConfig, amplifier_logger):
     song_library_logger = amplifier_logger.create_class_logger("SongLibrary", logging.INFO)
     sound_controller_logger = amplifier_logger.create_class_logger("SoundController", logging.INFO)
     
-    try:
-        
+    try:        
         # Initialize button sampler (GPIO hardware abstraction)
         # button_sampler = GPIOSampler(
 # Initialize button sampler (GPIO + keyboard for debugging)
@@ -143,6 +142,29 @@ def create_game_system(config: GameConfig, amplifier_logger):
             sampler=button_sampler,
             logger=button_reader_logger
         )
+
+                # Create schedule from config (validates collections)
+        schedule = Schedule(
+            daily_schedule=config.audio_config.daily_schedule,
+            special_schedule=config.audio_config.special_schedule,
+            songs_folder=config.audio_config.songs_folder
+        )
+        
+        # Create song library with validated schedule
+        song_library = SongLibrary(
+            songs_folder=config.audio_config.songs_folder,
+            schedule=schedule,
+            code_length=config.audio_config.code_length,
+            logger=song_library_logger
+        )
+        
+        # Create sound controller with song library
+        sound_controller = SoundController(
+            song_library=song_library,
+            num_buttons=config.button_count,
+            logger=sound_controller_logger
+        )
+
         
         # Initialize LED strips from configuration
         led_strips = []
@@ -164,27 +186,6 @@ def create_game_system(config: GameConfig, amplifier_logger):
             strip[:] = black
             strip.show()
         
-        # Create schedule from config (validates collections)
-        schedule = Schedule(
-            daily_schedule=config.audio_config.daily_schedule,
-            special_schedule=config.audio_config.special_schedule,
-            songs_folder=config.audio_config.songs_folder
-        )
-        
-        # Create song library with validated schedule
-        song_library = SongLibrary(
-            songs_folder=config.audio_config.songs_folder,
-            schedule=schedule,
-            code_length=config.audio_config.code_length,
-            logger=song_library_logger
-        )
-        
-        # Create sound controller with song library
-        sound_controller = SoundController(
-            song_library=song_library,
-            num_buttons=config.button_count,
-            logger=sound_controller_logger
-        )
         
         # Create button sequence tracker
         sequence_tracker = ButtonsSequenceTracker(max_sequence_length=10)
