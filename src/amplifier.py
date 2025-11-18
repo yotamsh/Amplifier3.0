@@ -14,7 +14,7 @@ from pathlib import Path
 from datetime import datetime, time
 
 # MOCK AUDIO - Set to True to bypass audio hardware
-USE_MOCK_AUDIO = True
+USE_MOCK_AUDIO = False
 
 # Add src to path for imports
 sys.path.insert(0, str(Path(__file__).parent))
