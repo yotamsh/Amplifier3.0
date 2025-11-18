@@ -1,0 +1,785 @@
+[2025-11-18 22:46:40,347] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-18 22:46:40,348] [INFO] [Amplifier] Button configuration: 10 buttons on GPIO [6, 5, 22, 17, 4, 23, 24, 25, 16, 20]
+[2025-11-18 22:46:40,348] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-18 22:46:40,349] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-18 22:46:40,349] [INFO] [Amplifier]   Strip 2: 300 LEDs on GPIO 18
+[2025-11-18 22:46:40,350] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-18 22:46:40,350] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-18 22:46:40,351] [INFO] [Amplifier] Audio folder: songs
+[2025-11-18 22:46:40,351] [INFO] [Amplifier] Schedule: 2 daily, 1 special entries
+[2025-11-18 22:46:40,352] [INFO] [ButtonReader] GPIO sampler initialized: 10 pins (no pulls)
+[2025-11-18 22:46:40,353] [INFO] [ButtonReader] Pin mapping: Btn0=GPIO6, Btn1=GPIO5, Btn2=GPIO22, Btn3=GPIO17, Btn4=GPIO4, Btn5=GPIO23, Btn6=GPIO24, Btn7=GPIO25, Btn8=GPIO16, Btn9=GPIO20
+[2025-11-18 22:46:40,353] [INFO] [ButtonReader] 🎮 Keyboard debug enabled: Press digit keys 0-9 to toggle buttons (works over SSH)
+[2025-11-18 22:46:40,353] [INFO] [ButtonReader]    Each keypress toggles button ON/OFF
+[2025-11-18 22:46:40,354] [INFO] [ButtonReader] ButtonReader initialized with 10 buttons
+[2025-11-18 22:46:40,355] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-18 22:46:42,399] [INFO] [SongLibrary] Loaded 549 song codes from 10 collections
+[2025-11-18 22:46:42,400] [INFO] [SongLibrary] Collections updated: ['MAIJAM']
+[2025-11-18 22:46:44,331] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-18 22:46:44,332] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-18 22:46:44,332] [INFO] [Amplifier] Hardware: 10 buttons, 2 LED strips, 20ms frame duration
+[2025-11-18 22:46:44,333] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['CLASSIC', 'VIRAL', 'SPANISH', 'MAIJAM', 'MORNING', 'FESTIGAL', 'GENERAL', 'PARTY', 'TV', 'DISNEY'], 'total_codes': 549, 'daily_schedule_entries': 2, 'special_schedule_entries': 1}
+[2025-11-18 22:46:44,333] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-18 22:46:44,333] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-18 22:46:44,333] [INFO] [Amplifier] Hardware status: 10 buttons, 2 LED strips
+[2025-11-18 22:46:44,333] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-18 22:46:44,334] [INFO] [Amplifier]   Strip 2: 300 LEDs active
+[2025-11-18 22:46:44,334] [INFO] [Amplifier] Audio system: 549 song codes, 12 sound effects
+[2025-11-18 22:46:44,334] [INFO] [Amplifier] Available collections: CLASSIC, VIRAL, SPANISH, MAIJAM, MORNING, FESTIGAL, GENERAL, PARTY, TV, DISNEY
+[2025-11-18 22:46:44,334] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-18 22:46:44,335] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-18 22:46:44,336] [INFO] [GameManager] 💾 Memory - Process: 81.8MB | System: 251/907MB (27.6%, 656MB free)
+[2025-11-18 22:47:44,355] [INFO] [GameManager] 💾 Memory - Process: 82.3MB | System: 246/907MB (27.1%, 661MB free)
+[2025-11-18 22:48:44,366] [INFO] [GameManager] 💾 Memory - Process: 82.4MB | System: 247/907MB (27.2%, 660MB free)
+[2025-11-18 22:49:19,188] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:49:19,188] [DEBUG] [GameManager] Button sequence: 5
+[2025-11-18 22:49:19,189] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:49:19,201] [INFO] [SoundController] Song "Soft Cell - Tainted Love (Official Music Video).mp3" was randomly started
+[2025-11-18 22:49:19,201] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:49:19,790] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:49:19,792] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:49:20,292] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:49:20,293] [DEBUG] [GameManager] Button sequence: 55
+[2025-11-18 22:49:20,294] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:49:20,305] [INFO] [SoundController] Song "Jennifer Lopez - Waiting For Tonight.mp3" was randomly started
+[2025-11-18 22:49:20,305] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:49:20,916] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:49:20,917] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:49:21,538] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:49:21,538] [DEBUG] [GameManager] Button sequence: 5
+[2025-11-18 22:49:21,539] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:49:21,549] [INFO] [SoundController] Song "Queen - I Want to Break Free (Official Lyric Video).mp3" was randomly started
+[2025-11-18 22:49:21,550] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:49:23,369] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:49:23,370] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:49:24,033] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:49:24,034] [DEBUG] [GameManager] Button sequence: 5
+[2025-11-18 22:49:24,035] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:49:24,046] [INFO] [SoundController] Song "Abba - Money, Money, Money (Official Music Video).mp3" was randomly started
+[2025-11-18 22:49:24,047] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:49:25,801] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:49:25,802] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:49:25,804] [ERROR] [SoundController] ❌ Failed to load song 'The Pointer Sisters - I_m So Excited (1).mp3' (attempt 1/3): mpg123_getformat: Message: I am done with this track.
+[2025-11-18 22:49:26,183] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:49:26,184] [DEBUG] [GameManager] Button sequence: 5
+[2025-11-18 22:49:26,185] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:49:26,196] [INFO] [SoundController] Song "ABBA - Voulez-Vous.mp3" was randomly started
+[2025-11-18 22:49:26,197] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:49:27,348] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:49:27,349] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:49:27,769] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:49:27,770] [DEBUG] [GameManager] Button sequence: 55
+[2025-11-18 22:49:27,770] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:49:27,781] [INFO] [SoundController] Song "Jennifer Lopez - Waiting For Tonight.mp3" was randomly started
+[2025-11-18 22:49:27,782] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:49:28,874] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:49:28,875] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:49:29,256] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:49:29,256] [DEBUG] [GameManager] Button sequence: 5
+[2025-11-18 22:49:29,257] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:49:29,267] [INFO] [SoundController] Song "ABBA - Voulez-Vous.mp3" was randomly started
+[2025-11-18 22:49:29,268] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:49:30,262] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:49:30,263] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:49:30,664] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:49:30,665] [DEBUG] [GameManager] Button sequence: 55
+[2025-11-18 22:49:30,665] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:49:30,676] [INFO] [SoundController] Song "Outkast - Hey Ya! (Official HD Video).mp3" was randomly started
+[2025-11-18 22:49:30,677] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:49:31,792] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:49:31,793] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:49:32,174] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:49:32,174] [DEBUG] [GameManager] Button sequence: 5
+[2025-11-18 22:49:32,175] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:49:32,186] [INFO] [SoundController] Song "Baccara - Yes Sir, I Can Boogie (Starparade 02.06.1977).mp3" was randomly started
+[2025-11-18 22:49:32,186] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:49:33,579] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:49:33,581] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:49:33,820] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:49:33,821] [DEBUG] [GameManager] Button sequence: 55
+[2025-11-18 22:49:33,822] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:49:33,832] [INFO] [SoundController] Song "The Jacksons - Blame It On the Boogie (Official Video).mp3" was randomly started
+[2025-11-18 22:49:33,833] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:49:35,126] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:49:35,127] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:49:35,346] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:49:35,347] [DEBUG] [GameManager] Button sequence: 5
+[2025-11-18 22:49:35,348] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:49:35,359] [INFO] [SoundController] Song "Mark Ronson - Uptown Funk (Official Video) ft. Bruno Mars.mp3" was randomly started
+[2025-11-18 22:49:35,359] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:49:36,592] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:49:36,593] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:49:36,813] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:49:36,814] [DEBUG] [GameManager] Button sequence: 55
+[2025-11-18 22:49:36,814] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:49:36,825] [INFO] [SoundController] Song "Sister Sledge - We Are Family.mp3" was randomly started
+[2025-11-18 22:49:36,826] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:49:37,739] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:49:37,740] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:49:38,041] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:49:38,042] [DEBUG] [GameManager] Button sequence: 5
+[2025-11-18 22:49:38,043] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:49:38,054] [INFO] [SoundController] Song "Cher - Believe (Official Music Video) [4K Remaster].mp3" was randomly started
+[2025-11-18 22:49:38,054] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:49:38,965] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:49:38,966] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:49:39,507] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:49:39,508] [DEBUG] [GameManager] Button sequence: 55
+[2025-11-18 22:49:39,509] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:49:39,519] [INFO] [SoundController] Song "Depeche Mode - Just Can_t Get Enough (Official Video).mp3" was randomly started
+[2025-11-18 22:49:39,520] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:49:40,552] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:49:40,553] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:49:41,054] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:49:41,055] [DEBUG] [GameManager] Button sequence: 5
+[2025-11-18 22:49:41,055] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:49:41,066] [INFO] [SoundController] Song "ABBA - Dancing Queen (Official Music Video).mp3" was randomly started
+[2025-11-18 22:49:41,066] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:49:42,058] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:49:42,059] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:49:42,360] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:49:42,360] [DEBUG] [GameManager] Button sequence: 55
+[2025-11-18 22:49:42,361] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:49:42,371] [INFO] [SoundController] Song "Belinda Carlisle - Heaven Is A Place On Earth (Official HD Music Video).mp3" was randomly started
+[2025-11-18 22:49:42,372] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:49:44,268] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:49:44,269] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:49:44,369] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 245/907MB (27.0%, 661MB free)
+[2025-11-18 22:49:44,510] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:49:44,511] [DEBUG] [GameManager] Button sequence: 5
+[2025-11-18 22:49:44,512] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:49:44,523] [INFO] [SoundController] Song "Sister Sledge - We Are Family.mp3" was randomly started
+[2025-11-18 22:49:44,525] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:49:45,820] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:49:45,822] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:49:46,264] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:49:46,264] [DEBUG] [GameManager] Button sequence: 55
+[2025-11-18 22:49:46,265] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:49:46,276] [INFO] [SoundController] Song "Madonna - Hung Up (Official Video) [HD].mp3" was randomly started
+[2025-11-18 22:49:46,276] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:49:48,071] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:49:48,073] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:49:48,473] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:49:48,474] [DEBUG] [GameManager] Button sequence: 5
+[2025-11-18 22:49:48,474] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:49:48,485] [INFO] [SoundController] Song "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster) [dQw4w9WgXcQ].mp3" was randomly started
+[2025-11-18 22:49:48,486] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:49:49,919] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:49:49,920] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:49:50,421] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:49:50,422] [DEBUG] [GameManager] Button sequence: 55
+[2025-11-18 22:49:50,422] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:49:50,433] [INFO] [SoundController] Song "Smash Mouth - I_m A Believer.mp3" was randomly started
+[2025-11-18 22:49:50,434] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:49:52,332] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:49:52,333] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:49:52,574] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:49:52,575] [DEBUG] [GameManager] Button sequence: 5
+[2025-11-18 22:49:52,576] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:49:52,587] [INFO] [SoundController] Song "Boney M. - Rasputin (Sopot Festival 1979).mp3" was randomly started
+[2025-11-18 22:49:52,588] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:49:54,708] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:49:54,709] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:49:54,848] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:49:54,849] [DEBUG] [GameManager] Button sequence: 5
+[2025-11-18 22:49:54,850] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:49:54,860] [INFO] [SoundController] Song "The Jacksons - Blame It On the Boogie (Official Video).mp3" was randomly started
+[2025-11-18 22:49:54,861] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:49:56,575] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:49:56,577] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:49:56,877] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:49:56,878] [DEBUG] [GameManager] Button sequence: 5
+[2025-11-18 22:49:56,878] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:49:56,889] [INFO] [SoundController] Song "M.C. Hammer - U Can_t Touch This.mp3" was randomly started
+[2025-11-18 22:49:56,889] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:49:58,303] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:49:58,304] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:49:58,846] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:49:58,847] [DEBUG] [GameManager] Button sequence: 55
+[2025-11-18 22:49:58,847] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:49:58,858] [INFO] [SoundController] Song "Jennifer Lopez - Waiting For Tonight.mp3" was randomly started
+[2025-11-18 22:49:58,859] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:50:00,053] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:50:00,055] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:50:00,877] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:50:00,878] [DEBUG] [GameManager] Button sequence: 5
+[2025-11-18 22:50:00,878] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:50:00,889] [INFO] [SoundController] Song "ABBA - The Winner Takes It All.mp3" was randomly started
+[2025-11-18 22:50:00,890] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:50:02,504] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:50:02,505] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:50:02,765] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:50:02,766] [DEBUG] [GameManager] Button sequence: 55
+[2025-11-18 22:50:02,766] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:50:02,777] [INFO] [SoundController] Song "Jennifer Lopez - Waiting For Tonight.mp3" was randomly started
+[2025-11-18 22:50:02,778] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:50:03,568] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:50:03,569] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:50:04,010] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:50:04,011] [DEBUG] [GameManager] Button sequence: 5
+[2025-11-18 22:50:04,012] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:50:04,022] [INFO] [SoundController] Song "Queen - Don_t Stop Me Now (Official Video).mp3" was randomly started
+[2025-11-18 22:50:04,023] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:50:06,262] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:50:06,263] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:50:06,527] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:50:06,528] [DEBUG] [GameManager] Button sequence: 5
+[2025-11-18 22:50:06,528] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:50:06,540] [INFO] [SoundController] Song "Queen - Don_t Stop Me Now (Official Video).mp3" was randomly started
+[2025-11-18 22:50:06,541] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:50:08,339] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:50:08,340] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:50:08,801] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:50:08,801] [DEBUG] [GameManager] Button sequence: 5
+[2025-11-18 22:50:08,802] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:50:08,813] [INFO] [SoundController] Song "September - Cry For You.mp3" was randomly started
+[2025-11-18 22:50:08,813] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:50:09,946] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:50:09,947] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:50:10,207] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:50:10,207] [DEBUG] [GameManager] Button sequence: 55
+[2025-11-18 22:50:10,208] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:50:10,219] [INFO] [SoundController] Song "Blondie - Call me.mp3" was randomly started
+[2025-11-18 22:50:10,219] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:50:11,291] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:50:11,292] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:50:11,592] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:50:11,593] [DEBUG] [GameManager] Button sequence: 5
+[2025-11-18 22:50:11,594] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:50:11,604] [INFO] [SoundController] Song "Mark Ronson - Uptown Funk (Official Video) ft. Bruno Mars.mp3" was randomly started
+[2025-11-18 22:50:11,605] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:50:14,817] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:50:14,818] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:50:14,877] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:50:14,878] [DEBUG] [GameManager] Button sequence: 5
+[2025-11-18 22:50:14,879] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:50:14,890] [INFO] [SoundController] Song "The Jacksons - Blame It On the Boogie (Official Video).mp3" was randomly started
+[2025-11-18 22:50:14,890] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:50:15,781] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:50:15,782] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:50:16,122] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:50:16,123] [DEBUG] [GameManager] Button sequence: 55
+[2025-11-18 22:50:16,124] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:50:16,134] [INFO] [SoundController] Song "Fame  Theme Song  Irene Cara.mp3" was randomly started
+[2025-11-18 22:50:16,135] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:50:17,086] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:50:17,087] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:50:17,267] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 22:50:17,268] [DEBUG] [GameManager] Button sequence: 5
+[2025-11-18 22:50:17,268] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 22:50:17,279] [INFO] [SoundController] Song "Gloria Gaynor - I Will Survive [6dYWe1c3OyU].mp3" was randomly started
+[2025-11-18 22:50:17,280] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 22:50:21,547] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 22:50:21,549] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 22:50:44,378] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 245/907MB (27.0%, 662MB free)
+[2025-11-18 22:51:44,381] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 247/907MB (27.2%, 660MB free)
+[2025-11-18 22:52:44,387] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 247/907MB (27.3%, 659MB free)
+[2025-11-18 22:53:44,394] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 249/907MB (27.4%, 658MB free)
+[2025-11-18 22:54:44,405] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 247/907MB (27.2%, 660MB free)
+[2025-11-18 22:55:44,424] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 244/907MB (26.9%, 663MB free)
+[2025-11-18 22:56:44,434] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 247/907MB (27.2%, 660MB free)
+[2025-11-18 22:57:44,453] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 247/907MB (27.3%, 660MB free)
+[2025-11-18 22:58:44,466] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 250/907MB (27.6%, 657MB free)
+[2025-11-18 22:59:44,476] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 248/907MB (27.3%, 659MB free)
+[2025-11-18 23:00:44,492] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 246/907MB (27.1%, 661MB free)
+[2025-11-18 23:01:44,501] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 248/907MB (27.4%, 658MB free)
+[2025-11-18 23:02:44,505] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 246/907MB (27.1%, 661MB free)
+[2025-11-18 23:03:44,506] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 246/907MB (27.1%, 661MB free)
+[2025-11-18 23:04:04,377] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:04,378] [DEBUG] [GameManager] Button sequence: 4
+[2025-11-18 23:04:04,379] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:04,390] [INFO] [SoundController] Song "Boney M. - Daddy Cool (Sopot Festival 1979).mp3" was randomly started
+[2025-11-18 23:04:04,390] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:04,578] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:04,579] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:05,160] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:05,161] [DEBUG] [GameManager] Button sequence: 45
+[2025-11-18 23:04:05,161] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:05,172] [INFO] [SoundController] Song "Abba - Money, Money, Money (Official Music Video).mp3" was randomly started
+[2025-11-18 23:04:05,172] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:05,341] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:05,342] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:05,743] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:05,743] [DEBUG] [GameManager] Button sequence: 454
+[2025-11-18 23:04:05,745] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:05,756] [INFO] [SoundController] Song "Baccara - Yes Sir, I Can Boogie (Starparade 02.06.1977) (1).mp3" was randomly started
+[2025-11-18 23:04:05,757] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:06,105] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:06,106] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:06,446] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:06,447] [DEBUG] [GameManager] Button sequence: 5
+[2025-11-18 23:04:06,448] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:06,458] [INFO] [SoundController] Song "Europe - The Final Countdown (Official Video).mp3" was randomly started
+[2025-11-18 23:04:06,459] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:06,808] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:06,809] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:07,109] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:07,110] [DEBUG] [GameManager] Button sequence: 54
+[2025-11-18 23:04:07,110] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:07,121] [INFO] [SoundController] Song "Boney M. - Sunny (Official Audio).mp3" was randomly started
+[2025-11-18 23:04:07,122] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:07,390] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:07,392] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:07,713] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:07,714] [DEBUG] [GameManager] Button sequence: 545
+[2025-11-18 23:04:07,714] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:07,725] [INFO] [SoundController] Song "Dead Or Alive - You Spin Me Round (Like a Record) (Official Video) (1).mp3" was randomly started
+[2025-11-18 23:04:07,726] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:08,015] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:08,016] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:08,357] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:08,357] [DEBUG] [GameManager] Button sequence: 5454
+[2025-11-18 23:04:08,358] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:08,369] [INFO] [SoundController] Song "Smash Mouth - All Star (Official Music Video).mp3" was randomly started
+[2025-11-18 23:04:08,369] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:08,718] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:08,719] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:09,020] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:09,021] [DEBUG] [GameManager] Button sequence: 5
+[2025-11-18 23:04:09,022] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:09,033] [INFO] [SoundController] Song "Earth, Wind & Fire - September (Official HD Video).mp3" was randomly started
+[2025-11-18 23:04:09,034] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:09,342] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:09,343] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:09,603] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:09,604] [DEBUG] [GameManager] Button sequence: 54
+[2025-11-18 23:04:09,605] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:09,616] [INFO] [SoundController] Song "Jennifer Lopez - Waiting For Tonight.mp3" was randomly started
+[2025-11-18 23:04:09,616] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:09,924] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:09,925] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:10,225] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:10,226] [DEBUG] [GameManager] Button sequence: 545
+[2025-11-18 23:04:10,227] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:10,238] [INFO] [SoundController] Song "The Offspring - Pretty Fly (For A White Guy) (Official Music Video) [QtTR-_Klcq8].mp3" was randomly started
+[2025-11-18 23:04:10,239] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:10,466] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:10,468] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:10,849] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:10,850] [DEBUG] [GameManager] Button sequence: 5454
+[2025-11-18 23:04:10,850] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:10,861] [INFO] [SoundController] Song "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster) [dQw4w9WgXcQ].mp3" was randomly started
+[2025-11-18 23:04:10,862] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:11,151] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:11,152] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:11,592] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:11,593] [DEBUG] [GameManager] Button sequence: 5
+[2025-11-18 23:04:11,594] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:11,604] [INFO] [SoundController] Song "ABBA - Voulez-Vous.mp3" was randomly started
+[2025-11-18 23:04:11,605] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:11,833] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:11,834] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:12,235] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:12,236] [DEBUG] [GameManager] Button sequence: 54
+[2025-11-18 23:04:12,236] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:12,247] [INFO] [SoundController] Song "Dead Or Alive - You Spin Me Round (Like a Record) (Official Video) (1).mp3" was randomly started
+[2025-11-18 23:04:12,248] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:12,556] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:12,557] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:12,958] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:12,959] [DEBUG] [GameManager] Button sequence: 545
+[2025-11-18 23:04:12,959] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:12,970] [INFO] [SoundController] Song "יהודית רביץ - הכל בסדר - עמרי סמדר רמיקס  Yehudit Ravitz - Hakol Beseder - Omri Smadar RMX.mp3" was randomly started
+[2025-11-18 23:04:12,971] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:13,219] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:13,220] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:14,525] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:14,525] [DEBUG] [GameManager] Button sequence: 4
+[2025-11-18 23:04:14,526] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:14,536] [INFO] [SoundController] Song "Baccara - Yes Sir, I Can Boogie (Starparade 02.06.1977).mp3" was randomly started
+[2025-11-18 23:04:14,537] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:14,868] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:14,869] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:17,082] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:17,083] [DEBUG] [GameManager] Button sequence: 4
+[2025-11-18 23:04:17,084] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:17,095] [INFO] [SoundController] Song "The Proclaimers - I_m Gonna Be (500 Miles) (Official Music Video).mp3" was randomly started
+[2025-11-18 23:04:17,096] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:17,384] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:17,385] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:17,725] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:17,726] [DEBUG] [GameManager] Button sequence: 45
+[2025-11-18 23:04:17,727] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:17,737] [INFO] [SoundController] Song "Dr. Alban - Sing Hallelujah (Official HD Video).mp3" was randomly started
+[2025-11-18 23:04:17,738] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:18,046] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:18,048] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:18,388] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:18,389] [DEBUG] [GameManager] Button sequence: 454
+[2025-11-18 23:04:18,390] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:18,401] [INFO] [SoundController] Song "Why - Bronski beat.mp3" was randomly started
+[2025-11-18 23:04:18,402] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:18,789] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:18,791] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:19,030] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:19,031] [DEBUG] [GameManager] Button sequence: 4545
+[2025-11-18 23:04:19,032] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:19,042] [INFO] [SoundController] Song "Boney M. - Sunny (Official Audio).mp3" was randomly started
+[2025-11-18 23:04:19,043] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:19,271] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:19,272] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:19,633] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:19,633] [DEBUG] [GameManager] Button sequence: 4
+[2025-11-18 23:04:19,634] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:19,645] [INFO] [SoundController] Song "Patti Smith Group - Because the Night (Official Audio).mp3" was randomly started
+[2025-11-18 23:04:19,645] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:20,014] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:20,015] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:20,275] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:20,276] [DEBUG] [GameManager] Button sequence: 45
+[2025-11-18 23:04:20,277] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:20,288] [INFO] [SoundController] Song "Cascada - Everytime We Touch (Official Video).mp3" was randomly started
+[2025-11-18 23:04:20,288] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:20,537] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:20,538] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:20,958] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:20,960] [DEBUG] [GameManager] Button sequence: 454
+[2025-11-18 23:04:20,960] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:20,971] [INFO] [SoundController] Song "Smash Mouth - I_m A Believer.mp3" was randomly started
+[2025-11-18 23:04:20,972] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:21,220] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:21,222] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:21,561] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:21,562] [DEBUG] [GameManager] Button sequence: 4545
+[2025-11-18 23:04:21,563] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:21,573] [INFO] [SoundController] Song "September - Cry For You.mp3" was randomly started
+[2025-11-18 23:04:21,574] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:21,863] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:21,864] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:22,265] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:22,266] [DEBUG] [GameManager] Button sequence: 4
+[2025-11-18 23:04:22,267] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:22,278] [INFO] [SoundController] Song "ABBA - Gimme! Gimme! Gimme! (A Man After Midnight).mp3" was randomly started
+[2025-11-18 23:04:22,279] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:22,627] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:22,628] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:22,909] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:22,910] [DEBUG] [GameManager] Button sequence: 45
+[2025-11-18 23:04:22,910] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:22,921] [INFO] [SoundController] Song "Maroon 5 - This Love.mp3" was randomly started
+[2025-11-18 23:04:22,922] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:23,170] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:23,172] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:23,553] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:23,553] [DEBUG] [GameManager] Button sequence: 454
+[2025-11-18 23:04:23,554] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:23,565] [INFO] [SoundController] Song "Depeche Mode - Just Can_t Get Enough (Official Video).mp3" was randomly started
+[2025-11-18 23:04:23,566] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:23,854] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:23,855] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:24,135] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:24,136] [DEBUG] [GameManager] Button sequence: 4545
+[2025-11-18 23:04:24,137] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:24,148] [INFO] [SoundController] Song "Jennifer Lopez - Waiting For Tonight.mp3" was randomly started
+[2025-11-18 23:04:24,148] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:24,396] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:24,397] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:24,737] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:24,738] [DEBUG] [GameManager] Button sequence: 4
+[2025-11-18 23:04:24,739] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:24,750] [INFO] [SoundController] Song "Michael Jackson - Thriller (Official 4K Video).mp3" was randomly started
+[2025-11-18 23:04:24,751] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:24,999] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:25,000] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:25,300] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:25,301] [DEBUG] [GameManager] Button sequence: 45
+[2025-11-18 23:04:25,301] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:25,312] [INFO] [SoundController] Song "Donna  Summer   --    Hot   Stuff  Video  HQ.mp3" was randomly started
+[2025-11-18 23:04:25,313] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:25,521] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:25,522] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:25,822] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:25,823] [DEBUG] [GameManager] Button sequence: 454
+[2025-11-18 23:04:25,824] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:25,835] [INFO] [SoundController] Song "LunchMoney Lewis - Bills (Official Video).mp3" was randomly started
+[2025-11-18 23:04:25,835] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:26,143] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:26,144] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:26,586] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:26,586] [DEBUG] [GameManager] Button sequence: 4545
+[2025-11-18 23:04:26,587] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:26,598] [INFO] [SoundController] Song "Mark Ronson - Uptown Funk (Official Video) ft. Bruno Mars.mp3" was randomly started
+[2025-11-18 23:04:26,599] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:26,827] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:26,828] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:27,208] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:27,209] [DEBUG] [GameManager] Button sequence: 4
+[2025-11-18 23:04:27,209] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:27,220] [INFO] [SoundController] Song "Abba - Money, Money, Money (Official Music Video).mp3" was randomly started
+[2025-11-18 23:04:27,220] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:27,489] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:27,491] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:27,750] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:27,751] [DEBUG] [GameManager] Button sequence: 45
+[2025-11-18 23:04:27,752] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:27,763] [INFO] [SoundController] Song "Gonna Make You Sweat (Everybody Dance Now) (Official HD Video).mp3" was randomly started
+[2025-11-18 23:04:27,764] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:27,991] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:27,993] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:28,433] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:28,434] [DEBUG] [GameManager] Button sequence: 454
+[2025-11-18 23:04:28,435] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:28,445] [INFO] [SoundController] Song "Kool & The Gang - Celebration.mp3" was randomly started
+[2025-11-18 23:04:28,446] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:28,775] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:28,776] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:29,117] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:29,117] [DEBUG] [GameManager] Button sequence: 4545
+[2025-11-18 23:04:29,118] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:29,128] [INFO] [SoundController] Song "ABBA - Dancing Queen (Official Music Video).mp3" was randomly started
+[2025-11-18 23:04:29,129] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:29,418] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:29,420] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:29,760] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:29,761] [DEBUG] [GameManager] Button sequence: 4
+[2025-11-18 23:04:29,761] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:29,772] [INFO] [SoundController] Song "Wham! - Wake Me Up Before You Go-Go (Official Video).mp3" was randomly started
+[2025-11-18 23:04:29,774] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:30,082] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:30,083] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:30,369] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:30,370] [DEBUG] [GameManager] Button sequence: 45
+[2025-11-18 23:04:30,371] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:30,383] [INFO] [SoundController] Song "Queen - Don't Stop Me Now (Official Video).mp3" was randomly started
+[2025-11-18 23:04:30,384] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:30,711] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:30,712] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:30,952] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:30,952] [DEBUG] [GameManager] Button sequence: 454
+[2025-11-18 23:04:30,953] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:30,964] [INFO] [SoundController] Song "ABBA - The Winner Takes It All.mp3" was randomly started
+[2025-11-18 23:04:30,964] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:31,293] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:31,294] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:31,554] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:31,555] [DEBUG] [GameManager] Button sequence: 4545
+[2025-11-18 23:04:31,556] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:31,567] [INFO] [SoundController] Song "Smash Mouth - I_m A Believer.mp3" was randomly started
+[2025-11-18 23:04:31,567] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:31,856] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:31,857] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:32,157] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:32,158] [DEBUG] [GameManager] Button sequence: 4
+[2025-11-18 23:04:32,158] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:32,169] [INFO] [SoundController] Song "Mark Ronson - Uptown Funk (Official Video) ft. Bruno Mars.mp3" was randomly started
+[2025-11-18 23:04:32,170] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:32,579] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:32,580] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:32,581] [ERROR] [SoundController] ❌ Failed to load song 'The Pointer Sisters - I_m So Excited (1).mp3' (attempt 1/3): mpg123_getformat: Message: I am done with this track.
+[2025-11-18 23:04:32,760] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:32,760] [DEBUG] [GameManager] Button sequence: 45
+[2025-11-18 23:04:32,761] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:32,772] [INFO] [SoundController] Song "September - Cry For You.mp3" was randomly started
+[2025-11-18 23:04:32,772] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:33,141] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:33,142] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:33,422] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:33,423] [DEBUG] [GameManager] Button sequence: 454
+[2025-11-18 23:04:33,424] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:33,435] [INFO] [SoundController] Song "Earth, Wind & Fire - September (Official HD Video).mp3" was randomly started
+[2025-11-18 23:04:33,435] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:33,784] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:33,785] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:34,005] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:34,006] [DEBUG] [GameManager] Button sequence: 4545
+[2025-11-18 23:04:34,006] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:34,017] [INFO] [SoundController] Song "ABBA - Voulez-Vous.mp3" was randomly started
+[2025-11-18 23:04:34,018] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:34,326] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:34,327] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:35,069] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:35,070] [DEBUG] [GameManager] Button sequence: 4
+[2025-11-18 23:04:35,070] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:35,081] [INFO] [SoundController] Song "Bill Medley, Jennifer Warnes - (I_ve Had) The Time Of My Life (Official HD Video).mp3" was randomly started
+[2025-11-18 23:04:35,081] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:35,391] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:35,392] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:35,873] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:35,874] [DEBUG] [GameManager] Button sequence: 45
+[2025-11-18 23:04:35,874] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:35,885] [INFO] [SoundController] Song "Eurythmics, Annie Lennox, Dave Stewart - Sweet Dreams (Are Made Of This) (Official Video).mp3" was randomly started
+[2025-11-18 23:04:35,886] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:36,155] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:36,156] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:37,988] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:37,989] [DEBUG] [GameManager] Button sequence: 4
+[2025-11-18 23:04:37,989] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:38,000] [INFO] [SoundController] Song "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster) [dQw4w9WgXcQ].mp3" was randomly started
+[2025-11-18 23:04:38,000] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:38,370] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:38,371] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:38,711] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:38,712] [DEBUG] [GameManager] Button sequence: 45
+[2025-11-18 23:04:38,712] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:38,723] [INFO] [SoundController] Song "Maroon 5 - This Love.mp3" was randomly started
+[2025-11-18 23:04:38,724] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:38,952] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:38,953] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:39,193] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:39,194] [DEBUG] [GameManager] Button sequence: 454
+[2025-11-18 23:04:39,194] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:39,205] [INFO] [SoundController] Song "Lizzo - Boys (Official Video).mp3" was randomly started
+[2025-11-18 23:04:39,206] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:39,494] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:39,495] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:39,695] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:39,696] [DEBUG] [GameManager] Button sequence: 4545
+[2025-11-18 23:04:39,696] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:39,707] [INFO] [SoundController] Song "Queen - Don't Stop Me Now (Official Video).mp3" was randomly started
+[2025-11-18 23:04:39,708] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:39,936] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:39,937] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:40,117] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:40,117] [DEBUG] [GameManager] Button sequence: 4
+[2025-11-18 23:04:40,118] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:40,128] [INFO] [SoundController] Song "The Weather Girls - It's Raining Men (Video).mp3" was randomly started
+[2025-11-18 23:04:40,129] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:40,398] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:40,399] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:40,519] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:40,519] [DEBUG] [GameManager] Button sequence: 45
+[2025-11-18 23:04:40,520] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:40,531] [INFO] [SoundController] Song "Aqua - Barbie Girl (Official Music Video).mp3" was randomly started
+[2025-11-18 23:04:40,531] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:40,760] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:40,761] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:41,201] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:41,202] [DEBUG] [GameManager] Button sequence: 455
+[2025-11-18 23:04:41,202] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:41,213] [INFO] [SoundController] Song "Why - Bronski beat.mp3" was randomly started
+[2025-11-18 23:04:41,213] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:41,462] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:41,464] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:41,603] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:41,604] [DEBUG] [GameManager] Button sequence: 4554
+[2025-11-18 23:04:41,605] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:41,617] [INFO] [SoundController] Song "The Jacksons - Blame It On the Boogie (Official Video).mp3" was randomly started
+[2025-11-18 23:04:41,618] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:41,864] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:41,865] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:41,867] [ERROR] [SoundController] ❌ Failed to load song 'Patti Smith Group - Because the Night (Official Audio) (1).mp3' (attempt 1/3): mpg123_getformat: Message: I am done with this track.
+[2025-11-18 23:04:41,868] [ERROR] [SoundController] ❌ Failed to load song 'Patti Smith Group - Because the Night (Official Audio) (1).mp3' (attempt 2/3): mpg123_getformat: Message: I am done with this track.
+[2025-11-18 23:04:42,025] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:42,026] [DEBUG] [GameManager] Button sequence: 45545
+[2025-11-18 23:04:42,026] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:42,037] [INFO] [SoundController] Song "Michael Jackson - Don_t Stop _Til You Get Enough (Official Video - Upscaled).mp3" was randomly started
+[2025-11-18 23:04:42,038] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:42,266] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:42,267] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:42,407] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:42,407] [DEBUG] [GameManager] Button sequence: 4
+[2025-11-18 23:04:42,408] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:42,419] [INFO] [SoundController] Song "Donna  Summer   --    Hot   Stuff  Video  HQ.mp3" was randomly started
+[2025-11-18 23:04:42,419] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:42,628] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:42,629] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:42,630] [ERROR] [SoundController] ❌ Failed to load song 'Patti Smith Group - Because the Night (Official Audio) (1).mp3' (attempt 1/3): mpg123_getformat: Message: I am done with this track.
+[2025-11-18 23:04:42,808] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:42,809] [DEBUG] [GameManager] Button sequence: 45
+[2025-11-18 23:04:42,810] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:42,820] [INFO] [SoundController] Song "אשליות - ניסים סרוסי.mp3" was randomly started
+[2025-11-18 23:04:42,821] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:43,030] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:43,030] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:43,170] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:43,171] [DEBUG] [GameManager] Button sequence: 454
+[2025-11-18 23:04:43,171] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:43,182] [INFO] [SoundController] Song "Queen - Don't Stop Me Now (Official Video).mp3" was randomly started
+[2025-11-18 23:04:43,183] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:43,392] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:43,393] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:43,532] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:43,533] [DEBUG] [GameManager] Button sequence: 4545
+[2025-11-18 23:04:43,534] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:43,545] [INFO] [SoundController] Song "Wham! - Wake Me Up Before You Go-Go (Official Video) (1).mp3" was randomly started
+[2025-11-18 23:04:43,546] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:43,814] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:43,815] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:43,816] [ERROR] [SoundController] ❌ Failed to load song 'Patti Smith Group - Because the Night (Official Audio) (1).mp3' (attempt 1/3): mpg123_getformat: Message: I am done with this track.
+[2025-11-18 23:04:43,935] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:43,936] [DEBUG] [GameManager] Button sequence: 45454
+[2025-11-18 23:04:43,936] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:43,949] [INFO] [SoundController] Song "Kool & The Gang - Celebration.mp3" was randomly started
+[2025-11-18 23:04:43,950] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:44,216] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:44,218] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:44,377] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:44,379] [DEBUG] [GameManager] Button sequence: 454545
+[2025-11-18 23:04:44,382] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:44,394] [INFO] [SoundController] Song "Why - Bronski beat.mp3" was randomly started
+[2025-11-18 23:04:44,395] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:44,521] [INFO] [GameManager] 💾 Memory - Process: 82.9MB | System: 247/907MB (27.2%, 660MB free)
+[2025-11-18 23:04:44,642] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:44,643] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:44,842] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:44,843] [DEBUG] [GameManager] Button sequence: 4
+[2025-11-18 23:04:44,844] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:44,854] [INFO] [SoundController] Song "Shakira - Hips Don_t Lie (Official 4K Video) ft. Wyclef Jean.mp3" was randomly started
+[2025-11-18 23:04:44,855] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:45,143] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:45,144] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:45,465] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:45,465] [DEBUG] [GameManager] Button sequence: 45
+[2025-11-18 23:04:45,466] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:45,477] [INFO] [SoundController] Song "Wham! - Wake Me Up Before You Go-Go (Official Video) (1).mp3" was randomly started
+[2025-11-18 23:04:45,478] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:45,766] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:45,767] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:45,987] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:45,988] [DEBUG] [GameManager] Button sequence: 454
+[2025-11-18 23:04:45,989] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:45,999] [INFO] [SoundController] Song "ABBA - Voulez-Vous.mp3" was randomly started
+[2025-11-18 23:04:46,000] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:46,248] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:46,249] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:49,903] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:49,903] [DEBUG] [GameManager] Button sequence: 4
+[2025-11-18 23:04:49,904] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:49,915] [INFO] [SoundController] Song "Shakira - Hips Don_t Lie (Official 4K Video) ft. Wyclef Jean.mp3" was randomly started
+[2025-11-18 23:04:49,915] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:50,184] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:50,185] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:50,345] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:50,346] [DEBUG] [GameManager] Button sequence: 45
+[2025-11-18 23:04:50,347] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:50,357] [INFO] [SoundController] Song "The Offspring - Pretty Fly (For A White Guy) (Official Music Video) [QtTR-_Klcq8].mp3" was randomly started
+[2025-11-18 23:04:50,359] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:50,567] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:50,568] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:50,808] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-18 23:04:50,809] [DEBUG] [GameManager] Button sequence: 454
+[2025-11-18 23:04:50,810] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:50,821] [INFO] [SoundController] Song "September - Cry For You.mp3" was randomly started
+[2025-11-18 23:04:50,822] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-18 23:04:51,070] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-18 23:04:51,071] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:51,331] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:51,332] [DEBUG] [GameManager] Button sequence: 4545
+[2025-11-18 23:04:51,333] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:51,344] [INFO] [SoundController] Song "September - Cry For You.mp3" was randomly started
+[2025-11-18 23:04:51,345] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:51,553] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:51,555] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:52,055] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:52,056] [DEBUG] [GameManager] Button sequence: 5
+[2025-11-18 23:04:52,057] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:52,067] [INFO] [SoundController] Song "Queen - Don't Stop Me Now (Official Video).mp3" was randomly started
+[2025-11-18 23:04:52,068] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:52,296] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:52,297] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:52,598] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:52,598] [DEBUG] [GameManager] Button sequence: 55
+[2025-11-18 23:04:52,599] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:52,610] [INFO] [SoundController] Song "Blondie - Call me.mp3" was randomly started
+[2025-11-18 23:04:52,610] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:52,839] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:52,840] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:04:53,180] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:04:53,181] [DEBUG] [GameManager] Button sequence: 555
+[2025-11-18 23:04:53,182] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:04:53,192] [INFO] [SoundController] Song "Jennifer Lopez - Waiting For Tonight.mp3" was randomly started
+[2025-11-18 23:04:53,193] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:04:53,461] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:04:53,462] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:05:44,538] [INFO] [GameManager] 💾 Memory - Process: 82.9MB | System: 246/907MB (27.1%, 661MB free)
+[2025-11-18 23:06:44,558] [INFO] [GameManager] 💾 Memory - Process: 82.9MB | System: 248/907MB (27.3%, 659MB free)

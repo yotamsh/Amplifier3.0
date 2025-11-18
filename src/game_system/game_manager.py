@@ -6,6 +6,13 @@ import time
 from typing import List, Optional, TYPE_CHECKING
 
 from .states import GameState
+from utils import OnceInMs
+
+try:
+    import psutil
+    PSUTIL_AVAILABLE = True
+except ImportError:
+    PSUTIL_AVAILABLE = False
 
 if TYPE_CHECKING:
     from button_system.interfaces import IButtonReader
@@ -13,7 +20,6 @@ if TYPE_CHECKING:
     from button_system.button_state import ButtonState
     from utils import ClassLogger
     from game_system.sequence_tracker import ButtonsSequenceTracker
-else:
     from led_system.pixel import Pixel
 
 
@@ -52,6 +58,10 @@ class GameManager:
         self.target_frame_duration = frame_duration_ms / 1000.0
         self.logger = logger
         self.running = True
+        
+        # Memory monitoring using OnceInMs
+        self._memory_monitor = OnceInMs(60000)  # Log every 60 seconds
+        self._process = psutil.Process() if PSUTIL_AVAILABLE else None
         
         # State management - create initial IdleState
         from game_system.states import IdleState
@@ -105,6 +115,10 @@ class GameManager:
         # 0. Update schedule if needed (once per minute)
         self.sound_controller.song_library.update_schedule_if_needed()
         
+        # 0.1. Log memory usage (once per minute)
+        if self._memory_monitor.should_execute():
+            self._log_memory_usage()
+        
         # 1. Sample button state
         button_state = self.button_reader.read_buttons()
         
@@ -129,12 +143,38 @@ class GameManager:
         self.running = False
         
         # Clear all LED strips
+        from led_system.pixel import Pixel
         black = Pixel(0, 0, 0)
         for strip in self.led_strips:
             strip[:] = black
             strip.show()
         
         self.logger.info("Game stopped")
+    
+    def _log_memory_usage(self) -> None:
+        """Log current memory usage (process and system)"""
+        if not PSUTIL_AVAILABLE:
+            return
+        
+        try:
+            # Process memory info
+            mem_info = self._process.memory_info()
+            process_mb = mem_info.rss / 1024 / 1024  # Resident Set Size in MB
+            
+            # System memory info
+            sys_mem = psutil.virtual_memory()
+            sys_total_mb = sys_mem.total / 1024 / 1024
+            sys_used_mb = sys_mem.used / 1024 / 1024
+            sys_available_mb = sys_mem.available / 1024 / 1024
+            sys_percent = sys_mem.percent
+            
+            self.logger.info(
+                f"💾 Memory - Process: {process_mb:.1f}MB | "
+                f"System: {sys_used_mb:.0f}/{sys_total_mb:.0f}MB ({sys_percent:.1f}%, "
+                f"{sys_available_mb:.0f}MB free)"
+            )
+        except Exception as e:
+            self.logger.warning(f"Failed to log memory usage: {e}")
     
     def _transition_to_state(self, new_state: GameState) -> None:
         """
