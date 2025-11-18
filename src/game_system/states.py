@@ -319,7 +319,7 @@ class PartyState(GameState):
             strip.show()
         
         # Set music to maximum volume
-        self.game_manager.sound_controller.mixer.music.set_volume(1.0)
+        self.game_manager.sound_controller.set_music_volume(1.0)
         
         # Start party timer
         import time
@@ -475,10 +475,10 @@ class PartyState(GameState):
         if both_pressed and total_spread % 10 == 0:
             # Volume decreases as spread increases: 1.0 → 0.0
             volume = 1.0 - (total_spread / (2 * self.max_spread))
-            self.game_manager.sound_controller.mixer.music.set_volume(volume)
+            self.game_manager.sound_controller.set_music_volume(volume)
         elif not both_pressed:
             # One or none pressed: reset to full volume
-            self.game_manager.sound_controller.mixer.music.set_volume(1.0)
+            self.game_manager.sound_controller.set_music_volume(1.0)
         
         # End condition: total spread == 2*max_spread
         if total_spread >= 2 * self.max_spread:
@@ -615,9 +615,7 @@ class CodeModeState(GameState):
         
         # Load and start code input music
         from audio_system.sound_controller import CODE_INPUT_MUSIC_PATH
-        self.game_manager.sound_controller.mixer.music.load(CODE_INPUT_MUSIC_PATH)
-        self.game_manager.sound_controller.mixer.music.set_volume(0.6)
-        self.game_manager.sound_controller.mixer.music.play()
+        self.game_manager.sound_controller.load_and_play_special_music(CODE_INPUT_MUSIC_PATH, volume=0.6)
         
         self.logger.info("Entered code mode - awaiting 5-digit code")
     

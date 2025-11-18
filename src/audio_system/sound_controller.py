@@ -132,6 +132,15 @@ class SoundController:
         volume = pow((total_clicked_buttons + 2) / (self.num_buttons + 2), 2)
         self.mixer.music.set_volume(volume)
     
+    def set_music_volume(self, volume: float) -> None:
+        """
+        Set music volume directly.
+        
+        Args:
+            volume: Volume level (0.0 to 1.0)
+        """
+        self.mixer.music.set_volume(volume)
+    
     def start_loaded_song(self) -> None:
         """Start playing the currently loaded song"""
         self.mixer.music.play()
@@ -144,6 +153,20 @@ class SoundController:
     def stop_music(self) -> None:
         """Stop the currently playing music"""
         self.mixer.music.stop()
+    
+    def load_and_play_special_music(self, file_path: str, volume: float = 1.0) -> None:
+        """
+        Load and play a special music file (like code input music).
+        
+        Args:
+            file_path: Path to music file
+            volume: Volume level (0.0 to 1.0)
+        """
+        self.stop_music()
+        self.current_song = file_path
+        self.mixer.music.load(file_path)
+        self.mixer.music.set_volume(volume)
+        self.mixer.music.play()
     
     def is_song_playing(self) -> bool:
         """

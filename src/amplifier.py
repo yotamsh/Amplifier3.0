@@ -8,9 +8,13 @@ and scheduled audio playback.
 """
 
 import sys
+import os
 import logging
 from pathlib import Path
 from datetime import datetime, time
+
+# MOCK AUDIO - Set to True to bypass audio hardware
+USE_MOCK_AUDIO = True
 
 # Add src to path for imports
 sys.path.insert(0, str(Path(__file__).parent))
@@ -21,6 +25,7 @@ try:
     from game_system import GameManager, ButtonsSequenceTracker
     from game_system.config import GameConfig, ButtonConfig, LedStripConfig, AudioConfig
     from audio_system import Schedule, DailyScheduleEntry, SpecialScheduleEntry, Collection, SongLibrary, SoundController, ALL_COLLECTIONS
+    from audio_system.mock_sound_controller import MockSoundController
     from utils import HybridLogger
     import RPi.GPIO as GPIO
 except ImportError as e:
@@ -159,11 +164,19 @@ def create_game_system(config: GameConfig, amplifier_logger):
         )
         
         # Create sound controller with song library
-        sound_controller = SoundController(
-            song_library=song_library,
-            num_buttons=config.button_count,
-            logger=sound_controller_logger
-        )
+        if USE_MOCK_AUDIO:
+            amplifier_logger.info("🔇 Using MockSoundController (audio hardware disabled)")
+            sound_controller = MockSoundController(
+                song_library=song_library,
+                num_buttons=config.button_count,
+                logger=sound_controller_logger
+            )
+        else:
+            sound_controller = SoundController(
+                song_library=song_library,
+                num_buttons=config.button_count,
+                logger=sound_controller_logger
+            )
 
         
         # Initialize LED strips from configuration
@@ -246,7 +259,10 @@ def main():
         amplifier_logger.info(f"Hardware status: {game_manager.button_reader.get_button_count()} buttons, {len(game_manager.led_strips)} LED strips")
         for i, strip in enumerate(game_manager.led_strips):
             amplifier_logger.info(f"  Strip {i+1}: {strip.num_pixels()} LEDs active")
-        amplifier_logger.info(f"Audio system: {audio_stats['total_codes']} song codes, {len(game_manager.sound_controller._sound_objects)} sound effects")
+        
+        # Get sound effects count (only for real SoundController)
+        sound_effects_count = len(getattr(game_manager.sound_controller, '_sound_objects', {}))
+        amplifier_logger.info(f"Audio system: {audio_stats['total_codes']} song codes, {sound_effects_count} sound effects")
         amplifier_logger.info(f"Available collections: {', '.join(audio_stats['all_collections'])}")
         
         amplifier_logger.info("🚀 Starting HumanAmplifier system...")
