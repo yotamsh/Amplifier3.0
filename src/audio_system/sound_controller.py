@@ -74,7 +74,9 @@ class SoundController:
         
         # Stop any existing music and load first song
         self.mixer.music.stop()
-        self.load_next_song()
+        success = self.load_next_song()
+        if not success:
+            self.logger.warning("⚠️ Could not preload initial song during initialization")
     
     def _load_and_validate_sounds(self) -> None:
         """
@@ -112,11 +114,38 @@ class SoundController:
             except pygame.error as e:
                 raise pygame.error(f"Failed to load sound {sound_enum.name} from {sound_path}: {e}")
     
-    def load_next_song(self) -> None:
-        """Load a random song from the song library into the mixer"""
-        self.current_song = self.song_library.get_random_song()
-        if self.current_song:
-            self.mixer.music.load(self.current_song)
+    def load_next_song(self, max_retries: int = 3) -> bool:
+        """
+        Load a random song from the song library into the mixer.
+        
+        Attempts to load a random song, retrying with different songs if loading fails
+        (e.g., due to corrupted MP3 files).
+        
+        Args:
+            max_retries: Maximum attempts to find a valid song file (default: 3)
+            
+        Returns:
+            True if song loaded successfully, False if all attempts failed
+        """
+        for attempt in range(max_retries):
+            self.current_song = self.song_library.get_random_song()
+            if not self.current_song:
+                self.logger.warning("No songs available in current collections")
+                return False
+            
+            try:
+                self.mixer.music.load(self.current_song)
+                return True
+            except pygame.error as e:
+                song_name = os.path.basename(self.current_song)
+                self.logger.error(
+                    f"❌ Failed to load song '{song_name}' (attempt {attempt + 1}/{max_retries}): {e}"
+                )
+                if attempt == max_retries - 1:
+                    self.logger.error(f"⚠️ All {max_retries} song load attempts failed - no valid songs found")
+                    return False
+        
+        return False
     
     def set_music_volume_by_buttons(self, total_clicked_buttons: int) -> None:
         """

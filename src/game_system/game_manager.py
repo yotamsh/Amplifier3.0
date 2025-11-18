@@ -87,8 +87,11 @@ class GameManager:
                     
         except KeyboardInterrupt:
             self.logger.info("Game stopped by user (Ctrl+C)")
+            self.logger.flush()
         except Exception as e:
             self.logger.error(f"Game loop error: {e}", exception=e)
+            # Error already auto-flushes, but be explicit
+            self.logger.flush()
             raise
         finally:
             self.stop()

@@ -82,10 +82,24 @@ class ClassLogger:
             self._log(logging.ERROR, enhanced_message, exc_info=True)
         else:
             self._log(logging.ERROR, message)
+        
+        # Flush immediately after error logging to ensure it's written to disk
+        self.flush()
     
     def critical(self, message: str) -> None:
         """Log critical message"""
         self._log(logging.CRITICAL, message)
+        
+        # Flush immediately after critical logging to ensure it's written to disk
+        self.flush()
+    
+    def flush(self) -> None:
+        """Force flush all handlers to disk immediately"""
+        for handler in self.main_logger.handlers:
+            try:
+                handler.flush()
+            except:
+                pass
     
     def create_class_logger(self, class_name: str, level: int = None) -> 'ClassLogger':
         """
@@ -167,6 +181,15 @@ class HybridLogger:
             ClassLogger: Main logger instance with class_name="Main"
         """
         return self.get_class_logger("Main", level)
+    
+    def flush(self) -> None:
+        """Force flush all handlers to disk immediately"""
+        if self.main_logger:
+            for handler in self.main_logger.handlers:
+                try:
+                    handler.flush()
+                except:
+                    pass
     
     def cleanup(self) -> None:
         """Clean up logger resources"""

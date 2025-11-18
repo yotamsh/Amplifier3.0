@@ -98,7 +98,9 @@ class IdleState(GameState):
     def custom_on_enter(self) -> None:
         """Actions when entering idle state"""
         # Load next random song to be ready for AmplifyState
-        self.game_manager.sound_controller.load_next_song()
+        success = self.game_manager.sound_controller.load_next_song()
+        if not success:
+            self.game_manager.logger.warning("⚠️ Could not load next song - audio may not play in next AmplifyState")
     
     def custom_on_exit(self) -> None:
         """Called when exiting idle state - cleanup if needed"""

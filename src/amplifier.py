@@ -10,11 +10,35 @@ and scheduled audio playback.
 import sys
 import os
 import logging
+import signal
+import atexit
 from pathlib import Path
 from datetime import datetime, time
 
 # MOCK AUDIO - Set to True to bypass audio hardware
 USE_MOCK_AUDIO = False
+
+# Global logger reference for signal handlers
+_global_logger = None
+
+def emergency_flush_and_log(sig=None, frame=None):
+    """Emergency handler - flush logs before crash"""
+    if _global_logger:
+        try:
+            if sig:
+                _global_logger.critical(f"⚠️  SIGNAL RECEIVED: {sig} - Process terminating")
+            _global_logger.critical("Emergency flush triggered")
+            _global_logger.flush()
+        except:
+            pass
+
+# Register signal handlers for graceful shutdown
+signal.signal(signal.SIGTERM, emergency_flush_and_log)  # Termination signal
+signal.signal(signal.SIGHUP, emergency_flush_and_log)   # Hangup signal
+signal.signal(signal.SIGINT, emergency_flush_and_log)   # Ctrl+C
+
+# Register exit handler
+atexit.register(lambda: emergency_flush_and_log())
 
 # Add src to path for imports
 sys.path.insert(0, str(Path(__file__).parent))
@@ -233,6 +257,10 @@ def main():
     main_logger = HybridLogger("HumanAmplifierSystem")
     amplifier_logger = main_logger.get_class_logger("Amplifier")
     
+    # Set global logger for signal handlers
+    global _global_logger
+    _global_logger = amplifier_logger
+    
     amplifier_logger.info("🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM")
     
     # Create configuration
@@ -272,12 +300,16 @@ def main():
         
     except KeyboardInterrupt:
         amplifier_logger.info("⏹️  HumanAmplifier stopped by user")
+        amplifier_logger.flush()
     except Exception as e:
         amplifier_logger.error(f"HumanAmplifier system error: {e}", exception=e)
+        # Error already auto-flushes, but be explicit
+        amplifier_logger.flush()
         raise
     finally:
         # Cleanup will be handled by GameManager.stop()
         amplifier_logger.info("✅ HumanAmplifier system shut down")
+        amplifier_logger.flush()
         main_logger.cleanup()
 
 
