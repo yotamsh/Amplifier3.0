@@ -5,7 +5,7 @@ Game state base class and concrete implementations
 from abc import ABC, abstractmethod
 from typing import List, Optional, TYPE_CHECKING
 
-from game_system.animations import AmplifyAnimation, AnimationDelayWrapper, IdleAnimation, PartyAnimation
+from .animations import AmplifyAnimation, AnimationDelayWrapper, IdleAnimation, PartyAnimation
 
 if TYPE_CHECKING:
     from button_system.button_state import ButtonState

@@ -5,13 +5,13 @@ Provides song management, collection scheduling, and code generation
 for the HumanAmplifier interactive game system.
 """
 
-from audio_system.audio_collections import Collection, Schedule, DailyScheduleEntry, SpecialScheduleEntry, ALL_COLLECTIONS
-from audio_system.song_library import SongLibrary
-from audio_system.code_generator import CodeGeneratorHelper
-from audio_system.sound_controller import SoundController, GameSounds
+from .audio_collections import AudioCollection, Schedule, DailyScheduleEntry, SpecialScheduleEntry, ALL_COLLECTIONS
+from .song_library import SongLibrary
+from .code_generator import CodeGeneratorHelper
+from .sound_controller import SoundController, GameSounds
 
 __all__ = [
-    'Collection',
+    'AudioCollection',
     'ALL_COLLECTIONS',
     'Schedule', 
     'DailyScheduleEntry',

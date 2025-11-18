@@ -5,8 +5,15 @@ Code Generator - CLI utility for managing song codes in ID3 tags
 
 import csv
 import os
+import sys
 import random
+from pathlib import Path
 from typing import Set
+
+# Add src to path for imports (needed when running as script)
+_src_path = Path(__file__).parent.parent
+if str(_src_path) not in sys.path:
+    sys.path.insert(0, str(_src_path))
 
 try:
     import eyed3
@@ -15,7 +22,22 @@ try:
 except ImportError:
     eyed3 = None
 
-from audio_system.audio_collections import Collection, ALL_COLLECTIONS
+# Direct imports to avoid loading pygame-dependent modules from __init__.py
+import importlib.util
+import sys
+
+# Load audio_collections directly without triggering package __init__
+collections_spec = importlib.util.spec_from_file_location(
+    "audio_collections",
+    Path(__file__).parent / "audio_collections.py"
+)
+collections_module = importlib.util.module_from_spec(collections_spec)
+collections_spec.loader.exec_module(collections_module)
+
+AudioCollection = collections_module.AudioCollection
+ALL_COLLECTIONS = collections_module.ALL_COLLECTIONS
+
+# Load config module (game_system doesn't have pygame dependencies)
 from game_system.config import AudioConfig
 
 

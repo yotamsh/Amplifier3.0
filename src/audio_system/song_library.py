@@ -14,7 +14,7 @@ try:
 except ImportError:
     eyed3 = None
 
-from audio_system.audio_collections import Collection, Schedule, ALL_COLLECTIONS
+from .audio_collections import AudioCollection, Schedule, ALL_COLLECTIONS
 from utils import OnceInMs
 
 
@@ -60,7 +60,7 @@ class SongLibrary:
         self.logger = logger
         
         # Current active collections and song basket
-        self.current_collections: Set[Collection] = set()
+        self.current_collections: Set[AudioCollection] = set()
         self.current_songs_basket: List[str] = []
         
         # Code to filepath mapping

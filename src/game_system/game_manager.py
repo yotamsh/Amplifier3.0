@@ -5,7 +5,7 @@ Main game manager - orchestrates state machine, button input, and LED output
 import time
 from typing import List, Optional, TYPE_CHECKING
 
-from game_system.states import GameState
+from .states import GameState
 
 if TYPE_CHECKING:
     from button_system.interfaces import IButtonReader

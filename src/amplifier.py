@@ -24,7 +24,7 @@ try:
     from led_system import PixelStripAdapter, Pixel
     from game_system import GameManager, ButtonsSequenceTracker
     from game_system.config import GameConfig, ButtonConfig, LedStripConfig, AudioConfig
-    from audio_system import Schedule, DailyScheduleEntry, SpecialScheduleEntry, Collection, SongLibrary, SoundController, ALL_COLLECTIONS
+    from audio_system import Schedule, DailyScheduleEntry, SpecialScheduleEntry, AudioCollection, SongLibrary, SoundController, ALL_COLLECTIONS
     from audio_system.mock_sound_controller import MockSoundController
     from utils import HybridLogger
     import RPi.GPIO as GPIO
@@ -81,7 +81,7 @@ def create_amplifier_config() -> GameConfig:
         songs_folder="songs",
         daily_schedule=[
             DailyScheduleEntry(time(0, 0), ALL_COLLECTIONS),
-            DailyScheduleEntry(time(16, 17), {Collection.MAIJAM}),
+            DailyScheduleEntry(time(16, 17), {AudioCollection.MAIJAM}),
             # DailyScheduleEntry(time(4, 0), {Collection.CLASSIC}),
             # DailyScheduleEntry(time(7, 0), {Collection.MORNING}),
             # DailyScheduleEntry(time(10, 0), ALL_COLLECTIONS),
@@ -96,7 +96,7 @@ def create_amplifier_config() -> GameConfig:
             SpecialScheduleEntry(
                 start=datetime(2025, 11, 12, 16, 18),
                 end=datetime(2025, 11, 12, 18, 0),
-                collections={Collection.MORNING}
+                collections={AudioCollection.MORNING}
             ),
         ]
     )

@@ -9,32 +9,33 @@ from enum import Enum
 from typing import Set, List, Optional
 
 
-class Collection(Enum):
+class AudioCollection(Enum):
     """
     Audio collections - each corresponds to a folder in the songs directory.
     
     Hardcoded collection definitions.
     """
-    # GENERAL = "general"
+    GENERAL = "general"
     MORNING = "morning"
-    # PARTY = "party"
-    # TV = "tv"
-    # CLASSIC = "classic"
-    # DISNEY = "disney"
-    # SPANISH = "spanish"
-    # TESTS = "tests"
+    PARTY = "party"
+    TV = "tv"
+    CLASSIC = "classic"
+    DISNEY = "disney"
+    SPANISH = "spanish"
     MAIJAM = "maijam"
+    FESTIGAL = "festigal"
+    VIRAL = "viral"
 
 
 # Constant with all collections
-ALL_COLLECTIONS = set(Collection)
+ALL_COLLECTIONS = set(AudioCollection)
 
 
 @dataclass
 class DailyScheduleEntry:
     """Entry in the daily schedule defining which collections are available at a specific time"""
     time: time
-    collections: Set[Collection]
+    collections: Set[AudioCollection]
 
 
 @dataclass
@@ -42,7 +43,7 @@ class SpecialScheduleEntry:
     """Special schedule entry for specific date/time ranges"""
     start: datetime
     end: datetime
-    collections: Set[Collection]
+    collections: Set[AudioCollection]
 
 
 class Schedule:
@@ -123,7 +124,7 @@ class Schedule:
                 f"Create these folders in {songs_folder}/ or update schedule configuration."
             )
     
-    def get_collections_by_time(self, current_time: datetime) -> Set[Collection]:
+    def get_collections_by_time(self, current_time: datetime) -> Set[AudioCollection]:
         """
         Get available collections for the given time.
         
