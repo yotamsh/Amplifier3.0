@@ -219,3 +219,148 @@ class AnimationHelpers:
         b = int((b_prime + m) * 255)
         
         return r, g, b
+
+
+class PyramidMapping:
+    """
+    Static mapping for A-shaped pyramid LED strip (Strip 1, GPIO 18).
+    
+    LED flow: LEFT_UP (bottom→top) → TOP_RIGHT → RIGHT_DOWN (top→bottom) → MIDDLE_LEFT
+    
+    Height buckets: 0-100 (101 total)
+      - Bucket 0: Empty (nothing lit)
+      - Buckets 1-99: Sides + middle bar (vertically distributed)
+      - Bucket 100: Top line only
+    
+    Usage:
+        # Get bottom 50%
+        leds = pyramidHeight[0:50]
+        
+        # Get top line only
+        leds = pyramidHeight[100:100]
+        
+        # Get sides and middle (no top line)
+        leds = pyramidHeight[1:99]
+    """
+    
+    # ============ MEASURED VALUES ============
+    LEFT_SIDE_COUNT = 116     # Bottom→top (LED 0=bottom/bucket1, 115=top/bucket99)
+    TOP_LINE_COUNT = 16       # Top line (all in bucket 100)
+    RIGHT_SIDE_COUNT = 116    # Top→bottom (LED 0=top/bucket99, 115=bottom/bucket1)
+    MIDDLE_LINE_COUNT = 46    # Middle bar
+    MIDDLE_ALIGN_LED = 48     # Aligned with left side LED 48
+    
+    # Calculate middle bar height: LED 48 from bottom = (48/115) * 98 + 1 ≈ 42
+    MIDDLE_BAR_HEIGHT = round((MIDDLE_ALIGN_LED / (LEFT_SIDE_COUNT - 1)) * 98) + 1
+    
+    # ============ SEGMENT BOUNDARIES ============
+    LEFT_START = 0
+    LEFT_END = LEFT_SIDE_COUNT                      # 0-115
+    
+    TOP_START = LEFT_END
+    TOP_END = TOP_START + TOP_LINE_COUNT            # 116-131
+    
+    RIGHT_START = TOP_END
+    RIGHT_END = RIGHT_START + RIGHT_SIDE_COUNT      # 132-247
+    
+    MIDDLE_START = RIGHT_END
+    MIDDLE_END = MIDDLE_START + MIDDLE_LINE_COUNT   # 248-293
+    
+    # ============ HEIGHT BUCKETS (0-100) ============
+    _HEIGHT_BUCKETS = [[] for _ in range(101)]
+    
+    @classmethod
+    def _build_buckets(cls):
+        """Build height buckets - called once at module load"""
+        
+        # Bucket 0 stays empty
+        
+        # Left side: LED 0 (bottom) → bucket 1, LED 115 (top) → bucket 99
+        for i in range(cls.LEFT_SIDE_COUNT):
+            height_bucket = round((i / (cls.LEFT_SIDE_COUNT - 1)) * 98) + 1
+            cls._HEIGHT_BUCKETS[height_bucket].append(cls.LEFT_START + i)
+        
+        # Top line: all in bucket 100
+        for i in range(cls.TOP_LINE_COUNT):
+            cls._HEIGHT_BUCKETS[100].append(cls.TOP_START + i)
+        
+        # Right side: LED 0 (top) → bucket 99, LED 115 (bottom) → bucket 1
+        for i in range(cls.RIGHT_SIDE_COUNT):
+            height_bucket = round((1 - i / (cls.RIGHT_SIDE_COUNT - 1)) * 98) + 1
+            cls._HEIGHT_BUCKETS[height_bucket].append(cls.RIGHT_START + i)
+        
+        # Middle bar at calculated height (~42%)
+        for i in range(cls.MIDDLE_LINE_COUNT):
+            cls._HEIGHT_BUCKETS[cls.MIDDLE_BAR_HEIGHT].append(cls.MIDDLE_START + i)
+    
+    @classmethod
+    def get_height_range(cls, start_percent: int, end_percent: int) -> set[int]:
+        """
+        Get all LED indices in height range [start, end] INCLUSIVE.
+        
+        Args:
+            start_percent: Bottom of range (0-100)
+            end_percent: Top of range (0-100, inclusive)
+            
+        Returns:
+            Set of LED indices in this range
+        """
+        result = set()
+        for h in range(start_percent, end_percent + 1):
+            result.update(cls._HEIGHT_BUCKETS[h])
+        return result
+    
+    @classmethod
+    def get_bottom_percent(cls, percent: int) -> set[int]:
+        """Get LEDs in bottom X% of pyramid"""
+        return cls.get_height_range(0, percent)
+    
+    @classmethod
+    def get_top_percent(cls, percent: int) -> set[int]:
+        """Get LEDs in top X% of pyramid"""
+        return cls.get_height_range(100 - percent, 100)
+
+
+class _PyramidHeightSliceHelper:
+    """
+    Helper class to enable slice syntax: pyramidHeight[start:end]
+    
+    Uses INCLUSIVE slicing on both ends (unlike standard Python slices).
+    
+    Examples:
+        pyramidHeight[0:50]    # Buckets 0-50 (bottom half)
+        pyramidHeight[100:100] # Bucket 100 only (top line)
+        pyramidHeight[1:99]    # Buckets 1-99 (sides+middle, no top line)
+        pyramidHeight[25]      # Bucket 25 only (single height)
+    """
+    
+    def __getitem__(self, key) -> set[int]:
+        if isinstance(key, slice):
+            start = key.start if key.start is not None else 0
+            stop = key.stop if key.stop is not None else 100
+            
+            # Clamp to valid range
+            start = max(0, min(100, start))
+            stop = max(0, min(100, stop))
+            
+            # INCLUSIVE on both ends (unlike standard Python slicing)
+            if stop < start:
+                return set()
+            
+            return PyramidMapping.get_height_range(start, stop)
+        
+        elif isinstance(key, int):
+            # Single bucket access
+            if not (0 <= key <= 100):
+                raise IndexError(f"Pyramid height index {key} out of range (0-100)")
+            return set(PyramidMapping._HEIGHT_BUCKETS[key])
+        
+        else:
+            raise TypeError(f"Pyramid height indices must be integers or slices, not {type(key).__name__}")
+
+
+# Global instance for slice syntax
+pyramidHeight = _PyramidHeightSliceHelper()
+
+# Build buckets at module load time (runs once)
+PyramidMapping._build_buckets()
