@@ -106,3 +106,4 @@ python src/amplifier.py
 - **Graceful fallback**: If stdin unavailable, logs warning and continues with GPIO-only
 
 
+
