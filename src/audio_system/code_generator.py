@@ -100,7 +100,7 @@ class CodeGeneratorHelper:
         num_new_songs = 0
         num_collides = 0
         num_errors = 0
-        existing_codes: Set[str] = set()
+        existing_codes: dict[str, str] = {}  # Maps code -> song_path for duplicate detection
         
         # Create CSV file
         with open(csv_output_path, 'w', newline='', encoding='utf-8') as csv_file:
@@ -135,9 +135,12 @@ class CodeGeneratorHelper:
                             if CodeGeneratorHelper._is_valid_code(existing_code):
                                 if existing_code in existing_codes:
                                     num_errors += 1
-                                    print(f"\n    ❌ Error: Duplicate code '{existing_code}' in {song_path}")
+                                    original_song = existing_codes[existing_code]
+                                    print(f"\n    ❌ Error: Duplicate code '{existing_code}'")
+                                    print(f"       Song 1: {original_song}")
+                                    print(f"       Song 2: {song_path}")
                                 else:
-                                    existing_codes.add(existing_code)
+                                    existing_codes[existing_code] = song_path
                                     writer.writerow([
                                         collection.name, 
                                         CodeGeneratorHelper._get_song_name(filename), 
@@ -193,7 +196,7 @@ class CodeGeneratorHelper:
                                 
                                 # Update ID3 tag
                                 audio_file.tag.album = new_code
-                                existing_codes.add(new_code)
+                                existing_codes[new_code] = song_path
                                 audio_file.tag.save(version=eyed3.id3.tag.ID3_V2_3)
                                 
                                 # Update modification time to ensure rsync detects the change
