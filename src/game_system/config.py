@@ -42,7 +42,7 @@ class AudioConfig:
     """Audio system configuration"""
     songs_folder: str = "songs"
     csv_output_path: str = "AmplifierSongCodes.csv"
-    code_length: int = 3  # Song code length for runtime (set to 3 for testing, 5 for production)
+    code_length: int = 5  # Song code length for runtime (set to 3 for testing, 5 for production)
     daily_schedule: List = None  # List[DailyScheduleEntry] - set in game_example
     special_schedule: List = None  # List[SpecialScheduleEntry] - set in game_example
 

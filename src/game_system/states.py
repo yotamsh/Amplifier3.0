@@ -115,9 +115,9 @@ class IdleState(GameState):
             if time_elapsed is not None and time_elapsed > 2.0:
                 self.game_manager.sequence_tracker.reset()
             
-        # Check for "111" pattern - enter code mode
-        if self.game_manager.sequence_tracker.get_sequence() == "111":
-            self.game_manager.logger.info("Triple 1 detected - entering code mode!")
+        # Check for "777" pattern - enter code mode
+        if self.game_manager.sequence_tracker.get_sequence() == "777":
+            self.game_manager.logger.info("Triple 777 detected - entering code mode!")
             self.game_manager.sequence_tracker.reset()
             return CodeModeState(self.game_manager)
         
