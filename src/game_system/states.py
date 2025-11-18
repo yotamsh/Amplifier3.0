@@ -135,13 +135,14 @@ class IdleState(GameState):
 
 class AmplifyState(GameState):
     """
-    Amplify state - rainbow animations for each pressed button.
+    Amplify state - rainbow animations on strip 1, pyramid fill on strip 2.
     
-    Each button controls an LED section with its own rainbow animation.
-    Dynamically adds/removes animations based on button presses.
+    Strip 1: Each button controls an LED section with rainbow animation.
+    Strip 2: Pyramid fills from bottom up based on button count.
     
     Transitions:
-    - No buttons pressed → IdleState  
+    - No buttons pressed → IdleState
+    - All buttons pressed → PartyState
     """
     
     def __init__(self, game_manager: 'GameManager', button_state: 'ButtonState'):
@@ -161,7 +162,17 @@ class AmplifyState(GameState):
             speed_ms=100,  # Slower animation (100ms vs 50ms)
             hue_shift_per_frame=10  # Slower hue rotation
         )
-        self.animations: List['Animation'] = [self.amplify_anim]
+        
+        # Create pyramid animation on strip 2 (index 1)
+        from game_system.animations import AmplifyPyramidAnimation
+        pyramid_strip = game_manager.led_strips[1]
+        self.pyramid_anim = AmplifyPyramidAnimation(
+            strip=pyramid_strip,
+            button_count=game_manager.button_reader.get_button_count(),
+            speed_ms=50  # Fast update for responsive fill
+        )
+        
+        self.animations: List['Animation'] = [self.amplify_anim, self.pyramid_anim]
         
         # Store initial button state for custom_on_enter
         self.initial_button_state = button_state
@@ -175,8 +186,9 @@ class AmplifyState(GameState):
             strip[:] = black
             strip.show()
         
-        # Update animation with current button state
+        # Update animations with current button state
         self.amplify_anim.set_pressed_buttons(self.pressed_buttons)
+        self.pyramid_anim.set_pressed_buttons(self.pressed_buttons)
         
         # Start music with initial volume
         self.game_manager.sound_controller.set_music_volume_by_buttons(
@@ -224,8 +236,9 @@ class AmplifyState(GameState):
         
         # Update if button state changed
         if button_state.any_changed:
-            # Update the amplify animation and volume with current button state
+            # Update both animations and volume with current button state
             self.amplify_anim.set_pressed_buttons(self.pressed_buttons)
+            self.pyramid_anim.set_pressed_buttons(self.pressed_buttons)
             self.game_manager.sound_controller.set_music_volume_by_buttons(button_state.total_buttons_pressed)
             pressed_indexes = [i for i, pressed in enumerate(button_state.for_button) if pressed]
             self.logger.debug(f"AmplifyState button change - currently pressed: {pressed_indexes}")
@@ -244,7 +257,8 @@ class PartyState(GameState):
     Features:
     - Plays win sound (in AmplifyState before transition)
     - Sets music to maximum volume
-    - Crazy multi-effect animation
+    - Strip 1: Crazy multi-effect pushing wave animation
+    - Strip 2: Pyramid blinks with random colors every 300ms
     - After 15 seconds: Reduction feature enabled (center buttons can reduce volume/end party)
     - Returns to idle when song ends
     
@@ -305,7 +319,16 @@ class PartyState(GameState):
             speed_ms=20,  # Very fast updates
             button_count=button_count
         )
-        self.animations: List['Animation'] = [self.party_anim]
+        
+        # Create party pyramid animation on strip 2 (index 1)
+        from game_system.animations import PartyPyramidAnimation
+        pyramid_strip = game_manager.led_strips[1]
+        self.pyramid_party_anim = PartyPyramidAnimation(
+            strip=pyramid_strip,
+            speed_ms=50  # Check for color changes frequently
+        )
+        
+        self.animations: List['Animation'] = [self.party_anim, self.pyramid_party_anim]
     
     def custom_on_enter(self) -> None:
         """Actions when entering party mode"""

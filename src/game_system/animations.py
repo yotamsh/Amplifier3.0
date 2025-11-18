@@ -377,6 +377,140 @@ class AmplifyAnimation(Animation):
                     self.strip[center_pixel] = AnimationHelpers.BLACK
 
 
+class AmplifyPyramidAnimation(Animation):
+    """
+    Pyramid fill animation based on number of pressed buttons.
+    
+    Fills the pyramid from bottom to top proportionally to the number
+    of pressed buttons. Uses PyramidMapping for height-based control.
+    """
+    
+    def __init__(self, strip: 'LedStrip', button_count: int, speed_ms: int = 50):
+        """
+        Initialize pyramid amplify animation.
+        
+        Args:
+            strip: LED strip to operate on (pyramid strip)
+            button_count: Total number of buttons in the system
+            speed_ms: Animation update interval in milliseconds
+        """
+        super().__init__(strip, speed_ms)
+        self.button_count: int = button_count
+        
+        # Track which buttons are currently pressed
+        self.pressed_buttons: List[bool] = [False] * button_count
+        
+        # Fill color - white
+        from led_system.pixel import Pixel
+        self.fill_color = Pixel(255, 255, 255)
+        self.off_color = Pixel(0, 0, 0)
+    
+    def set_pressed_buttons(self, pressed_buttons: List[bool]) -> None:
+        """
+        Update which buttons are currently pressed.
+        
+        Args:
+            pressed_buttons: List of boolean values indicating button press state
+        """
+        self.pressed_buttons = pressed_buttons.copy()
+    
+    def advance(self) -> None:
+        """Update pyramid LEDs based on number of pressed buttons"""
+        from game_system.animation_helpers import pyramidHeight
+        
+        # Count how many buttons are pressed
+        buttons_pressed = sum(self.pressed_buttons)
+        
+        # Calculate fill percentage: (buttons_pressed / total_buttons) * 100
+        fill_percent = int((buttons_pressed / self.button_count) * 100)
+        
+        # Get LEDs to light (from bottom to fill_percent height)
+        leds_to_light = pyramidHeight[0:fill_percent]
+        
+        # Clear entire strip first
+        num_pixels = self.strip.num_pixels()
+        for i in range(num_pixels):
+            self.strip[i] = self.off_color
+        
+        # Light the bottom portion
+        for led_idx in leds_to_light:
+            self.strip[led_idx] = self.fill_color
+
+
+class PartyPyramidAnimation(Animation):
+    """
+    Party pyramid animation - whole pyramid blinks on/off with random pastel colors.
+    
+    Alternates between lit (with color) and dark every 300ms.
+    Starts with white, then uses pastel colors.
+    """
+    
+    def __init__(self, strip: 'LedStrip', speed_ms: int = 50):
+        """
+        Initialize party pyramid animation.
+        
+        Args:
+            strip: LED strip to operate on (pyramid strip)
+            speed_ms: Animation update interval (checks for blink timing)
+        """
+        super().__init__(strip, speed_ms)
+        
+        # Blinking state
+        from led_system.pixel import Pixel
+        self.current_color = Pixel(255, 255, 255)  # Start with white
+        self.is_lit = True  # Start lit
+        self.is_first_blink = True
+        self.blink_interval_ms = 300  # 300ms per on/off toggle
+        self.last_blink_time = time.time()
+        self.black = Pixel(0, 0, 0)
+    
+    def _get_random_pastel_color(self) -> 'Pixel':
+        """Generate a random pastel color"""
+        from led_system.pixel import Pixel
+        
+        # Pastel color palette - soft, pleasant colors
+        colors = [
+            Pixel(255, 179, 186),  # Pastel pink
+            Pixel(186, 225, 255),  # Pastel blue
+            Pixel(179, 255, 179),  # Pastel green
+            Pixel(255, 223, 186),  # Pastel peach
+            Pixel(230, 190, 255),  # Pastel lavender
+            Pixel(255, 255, 186),  # Pastel yellow
+            Pixel(186, 255, 238),  # Pastel mint
+            Pixel(255, 204, 229),  # Pastel rose
+            Pixel(204, 229, 255),  # Pastel sky blue
+            Pixel(255, 218, 185),  # Pastel coral
+        ]
+        return random.choice(colors)
+    
+    def advance(self) -> None:
+        """Toggle pyramid on/off every 300ms, changing color when turning on"""
+        current_time = time.time()
+        elapsed_ms = (current_time - self.last_blink_time) * 1000
+        
+        # Check if it's time to toggle
+        if elapsed_ms >= self.blink_interval_ms:
+            self.is_lit = not self.is_lit
+            
+            # When turning on, pick a new color
+            if self.is_lit:
+                if self.is_first_blink:
+                    # First time stays white
+                    self.is_first_blink = False
+                else:
+                    # After first blink, use pastel colors
+                    self.current_color = self._get_random_pastel_color()
+            
+            self.last_blink_time = current_time
+        
+        # Fill pyramid with current state (lit color or black)
+        num_pixels = self.strip.num_pixels()
+        display_color = self.current_color if self.is_lit else self.black
+        
+        for i in range(num_pixels):
+            self.strip[i] = display_color
+
+
 class PartyAnimation(Animation):
     """
     Elegant pushing wave party animation.
