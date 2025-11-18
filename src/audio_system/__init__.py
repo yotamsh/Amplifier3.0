@@ -5,7 +5,7 @@ Provides song management, collection scheduling, and code generation
 for the HumanAmplifier interactive game system.
 """
 
-from audio_system.collections import Collection, Schedule, DailyScheduleEntry, SpecialScheduleEntry, ALL_COLLECTIONS
+from audio_system.audio_collections import Collection, Schedule, DailyScheduleEntry, SpecialScheduleEntry, ALL_COLLECTIONS
 from audio_system.song_library import SongLibrary
 from audio_system.code_generator import CodeGeneratorHelper
 from audio_system.sound_controller import SoundController, GameSounds

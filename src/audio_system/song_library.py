@@ -14,7 +14,7 @@ try:
 except ImportError:
     eyed3 = None
 
-from audio_system.collections import Collection, Schedule, ALL_COLLECTIONS
+from audio_system.audio_collections import Collection, Schedule, ALL_COLLECTIONS
 from utils import OnceInMs
 
 

@@ -439,10 +439,10 @@ class AmplifyPyramidAnimation(Animation):
 
 class PartyPyramidAnimation(Animation):
     """
-    Party pyramid animation - whole pyramid blinks on/off with random pastel colors.
+    Party pyramid animation - whole pyramid blinks on/off with vibrant colors.
     
-    Alternates between lit (with color) and dark every 300ms.
-    Starts with white, then uses pastel colors.
+    Alternates between lit (with color) and dark every 400ms.
+    Starts with white, then uses vibrant, pleasant colors.
     """
     
     def __init__(self, strip: 'LedStrip', speed_ms: int = 50):
@@ -460,31 +460,33 @@ class PartyPyramidAnimation(Animation):
         self.current_color = Pixel(255, 255, 255)  # Start with white
         self.is_lit = True  # Start lit
         self.is_first_blink = True
-        self.blink_interval_ms = 300  # 300ms per on/off toggle
+        self.blink_interval_ms = 400  # 400ms per on/off toggle
         self.last_blink_time = time.time()
         self.black = Pixel(0, 0, 0)
     
     def _get_random_pastel_color(self) -> 'Pixel':
-        """Generate a random pastel color"""
+        """Generate a random vibrant, pleasant color"""
         from led_system.pixel import Pixel
         
-        # Pastel color palette - soft, pleasant colors
+        # Vibrant but pleasant color palette
         colors = [
-            Pixel(255, 179, 186),  # Pastel pink
-            Pixel(186, 225, 255),  # Pastel blue
-            Pixel(179, 255, 179),  # Pastel green
-            Pixel(255, 223, 186),  # Pastel peach
-            Pixel(230, 190, 255),  # Pastel lavender
-            Pixel(255, 255, 186),  # Pastel yellow
-            Pixel(186, 255, 238),  # Pastel mint
-            Pixel(255, 204, 229),  # Pastel rose
-            Pixel(204, 229, 255),  # Pastel sky blue
-            Pixel(255, 218, 185),  # Pastel coral
+            Pixel(255, 105, 180),  # Hot pink
+            Pixel(100, 149, 237),  # Cornflower blue
+            Pixel(144, 238, 144),  # Light green
+            Pixel(255, 165, 0),    # Orange
+            Pixel(186, 85, 211),   # Medium orchid
+            Pixel(255, 215, 0),    # Gold
+            Pixel(64, 224, 208),   # Turquoise
+            Pixel(255, 20, 147),   # Deep pink
+            Pixel(30, 144, 255),   # Dodger blue
+            Pixel(255, 99, 71),    # Tomato red
+            Pixel(147, 112, 219),  # Medium purple
+            Pixel(50, 205, 50),    # Lime green
         ]
         return random.choice(colors)
     
     def advance(self) -> None:
-        """Toggle pyramid on/off every 300ms, changing color when turning on"""
+        """Toggle pyramid on/off every 400ms, changing color when turning on"""
         current_time = time.time()
         elapsed_ms = (current_time - self.last_blink_time) * 1000
         

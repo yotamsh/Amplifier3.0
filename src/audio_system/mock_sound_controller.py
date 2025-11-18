@@ -7,6 +7,25 @@ from datetime import datetime
 from typing import Optional
 
 
+class MockChannel:
+    """Mock pygame.mixer.Channel for testing"""
+    
+    def __init__(self, duration_seconds: float = 1.0):
+        """
+        Initialize mock channel.
+        
+        Args:
+            duration_seconds: How long the channel should report as "busy"
+        """
+        self.start_time = time.time()
+        self.duration = duration_seconds
+    
+    def get_busy(self) -> bool:
+        """Returns True while simulated sound is playing"""
+        elapsed = time.time() - self.start_time
+        return elapsed < self.duration
+
+
 class MockSoundController:
     """
     Mock implementation of SoundController that performs no audio operations.
@@ -140,17 +159,17 @@ class MockSoundController:
     
     def play_sound_with_volume(self, sound, volume: float):
         """
-        Mock: No-op for sound effects.
+        Mock: Returns mock channel that simulates sound playback.
         
         Args:
             sound: GameSounds enum value (ignored)
             volume: Volume level (ignored)
             
         Returns:
-            None (real implementation returns pygame.mixer.Channel)
+            MockChannel that simulates a 1-second sound effect
         """
         self.logger.debug(f"Mock: Playing sound {sound} at volume {volume}")
-        return None
+        return MockChannel(duration_seconds=1.0)
     
     def play_random_fail_sound(self, volume: float = 1.0) -> None:
         """

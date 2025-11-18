@@ -1,0 +1,161 @@
+[2025-11-18 03:13:26,426] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-18 03:13:26,427] [INFO] [Amplifier] Button configuration: 10 buttons on GPIO [6, 5, 22, 17, 4, 23, 24, 25, 16, 20]
+[2025-11-18 03:13:26,428] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-18 03:13:26,428] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-18 03:13:26,428] [INFO] [Amplifier]   Strip 2: 300 LEDs on GPIO 18
+[2025-11-18 03:13:26,428] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-18 03:13:26,429] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-18 03:13:26,429] [INFO] [Amplifier] Audio folder: songs
+[2025-11-18 03:13:26,429] [INFO] [Amplifier] Schedule: 2 daily, 1 special entries
+[2025-11-18 03:13:26,430] [INFO] [ButtonReader] GPIO sampler initialized: 10 pins (no pulls)
+[2025-11-18 03:13:26,430] [INFO] [ButtonReader] Pin mapping: Btn0=GPIO6, Btn1=GPIO5, Btn2=GPIO22, Btn3=GPIO17, Btn4=GPIO4, Btn5=GPIO23, Btn6=GPIO24, Btn7=GPIO25, Btn8=GPIO16, Btn9=GPIO20
+[2025-11-18 03:13:26,431] [INFO] [ButtonReader] 🎮 Keyboard debug enabled: Press digit keys 0-9 to toggle buttons (works over SSH)
+[2025-11-18 03:13:26,431] [INFO] [ButtonReader]    Each keypress toggles button ON/OFF
+[2025-11-18 03:13:26,432] [INFO] [ButtonReader] ButtonReader initialized with 10 buttons
+[2025-11-18 03:13:26,432] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-18 03:13:26,696] [INFO] [SongLibrary] Loaded 0 song codes from 2 collections
+[2025-11-18 03:13:26,696] [INFO] [SongLibrary] Collections updated: ['MORNING', 'MAIJAM']
+[2025-11-18 03:13:26,698] [INFO] [Amplifier] 🔇 Using MockSoundController (audio hardware disabled)
+[2025-11-18 03:13:26,698] [INFO] [SoundController] 🔇 MockSoundController initialized (audio disabled)
+[2025-11-18 03:13:26,702] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-18 03:13:26,703] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-18 03:13:26,703] [INFO] [Amplifier] Hardware: 10 buttons, 2 LED strips, 20ms frame duration
+[2025-11-18 03:13:26,703] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['MORNING', 'MAIJAM'], 'total_codes': 0, 'daily_schedule_entries': 2, 'special_schedule_entries': 1}
+[2025-11-18 03:13:26,704] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-18 03:13:26,704] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-18 03:13:26,705] [INFO] [Amplifier] Hardware status: 10 buttons, 2 LED strips
+[2025-11-18 03:13:26,705] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-18 03:13:26,705] [INFO] [Amplifier]   Strip 2: 300 LEDs active
+[2025-11-18 03:13:26,706] [INFO] [Amplifier] Audio system: 0 song codes, 0 sound effects
+[2025-11-18 03:13:26,706] [INFO] [Amplifier] Available collections: MORNING, MAIJAM
+[2025-11-18 03:13:26,706] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-18 03:13:26,707] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-18 03:13:29,379] [INFO] [ButtonReader] Keyboard: Button 1 toggled ON (key '1')
+[2025-11-18 03:13:29,386] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-18 03:13:29,387] [DEBUG] [GameManager] Button sequence: 1
+[2025-11-18 03:13:29,388] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 03:13:29,400] [INFO] [SoundController] Mock: Started playback of "songs/maijam/The Offspring - Pretty Fly (For A White Guy) (Official Music Video) [QtTR-_Klcq8].mp3"
+[2025-11-18 03:13:29,400] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [1]
+[2025-11-18 03:13:29,623] [INFO] [ButtonReader] Keyboard: Button 1 toggled OFF (key '1')
+[2025-11-18 03:13:29,624] [DEBUG] [ButtonReader] Button state changed: [(1, 'released')]
+[2025-11-18 03:13:29,624] [INFO] [SoundController] Mock: Stopped playback
+[2025-11-18 03:13:29,625] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 03:13:29,924] [INFO] [ButtonReader] Keyboard: Button 1 toggled ON (key '1')
+[2025-11-18 03:13:29,926] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-18 03:13:29,927] [DEBUG] [GameManager] Button sequence: 11
+[2025-11-18 03:13:29,928] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 03:13:29,939] [INFO] [SoundController] Mock: Started playback of "songs/maijam/Queen - Don't Stop Me Now (Official Video).mp3"
+[2025-11-18 03:13:29,940] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [1]
+[2025-11-18 03:13:31,071] [INFO] [ButtonReader] Keyboard: Button 1 toggled OFF (key '1')
+[2025-11-18 03:13:31,072] [DEBUG] [ButtonReader] Button state changed: [(1, 'released')]
+[2025-11-18 03:13:31,072] [INFO] [SoundController] Mock: Stopped playback
+[2025-11-18 03:13:31,073] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 03:13:34,042] [INFO] [ButtonReader] Keyboard: Button 1 toggled ON (key '1')
+[2025-11-18 03:13:34,043] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-18 03:13:34,044] [DEBUG] [GameManager] Button sequence: 1
+[2025-11-18 03:13:34,044] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 03:13:34,055] [INFO] [SoundController] Mock: Started playback of "songs/morning/Aqua - Good Morning Sunshine.mp3"
+[2025-11-18 03:13:34,055] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [1]
+[2025-11-18 03:13:34,925] [INFO] [ButtonReader] Keyboard: Button 1 toggled OFF (key '1')
+[2025-11-18 03:13:34,926] [DEBUG] [ButtonReader] Button state changed: [(1, 'released')]
+[2025-11-18 03:13:34,927] [INFO] [SoundController] Mock: Stopped playback
+[2025-11-18 03:13:34,927] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 03:13:35,448] [INFO] [ButtonReader] Keyboard: Button 1 toggled ON (key '1')
+[2025-11-18 03:13:35,449] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-18 03:13:35,450] [DEBUG] [GameManager] Button sequence: 11
+[2025-11-18 03:13:35,451] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 03:13:35,463] [INFO] [SoundController] Mock: Started playback of "songs/morning/אריק איינשטיין - שבת בבוקר.mp3"
+[2025-11-18 03:13:35,464] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [1]
+[2025-11-18 03:13:35,950] [INFO] [ButtonReader] Keyboard: Button 1 toggled OFF (key '1')
+[2025-11-18 03:13:35,952] [DEBUG] [ButtonReader] Button state changed: [(1, 'released')]
+[2025-11-18 03:13:35,952] [INFO] [SoundController] Mock: Stopped playback
+[2025-11-18 03:13:35,953] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 03:13:36,413] [INFO] [ButtonReader] Keyboard: Button 1 toggled ON (key '1')
+[2025-11-18 03:13:36,414] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-18 03:13:36,415] [DEBUG] [GameManager] Button sequence: 1
+[2025-11-18 03:13:36,416] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 03:13:36,428] [INFO] [SoundController] Mock: Started playback of "songs/maijam/Baccara - Yes Sir, I Can Boogie (Starparade 02.06.1977).mp3"
+[2025-11-18 03:13:36,429] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [1]
+[2025-11-18 03:13:37,096] [INFO] [ButtonReader] Keyboard: Button 1 toggled OFF (key '1')
+[2025-11-18 03:13:37,098] [DEBUG] [ButtonReader] Button state changed: [(1, 'released')]
+[2025-11-18 03:13:37,099] [INFO] [SoundController] Mock: Stopped playback
+[2025-11-18 03:13:37,100] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 03:13:38,002] [INFO] [ButtonReader] Keyboard: Button 1 toggled ON (key '1')
+[2025-11-18 03:13:38,003] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-18 03:13:38,003] [DEBUG] [GameManager] Button sequence: 11
+[2025-11-18 03:13:38,003] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 03:13:38,014] [INFO] [SoundController] Mock: Started playback of "songs/morning/Norah Jones - Feels Like Home - 05 - In The Morning.mp3"
+[2025-11-18 03:13:38,014] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [1]
+[2025-11-18 03:13:39,086] [INFO] [ButtonReader] Keyboard: Button 1 toggled OFF (key '1')
+[2025-11-18 03:13:39,087] [DEBUG] [ButtonReader] Button state changed: [(1, 'released')]
+[2025-11-18 03:13:39,088] [INFO] [SoundController] Mock: Stopped playback
+[2025-11-18 03:13:39,088] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 03:13:39,588] [INFO] [ButtonReader] Keyboard: Button 1 toggled ON (key '1')
+[2025-11-18 03:13:39,589] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-18 03:13:39,590] [DEBUG] [GameManager] Button sequence: 1
+[2025-11-18 03:13:39,592] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 03:13:39,603] [INFO] [SoundController] Mock: Started playback of "songs/maijam/Whitney Houston - I Wanna Dance With Somebody.mp3"
+[2025-11-18 03:13:39,604] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [1]
+[2025-11-18 03:13:40,371] [INFO] [ButtonReader] Keyboard: Button 1 toggled OFF (key '1')
+[2025-11-18 03:13:40,372] [DEBUG] [ButtonReader] Button state changed: [(1, 'released')]
+[2025-11-18 03:13:40,373] [INFO] [SoundController] Mock: Stopped playback
+[2025-11-18 03:13:40,373] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 03:13:40,874] [INFO] [ButtonReader] Keyboard: Button 1 toggled ON (key '1')
+[2025-11-18 03:13:40,874] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-18 03:13:40,875] [DEBUG] [GameManager] Button sequence: 11
+[2025-11-18 03:13:40,876] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 03:13:40,886] [INFO] [SoundController] Mock: Started playback of "songs/maijam/Why - Bronski beat.mp3"
+[2025-11-18 03:13:40,887] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [1]
+[2025-11-18 03:13:41,155] [INFO] [ButtonReader] Keyboard: Button 1 toggled OFF (key '1')
+[2025-11-18 03:13:41,156] [DEBUG] [ButtonReader] Button state changed: [(1, 'released')]
+[2025-11-18 03:13:41,156] [INFO] [SoundController] Mock: Stopped playback
+[2025-11-18 03:13:41,157] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 03:13:41,657] [INFO] [ButtonReader] Keyboard: Button 1 toggled ON (key '1')
+[2025-11-18 03:13:41,658] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-18 03:13:41,658] [DEBUG] [GameManager] Button sequence: 1
+[2025-11-18 03:13:41,659] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 03:13:41,669] [INFO] [SoundController] Mock: Started playback of "songs/morning/Norah Jones - Feels Like Home - 01 - Sunrise.mp3"
+[2025-11-18 03:13:41,670] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [1]
+[2025-11-18 03:13:42,159] [INFO] [ButtonReader] Keyboard: Button 1 toggled OFF (key '1')
+[2025-11-18 03:13:42,160] [DEBUG] [ButtonReader] Button state changed: [(1, 'released')]
+[2025-11-18 03:13:42,160] [INFO] [SoundController] Mock: Stopped playback
+[2025-11-18 03:13:42,161] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 03:13:42,380] [INFO] [ButtonReader] Keyboard: Button 1 toggled ON (key '1')
+[2025-11-18 03:13:42,382] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-18 03:13:42,383] [DEBUG] [GameManager] Button sequence: 11
+[2025-11-18 03:13:42,383] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 03:13:42,395] [INFO] [SoundController] Mock: Started playback of "songs/maijam/LunchMoney Lewis - Bills (Official Video).mp3"
+[2025-11-18 03:13:42,395] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [1]
+[2025-11-18 03:13:43,044] [INFO] [ButtonReader] Keyboard: Button 1 toggled OFF (key '1')
+[2025-11-18 03:13:43,045] [DEBUG] [ButtonReader] Button state changed: [(1, 'released')]
+[2025-11-18 03:13:43,046] [INFO] [SoundController] Mock: Stopped playback
+[2025-11-18 03:13:43,047] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 03:13:43,406] [INFO] [ButtonReader] Keyboard: Button 1 toggled ON (key '1')
+[2025-11-18 03:13:43,408] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-18 03:13:43,408] [DEBUG] [GameManager] Button sequence: 111
+[2025-11-18 03:13:43,409] [INFO] [GameManager] Triple 1 detected - entering code mode!
+[2025-11-18 03:13:43,410] [INFO] [GameManager] State transition: IdleState → CodeModeState
+[2025-11-18 03:13:43,411] [DEBUG] [ButtonReader] Button 1 will be ignored until released
+[2025-11-18 03:13:43,423] [INFO] [SoundController] Mock: Playing special music sounds/sheshtus_long_voice.mp3 at volume 0.6
+[2025-11-18 03:13:43,424] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-18 03:13:43,728] [INFO] [ButtonReader] Keyboard: Button 1 toggled OFF (key '1')
+[2025-11-18 03:13:43,728] [DEBUG] [ButtonReader] Button 1 released, no longer ignored
+[2025-11-18 03:13:45,036] [INFO] [ButtonReader] Keyboard: Button 1 toggled ON (key '1')
+[2025-11-18 03:13:45,037] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-18 03:13:45,037] [DEBUG] [GameManager] Button sequence: 1
+[2025-11-18 03:13:46,762] [INFO] [ButtonReader] Keyboard: Button 2 toggled ON (key '2')
+[2025-11-18 03:13:46,763] [DEBUG] [ButtonReader] Button state changed: [(2, 'pressed')]
+[2025-11-18 03:13:46,763] [DEBUG] [GameManager] Button sequence: 12
+[2025-11-18 03:13:48,610] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-18 03:13:48,611] [DEBUG] [ButtonReader] Button state changed: [(3, 'pressed')]
+[2025-11-18 03:13:48,612] [DEBUG] [GameManager] Button sequence: 123
+[2025-11-18 03:13:48,613] [INFO] [CodeModeState] Code entered: 123
+[2025-11-18 03:13:48,614] [INFO] [CodeModeState] Code mode failed: Invalid code: 123
+[2025-11-18 03:13:48,615] [INFO] [SoundController] Mock: Stopped playback
+[2025-11-18 03:13:48,616] [DEBUG] [ButtonReader] Button 1 will be ignored until released
+[2025-11-18 03:13:48,617] [DEBUG] [ButtonReader] Button 2 will be ignored until released
+[2025-11-18 03:13:48,617] [DEBUG] [ButtonReader] Button 3 will be ignored until released
+[2025-11-18 03:13:48,618] [INFO] [GameManager] State transition: CodeModeState → IdleState
+[2025-11-18 03:16:40,013] [INFO] [GameManager] Game stopped by user (Ctrl+C)
+[2025-11-18 03:16:40,032] [INFO] [GameManager] Game stopped
+[2025-11-18 03:16:40,032] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

@@ -15,7 +15,7 @@ try:
 except ImportError:
     eyed3 = None
 
-from audio_system.collections import Collection, ALL_COLLECTIONS
+from audio_system.audio_collections import Collection, ALL_COLLECTIONS
 from game_system.config import AudioConfig
 
 
@@ -173,6 +173,9 @@ class CodeGeneratorHelper:
                                 audio_file.tag.album = new_code
                                 existing_codes.add(new_code)
                                 audio_file.tag.save(version=eyed3.id3.tag.ID3_V2_3)
+                                
+                                # Update modification time to ensure rsync detects the change
+                                os.utime(song_path, None)
                                 
                                 # Add to CSV
                                 writer.writerow([
