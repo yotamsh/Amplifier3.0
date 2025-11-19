@@ -81,3 +81,15 @@
 [2025-11-19 23:10:41,630] [INFO] [CodeRevealState] Song loaded successfully, transitioning to PartyState
 [2025-11-19 23:10:41,631] [INFO] [GameManager] State transition: CodeRevealState → PartyState
 [2025-11-19 23:10:41,642] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: Bach - Aria (from) Hunt Cantata.mp3
+[2025-11-19 23:11:08,435] [INFO] [GameManager] 💾 Memory - Process: 86.3MB | System: 246/907MB (27.1%, 661MB free) | ⚙️  CPU - Process: 18.2% | System: 7.7% | Cores: [8%, 9%, 8%, 6%]
+[2025-11-19 23:12:08,440] [INFO] [GameManager] 💾 Memory - Process: 86.3MB | System: 248/907MB (27.3%, 659MB free) | ⚙️  CPU - Process: 26.2% | System: 9.7% | Cores: [9%, 9%, 10%, 10%]
+[2025-11-19 23:13:08,455] [INFO] [GameManager] 💾 Memory - Process: 86.3MB | System: 245/907MB (27.1%, 661MB free) | ⚙️  CPU - Process: 24.7% | System: 9.4% | Cores: [12%, 10%, 9%, 7%]
+[2025-11-19 23:14:08,471] [INFO] [GameManager] 💾 Memory - Process: 86.3MB | System: 249/907MB (27.4%, 658MB free) | ⚙️  CPU - Process: 25.1% | System: 9.6% | Cores: [6%, 10%, 14%, 8%]
+[2025-11-19 23:14:41,770] [INFO] [PartyState] Song finished, returning to idle
+[2025-11-19 23:14:41,783] [INFO] [GameManager] State transition: PartyState → IdleState
+[2025-11-19 23:15:08,491] [INFO] [GameManager] 💾 Memory - Process: 86.3MB | System: 247/907MB (27.3%, 660MB free) | ⚙️  CPU - Process: 25.4% | System: 9.7% | Cores: [12%, 8%, 6%, 12%]
+[2025-11-19 23:15:12,594] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 2 - Process terminating
+[2025-11-19 23:15:12,594] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-19 23:15:12,800] [INFO] [SoundController] Sound controller cleaned up successfully
+[2025-11-19 23:15:12,811] [INFO] [GameManager] Game stopped
+[2025-11-19 23:15:12,811] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

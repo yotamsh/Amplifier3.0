@@ -610,24 +610,22 @@ class RainbowWavePyramidAnimation(Animation):
         # Apply dense rainbow gradient
         for i in range(num_pixels):
             hue = (i * 3 + hue_offset) % 360
-            color = AnimationHelpers.hsv_to_pixel(hue, 0.85, 1.0)
+            color = AnimationHelpers.hsv_to_pixel(hue, 0.9, 1.0)
             self.strip[i] = color
 
 
 class PermutationColorsPyramidAnimation(Animation):
     """Permutation color change - colors change pixel by pixel in permutation order"""
     
-    def __init__(self, strip: 'LedStrip', speed_ms: int = 50):
+    def __init__(self, strip: 'LedStrip', speed_ms: int = 20):
         super().__init__(strip, speed_ms)
         
         self.perm_prev_color = None
         self.perm_new_color = None
         self.perm_pixel_index = 0
-        self.perm_last_change_time = time.time()
-        self.perm_change_interval_ms = 20  # 20ms per pixel
     
     def advance(self) -> None:
-        """Change pixels one by one in permutation order"""
+        """Change 2 pixels per advance in permutation order"""
         from game_system.animation_helpers import AnimationHelpers, STRIP_PERMUTATIONS
         
         # Strip 1 (pyramid) uses index 1
@@ -652,23 +650,20 @@ class PermutationColorsPyramidAnimation(Animation):
             self.perm_new_color = AnimationHelpers.hsv_to_pixel(random_hue, 1.0, 1.0)
             self.perm_pixel_index = 0
         
-        current_time = time.time()
-        elapsed_ms = (current_time - self.perm_last_change_time) * 1000
-        
-        # Check if time to change next pixel
-        if elapsed_ms >= self.perm_change_interval_ms:
+        # Change 2 pixels per advance call
+        pixels_to_change = 2
+        for _ in range(pixels_to_change):
             if self.perm_pixel_index < len(permutation):
                 pixel_to_change = permutation[self.perm_pixel_index]
                 self.strip[pixel_to_change] = self.perm_new_color
                 self.perm_pixel_index += 1
-                self.perm_last_change_time = current_time
             else:
                 # All pixels changed - restart with new colors
                 self.perm_prev_color = self.perm_new_color
                 random_hue = random.random() * 360
                 self.perm_new_color = AnimationHelpers.hsv_to_pixel(random_hue, 1.0, 1.0)
                 self.perm_pixel_index = 0
-                self.perm_last_change_time = current_time
+                break  # Start fresh next advance call
 
 
 def create_party_pyramid_animation(strip: 'LedStrip') -> SequenceAnimation:
@@ -691,7 +686,7 @@ def create_party_pyramid_animation(strip: 'LedStrip') -> SequenceAnimation:
     # Phase 2: Random loop of other animations
     random_anims = [
         RainbowWavePyramidAnimation(strip, speed_ms=50),
-        PermutationColorsPyramidAnimation(strip, speed_ms=50)
+        PermutationColorsPyramidAnimation(strip, speed_ms=20)
     ]
     random.shuffle(random_anims)  # Randomize order
     
