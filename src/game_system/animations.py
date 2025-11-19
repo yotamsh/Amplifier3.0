@@ -439,24 +439,37 @@ class AmplifyPyramidAnimation(Animation):
 
 class PartyPyramidAnimation(Animation):
     """
-    Party pyramid animation - whole pyramid blinks on/off with vibrant colors.
+    Multi-phase party pyramid animation.
     
-    Alternates between lit (with color) and dark every 400ms.
-    Starts with white, then uses vibrant, pleasant colors.
+    Phases:
+    1. BLINK (5 seconds) - Vibrant color blinks
+    2. Random animation selection from pool:
+       - RAINBOW_WAVE: Rainbow colors with sin-based hue movement
     """
+    
+    # Phase constants
+    PHASE_BLINK = "blink"
+    PHASE_RAINBOW_WAVE = "rainbow_wave"
     
     def __init__(self, strip: 'LedStrip', speed_ms: int = 50):
         """
-        Initialize party pyramid animation.
+        Initialize multi-phase party pyramid animation.
         
         Args:
             strip: LED strip to operate on (pyramid strip)
-            speed_ms: Animation update interval (checks for blink timing)
+            speed_ms: Animation update interval
         """
         super().__init__(strip, speed_ms)
         
-        # Blinking state
         from led_system.pixel import Pixel
+        
+        # Phase management
+        self.current_phase = self.PHASE_BLINK
+        self.phase_start_time = time.time()
+        self.blink_duration = 5.0  # 5 seconds of blinking before switching
+        self.random_phases = [self.PHASE_RAINBOW_WAVE]  # Pool for random selection
+        
+        # Blink phase state
         self.current_color = Pixel(255, 255, 255)  # Start with white
         self.is_lit = True  # Start lit
         self.is_first_blink = True
@@ -464,7 +477,7 @@ class PartyPyramidAnimation(Animation):
         self.last_blink_time = time.time()
         self.black = Pixel(0, 0, 0)
     
-    def _get_random_pastel_color(self) -> 'Pixel':
+    def _get_random_vibrant_color(self) -> 'Pixel':
         """Generate a random vibrant, pleasant color"""
         from led_system.pixel import Pixel
         
@@ -486,7 +499,24 @@ class PartyPyramidAnimation(Animation):
         return random.choice(colors)
     
     def advance(self) -> None:
-        """Toggle pyramid on/off every 400ms, changing color when turning on"""
+        """Update animation - check phase transitions and execute current phase"""
+        current_time = time.time()
+        
+        # Check if should switch phase
+        if self.current_phase == self.PHASE_BLINK:
+            if current_time - self.phase_start_time >= self.blink_duration:
+                # Switch to random animation from pool
+                self.current_phase = random.choice(self.random_phases)
+                self.phase_start_time = current_time
+        
+        # Execute current phase animation
+        if self.current_phase == self.PHASE_BLINK:
+            self._animate_blink()
+        elif self.current_phase == self.PHASE_RAINBOW_WAVE:
+            self._animate_rainbow_wave()
+    
+    def _animate_blink(self) -> None:
+        """Blink animation - toggle between vibrant colors and black"""
         current_time = time.time()
         elapsed_ms = (current_time - self.last_blink_time) * 1000
         
@@ -500,8 +530,8 @@ class PartyPyramidAnimation(Animation):
                     # First time stays white
                     self.is_first_blink = False
                 else:
-                    # After first blink, use pastel colors
-                    self.current_color = self._get_random_pastel_color()
+                    # After first blink, use vibrant colors
+                    self.current_color = self._get_random_vibrant_color()
             
             self.last_blink_time = current_time
         
@@ -511,6 +541,29 @@ class PartyPyramidAnimation(Animation):
         
         for i in range(num_pixels):
             self.strip[i] = display_color
+    
+    def _animate_rainbow_wave(self) -> None:
+        """Rainbow wave animation - dense rainbow with complex sin-based movement"""
+        from game_system.animation_helpers import AnimationHelpers
+        
+        # Complex hue offset using combination of three sin waves at different frequencies
+        # This creates organic, non-repeating movement patterns
+        sin_a = AnimationHelpers.sin8(0.07)  # Slow wave
+        sin_b = AnimationHelpers.sin8(0.19)  # Medium wave
+        sin_c = AnimationHelpers.sin8(0.53)  # Fast wave
+        
+        # Combine the three sin waves (sum: 0-765, scale to 0-360)
+        # Multiply by 3 to make the movement faster
+        hue_offset = (sin_a + sin_b + sin_c) * 360 / (255 * 3) * 3
+        
+        num_pixels = self.strip.num_pixels()
+        
+        # Apply dense rainbow gradient with moving offset
+        for i in range(num_pixels):
+            # Rainbow density: 3 degrees hue change per pixel
+            hue = (i * 3 + hue_offset) % 360
+            color = AnimationHelpers.hsv_to_pixel(hue, 1.0, 1.0)
+            self.strip[i] = color
 
 
 class PartyAnimation(Animation):

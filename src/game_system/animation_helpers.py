@@ -69,6 +69,37 @@ class AnimationHelpers:
         return int(sine_value * 255)
     
     @staticmethod
+    def sin8(frequency: float, phase_offset: float = 0.0) -> int:
+        """
+        Sine wave generator returning 0-255.
+        
+        Deterministic function based on current time, useful for smooth
+        oscillating animations like moving rainbow waves.
+        
+        Args:
+            frequency: Oscillation frequency in Hz (e.g., 0.2 = 5 second period)
+            phase_offset: Phase offset in degrees (0-360)
+            
+        Returns:
+            Value between 0-255 following sine wave
+            
+        Example:
+            # Slow oscillation (5 second period)
+            hue_offset = AnimationHelpers.sin8(0.2) * 360 / 255
+        """
+        current_time = time.time()
+        
+        # Convert phase offset to radians
+        phase_rad = (phase_offset / 360.0) * 2 * math.pi
+        
+        # Calculate sine value
+        angle = 2 * math.pi * frequency * current_time + phase_rad
+        sine_value = (math.sin(angle) + 1) / 2  # Normalize to 0-1
+        
+        # Scale to 0-255
+        return int(sine_value * 255)
+    
+    @staticmethod
     def hsv_to_pixel(h: float, s: float, v: float) -> 'Pixel':
         """
         Convert HSV to Pixel RGB.

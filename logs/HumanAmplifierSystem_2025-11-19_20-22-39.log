@@ -106,3 +106,9 @@
 [2025-11-19 20:52:43,307] [INFO] [GameManager] 💾 Memory - Process: 82.8MB | System: 242/907MB (26.7%, 665MB free)
 [2025-11-19 20:53:43,320] [INFO] [GameManager] 💾 Memory - Process: 82.8MB | System: 245/907MB (27.0%, 662MB free)
 [2025-11-19 20:54:43,335] [INFO] [GameManager] 💾 Memory - Process: 82.8MB | System: 241/907MB (26.6%, 665MB free)
+[2025-11-19 20:55:43,355] [INFO] [GameManager] 💾 Memory - Process: 82.8MB | System: 242/907MB (26.6%, 665MB free)
+[2025-11-19 20:56:43,371] [INFO] [GameManager] 💾 Memory - Process: 82.8MB | System: 242/907MB (26.7%, 665MB free)
+[2025-11-19 20:56:58,999] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 2 - Process terminating
+[2025-11-19 20:56:59,000] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-19 20:56:59,010] [INFO] [GameManager] Game stopped
+[2025-11-19 20:56:59,011] [INFO] [Amplifier] ✅ HumanAmplifier system shut down
