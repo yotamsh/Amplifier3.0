@@ -103,8 +103,12 @@ class IdleState(GameState):
             self.game_manager.logger.warning("⚠️ Could not load next song - audio may not play in next AmplifyState")
     
     def custom_on_exit(self) -> None:
-        """Called when exiting idle state - cleanup if needed"""
-        pass
+        """Called when exiting idle state - cleanup animations"""
+        # Clear animation references to help GC
+        for anim in self.animations:
+            if hasattr(anim, 'strip'):
+                anim.strip = None
+        self.animations.clear()
     
     def update(self, button_state: 'ButtonState') -> Optional['GameState']:
         """Update idle state - handle buttons, animations, and LED rendering"""
@@ -208,6 +212,11 @@ class AmplifyState(GameState):
         # Ignore any currently pressed buttons until they're released
         # This prevents immediately re-entering Amplify if buttons are still held
         self.game_manager.button_reader.ignore_pressed_until_released()
+        
+        # Clear animation references to help GC
+        self.amplify_anim.strip = None
+        self.pyramid_anim.strip = None
+        self.animations.clear()
     
     def update(self, button_state: 'ButtonState') -> Optional['GameState']:
         """Update amplify state - handle buttons, animations, and LED rendering"""
@@ -356,15 +365,20 @@ class PartyState(GameState):
         """Stop music, applause, and amazing when exiting"""
         self.game_manager.sound_controller.stop_music()
         
-        # Stop applause if playing
+        # Stop and clear applause channel
         if self.applause_channel:
             self.applause_channel.stop()
             self.applause_channel = None
         
-        # Stop amazing if playing
+        # Stop and clear amazing channel
         if self.amazing_channel:
             self.amazing_channel.stop()
             self.amazing_channel = None
+        
+        # Clear animation references to help GC
+        self.party_anim.strip = None
+        self.pyramid_party_anim.strip = None
+        self.animations.clear()
         
         # Ignore any pressed buttons until they're released
         self.game_manager.button_reader.ignore_pressed_until_released()
@@ -648,6 +662,10 @@ class CodeModeState(GameState):
         """Actions when exiting code mode"""
         # Ignore currently pressed buttons until released
         self.game_manager.button_reader.ignore_pressed_until_released()
+        
+        # Clear animation references to help GC
+        self.code_anim.strip = None
+        self.animations.clear()
     
     def _fail_and_return_to_idle(self, reason: str) -> 'GameState':
         """
@@ -803,6 +821,10 @@ class CodeRevealState(GameState):
         """Actions when exiting code reveal state"""
         # Ignore currently pressed buttons until released
         self.game_manager.button_reader.ignore_pressed_until_released()
+        
+        # Clear animation references to help GC
+        self.reveal_anim.strip = None
+        self.animations.clear()
     
     def update(self, button_state: 'ButtonState') -> Optional['GameState']:
         """Update code reveal - manage animation phases and sound timing"""

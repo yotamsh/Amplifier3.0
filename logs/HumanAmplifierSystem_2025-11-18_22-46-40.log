@@ -783,3 +783,35 @@
 [2025-11-18 23:04:53,462] [INFO] [GameManager] State transition: AmplifyState → IdleState
 [2025-11-18 23:05:44,538] [INFO] [GameManager] 💾 Memory - Process: 82.9MB | System: 246/907MB (27.1%, 661MB free)
 [2025-11-18 23:06:44,558] [INFO] [GameManager] 💾 Memory - Process: 82.9MB | System: 248/907MB (27.3%, 659MB free)
+[2025-11-18 23:07:44,567] [INFO] [GameManager] 💾 Memory - Process: 82.9MB | System: 248/907MB (27.4%, 658MB free)
+[2025-11-18 23:08:44,571] [INFO] [GameManager] 💾 Memory - Process: 82.9MB | System: 246/907MB (27.1%, 661MB free)
+[2025-11-18 23:09:44,577] [INFO] [GameManager] 💾 Memory - Process: 82.9MB | System: 248/907MB (27.3%, 659MB free)
+[2025-11-18 23:10:44,583] [INFO] [GameManager] 💾 Memory - Process: 82.9MB | System: 248/907MB (27.3%, 659MB free)
+[2025-11-18 23:11:44,586] [INFO] [GameManager] 💾 Memory - Process: 82.9MB | System: 246/907MB (27.2%, 660MB free)
+[2025-11-18 23:12:44,605] [INFO] [GameManager] 💾 Memory - Process: 82.9MB | System: 248/907MB (27.3%, 659MB free)
+[2025-11-18 23:13:44,611] [INFO] [GameManager] 💾 Memory - Process: 82.9MB | System: 247/907MB (27.2%, 660MB free)
+[2025-11-18 23:14:44,617] [INFO] [GameManager] 💾 Memory - Process: 82.9MB | System: 247/907MB (27.2%, 660MB free)
+[2025-11-18 23:15:44,619] [INFO] [GameManager] 💾 Memory - Process: 82.9MB | System: 247/907MB (27.2%, 660MB free)
+[2025-11-18 23:16:44,625] [INFO] [GameManager] 💾 Memory - Process: 82.9MB | System: 246/907MB (27.2%, 660MB free)
+[2025-11-18 23:17:44,640] [INFO] [GameManager] 💾 Memory - Process: 82.9MB | System: 249/907MB (27.4%, 658MB free)
+[2025-11-18 23:18:44,644] [INFO] [GameManager] 💾 Memory - Process: 82.9MB | System: 247/907MB (27.3%, 659MB free)
+[2025-11-18 23:19:44,657] [INFO] [GameManager] 💾 Memory - Process: 82.9MB | System: 246/907MB (27.2%, 660MB free)
+[2025-11-18 23:20:44,667] [INFO] [GameManager] 💾 Memory - Process: 82.9MB | System: 246/907MB (27.2%, 660MB free)
+[2025-11-18 23:21:44,680] [INFO] [GameManager] 💾 Memory - Process: 82.9MB | System: 246/907MB (27.1%, 661MB free)
+[2025-11-18 23:22:44,696] [INFO] [GameManager] 💾 Memory - Process: 82.9MB | System: 248/907MB (27.4%, 658MB free)
+[2025-11-18 23:23:44,701] [INFO] [GameManager] 💾 Memory - Process: 82.9MB | System: 249/907MB (27.5%, 658MB free)
+[2025-11-18 23:23:57,897] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 2 - Process terminating
+[2025-11-18 23:23:57,898] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-18 23:24:05,947] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 2 - Process terminating
+[2025-11-18 23:24:05,948] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-18 23:24:44,719] [INFO] [GameManager] 💾 Memory - Process: 82.9MB | System: 246/907MB (27.2%, 660MB free)
+[2025-11-18 23:25:44,728] [INFO] [GameManager] 💾 Memory - Process: 82.9MB | System: 246/907MB (27.1%, 661MB free)
+[2025-11-18 23:26:20,185] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 2 - Process terminating
+[2025-11-18 23:26:20,186] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-18 23:26:21,307] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 2 - Process terminating
+[2025-11-18 23:26:21,308] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-18 23:26:44,742] [INFO] [GameManager] 💾 Memory - Process: 82.9MB | System: 245/907MB (27.0%, 662MB free)
+[2025-11-18 23:26:52,208] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 1 - Process terminating
+[2025-11-18 23:26:52,209] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-18 23:26:52,210] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 15 - Process terminating
+[2025-11-18 23:26:52,211] [CRITICAL] [Amplifier] Emergency flush triggered

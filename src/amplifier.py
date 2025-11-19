@@ -31,6 +31,14 @@ def emergency_flush_and_log(sig=None, frame=None):
             _global_logger.flush()
         except:
             pass
+    
+    # Exit after logging
+    if sig == signal.SIGINT:
+        # CTRL+C - exit cleanly
+        sys.exit(0)
+    elif sig:
+        # Other signals - exit with error code
+        sys.exit(1)
 
 # Register signal handlers for graceful shutdown
 signal.signal(signal.SIGTERM, emergency_flush_and_log)  # Termination signal

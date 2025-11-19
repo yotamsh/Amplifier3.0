@@ -1,0 +1,111 @@
+[2025-11-18 23:27:39,440] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-18 23:27:39,441] [INFO] [Amplifier] Button configuration: 10 buttons on GPIO [6, 5, 22, 17, 4, 23, 24, 25, 16, 20]
+[2025-11-18 23:27:39,441] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-18 23:27:39,442] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-18 23:27:39,442] [INFO] [Amplifier]   Strip 2: 300 LEDs on GPIO 18
+[2025-11-18 23:27:39,443] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-18 23:27:39,443] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-18 23:27:39,443] [INFO] [Amplifier] Audio folder: songs
+[2025-11-18 23:27:39,444] [INFO] [Amplifier] Schedule: 2 daily, 1 special entries
+[2025-11-18 23:27:39,445] [INFO] [ButtonReader] GPIO sampler initialized: 10 pins (no pulls)
+[2025-11-18 23:27:39,445] [INFO] [ButtonReader] Pin mapping: Btn0=GPIO6, Btn1=GPIO5, Btn2=GPIO22, Btn3=GPIO17, Btn4=GPIO4, Btn5=GPIO23, Btn6=GPIO24, Btn7=GPIO25, Btn8=GPIO16, Btn9=GPIO20
+[2025-11-18 23:27:39,445] [INFO] [ButtonReader] 🎮 Keyboard debug enabled: Press digit keys 0-9 to toggle buttons (works over SSH)
+[2025-11-18 23:27:39,446] [INFO] [ButtonReader]    Each keypress toggles button ON/OFF
+[2025-11-18 23:27:39,446] [INFO] [ButtonReader] ButtonReader initialized with 10 buttons
+[2025-11-18 23:27:39,447] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-18 23:27:41,642] [INFO] [SongLibrary] Loaded 549 song codes from 10 collections
+[2025-11-18 23:27:41,643] [INFO] [SongLibrary] Collections updated: ['MAIJAM']
+[2025-11-18 23:27:43,574] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-18 23:27:43,575] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-18 23:27:43,576] [INFO] [Amplifier] Hardware: 10 buttons, 2 LED strips, 20ms frame duration
+[2025-11-18 23:27:43,577] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['TV', 'VIRAL', 'DISNEY', 'MORNING', 'MAIJAM', 'GENERAL', 'CLASSIC', 'SPANISH', 'FESTIGAL', 'PARTY'], 'total_codes': 549, 'daily_schedule_entries': 2, 'special_schedule_entries': 1}
+[2025-11-18 23:27:43,577] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-18 23:27:43,577] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-18 23:27:43,578] [INFO] [Amplifier] Hardware status: 10 buttons, 2 LED strips
+[2025-11-18 23:27:43,578] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-18 23:27:43,579] [INFO] [Amplifier]   Strip 2: 300 LEDs active
+[2025-11-18 23:27:43,580] [INFO] [Amplifier] Audio system: 549 song codes, 12 sound effects
+[2025-11-18 23:27:43,580] [INFO] [Amplifier] Available collections: TV, VIRAL, DISNEY, MORNING, MAIJAM, GENERAL, CLASSIC, SPANISH, FESTIGAL, PARTY
+[2025-11-18 23:27:43,581] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-18 23:27:43,581] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-18 23:27:43,582] [INFO] [GameManager] 💾 Memory - Process: 81.7MB | System: 276/907MB (30.4%, 631MB free)
+[2025-11-18 23:28:17,262] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:28:17,266] [DEBUG] [GameManager] Button sequence: 5
+[2025-11-18 23:28:17,267] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:28:17,278] [INFO] [SoundController] Song "Outkast - Hey Ya! (Official HD Video).mp3" was randomly started
+[2025-11-18 23:28:17,278] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:28:18,691] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:28:18,692] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:28:18,771] [DEBUG] [ButtonReader] Button state changed: [(6, 'pressed')]
+[2025-11-18 23:28:18,772] [DEBUG] [GameManager] Button sequence: 56
+[2025-11-18 23:28:18,772] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:28:18,783] [INFO] [SoundController] Song "Whitney Houston - I Wanna Dance With Somebody.mp3" was randomly started
+[2025-11-18 23:28:18,783] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [6]
+[2025-11-18 23:28:20,618] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:28:20,619] [DEBUG] [GameManager] Button sequence: 565
+[2025-11-18 23:28:20,619] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [5, 6]
+[2025-11-18 23:28:20,659] [DEBUG] [ButtonReader] Button state changed: [(6, 'released')]
+[2025-11-18 23:28:20,659] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [5]
+[2025-11-18 23:28:22,447] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:28:22,449] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:28:23,192] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:28:23,192] [DEBUG] [GameManager] Button sequence: 5
+[2025-11-18 23:28:23,193] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:28:23,204] [INFO] [SoundController] Song "Spice Girls - Wannabe [Lyrics].mp3" was randomly started
+[2025-11-18 23:28:23,205] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [5]
+[2025-11-18 23:28:24,718] [DEBUG] [ButtonReader] Button state changed: [(6, 'pressed')]
+[2025-11-18 23:28:24,719] [DEBUG] [GameManager] Button sequence: 56
+[2025-11-18 23:28:24,719] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [5, 6]
+[2025-11-18 23:28:25,863] [DEBUG] [ButtonReader] Button state changed: [(6, 'released')]
+[2025-11-18 23:28:25,863] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [5]
+[2025-11-18 23:28:25,943] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:28:25,944] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:28:26,405] [DEBUG] [ButtonReader] Button state changed: [(6, 'pressed')]
+[2025-11-18 23:28:26,405] [DEBUG] [GameManager] Button sequence: 6
+[2025-11-18 23:28:26,406] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:28:26,417] [INFO] [SoundController] Song "Lady Gaga - Bad Romance (Official Music Video).mp3" was randomly started
+[2025-11-18 23:28:26,418] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [6]
+[2025-11-18 23:28:27,731] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-18 23:28:27,732] [DEBUG] [GameManager] Button sequence: 65
+[2025-11-18 23:28:27,733] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [5, 6]
+[2025-11-18 23:28:34,366] [DEBUG] [ButtonReader] Button state changed: [(6, 'released')]
+[2025-11-18 23:28:34,366] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [5]
+[2025-11-18 23:28:34,386] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-18 23:28:34,387] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:28:43,592] [INFO] [GameManager] 💾 Memory - Process: 82.4MB | System: 249/907MB (27.5%, 658MB free)
+[2025-11-18 23:29:15,745] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-18 23:29:15,746] [DEBUG] [GameManager] Button sequence: 1
+[2025-11-18 23:29:15,746] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:29:15,757] [INFO] [SoundController] Song "ABBA - The Winner Takes It All.mp3" was randomly started
+[2025-11-18 23:29:15,759] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [1]
+[2025-11-18 23:29:16,288] [DEBUG] [ButtonReader] Button state changed: [(1, 'released')]
+[2025-11-18 23:29:16,289] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:29:18,278] [DEBUG] [ButtonReader] Button state changed: [(2, 'pressed')]
+[2025-11-18 23:29:18,279] [DEBUG] [GameManager] Button sequence: 2
+[2025-11-18 23:29:18,280] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:29:18,290] [INFO] [SoundController] Song "September - Cry For You.mp3" was randomly started
+[2025-11-18 23:29:18,291] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [2]
+[2025-11-18 23:29:18,700] [DEBUG] [ButtonReader] Button state changed: [(2, 'released')]
+[2025-11-18 23:29:18,701] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:29:43,592] [INFO] [GameManager] 💾 Memory - Process: 82.4MB | System: 247/907MB (27.2%, 660MB free)
+[2025-11-18 23:30:43,601] [INFO] [GameManager] 💾 Memory - Process: 82.4MB | System: 250/907MB (27.6%, 656MB free)
+[2025-11-18 23:31:43,616] [INFO] [GameManager] 💾 Memory - Process: 82.4MB | System: 250/907MB (27.6%, 656MB free)
+[2025-11-18 23:31:54,820] [DEBUG] [ButtonReader] Button state changed: [(9, 'pressed')]
+[2025-11-18 23:31:54,820] [DEBUG] [GameManager] Button sequence: 9
+[2025-11-18 23:31:54,821] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-18 23:31:54,832] [INFO] [SoundController] Song "Haddaway - What Is Love [Official 4K].mp3" was randomly started
+[2025-11-18 23:31:54,833] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [9]
+[2025-11-18 23:31:55,683] [DEBUG] [ButtonReader] Button state changed: [(9, 'released')]
+[2025-11-18 23:31:55,684] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-18 23:32:43,631] [INFO] [GameManager] 💾 Memory - Process: 82.4MB | System: 250/907MB (27.6%, 657MB free)
+[2025-11-18 23:33:43,646] [INFO] [GameManager] 💾 Memory - Process: 82.4MB | System: 250/907MB (27.6%, 657MB free)
+[2025-11-18 23:34:43,656] [INFO] [GameManager] 💾 Memory - Process: 82.4MB | System: 250/907MB (27.6%, 657MB free)
+[2025-11-18 23:35:43,662] [INFO] [GameManager] 💾 Memory - Process: 82.4MB | System: 248/907MB (27.4%, 658MB free)
+[2025-11-18 23:36:43,677] [INFO] [GameManager] 💾 Memory - Process: 82.4MB | System: 248/907MB (27.4%, 658MB free)
+[2025-11-18 23:37:43,683] [INFO] [GameManager] 💾 Memory - Process: 82.4MB | System: 248/907MB (27.3%, 659MB free)
+[2025-11-18 23:38:43,699] [INFO] [GameManager] 💾 Memory - Process: 82.4MB | System: 248/907MB (27.3%, 659MB free)
+[2025-11-18 23:39:43,701] [INFO] [GameManager] 💾 Memory - Process: 82.4MB | System: 246/907MB (27.1%, 661MB free)
+[2025-11-18 23:40:28,670] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 15 - Process terminating
+[2025-11-18 23:40:28,675] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-18 23:40:28,688] [INFO] [GameManager] Game stopped
+[2025-11-18 23:40:28,691] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

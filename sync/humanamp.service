@@ -1,0 +1,29 @@
+[Unit]
+Description=HumanAmplifier Interactive Game System
+After=network.target sound.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/home/yotam/AmpSync/Amp3
+ExecStart=/home/yotam/AmpSync/Amp3/venv_pi/bin/python3 /home/yotam/AmpSync/Amp3/src/amplifier.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# Ensure unbuffered output for real-time logs
+Environment="PYTHONUNBUFFERED=1"
+
+# Prevent rapid restart loops (max 5 restarts in 60 seconds)
+StartLimitBurst=5
+StartLimitIntervalSec=60
+
+# Graceful shutdown (your script has SIGTERM handlers)
+TimeoutStopSec=30
+KillSignal=SIGTERM
+
+[Install]
+WantedBy=multi-user.target
+
