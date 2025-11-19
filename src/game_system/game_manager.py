@@ -156,7 +156,7 @@ class GameManager:
         self.logger.info("Game stopped")
     
     def _log_memory_usage(self) -> None:
-        """Log current memory usage (process and system)"""
+        """Log current memory and CPU usage (process and system)"""
         if not PSUTIL_AVAILABLE:
             return
         
@@ -165,6 +165,9 @@ class GameManager:
             mem_info = self._process.memory_info()
             process_mb = mem_info.rss / 1024 / 1024  # Resident Set Size in MB
             
+            # Process CPU info (non-blocking)
+            process_cpu_percent = self._process.cpu_percent(interval=None)
+            
             # System memory info
             sys_mem = psutil.virtual_memory()
             sys_total_mb = sys_mem.total / 1024 / 1024
@@ -172,13 +175,22 @@ class GameManager:
             sys_available_mb = sys_mem.available / 1024 / 1024
             sys_percent = sys_mem.percent
             
+            # System CPU info (non-blocking)
+            sys_cpu_percent = psutil.cpu_percent(interval=None)
+            
+            # CPU per core
+            cpu_per_core = psutil.cpu_percent(interval=None, percpu=True)
+            cores_str = ", ".join([f"{cpu:.0f}%" for cpu in cpu_per_core])
+            
             self.logger.info(
                 f"💾 Memory - Process: {process_mb:.1f}MB | "
                 f"System: {sys_used_mb:.0f}/{sys_total_mb:.0f}MB ({sys_percent:.1f}%, "
-                f"{sys_available_mb:.0f}MB free)"
+                f"{sys_available_mb:.0f}MB free) | "
+                f"⚙️  CPU - Process: {process_cpu_percent:.1f}% | "
+                f"System: {sys_cpu_percent:.1f}% | Cores: [{cores_str}]"
             )
         except Exception as e:
-            self.logger.warning(f"Failed to log memory usage: {e}")
+            self.logger.warning(f"Failed to log system usage: {e}")
     
     def _transition_to_state(self, new_state: GameState) -> None:
         """

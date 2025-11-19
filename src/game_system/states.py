@@ -336,13 +336,10 @@ class PartyState(GameState):
             button_count=button_count
         )
         
-        # Create party pyramid animation on strip 2 (index 1)
-        from game_system.animations import PartyPyramidAnimation
+        # Create party pyramid animation sequence on strip 2 (index 1)
+        from game_system.animations import create_party_pyramid_animation
         pyramid_strip = game_manager.led_strips[1]
-        self.pyramid_party_anim = PartyPyramidAnimation(
-            strip=pyramid_strip,
-            speed_ms=50  # Check for color changes frequently
-        )
+        self.pyramid_party_anim = create_party_pyramid_animation(pyramid_strip)
         
         self.animations: List['Animation'] = [self.party_anim, self.pyramid_party_anim]
     

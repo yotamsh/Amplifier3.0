@@ -62,6 +62,7 @@ class SoundController:
         self.num_buttons = num_buttons
         self.logger = logger
         self.current_song: Optional[str] = None
+        self._cleanup_done = False  # Track if cleanup already happened
         
         # Initialize pygame mixer with larger buffer to prevent underruns
         # Using 48kHz (Raspberry Pi native rate) for better compatibility
@@ -302,7 +303,12 @@ class SoundController:
         
         This ensures ALSA audio device is properly closed and prevents
         device state issues on subsequent runs (fixes intermittent underruns).
+        Safe to call multiple times (idempotent).
         """
+        # Skip if already cleaned up
+        if self._cleanup_done:
+            return
+        
         try:
             # Stop any playing music
             self.mixer.music.stop()
@@ -312,6 +318,9 @@ class SoundController:
             
             # Properly quit pygame mixer to close ALSA device
             self.mixer.quit()
+            
+            # Mark as cleaned up
+            self._cleanup_done = True
             
             self.logger.info("Sound controller cleaned up successfully")
         except Exception as e:

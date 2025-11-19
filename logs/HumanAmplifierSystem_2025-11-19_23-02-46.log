@@ -1,0 +1,84 @@
+[2025-11-19 23:02:46,893] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-19 23:02:46,894] [INFO] [Amplifier] Button configuration: 10 buttons on GPIO [6, 5, 22, 17, 4, 23, 24, 25, 16, 20]
+[2025-11-19 23:02:46,894] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-19 23:02:46,895] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-19 23:02:46,895] [INFO] [Amplifier]   Strip 2: 293 LEDs on GPIO 18
+[2025-11-19 23:02:46,896] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-19 23:02:46,896] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-19 23:02:46,897] [INFO] [Amplifier] Audio folder: songs
+[2025-11-19 23:02:46,897] [INFO] [Amplifier] Schedule: 2 daily, 1 special entries
+[2025-11-19 23:02:46,898] [INFO] [ButtonReader] GPIO sampler initialized: 10 pins (no pulls)
+[2025-11-19 23:02:46,899] [INFO] [ButtonReader] Pin mapping: Btn0=GPIO6, Btn1=GPIO5, Btn2=GPIO22, Btn3=GPIO17, Btn4=GPIO4, Btn5=GPIO23, Btn6=GPIO24, Btn7=GPIO25, Btn8=GPIO16, Btn9=GPIO20
+[2025-11-19 23:02:46,899] [INFO] [ButtonReader] 🎮 Keyboard debug enabled: Press digit keys 0-9 to toggle buttons (works over SSH)
+[2025-11-19 23:02:46,900] [INFO] [ButtonReader]    Each keypress toggles button ON/OFF
+[2025-11-19 23:02:46,900] [INFO] [ButtonReader] ButtonReader initialized with 10 buttons
+[2025-11-19 23:02:46,901] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-19 23:02:48,949] [INFO] [SongLibrary] Loaded 547 song codes from 10 collections
+[2025-11-19 23:02:48,950] [INFO] [SongLibrary] Collections updated: ['MAIJAM']
+[2025-11-19 23:02:57,068] [INFO] [SoundController] Sound controller initialized - mixer ready, first song will load on demand
+[2025-11-19 23:02:57,075] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-19 23:02:57,076] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-19 23:02:57,076] [INFO] [Amplifier] Hardware: 10 buttons, 2 LED strips, 20ms frame duration
+[2025-11-19 23:02:57,077] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['CLASSIC', 'MAIJAM', 'MORNING', 'DISNEY', 'TV', 'VIRAL', 'SPANISH', 'PARTY', 'FESTIGAL', 'GENERAL'], 'total_codes': 547, 'daily_schedule_entries': 2, 'special_schedule_entries': 1}
+[2025-11-19 23:02:57,077] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-19 23:02:57,078] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-19 23:02:57,078] [INFO] [Amplifier] Hardware status: 10 buttons, 2 LED strips
+[2025-11-19 23:02:57,079] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-19 23:02:57,079] [INFO] [Amplifier]   Strip 2: 293 LEDs active
+[2025-11-19 23:02:57,079] [INFO] [Amplifier] Audio system: 547 song codes, 12 sound effects
+[2025-11-19 23:02:57,080] [INFO] [Amplifier] Available collections: CLASSIC, MAIJAM, MORNING, DISNEY, TV, VIRAL, SPANISH, PARTY, FESTIGAL, GENERAL
+[2025-11-19 23:02:57,080] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-19 23:02:57,081] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-19 23:02:57,084] [INFO] [GameManager] 💾 Memory - Process: 86.1MB | System: 266/907MB (29.4%, 641MB free) | ⚙️  CPU - Process: 0.0% | System: 29.1% | Cores: [99%, 5%, 5%, 6%]
+[2025-11-19 23:03:21,188] [INFO] [ButtonReader] Keyboard: Button 1 toggled ON (key '1')
+[2025-11-19 23:03:21,190] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 23:03:21,201] [INFO] [SoundController] Song "Earth, Wind & Fire - September (Official HD Video).mp3" was randomly started
+[2025-11-19 23:03:23,522] [INFO] [ButtonReader] Keyboard: Button 2 toggled ON (key '2')
+[2025-11-19 23:03:24,186] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-19 23:03:24,649] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-19 23:03:25,019] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-19 23:03:27,936] [INFO] [ButtonReader] Keyboard: Button 1 toggled OFF (key '1')
+[2025-11-19 23:03:28,279] [INFO] [ButtonReader] Keyboard: Button 2 toggled OFF (key '2')
+[2025-11-19 23:03:29,624] [INFO] [ButtonReader] Keyboard: Button 3 toggled OFF (key '3')
+[2025-11-19 23:03:29,991] [INFO] [ButtonReader] Keyboard: Button 4 toggled OFF (key '4')
+[2025-11-19 23:03:31,117] [INFO] [ButtonReader] Keyboard: Button 5 toggled OFF (key '5')
+[2025-11-19 23:03:31,119] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 23:03:33,569] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-19 23:03:33,570] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 23:03:33,580] [INFO] [SoundController] Song "M.C. Hammer - U Can_t Touch This.mp3" was randomly started
+[2025-11-19 23:03:33,931] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-19 23:03:33,932] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 23:03:34,292] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-19 23:03:34,293] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 23:03:34,304] [INFO] [SoundController] Song "Abba - Money, Money, Money (Official Music Video).mp3" was randomly started
+[2025-11-19 23:03:34,814] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-19 23:03:34,816] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 23:03:37,726] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-19 23:03:37,727] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 23:03:37,738] [INFO] [SoundController] Song "The Weather Girls - It_s Raining Men (Video).mp3" was randomly started
+[2025-11-19 23:03:38,068] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-19 23:03:38,069] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 23:03:38,350] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-19 23:03:38,351] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 23:03:38,362] [INFO] [SoundController] Song "Outkast - Hey Ya! (Official HD Video).mp3" was randomly started
+[2025-11-19 23:03:38,732] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-19 23:03:38,733] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 23:03:39,174] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-19 23:03:39,175] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-19 23:03:39,175] [INFO] [GameManager] State transition: IdleState → CodeModeState
+[2025-11-19 23:03:39,187] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-19 23:03:40,824] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-19 23:03:41,367] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-19 23:03:41,869] [INFO] [ButtonReader] Keyboard: Button 8 toggled ON (key '8')
+[2025-11-19 23:03:42,331] [INFO] [ButtonReader] Keyboard: Button 0 toggled ON (key '0')
+[2025-11-19 23:03:43,054] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-19 23:03:43,055] [INFO] [CodeModeState] Code entered: 63804
+[2025-11-19 23:03:43,055] [INFO] [CodeModeState] Valid code! Transitioning to CodeRevealState
+[2025-11-19 23:03:43,057] [INFO] [GameManager] State transition: CodeModeState → CodeRevealState
+[2025-11-19 23:03:43,067] [INFO] [CodeRevealState] Code reveal started for code: 63804
+[2025-11-19 23:03:47,019] [INFO] [CodeRevealState] Loading song by code: 63804
+[2025-11-19 23:03:47,020] [INFO] [SoundController] Playing song by code 63804: "Bach - Aria (from) Hunt Cantata.mp3"
+[2025-11-19 23:03:47,020] [INFO] [CodeRevealState] Song loaded successfully, transitioning to PartyState
+[2025-11-19 23:03:47,022] [INFO] [GameManager] State transition: CodeRevealState → PartyState
+[2025-11-19 23:03:47,034] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: Bach - Aria (from) Hunt Cantata.mp3
+[2025-11-19 23:03:57,088] [INFO] [GameManager] 💾 Memory - Process: 86.2MB | System: 246/907MB (27.1%, 661MB free) | ⚙️  CPU - Process: 19.2% | System: 8.2% | Cores: [11%, 7%, 6%, 9%]

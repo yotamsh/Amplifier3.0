@@ -6,7 +6,7 @@ import math
 import random
 import time
 from abc import ABC, abstractmethod
-from typing import List, Tuple, TYPE_CHECKING
+from typing import List, Tuple, Optional, TYPE_CHECKING
 
 from .animation_helpers import AnimationHelpers
 
@@ -437,59 +437,111 @@ class AmplifyPyramidAnimation(Animation):
             self.strip[led_idx] = self.fill_color
 
 
-class PartyPyramidAnimation(Animation):
+class SequenceAnimation(Animation):
     """
-    Multi-phase party pyramid animation.
+    Composite animation that plays child animations in sequence.
     
-    Phases:
-    1. BLINK (5 seconds) - Vibrant color blinks
-    2. Random animation selection from pool:
-       - RAINBOW_WAVE: Rainbow colors with sin-based hue movement
+    Each animation in the sequence plays for a specified duration,
+    then transitions to the next. Can optionally loop back to start.
+    
+    Args:
+        strip: LED strip to operate on
+        animation_sequence: List of (Animation, duration_seconds) tuples.
+                           Duration can be None for last item (plays forever).
+        repeat: If True, loops back to first animation after sequence ends.
+        frame_speed_ms: How often to check for phase switches (typically 20ms).
+    
+    Example:
+        seq = SequenceAnimation(
+            strip=strip,
+            animation_sequence=[
+                (BlinkAnimation(strip), 5.0),    # 5 seconds
+                (RainbowAnimation(strip), 10.0), # 10 seconds
+                (WaveAnimation(strip), None)     # Forever
+            ],
+            repeat=False,
+            frame_speed_ms=20
+        )
     """
     
-    # Phase constants
-    PHASE_BLINK = "blink"
-    PHASE_RAINBOW_WAVE = "rainbow_wave"
-    PHASE_PERMUTATION_COLORS = "permutation_colors"
+    def __init__(self, strip: 'LedStrip', 
+                 animation_sequence: List[Tuple['Animation', Optional[float]]],
+                 repeat: bool = False,
+                 frame_speed_ms: int = 20):
+        super().__init__(strip, frame_speed_ms)
+        self.sequence = animation_sequence
+        self.repeat = repeat
+        self.current_index = 0
+        self.phase_start_time = time.time()
+        
+        if animation_sequence:
+            self.current_animation = animation_sequence[0][0]
+        else:
+            self.current_animation = None
+    
+    def advance(self) -> None:
+        """Check for phase switches, then delegate to current child animation"""
+        current_time = time.time()
+        
+        # Check if should advance to next animation
+        if self.current_index < len(self.sequence):
+            _, duration = self.sequence[self.current_index]
+            
+            if duration is not None:
+                if current_time - self.phase_start_time >= duration:
+                    # Time to switch to next animation
+                    self.current_index += 1
+                    
+                    if self.current_index >= len(self.sequence):
+                        if self.repeat:
+                            # Loop back to start
+                            self.current_index = 0
+                        else:
+                            # Stay on last
+                            self.current_index = len(self.sequence) - 1
+                    
+                    self.current_animation = self.sequence[self.current_index][0]
+                    self.phase_start_time = current_time
+        
+        # Delegate rendering to current child
+        # Child checks its own timing and updates if needed
+        if self.current_animation:
+            self.current_animation.update_if_needed()
+    
+    def update_if_needed(self) -> bool:
+        """
+        Override to prevent double strip.show().
+        Child's update_if_needed() already calls show().
+        """
+        now = time.time()
+        elapsed_ms = (now - self.last_update) * 1000
+        
+        if elapsed_ms >= self.speed_ms:
+            self.advance()
+            # DON'T call strip.show() - child already did it
+            self.last_update = now
+            return True
+        return False
+
+
+class BlinkPyramidAnimation(Animation):
+    """Pyramid blink animation - toggle between vibrant colors and black"""
     
     def __init__(self, strip: 'LedStrip', speed_ms: int = 50):
-        """
-        Initialize multi-phase party pyramid animation.
-        
-        Args:
-            strip: LED strip to operate on (pyramid strip)
-            speed_ms: Animation update interval
-        """
         super().__init__(strip, speed_ms)
         
         from led_system.pixel import Pixel
-        
-        # Phase management
-        self.current_phase = self.PHASE_BLINK
-        self.phase_start_time = time.time()
-        self.blink_duration = 5.0  # 5 seconds of blinking before switching
-        self.random_phases = [self.PHASE_RAINBOW_WAVE, self.PHASE_PERMUTATION_COLORS]  # Pool for random selection
-        
-        # Blink phase state
         self.current_color = Pixel(255, 255, 255)  # Start with white
-        self.is_lit = True  # Start lit
+        self.is_lit = True
         self.is_first_blink = True
         self.blink_interval_ms = 400  # 400ms per on/off toggle
         self.last_blink_time = time.time()
         self.black = Pixel(0, 0, 0)
-        
-        # Permutation colors phase state
-        self.perm_prev_color = None  # Previous solid color
-        self.perm_new_color = None   # New color being applied
-        self.perm_pixel_index = 0    # Current position in permutation
-        self.perm_last_change_time = time.time()
-        self.perm_change_interval_ms = 20  # 20ms per pixel
     
     def _get_random_vibrant_color(self) -> 'Pixel':
         """Generate a random vibrant, pleasant color"""
         from led_system.pixel import Pixel
         
-        # Vibrant but pleasant color palette
         colors = [
             Pixel(255, 105, 180),  # Hot pink
             Pixel(100, 149, 237),  # Cornflower blue
@@ -507,33 +559,7 @@ class PartyPyramidAnimation(Animation):
         return random.choice(colors)
     
     def advance(self) -> None:
-        """Update animation - check phase transitions and execute current phase"""
-        current_time = time.time()
-        
-        # Check if should switch phase
-        if self.current_phase == self.PHASE_BLINK:
-            if current_time - self.phase_start_time >= self.blink_duration:
-                # Switch to random animation from pool
-                new_phase = random.choice(self.random_phases)
-                self.current_phase = new_phase
-                self.phase_start_time = current_time
-                
-                # Reset phase-specific state when entering new phase
-                if new_phase == self.PHASE_PERMUTATION_COLORS:
-                    self.perm_prev_color = None
-                    self.perm_new_color = None
-                    self.perm_pixel_index = 0
-        
-        # Execute current phase animation
-        if self.current_phase == self.PHASE_BLINK:
-            self._animate_blink()
-        elif self.current_phase == self.PHASE_RAINBOW_WAVE:
-            self._animate_rainbow_wave()
-        elif self.current_phase == self.PHASE_PERMUTATION_COLORS:
-            self._animate_permutation_colors()
-    
-    def _animate_blink(self) -> None:
-        """Blink animation - toggle between vibrant colors and black"""
+        """Toggle pyramid on/off, changing color when turning on"""
         current_time = time.time()
         elapsed_ms = (current_time - self.last_blink_time) * 1000
         
@@ -544,10 +570,8 @@ class PartyPyramidAnimation(Animation):
             # When turning on, pick a new color
             if self.is_lit:
                 if self.is_first_blink:
-                    # First time stays white
                     self.is_first_blink = False
                 else:
-                    # After first blink, use vibrant colors
                     self.current_color = self._get_random_vibrant_color()
             
             self.last_blink_time = current_time
@@ -558,54 +582,69 @@ class PartyPyramidAnimation(Animation):
         
         for i in range(num_pixels):
             self.strip[i] = display_color
+
+
+class RainbowWavePyramidAnimation(Animation):
+    """Rainbow wave animation - dense rainbow with complex sin-based movement"""
     
-    def _animate_rainbow_wave(self) -> None:
-        """Rainbow wave animation - dense rainbow with complex sin-based movement"""
+    def __init__(self, strip: 'LedStrip', speed_ms: int = 50):
+        super().__init__(strip, speed_ms)
+    
+    def advance(self) -> None:
+        """Render rainbow wave with sin-based hue offset"""
         from game_system.animation_helpers import AnimationHelpers
         
-        # Complex hue offset using combination of three sin waves at different frequencies
-        # This creates organic, non-repeating movement patterns
+        # Complex hue offset using combination of three sin waves
         sin_a = AnimationHelpers.sin8(0.07)  # Slow wave
         sin_b = AnimationHelpers.sin8(0.19)  # Medium wave
         sin_c = AnimationHelpers.sin8(0.53)  # Fast wave
         
-        # Combine the three sin waves (sum: 0-765, scale to 0-360)
-        # Multiply by 3 to make the movement faster
+        # Combine and scale (3x speed multiplier)
         hue_offset = (sin_a + sin_b + sin_c) * 360 / (255 * 3) * 3
         
         num_pixels = self.strip.num_pixels()
         
-        # Apply dense rainbow gradient with moving offset
+        # Apply dense rainbow gradient
         for i in range(num_pixels):
-            # Rainbow density: 3 degrees hue change per pixel
             hue = (i * 3 + hue_offset) % 360
-            # Slightly lower saturation (0.85) for a softer, more pleasant look
             color = AnimationHelpers.hsv_to_pixel(hue, 0.85, 1.0)
             self.strip[i] = color
+
+
+class PermutationColorsPyramidAnimation(Animation):
+    """Permutation color change - colors change pixel by pixel in permutation order"""
     
-    def _animate_permutation_colors(self) -> None:
-        """Permutation color change - colors change pixel by pixel in permutation order"""
+    def __init__(self, strip: 'LedStrip', speed_ms: int = 50):
+        super().__init__(strip, speed_ms)
+        
+        self.perm_prev_color = None
+        self.perm_new_color = None
+        self.perm_pixel_index = 0
+        self.perm_last_change_time = time.time()
+        self.perm_change_interval_ms = 20  # 20ms per pixel
+    
+    def advance(self) -> None:
+        """Change pixels one by one in permutation order"""
         from game_system.animation_helpers import AnimationHelpers, STRIP_PERMUTATIONS
         
         # Strip 1 (pyramid) uses index 1
         strip_index = 1
         
-        # Get permutation for this strip
         if strip_index not in STRIP_PERMUTATIONS:
-            # Fallback if permutation not initialized (shouldn't happen)
             return
         
         permutation = STRIP_PERMUTATIONS[strip_index]
         
-        # Initialize colors if first time in this phase
+        # Initialize colors if first time
         if self.perm_prev_color is None:
-            # Start with random color
             random_hue = random.random() * 360
             self.perm_prev_color = AnimationHelpers.hsv_to_pixel(random_hue, 1.0, 1.0)
-            # Fill entire strip with prev color
+            
+            # Fill entire strip
             for i in range(self.strip.num_pixels()):
                 self.strip[i] = self.perm_prev_color
-            # Pick new color to transition to
+            
+            # Pick new color
             random_hue = random.random() * 360
             self.perm_new_color = AnimationHelpers.hsv_to_pixel(random_hue, 1.0, 1.0)
             self.perm_pixel_index = 0
@@ -613,21 +652,63 @@ class PartyPyramidAnimation(Animation):
         current_time = time.time()
         elapsed_ms = (current_time - self.perm_last_change_time) * 1000
         
-        # Check if it's time to change next pixel
+        # Check if time to change next pixel
         if elapsed_ms >= self.perm_change_interval_ms:
             if self.perm_pixel_index < len(permutation):
-                # Change next pixel in permutation order
                 pixel_to_change = permutation[self.perm_pixel_index]
                 self.strip[pixel_to_change] = self.perm_new_color
                 self.perm_pixel_index += 1
                 self.perm_last_change_time = current_time
             else:
-                # All pixels changed - pick new colors and restart
+                # All pixels changed - restart with new colors
                 self.perm_prev_color = self.perm_new_color
                 random_hue = random.random() * 360
                 self.perm_new_color = AnimationHelpers.hsv_to_pixel(random_hue, 1.0, 1.0)
                 self.perm_pixel_index = 0
                 self.perm_last_change_time = current_time
+
+
+def create_party_pyramid_animation(strip: 'LedStrip') -> SequenceAnimation:
+    """
+    Factory function to create party pyramid animation sequence.
+    
+    Sequence:
+    1. Blink for 5 seconds
+    2. Random loop of rainbow wave and permutation colors (20s each)
+    
+    Args:
+        strip: LED strip to animate (pyramid strip)
+        
+    Returns:
+        SequenceAnimation with nested random loop
+    """
+    # Phase 1: Initial blink
+    blink = BlinkPyramidAnimation(strip, speed_ms=50)
+    
+    # Phase 2: Random loop of other animations
+    random_anims = [
+        RainbowWavePyramidAnimation(strip, speed_ms=50),
+        PermutationColorsPyramidAnimation(strip, speed_ms=50)
+    ]
+    random.shuffle(random_anims)  # Randomize order
+    
+    random_loop = SequenceAnimation(
+        strip=strip,
+        animation_sequence=[(a, 20.0) for a in random_anims],
+        repeat=True,  # Loop these forever
+        frame_speed_ms=20
+    )
+    
+    # Overall sequence: blink once, then random loop forever
+    return SequenceAnimation(
+        strip=strip,
+        animation_sequence=[
+            (blink, 5.0),
+            (random_loop, None)  # Forever
+        ],
+        repeat=False,
+        frame_speed_ms=20
+    )
 
 
 class PartyAnimation(Animation):
