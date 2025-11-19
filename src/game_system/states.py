@@ -217,6 +217,13 @@ class AmplifyState(GameState):
         self.amplify_anim.strip = None
         self.pyramid_anim.strip = None
         self.animations.clear()
+        
+        # Clear button state references
+        self.pressed_buttons = None
+        self.initial_button_state = None
+        
+        # Clear logger reference (prevents logger accumulation)
+        self.logger = None
     
     def update(self, button_state: 'ButtonState') -> Optional['GameState']:
         """Update amplify state - handle buttons, animations, and LED rendering"""
@@ -377,6 +384,9 @@ class PartyState(GameState):
         self.party_anim.strip = None
         self.pyramid_party_anim.strip = None
         self.animations.clear()
+        
+        # Clear logger reference (prevents logger accumulation)
+        self.logger = None
         
         # Ignore any pressed buttons until they're released
         self.game_manager.button_reader.ignore_pressed_until_released()
@@ -656,6 +666,9 @@ class CodeModeState(GameState):
         # Clear animation references to help GC
         self.code_anim.strip = None
         self.animations.clear()
+        
+        # Clear logger reference (prevents logger accumulation)
+        self.logger = None
     
     def _fail_and_return_to_idle(self, reason: str) -> 'GameState':
         """
@@ -815,6 +828,13 @@ class CodeRevealState(GameState):
         # Clear animation references to help GC
         self.reveal_anim.strip = None
         self.animations.clear()
+        
+        # Clear sound channel references
+        self.code_sound_channel = None
+        self.one_two_three_channel = None
+        
+        # Clear logger reference (prevents logger accumulation)
+        self.logger = None
     
     def update(self, button_state: 'ButtonState') -> Optional['GameState']:
         """Update code reveal - manage animation phases and sound timing"""

@@ -231,6 +231,15 @@ def create_game_system(config: GameConfig, amplifier_logger):
             strip[:] = black
             strip.show()
         
+        # Initialize random permutations for each strip
+        import random
+        from game_system import animation_helpers
+        for strip_idx, strip in enumerate(led_strips):
+            pixel_count = strip.num_pixels()
+            indices = list(range(pixel_count))
+            random.shuffle(indices)
+            animation_helpers.STRIP_PERMUTATIONS[strip_idx] = indices
+        
         
         # Create button sequence tracker
         sequence_tracker = ButtonsSequenceTracker(max_sequence_length=10)

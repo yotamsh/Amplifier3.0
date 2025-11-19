@@ -4,7 +4,7 @@ Helper utilities for animations
 
 import math
 import time
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Dict, List
 
 if TYPE_CHECKING:
     from led_system.pixel import Pixel
@@ -13,6 +13,9 @@ else:
 
 # Initialize color constants at module load time
 from led_system.pixel import Pixel
+
+# Random permutations for each strip (initialized during system setup)
+STRIP_PERMUTATIONS: Dict[int, List[int]] = {}
 
 class AnimationHelpers:
     """Static helper methods for animations"""
