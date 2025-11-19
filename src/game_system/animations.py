@@ -41,17 +41,20 @@ class Animation(ABC):
     
     def update_if_needed(self) -> bool:
         """
-        Update animation if enough time has passed.
+        Update animation buffer if enough time has passed.
+        
+        Does NOT call strip.show() - the caller (game state) is responsible
+        for calling show() on strips that were updated.
         
         Returns:
-            True if animation was updated, False if skipped
+            True if strip buffer was modified, False if skipped
         """
         now = time.time()
         elapsed_ms = (now - self.last_update) * 1000
         
         if elapsed_ms >= self.speed_ms:
             self.advance()
-            self.strip.show()
+            # DON'T call strip.show() - state handles rendering
             self.last_update = now
             return True
         return False

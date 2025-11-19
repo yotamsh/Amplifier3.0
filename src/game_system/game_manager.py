@@ -134,7 +134,8 @@ class GameManager:
             self.logger.debug(f"Button sequence: {self.sequence_tracker.get_sequence()}")
         
         # 3. Let state handle everything and check for state transitions
-        new_state = self.current_state.update(button_state)
+        # Call generic_update_and_show which orchestrates: state logic → animations → rendering
+        new_state = self.current_state.generic_update_and_show(button_state)
         if new_state:
             self._transition_to_state(new_state)
     

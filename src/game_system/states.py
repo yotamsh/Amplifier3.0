@@ -3,7 +3,7 @@ Game state base class and concrete implementations
 """
 
 from abc import ABC, abstractmethod
-from typing import List, Optional, TYPE_CHECKING
+from typing import Dict, List, Optional, TYPE_CHECKING
 
 from .animations import AmplifyAnimation, AnimationDelayWrapper, IdleAnimation, PartyAnimation
 
@@ -24,22 +24,67 @@ class GameState(ABC):
     - Button handling logic
     - Animation management 
     - State transition conditions
+    
+    Architecture:
+    - Subclasses register animations via strip_animations dict
+    - generic_update_and_show() orchestrates: state logic → animations → rendering
+    - Only strips with updated animations call show()
     """
     
     def __init__(self, game_manager: 'GameManager'):
         """Initialize the game state"""
         self.game_manager: 'GameManager' = game_manager
+        
+        # Track which animation controls which strip (set by subclasses)
+        self.strip_animations: Dict[int, Optional['Animation']] = {}
     
-    @abstractmethod
-    def update(self, button_state: 'ButtonState') -> Optional['GameState']:
+    def generic_update_and_show(self, button_state: 'ButtonState') -> Optional['GameState']:
         """
-        Update state logic, handle button changes, update animations, and render LEDs.
+        Generic update orchestration: state logic → animations → rendering.
+        
+        Call order:
+        1. State-specific logic (state_update)
+        2. Update all strip animations  
+        3. Show() any strips that were modified
         
         Args:
             button_state: Current button state with edge detection
             
         Returns:
-            New GameState instance if transition needed, None to stay in current state
+            New GameState instance if transition needed, None to stay
+        """
+        # 1. Let subclass handle state-specific logic
+        new_state = self.state_update(button_state)
+        
+        # 2. Update all strip animations and render
+        self._update_and_render_strips()
+        
+        return new_state
+    
+    def _update_and_render_strips(self) -> None:
+        """Update all registered strip animations and show() those that changed"""
+        for strip_index, animation in self.strip_animations.items():
+            if animation is not None:
+                # Try to update animation buffer
+                was_updated = animation.update_if_needed()
+                
+                # If buffer was modified, push to hardware
+                if was_updated:
+                    self.game_manager.led_strips[strip_index].show()
+    
+    @abstractmethod
+    def state_update(self, button_state: 'ButtonState') -> Optional['GameState']:
+        """
+        State-specific update logic (override in subclasses).
+        
+        Handle button input, check transitions, update state variables.
+        DO NOT call animation.update_if_needed() or strip.show() here.
+        
+        Args:
+            button_state: Current button state with edge detection
+            
+        Returns:
+            New GameState instance if transition needed, None to stay
         """
         pass
     
@@ -74,11 +119,9 @@ class IdleState(GameState):
     
     def __init__(self, game_manager: 'GameManager'):
         super().__init__(game_manager)
-    
-        # Create bouncing rainbow scanner animation for each strip, wrapped with 2-second delay
-        self.animations: List['Animation'] = []
         
-        for strip in self.game_manager.led_strips:
+        # Register animations for each strip (idle scanner with delay)
+        for strip_index, strip in enumerate(self.game_manager.led_strips):
             # Create the idle scanner animation
             idle_anim = IdleAnimation(
                 strip=strip,
@@ -93,7 +136,8 @@ class IdleState(GameState):
                 delay_ms=2000  # 2 seconds of darkness
             )
             
-            self.animations.append(delayed_idle)
+            # Register with base class
+            self.strip_animations[strip_index] = delayed_idle
     
     def custom_on_enter(self) -> None:
         """Actions when entering idle state"""
@@ -105,13 +149,14 @@ class IdleState(GameState):
     def custom_on_exit(self) -> None:
         """Called when exiting idle state - cleanup animations"""
         # Clear animation references to help GC
-        for anim in self.animations:
-            if hasattr(anim, 'strip'):
+        for strip_index in list(self.strip_animations.keys()):
+            anim = self.strip_animations[strip_index]
+            if anim and hasattr(anim, 'strip'):
                 anim.strip = None
-        self.animations.clear()
+        self.strip_animations.clear()
     
-    def update(self, button_state: 'ButtonState') -> Optional['GameState']:
-        """Update idle state - handle buttons, animations, and LED rendering"""
+    def state_update(self, button_state: 'ButtonState') -> Optional['GameState']:
+        """Update idle state - handle buttons and state transitions"""
         
         # Handle sequence timeout and pattern detection when all buttons released
         if button_state.total_buttons_pressed == 0:
@@ -132,10 +177,7 @@ class IdleState(GameState):
         if button_state.total_buttons_pressed > 0:
             return AmplifyState(self.game_manager, button_state)
         
-        # Update animations (they handle their own rendering and timing)
-        for animation in self.animations:
-            animation.update_if_needed()
-        
+        # No transitions - animations will be handled by generic_update_and_show
         return None
 
 
@@ -178,7 +220,9 @@ class AmplifyState(GameState):
             speed_ms=50  # Fast update for responsive fill
         )
         
-        self.animations: List['Animation'] = [self.amplify_anim, self.pyramid_anim]
+        # Register animations with base class
+        self.strip_animations[0] = self.amplify_anim
+        self.strip_animations[1] = self.pyramid_anim
         
         # Store initial button state for custom_on_enter
         self.initial_button_state = button_state
@@ -216,7 +260,7 @@ class AmplifyState(GameState):
         # Clear animation references to help GC
         self.amplify_anim.strip = None
         self.pyramid_anim.strip = None
-        self.animations.clear()
+        self.strip_animations.clear()
         
         # Clear button state references
         self.pressed_buttons = None
@@ -225,8 +269,8 @@ class AmplifyState(GameState):
         # Clear logger reference (prevents logger accumulation)
         self.logger = None
     
-    def update(self, button_state: 'ButtonState') -> Optional['GameState']:
-        """Update amplify state - handle buttons, animations, and LED rendering"""
+    def state_update(self, button_state: 'ButtonState') -> Optional['GameState']:
+        """Update amplify state - handle buttons and state transitions"""
         # Check for party mode - all buttons pressed
         button_count = self.game_manager.button_reader.get_button_count()
         if button_state.total_buttons_pressed == button_count:
@@ -251,7 +295,6 @@ class AmplifyState(GameState):
         # Update pressed buttons state to current button state
         self.pressed_buttons = button_state.for_button
         
-        
         # Update if button state changed
         if button_state.any_changed:
             # Update both animations and volume with current button state
@@ -261,10 +304,7 @@ class AmplifyState(GameState):
             pressed_indexes = [i for i, pressed in enumerate(button_state.for_button) if pressed]
             self.logger.debug(f"AmplifyState button change - currently pressed: {pressed_indexes}")
         
-        # Update animations (they handle their own rendering and timing)
-        for animation in self.animations:
-            animation.update_if_needed()
-        
+        # No transitions - animations will be handled by generic_update_and_show
         return None
     
 
@@ -341,7 +381,9 @@ class PartyState(GameState):
         pyramid_strip = game_manager.led_strips[1]
         self.pyramid_party_anim = create_party_pyramid_animation(pyramid_strip)
         
-        self.animations: List['Animation'] = [self.party_anim, self.pyramid_party_anim]
+        # Register animations with base class
+        self.strip_animations[0] = self.party_anim
+        self.strip_animations[1] = self.pyramid_party_anim
     
     def custom_on_enter(self) -> None:
         """Actions when entering party mode"""
@@ -380,7 +422,7 @@ class PartyState(GameState):
         # Clear animation references to help GC
         self.party_anim.strip = None
         self.pyramid_party_anim.strip = None
-        self.animations.clear()
+        self.strip_animations.clear()
         
         # Clear logger reference (prevents logger accumulation)
         self.logger = None
@@ -388,7 +430,7 @@ class PartyState(GameState):
         # Ignore any pressed buttons until they're released
         self.game_manager.button_reader.ignore_pressed_until_released()
     
-    def update(self, button_state: 'ButtonState') -> Optional['GameState']:
+    def state_update(self, button_state: 'ButtonState') -> Optional['GameState']:
         """Update party state"""
         import time
         current_time = time.time()
@@ -427,10 +469,7 @@ class PartyState(GameState):
             self.button_B_held
         )
         
-        # Update animations (they handle rendering and show())
-        for animation in self.animations:
-            animation.update_if_needed()
-        
+        # No transitions - animations will be handled by generic_update_and_show
         return None
     
     def _handle_reduction(self, button_state: 'ButtonState', current_time: float) -> Optional['GameState']:
@@ -625,7 +664,9 @@ class CodeModeState(GameState):
             button_count=game_manager.button_reader.get_button_count(),
             speed_ms=50
         )
-        self.animations: List['Animation'] = [self.code_anim]
+        
+        # Register with base class
+        self.strip_animations[0] = self.code_anim
     
     def custom_on_enter(self) -> None:
         """Actions when entering code mode"""
@@ -662,7 +703,7 @@ class CodeModeState(GameState):
         
         # Clear animation references to help GC
         self.code_anim.strip = None
-        self.animations.clear()
+        self.strip_animations.clear()
         
         # Clear logger reference (prevents logger accumulation)
         self.logger = None
@@ -688,7 +729,7 @@ class CodeModeState(GameState):
         # Return to idle
         return IdleState(self.game_manager)
     
-    def update(self, button_state: 'ButtonState') -> Optional['GameState']:
+    def state_update(self, button_state: 'ButtonState') -> Optional['GameState']:
         """Update code mode - track sequence, check for completion and failures"""
         
         # FAILURE CONDITION 1: Check if any button was released
@@ -739,10 +780,7 @@ class CodeModeState(GameState):
                 # FAILURE CONDITION 3: Invalid/unsupported code
                 return self._fail_and_return_to_idle(f"Invalid code: {sequence}")
         
-        # Update animations
-        for animation in self.animations:
-            animation.update_if_needed()
-        
+        # No transitions - animations will be handled by generic_update_and_show
         return None
 
 
@@ -791,7 +829,9 @@ class CodeRevealState(GameState):
             fill_speed_ms=fill_speed_ms,
             blink_speed_ms=blink_speed_ms
         )
-        self.animations: List['Animation'] = [self.reveal_anim]
+        
+        # Register with base class
+        self.strip_animations[0] = self.reveal_anim
         
         # Sound channel tracking
         self.code_sound_channel = None
@@ -824,7 +864,7 @@ class CodeRevealState(GameState):
         
         # Clear animation references to help GC
         self.reveal_anim.strip = None
-        self.animations.clear()
+        self.strip_animations.clear()
         
         # Clear sound channel references
         self.code_sound_channel = None
@@ -833,7 +873,7 @@ class CodeRevealState(GameState):
         # Clear logger reference (prevents logger accumulation)
         self.logger = None
     
-    def update(self, button_state: 'ButtonState') -> Optional['GameState']:
+    def state_update(self, button_state: 'ButtonState') -> Optional['GameState']:
         """Update code reveal - manage animation phases and sound timing"""
         
         if self.phase == "CODE_SOUND":
@@ -870,8 +910,5 @@ class CodeRevealState(GameState):
                     self.logger.error("Failed to load song, returning to IdleState")
                     return IdleState(self.game_manager)
         
-        # Update animations
-        for animation in self.animations:
-            animation.update_if_needed()
-        
+        # No transitions - animations will be handled by generic_update_and_show
         return None

@@ -82,3 +82,62 @@
 [2025-11-19 23:03:47,022] [INFO] [GameManager] State transition: CodeRevealState → PartyState
 [2025-11-19 23:03:47,034] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: Bach - Aria (from) Hunt Cantata.mp3
 [2025-11-19 23:03:57,088] [INFO] [GameManager] 💾 Memory - Process: 86.2MB | System: 246/907MB (27.1%, 661MB free) | ⚙️  CPU - Process: 19.2% | System: 8.2% | Cores: [11%, 7%, 6%, 9%]
+[2025-11-19 23:04:57,106] [INFO] [GameManager] 💾 Memory - Process: 86.4MB | System: 247/907MB (27.3%, 659MB free) | ⚙️  CPU - Process: 24.9% | System: 9.5% | Cores: [11%, 9%, 11%, 7%]
+[2025-11-19 23:05:23,305] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-19 23:05:24,251] [INFO] [ButtonReader] Keyboard: Button 6 toggled OFF (key '6')
+[2025-11-19 23:05:26,160] [INFO] [ButtonReader] Keyboard: Button 4 toggled OFF (key '4')
+[2025-11-19 23:05:29,333] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-19 23:05:36,566] [INFO] [PartyState] Reduction complete!
+[2025-11-19 23:05:36,567] [INFO] [GameManager] State transition: PartyState → IdleState
+[2025-11-19 23:05:57,123] [INFO] [GameManager] 💾 Memory - Process: 86.4MB | System: 245/907MB (27.0%, 662MB free) | ⚙️  CPU - Process: 23.6% | System: 9.4% | Cores: [6%, 13%, 9%, 9%]
+[2025-11-19 23:06:22,997] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-19 23:06:23,419] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-19 23:06:23,421] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 23:06:23,431] [INFO] [SoundController] Song "Dua Lipa - Levitating Featuring DaBaby (Official Music Video).mp3" was randomly started
+[2025-11-19 23:06:23,782] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-19 23:06:23,784] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 23:06:24,204] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-19 23:06:24,205] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 23:06:24,216] [INFO] [SoundController] Song "ABBA - The Winner Takes It All.mp3" was randomly started
+[2025-11-19 23:06:29,950] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-19 23:06:29,952] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 23:06:30,613] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-19 23:06:30,615] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 23:06:30,625] [INFO] [SoundController] Song "Whitney Houston - I Wanna Dance With Somebody.mp3" was randomly started
+[2025-11-19 23:06:31,016] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-19 23:06:31,020] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 23:06:31,458] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-19 23:06:31,459] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 23:06:31,469] [INFO] [SoundController] Song "Cher - Believe (Official Music Video) [4K Remaster].mp3" was randomly started
+[2025-11-19 23:06:31,879] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-19 23:06:31,881] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 23:06:32,301] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-19 23:06:32,302] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-19 23:06:32,303] [INFO] [GameManager] State transition: IdleState → CodeModeState
+[2025-11-19 23:06:32,314] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-19 23:06:34,732] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-19 23:06:35,616] [INFO] [ButtonReader] Keyboard: Button 3 toggled OFF (key '3')
+[2025-11-19 23:06:39,779] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-19 23:06:40,482] [INFO] [ButtonReader] Keyboard: Button 8 toggled OFF (key '8')
+[2025-11-19 23:06:41,165] [INFO] [ButtonReader] Keyboard: Button 8 toggled ON (key '8')
+[2025-11-19 23:06:41,969] [INFO] [ButtonReader] Keyboard: Button 0 toggled OFF (key '0')
+[2025-11-19 23:06:42,652] [INFO] [ButtonReader] Keyboard: Button 0 toggled ON (key '0')
+[2025-11-19 23:06:44,400] [INFO] [ButtonReader] Keyboard: Button 4 toggled OFF (key '4')
+[2025-11-19 23:06:45,386] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-19 23:06:45,387] [INFO] [CodeModeState] Code entered: 63804
+[2025-11-19 23:06:45,388] [INFO] [CodeModeState] Valid code! Transitioning to CodeRevealState
+[2025-11-19 23:06:45,389] [INFO] [GameManager] State transition: CodeModeState → CodeRevealState
+[2025-11-19 23:06:45,400] [INFO] [CodeRevealState] Code reveal started for code: 63804
+[2025-11-19 23:06:49,364] [INFO] [CodeRevealState] Loading song by code: 63804
+[2025-11-19 23:06:49,365] [INFO] [SoundController] Playing song by code 63804: "Bach - Aria (from) Hunt Cantata.mp3"
+[2025-11-19 23:06:49,366] [INFO] [CodeRevealState] Song loaded successfully, transitioning to PartyState
+[2025-11-19 23:06:49,367] [INFO] [GameManager] State transition: CodeRevealState → PartyState
+[2025-11-19 23:06:49,377] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: Bach - Aria (from) Hunt Cantata.mp3
+[2025-11-19 23:06:57,141] [INFO] [GameManager] 💾 Memory - Process: 86.4MB | System: 247/907MB (27.3%, 660MB free) | ⚙️  CPU - Process: 17.9% | System: 7.6% | Cores: [5%, 12%, 7%, 7%]
+[2025-11-19 23:07:57,156] [INFO] [GameManager] 💾 Memory - Process: 86.4MB | System: 248/907MB (27.3%, 659MB free) | ⚙️  CPU - Process: 23.5% | System: 9.3% | Cores: [7%, 12%, 7%, 11%]
+[2025-11-19 23:08:57,164] [INFO] [GameManager] 💾 Memory - Process: 86.4MB | System: 247/907MB (27.2%, 660MB free) | ⚙️  CPU - Process: 25.4% | System: 9.6% | Cores: [10%, 10%, 9%, 9%]
+[2025-11-19 23:09:36,267] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 2 - Process terminating
+[2025-11-19 23:09:36,268] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-19 23:09:36,507] [INFO] [SoundController] Sound controller cleaned up successfully
+[2025-11-19 23:09:36,518] [INFO] [GameManager] Game stopped
+[2025-11-19 23:09:36,519] [INFO] [Amplifier] ✅ HumanAmplifier system shut down
