@@ -64,19 +64,22 @@ class SoundController:
         self.current_song: Optional[str] = None
         
         # Initialize pygame mixer with larger buffer to prevent underruns
+        # Using 48kHz (Raspberry Pi native rate) for better compatibility
         self.mixer = pygame.mixer
-        self.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
+        self.mixer.pre_init(frequency=48000, size=-16, channels=2, buffer=4096)
         self.mixer.init()
+        
+        # Give ALSA time to fully initialize before loading sounds (prevents race condition underruns)
+        import time
+        time.sleep(0.1)  # 100ms settling time
         
         # Load and validate all sound files (strict - fail if any missing)
         self._sound_objects = {}
         self._load_and_validate_sounds()
         
-        # Stop any existing music and load first song
+        # Stop any existing music (don't preload song - let IdleState load when ready)
         self.mixer.music.stop()
-        success = self.load_next_song()
-        if not success:
-            self.logger.warning("⚠️ Could not preload initial song during initialization")
+        self.logger.info("Sound controller initialized - mixer ready, first song will load on demand")
     
     def _load_and_validate_sounds(self) -> None:
         """
@@ -292,3 +295,31 @@ class SoundController:
         ]
         random_fail_sound = random.choice(fail_sounds)
         self.play_sound_with_volume(random_fail_sound, volume)
+    
+    def cleanup(self) -> None:
+        """
+        Cleanup sound controller and properly shut down pygame mixer.
+        
+        This ensures ALSA audio device is properly closed and prevents
+        device state issues on subsequent runs (fixes intermittent underruns).
+        """
+        try:
+            # Stop any playing music
+            self.mixer.music.stop()
+            
+            # Stop all sound channels
+            self.mixer.stop()
+            
+            # Properly quit pygame mixer to close ALSA device
+            self.mixer.quit()
+            
+            self.logger.info("Sound controller cleaned up successfully")
+        except Exception as e:
+            self.logger.warning(f"Error during sound controller cleanup: {e}")
+    
+    def __del__(self):
+        """Automatic cleanup when object is destroyed"""
+        try:
+            self.cleanup()
+        except:
+            pass  # Silent fail during garbage collection

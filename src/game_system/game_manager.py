@@ -142,6 +142,10 @@ class GameManager:
         """Stop the game and clean up resources."""
         self.running = False
         
+        # Cleanup sound controller first (properly close ALSA device)
+        if hasattr(self, 'sound_controller') and self.sound_controller:
+            self.sound_controller.cleanup()
+        
         # Clear all LED strips
         from led_system.pixel import Pixel
         black = Pixel(0, 0, 0)

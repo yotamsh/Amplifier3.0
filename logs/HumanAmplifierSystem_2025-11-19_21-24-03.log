@@ -60,3 +60,8 @@
 [2025-11-19 21:24:19,769] [INFO] [CodeRevealState] Song loaded successfully, transitioning to PartyState
 [2025-11-19 21:24:19,770] [INFO] [GameManager] State transition: CodeRevealState → PartyState
 [2025-11-19 21:24:19,781] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: Bach - Aria (from) Hunt Cantata.mp3
+[2025-11-19 21:25:07,238] [INFO] [GameManager] 💾 Memory - Process: 82.3MB | System: 238/907MB (26.3%, 668MB free)
+[2025-11-19 21:25:10,049] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 2 - Process terminating
+[2025-11-19 21:25:10,050] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-19 21:25:10,060] [INFO] [GameManager] Game stopped
+[2025-11-19 21:25:10,061] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

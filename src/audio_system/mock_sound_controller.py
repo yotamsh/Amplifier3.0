@@ -179,4 +179,15 @@ class MockSoundController:
             volume: Volume level (ignored)
         """
         self.logger.debug(f"Mock: Playing random fail sound at volume {volume}")
+    
+    def cleanup(self) -> None:
+        """Cleanup mock sound controller (no-op for mock)"""
+        self.logger.info("Mock sound controller cleaned up")
+    
+    def __del__(self):
+        """Automatic cleanup when object is destroyed"""
+        try:
+            self.cleanup()
+        except:
+            pass  # Silent fail during garbage collection
 

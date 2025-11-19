@@ -450,6 +450,7 @@ class PartyPyramidAnimation(Animation):
     # Phase constants
     PHASE_BLINK = "blink"
     PHASE_RAINBOW_WAVE = "rainbow_wave"
+    PHASE_PERMUTATION_COLORS = "permutation_colors"
     
     def __init__(self, strip: 'LedStrip', speed_ms: int = 50):
         """
@@ -467,7 +468,7 @@ class PartyPyramidAnimation(Animation):
         self.current_phase = self.PHASE_BLINK
         self.phase_start_time = time.time()
         self.blink_duration = 5.0  # 5 seconds of blinking before switching
-        self.random_phases = [self.PHASE_RAINBOW_WAVE]  # Pool for random selection
+        self.random_phases = [self.PHASE_RAINBOW_WAVE, self.PHASE_PERMUTATION_COLORS]  # Pool for random selection
         
         # Blink phase state
         self.current_color = Pixel(255, 255, 255)  # Start with white
@@ -476,6 +477,13 @@ class PartyPyramidAnimation(Animation):
         self.blink_interval_ms = 400  # 400ms per on/off toggle
         self.last_blink_time = time.time()
         self.black = Pixel(0, 0, 0)
+        
+        # Permutation colors phase state
+        self.perm_prev_color = None  # Previous solid color
+        self.perm_new_color = None   # New color being applied
+        self.perm_pixel_index = 0    # Current position in permutation
+        self.perm_last_change_time = time.time()
+        self.perm_change_interval_ms = 20  # 20ms per pixel
     
     def _get_random_vibrant_color(self) -> 'Pixel':
         """Generate a random vibrant, pleasant color"""
@@ -506,14 +514,23 @@ class PartyPyramidAnimation(Animation):
         if self.current_phase == self.PHASE_BLINK:
             if current_time - self.phase_start_time >= self.blink_duration:
                 # Switch to random animation from pool
-                self.current_phase = random.choice(self.random_phases)
+                new_phase = random.choice(self.random_phases)
+                self.current_phase = new_phase
                 self.phase_start_time = current_time
+                
+                # Reset phase-specific state when entering new phase
+                if new_phase == self.PHASE_PERMUTATION_COLORS:
+                    self.perm_prev_color = None
+                    self.perm_new_color = None
+                    self.perm_pixel_index = 0
         
         # Execute current phase animation
         if self.current_phase == self.PHASE_BLINK:
             self._animate_blink()
         elif self.current_phase == self.PHASE_RAINBOW_WAVE:
             self._animate_rainbow_wave()
+        elif self.current_phase == self.PHASE_PERMUTATION_COLORS:
+            self._animate_permutation_colors()
     
     def _animate_blink(self) -> None:
         """Blink animation - toggle between vibrant colors and black"""
@@ -562,8 +579,55 @@ class PartyPyramidAnimation(Animation):
         for i in range(num_pixels):
             # Rainbow density: 3 degrees hue change per pixel
             hue = (i * 3 + hue_offset) % 360
-            color = AnimationHelpers.hsv_to_pixel(hue, 1.0, 1.0)
+            # Slightly lower saturation (0.85) for a softer, more pleasant look
+            color = AnimationHelpers.hsv_to_pixel(hue, 0.85, 1.0)
             self.strip[i] = color
+    
+    def _animate_permutation_colors(self) -> None:
+        """Permutation color change - colors change pixel by pixel in permutation order"""
+        from game_system.animation_helpers import AnimationHelpers, STRIP_PERMUTATIONS
+        
+        # Strip 1 (pyramid) uses index 1
+        strip_index = 1
+        
+        # Get permutation for this strip
+        if strip_index not in STRIP_PERMUTATIONS:
+            # Fallback if permutation not initialized (shouldn't happen)
+            return
+        
+        permutation = STRIP_PERMUTATIONS[strip_index]
+        
+        # Initialize colors if first time in this phase
+        if self.perm_prev_color is None:
+            # Start with random color
+            random_hue = random.random() * 360
+            self.perm_prev_color = AnimationHelpers.hsv_to_pixel(random_hue, 1.0, 1.0)
+            # Fill entire strip with prev color
+            for i in range(self.strip.num_pixels()):
+                self.strip[i] = self.perm_prev_color
+            # Pick new color to transition to
+            random_hue = random.random() * 360
+            self.perm_new_color = AnimationHelpers.hsv_to_pixel(random_hue, 1.0, 1.0)
+            self.perm_pixel_index = 0
+        
+        current_time = time.time()
+        elapsed_ms = (current_time - self.perm_last_change_time) * 1000
+        
+        # Check if it's time to change next pixel
+        if elapsed_ms >= self.perm_change_interval_ms:
+            if self.perm_pixel_index < len(permutation):
+                # Change next pixel in permutation order
+                pixel_to_change = permutation[self.perm_pixel_index]
+                self.strip[pixel_to_change] = self.perm_new_color
+                self.perm_pixel_index += 1
+                self.perm_last_change_time = current_time
+            else:
+                # All pixels changed - pick new colors and restart
+                self.perm_prev_color = self.perm_new_color
+                random_hue = random.random() * 360
+                self.perm_new_color = AnimationHelpers.hsv_to_pixel(random_hue, 1.0, 1.0)
+                self.perm_pixel_index = 0
+                self.perm_last_change_time = current_time
 
 
 class PartyAnimation(Animation):

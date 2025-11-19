@@ -101,7 +101,7 @@ def create_amplifier_config() -> GameConfig:
         # Strip 2 - pyramid strip
         LedStripConfig(
             gpio_pin=18,
-            led_count=300,
+            led_count=293,
             dma=10,
             brightness=26,  # 10% brightness for testing
             channel=0
