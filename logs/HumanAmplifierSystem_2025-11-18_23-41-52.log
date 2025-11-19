@@ -1,0 +1,199 @@
+[2025-11-18 23:41:52,492] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-18 23:41:52,493] [INFO] [Amplifier] Button configuration: 10 buttons on GPIO [6, 5, 22, 17, 4, 23, 24, 25, 16, 20]
+[2025-11-18 23:41:52,493] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-18 23:41:52,494] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-18 23:41:52,494] [INFO] [Amplifier]   Strip 2: 300 LEDs on GPIO 18
+[2025-11-18 23:41:52,494] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-18 23:41:52,495] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-18 23:41:52,495] [INFO] [Amplifier] Audio folder: songs
+[2025-11-18 23:41:52,495] [INFO] [Amplifier] Schedule: 2 daily, 1 special entries
+[2025-11-18 23:41:52,496] [INFO] [ButtonReader] GPIO sampler initialized: 10 pins (no pulls)
+[2025-11-18 23:41:52,496] [INFO] [ButtonReader] Pin mapping: Btn0=GPIO6, Btn1=GPIO5, Btn2=GPIO22, Btn3=GPIO17, Btn4=GPIO4, Btn5=GPIO23, Btn6=GPIO24, Btn7=GPIO25, Btn8=GPIO16, Btn9=GPIO20
+[2025-11-18 23:41:52,497] [INFO] [ButtonReader] 🎮 Keyboard debug enabled: Press digit keys 0-9 to toggle buttons (works over SSH)
+[2025-11-18 23:41:52,497] [INFO] [ButtonReader]    Each keypress toggles button ON/OFF
+[2025-11-18 23:41:52,497] [INFO] [ButtonReader] ButtonReader initialized with 10 buttons
+[2025-11-18 23:41:52,499] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-18 23:41:57,736] [INFO] [SongLibrary] Loaded 549 song codes from 10 collections
+[2025-11-18 23:41:57,737] [INFO] [SongLibrary] Collections updated: ['MAIJAM']
+[2025-11-18 23:41:59,760] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-18 23:41:59,761] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-18 23:41:59,761] [INFO] [Amplifier] Hardware: 10 buttons, 2 LED strips, 20ms frame duration
+[2025-11-18 23:41:59,761] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['SPANISH', 'FESTIGAL', 'GENERAL', 'MORNING', 'VIRAL', 'PARTY', 'MAIJAM', 'DISNEY', 'TV', 'CLASSIC'], 'total_codes': 549, 'daily_schedule_entries': 2, 'special_schedule_entries': 1}
+[2025-11-18 23:41:59,762] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-18 23:41:59,762] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-18 23:41:59,762] [INFO] [Amplifier] Hardware status: 10 buttons, 2 LED strips
+[2025-11-18 23:41:59,763] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-18 23:41:59,763] [INFO] [Amplifier]   Strip 2: 300 LEDs active
+[2025-11-18 23:41:59,763] [INFO] [Amplifier] Audio system: 549 song codes, 12 sound effects
+[2025-11-18 23:41:59,764] [INFO] [Amplifier] Available collections: SPANISH, FESTIGAL, GENERAL, MORNING, VIRAL, PARTY, MAIJAM, DISNEY, TV, CLASSIC
+[2025-11-18 23:41:59,764] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-18 23:41:59,764] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-18 23:41:59,765] [INFO] [GameManager] 💾 Memory - Process: 81.1MB | System: 237/907MB (26.2%, 669MB free)
+[2025-11-19 19:22:36,760] [INFO] [GameManager] 💾 Memory - Process: 81.7MB | System: 211/907MB (23.3%, 696MB free)
+[2025-11-19 19:23:25,066] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-19 19:23:25,066] [DEBUG] [GameManager] Button sequence: 4
+[2025-11-19 19:23:25,067] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 19:23:25,078] [INFO] [SoundController] Song "Patti Smith Group - Because the Night (Official Audio).mp3" was randomly started
+[2025-11-19 19:23:25,079] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-19 19:23:27,840] [DEBUG] [ButtonReader] Button state changed: [(3, 'pressed')]
+[2025-11-19 19:23:27,841] [DEBUG] [GameManager] Button sequence: 43
+[2025-11-19 19:23:27,841] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [3, 4]
+[2025-11-19 19:23:32,103] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-19 19:23:32,103] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [3]
+[2025-11-19 19:23:32,645] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-19 19:23:32,646] [DEBUG] [GameManager] Button sequence: 435
+[2025-11-19 19:23:32,646] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [3, 5]
+[2025-11-19 19:23:35,118] [DEBUG] [ButtonReader] Button state changed: [(3, 'released')]
+[2025-11-19 19:23:35,119] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [5]
+[2025-11-19 19:23:35,821] [DEBUG] [ButtonReader] Button state changed: [(5, 'released')]
+[2025-11-19 19:23:35,823] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 19:23:36,766] [INFO] [GameManager] 💾 Memory - Process: 81.9MB | System: 207/907MB (22.9%, 699MB free)
+[2025-11-19 19:24:36,771] [INFO] [GameManager] 💾 Memory - Process: 81.9MB | System: 207/907MB (22.8%, 700MB free)
+[2025-11-19 19:25:36,781] [INFO] [GameManager] 💾 Memory - Process: 82.0MB | System: 207/907MB (22.8%, 700MB free)
+[2025-11-19 19:26:36,794] [INFO] [GameManager] 💾 Memory - Process: 82.0MB | System: 207/907MB (22.9%, 699MB free)
+[2025-11-19 19:27:36,811] [INFO] [GameManager] 💾 Memory - Process: 82.0MB | System: 208/907MB (22.9%, 699MB free)
+[2025-11-19 19:28:36,829] [INFO] [GameManager] 💾 Memory - Process: 82.0MB | System: 207/907MB (22.8%, 700MB free)
+[2025-11-19 19:29:36,844] [INFO] [GameManager] 💾 Memory - Process: 82.0MB | System: 208/907MB (22.9%, 699MB free)
+[2025-11-19 19:30:36,858] [INFO] [GameManager] 💾 Memory - Process: 82.0MB | System: 206/907MB (22.8%, 700MB free)
+[2025-11-19 19:31:36,873] [INFO] [GameManager] 💾 Memory - Process: 82.0MB | System: 207/907MB (22.8%, 700MB free)
+[2025-11-19 19:32:36,887] [INFO] [GameManager] 💾 Memory - Process: 82.0MB | System: 207/907MB (22.8%, 700MB free)
+[2025-11-19 19:33:36,903] [INFO] [GameManager] 💾 Memory - Process: 82.0MB | System: 208/907MB (22.9%, 699MB free)
+[2025-11-19 19:34:36,918] [INFO] [GameManager] 💾 Memory - Process: 82.0MB | System: 220/907MB (24.3%, 686MB free)
+[2025-11-19 19:35:36,931] [INFO] [GameManager] 💾 Memory - Process: 82.0MB | System: 221/907MB (24.3%, 686MB free)
+[2025-11-19 19:36:36,949] [INFO] [GameManager] 💾 Memory - Process: 82.0MB | System: 220/907MB (24.3%, 686MB free)
+[2025-11-19 19:37:36,966] [INFO] [GameManager] 💾 Memory - Process: 82.0MB | System: 221/907MB (24.3%, 686MB free)
+[2025-11-19 19:38:36,979] [INFO] [GameManager] 💾 Memory - Process: 82.0MB | System: 221/907MB (24.4%, 685MB free)
+[2025-11-19 19:39:36,993] [INFO] [GameManager] 💾 Memory - Process: 82.0MB | System: 221/907MB (24.4%, 685MB free)
+[2025-11-19 19:40:37,009] [INFO] [GameManager] 💾 Memory - Process: 82.0MB | System: 221/907MB (24.4%, 685MB free)
+[2025-11-19 19:41:37,029] [INFO] [GameManager] 💾 Memory - Process: 82.0MB | System: 222/907MB (24.4%, 685MB free)
+[2025-11-19 19:42:37,045] [INFO] [GameManager] 💾 Memory - Process: 82.0MB | System: 221/907MB (24.4%, 685MB free)
+[2025-11-19 19:43:37,058] [INFO] [GameManager] 💾 Memory - Process: 82.0MB | System: 222/907MB (24.5%, 684MB free)
+[2025-11-19 19:44:37,072] [INFO] [GameManager] 💾 Memory - Process: 82.0MB | System: 222/907MB (24.5%, 684MB free)
+[2025-11-19 19:45:37,078] [INFO] [GameManager] 💾 Memory - Process: 82.1MB | System: 222/907MB (24.5%, 685MB free)
+[2025-11-19 19:46:37,091] [INFO] [GameManager] 💾 Memory - Process: 82.1MB | System: 222/907MB (24.5%, 685MB free)
+[2025-11-19 19:47:37,108] [INFO] [GameManager] 💾 Memory - Process: 82.1MB | System: 222/907MB (24.5%, 685MB free)
+[2025-11-19 19:48:37,124] [INFO] [GameManager] 💾 Memory - Process: 82.1MB | System: 222/907MB (24.5%, 685MB free)
+[2025-11-19 19:49:37,138] [INFO] [GameManager] 💾 Memory - Process: 82.1MB | System: 222/907MB (24.5%, 684MB free)
+[2025-11-19 19:50:37,153] [INFO] [GameManager] 💾 Memory - Process: 82.1MB | System: 222/907MB (24.5%, 684MB free)
+[2025-11-19 19:51:37,166] [INFO] [GameManager] 💾 Memory - Process: 82.1MB | System: 223/907MB (24.5%, 684MB free)
+[2025-11-19 19:52:11,359] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-19 19:52:11,359] [DEBUG] [GameManager] Button sequence: 4
+[2025-11-19 19:52:11,360] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 19:52:11,371] [INFO] [SoundController] Song "M.C. Hammer - U Can_t Touch This.mp3" was randomly started
+[2025-11-19 19:52:11,371] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-19 19:52:11,620] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-19 19:52:11,621] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 19:52:11,840] [DEBUG] [ButtonReader] Button state changed: [(3, 'pressed')]
+[2025-11-19 19:52:11,841] [DEBUG] [GameManager] Button sequence: 43
+[2025-11-19 19:52:11,842] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 19:52:11,852] [INFO] [SoundController] Song "Aqua - Barbie Girl (Official Music Video).mp3" was randomly started
+[2025-11-19 19:52:11,853] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [3]
+[2025-11-19 19:52:12,162] [DEBUG] [ButtonReader] Button state changed: [(3, 'released')]
+[2025-11-19 19:52:12,163] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 19:52:12,222] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-19 19:52:12,223] [DEBUG] [GameManager] Button sequence: 434
+[2025-11-19 19:52:12,224] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 19:52:12,235] [INFO] [SoundController] Song "Soft Cell - Tainted Love (Official Music Video).mp3" was randomly started
+[2025-11-19 19:52:12,236] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-19 19:52:12,463] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-19 19:52:12,466] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 19:52:12,543] [DEBUG] [ButtonReader] Button state changed: [(3, 'pressed')]
+[2025-11-19 19:52:12,544] [DEBUG] [GameManager] Button sequence: 4343
+[2025-11-19 19:52:12,545] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 19:52:12,556] [INFO] [SoundController] Song "Queen - Don't Stop Me Now (Official Video).mp3" was randomly started
+[2025-11-19 19:52:12,557] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [3]
+[2025-11-19 19:52:12,764] [DEBUG] [ButtonReader] Button state changed: [(3, 'released')]
+[2025-11-19 19:52:12,766] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 19:52:12,844] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-19 19:52:12,846] [DEBUG] [GameManager] Button sequence: 43434
+[2025-11-19 19:52:12,846] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 19:52:12,857] [INFO] [SoundController] Song "Baccara - Yes Sir, I Can Boogie (Starparade 02.06.1977).mp3" was randomly started
+[2025-11-19 19:52:12,858] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-19 19:52:13,065] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-19 19:52:13,067] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 19:52:13,166] [DEBUG] [ButtonReader] Button state changed: [(3, 'pressed')]
+[2025-11-19 19:52:13,167] [DEBUG] [GameManager] Button sequence: 434343
+[2025-11-19 19:52:13,168] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 19:52:13,178] [INFO] [SoundController] Song "Sister Sledge - We Are Family.mp3" was randomly started
+[2025-11-19 19:52:13,179] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [3]
+[2025-11-19 19:52:13,387] [DEBUG] [ButtonReader] Button state changed: [(3, 'released')]
+[2025-11-19 19:52:13,388] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 19:52:13,527] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-19 19:52:13,529] [DEBUG] [GameManager] Button sequence: 4
+[2025-11-19 19:52:13,530] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 19:52:13,541] [INFO] [SoundController] Song "Maroon 5 - This Love.mp3" was randomly started
+[2025-11-19 19:52:13,542] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-19 19:52:13,708] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-19 19:52:13,710] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 19:52:13,789] [DEBUG] [ButtonReader] Button state changed: [(3, 'pressed')]
+[2025-11-19 19:52:13,790] [DEBUG] [GameManager] Button sequence: 43
+[2025-11-19 19:52:13,790] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 19:52:13,801] [INFO] [SoundController] Song "ABBA - Voulez-Vous.mp3" was randomly started
+[2025-11-19 19:52:13,803] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [3]
+[2025-11-19 19:52:13,989] [DEBUG] [ButtonReader] Button state changed: [(3, 'released')]
+[2025-11-19 19:52:13,991] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 19:52:14,150] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-19 19:52:14,151] [DEBUG] [GameManager] Button sequence: 434
+[2025-11-19 19:52:14,152] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 19:52:14,163] [INFO] [SoundController] Song "Boney M. - Daddy Cool (Sopot Festival 1979).mp3" was randomly started
+[2025-11-19 19:52:14,163] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-19 19:52:14,291] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-19 19:52:14,292] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 19:52:14,592] [DEBUG] [ButtonReader] Button state changed: [(3, 'pressed')]
+[2025-11-19 19:52:14,594] [DEBUG] [GameManager] Button sequence: 4343
+[2025-11-19 19:52:14,594] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 19:52:14,605] [INFO] [SoundController] Song "Europe - The Final Countdown (Official Video).mp3" was randomly started
+[2025-11-19 19:52:14,606] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [3]
+[2025-11-19 19:52:14,833] [DEBUG] [ButtonReader] Button state changed: [(3, 'released')]
+[2025-11-19 19:52:14,834] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 19:52:15,054] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-19 19:52:15,054] [DEBUG] [GameManager] Button sequence: 43434
+[2025-11-19 19:52:15,055] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 19:52:15,066] [INFO] [SoundController] Song "The Pointer Sisters - I_m So Excited.mp3" was randomly started
+[2025-11-19 19:52:15,066] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [4]
+[2025-11-19 19:52:15,194] [DEBUG] [ButtonReader] Button state changed: [(4, 'released')]
+[2025-11-19 19:52:15,196] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 19:52:15,415] [DEBUG] [ButtonReader] Button state changed: [(3, 'pressed')]
+[2025-11-19 19:52:15,416] [DEBUG] [GameManager] Button sequence: 434343
+[2025-11-19 19:52:15,416] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 19:52:15,427] [INFO] [SoundController] Song "Europe - The Final Countdown (Official Video).mp3" was randomly started
+[2025-11-19 19:52:15,427] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [3]
+[2025-11-19 19:52:37,183] [INFO] [GameManager] 💾 Memory - Process: 82.1MB | System: 222/907MB (24.5%, 684MB free)
+[2025-11-19 19:52:45,377] [DEBUG] [ButtonReader] Button state changed: [(3, 'released')]
+[2025-11-19 19:52:45,378] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 19:52:45,778] [DEBUG] [ButtonReader] Button state changed: [(3, 'pressed')]
+[2025-11-19 19:52:45,779] [DEBUG] [GameManager] Button sequence: 3
+[2025-11-19 19:52:45,779] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 19:52:45,790] [INFO] [SoundController] Song "Gonna Make You Sweat (Everybody Dance Now) (Official HD Video).mp3" was randomly started
+[2025-11-19 19:52:45,790] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [3]
+[2025-11-19 19:52:47,164] [DEBUG] [ButtonReader] Button state changed: [(3, 'released')]
+[2025-11-19 19:52:47,165] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 19:52:47,264] [DEBUG] [ButtonReader] Button state changed: [(3, 'pressed')]
+[2025-11-19 19:52:47,265] [DEBUG] [GameManager] Button sequence: 33
+[2025-11-19 19:52:47,265] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 19:52:47,276] [INFO] [SoundController] Song "Dead Or Alive - You Spin Me Round (Like a Record) (Official Video) (1).mp3" was randomly started
+[2025-11-19 19:52:47,276] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [3]
+[2025-11-19 19:52:49,051] [DEBUG] [ButtonReader] Button state changed: [(3, 'released')]
+[2025-11-19 19:52:49,052] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 19:52:49,312] [DEBUG] [ButtonReader] Button state changed: [(3, 'pressed')]
+[2025-11-19 19:52:49,313] [DEBUG] [GameManager] Button sequence: 3
+[2025-11-19 19:52:49,313] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 19:52:49,324] [INFO] [SoundController] Song "Boney M. - Sunny (Official Audio).mp3" was randomly started
+[2025-11-19 19:52:49,325] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [3]
+[2025-11-19 19:52:49,534] [DEBUG] [ButtonReader] Button state changed: [(3, 'released')]
+[2025-11-19 19:52:49,535] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 19:53:37,203] [INFO] [GameManager] 💾 Memory - Process: 82.1MB | System: 223/907MB (24.6%, 684MB free)
+[2025-11-19 19:54:37,222] [INFO] [GameManager] 💾 Memory - Process: 82.1MB | System: 224/907MB (24.7%, 683MB free)
+[2025-11-19 19:55:37,236] [INFO] [GameManager] 💾 Memory - Process: 82.1MB | System: 224/907MB (24.7%, 683MB free)
+[2025-11-19 19:56:37,250] [INFO] [GameManager] 💾 Memory - Process: 82.1MB | System: 224/907MB (24.7%, 683MB free)
+[2025-11-19 19:57:37,265] [INFO] [GameManager] 💾 Memory - Process: 82.1MB | System: 224/907MB (24.7%, 683MB free)
+[2025-11-19 19:58:37,278] [INFO] [GameManager] 💾 Memory - Process: 82.1MB | System: 223/907MB (24.6%, 684MB free)
+[2025-11-19 19:59:37,280] [INFO] [GameManager] 💾 Memory - Process: 82.1MB | System: 221/907MB (24.4%, 685MB free)
+[2025-11-19 20:00:37,296] [INFO] [GameManager] 💾 Memory - Process: 82.1MB | System: 222/907MB (24.5%, 684MB free)
+[2025-11-19 20:01:37,311] [INFO] [GameManager] 💾 Memory - Process: 82.1MB | System: 223/907MB (24.5%, 684MB free)
+[2025-11-19 20:02:37,327] [INFO] [GameManager] 💾 Memory - Process: 82.1MB | System: 223/907MB (24.5%, 684MB free)
+[2025-11-19 20:03:37,341] [INFO] [GameManager] 💾 Memory - Process: 82.1MB | System: 223/907MB (24.6%, 684MB free)
+[2025-11-19 20:03:50,633] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 15 - Process terminating
+[2025-11-19 20:03:50,634] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-19 20:03:50,647] [INFO] [GameManager] Game stopped
+[2025-11-19 20:03:50,648] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

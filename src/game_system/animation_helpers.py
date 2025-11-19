@@ -29,6 +29,8 @@ class AnimationHelpers:
     PURPLE = Pixel(138, 43, 226)        # Rich purple (blue-violet)
     SOFT_WHITE = Pixel(255, 248, 220)   # Soft warm white (cornsilk)
     
+
+    
     @staticmethod
     def beat8(bpm: int) -> int:
         """

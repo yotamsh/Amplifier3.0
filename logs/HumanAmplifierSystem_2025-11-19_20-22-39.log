@@ -1,0 +1,86 @@
+[2025-11-19 20:22:39,025] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-19 20:22:39,026] [INFO] [Amplifier] Button configuration: 10 buttons on GPIO [6, 5, 22, 17, 4, 23, 24, 25, 16, 20]
+[2025-11-19 20:22:39,027] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-19 20:22:39,027] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-19 20:22:39,028] [INFO] [Amplifier]   Strip 2: 300 LEDs on GPIO 18
+[2025-11-19 20:22:39,028] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-19 20:22:39,029] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-19 20:22:39,029] [INFO] [Amplifier] Audio folder: songs
+[2025-11-19 20:22:39,030] [INFO] [Amplifier] Schedule: 2 daily, 1 special entries
+[2025-11-19 20:22:39,030] [INFO] [ButtonReader] GPIO sampler initialized: 10 pins (no pulls)
+[2025-11-19 20:22:39,031] [INFO] [ButtonReader] Pin mapping: Btn0=GPIO6, Btn1=GPIO5, Btn2=GPIO22, Btn3=GPIO17, Btn4=GPIO4, Btn5=GPIO23, Btn6=GPIO24, Btn7=GPIO25, Btn8=GPIO16, Btn9=GPIO20
+[2025-11-19 20:22:39,031] [INFO] [ButtonReader] 🎮 Keyboard debug enabled: Press digit keys 0-9 to toggle buttons (works over SSH)
+[2025-11-19 20:22:39,032] [INFO] [ButtonReader]    Each keypress toggles button ON/OFF
+[2025-11-19 20:22:39,032] [INFO] [ButtonReader] ButtonReader initialized with 10 buttons
+[2025-11-19 20:22:39,033] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-19 20:22:41,143] [INFO] [SongLibrary] Loaded 549 song codes from 10 collections
+[2025-11-19 20:22:41,144] [INFO] [SongLibrary] Collections updated: ['MAIJAM']
+[2025-11-19 20:22:43,021] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-19 20:22:43,022] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-19 20:22:43,022] [INFO] [Amplifier] Hardware: 10 buttons, 2 LED strips, 20ms frame duration
+[2025-11-19 20:22:43,023] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['FESTIGAL', 'SPANISH', 'MAIJAM', 'GENERAL', 'MORNING', 'PARTY', 'CLASSIC', 'TV', 'VIRAL', 'DISNEY'], 'total_codes': 549, 'daily_schedule_entries': 2, 'special_schedule_entries': 1}
+[2025-11-19 20:22:43,023] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-19 20:22:43,023] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-19 20:22:43,024] [INFO] [Amplifier] Hardware status: 10 buttons, 2 LED strips
+[2025-11-19 20:22:43,024] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-19 20:22:43,024] [INFO] [Amplifier]   Strip 2: 300 LEDs active
+[2025-11-19 20:22:43,025] [INFO] [Amplifier] Audio system: 549 song codes, 12 sound effects
+[2025-11-19 20:22:43,025] [INFO] [Amplifier] Available collections: FESTIGAL, SPANISH, MAIJAM, GENERAL, MORNING, PARTY, CLASSIC, TV, VIRAL, DISNEY
+[2025-11-19 20:22:43,026] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-19 20:22:43,026] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-19 20:22:43,027] [INFO] [GameManager] 💾 Memory - Process: 81.8MB | System: 257/907MB (28.3%, 650MB free)
+[2025-11-19 20:22:49,577] [INFO] [ButtonReader] Keyboard: Button 1 toggled ON (key '1')
+[2025-11-19 20:22:49,578] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 20:22:49,589] [INFO] [SoundController] Song "September - Cry For You.mp3" was randomly started
+[2025-11-19 20:22:50,844] [INFO] [ButtonReader] Keyboard: Button 2 toggled ON (key '2')
+[2025-11-19 20:22:51,286] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-19 20:22:51,730] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-19 20:22:52,112] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-19 20:22:52,514] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-19 20:22:52,880] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-19 20:22:53,655] [INFO] [ButtonReader] Keyboard: Button 1 toggled OFF (key '1')
+[2025-11-19 20:22:53,944] [INFO] [ButtonReader] Keyboard: Button 2 toggled OFF (key '2')
+[2025-11-19 20:22:54,294] [INFO] [ButtonReader] Keyboard: Button 3 toggled OFF (key '3')
+[2025-11-19 20:22:54,659] [INFO] [ButtonReader] Keyboard: Button 4 toggled OFF (key '4')
+[2025-11-19 20:22:55,068] [INFO] [ButtonReader] Keyboard: Button 5 toggled OFF (key '5')
+[2025-11-19 20:22:56,465] [INFO] [ButtonReader] Keyboard: Button 1 toggled ON (key '1')
+[2025-11-19 20:22:56,866] [INFO] [ButtonReader] Keyboard: Button 2 toggled ON (key '2')
+[2025-11-19 20:22:57,228] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-19 20:22:57,771] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-19 20:22:58,545] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-19 20:22:59,320] [INFO] [ButtonReader] Keyboard: Button 6 toggled OFF (key '6')
+[2025-11-19 20:23:00,156] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-19 20:23:00,672] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-19 20:23:07,085] [INFO] [ButtonReader] Keyboard: Button 8 toggled ON (key '8')
+[2025-11-19 20:23:10,122] [INFO] [ButtonReader] Keyboard: Button 9 toggled ON (key '9')
+[2025-11-19 20:23:11,320] [INFO] [ButtonReader] Keyboard: Button 0 toggled ON (key '0')
+[2025-11-19 20:23:16,257] [INFO] [ButtonReader] Keyboard: Button 1 toggled OFF (key '1')
+[2025-11-19 20:23:17,186] [INFO] [ButtonReader] Keyboard: Button 1 toggled ON (key '1')
+[2025-11-19 20:23:19,953] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-19 20:23:19,955] [INFO] [GameManager] State transition: AmplifyState → PartyState
+[2025-11-19 20:23:19,966] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED!
+[2025-11-19 20:23:43,040] [INFO] [GameManager] 💾 Memory - Process: 82.4MB | System: 235/907MB (25.9%, 672MB free)
+[2025-11-19 20:24:15,175] [INFO] [ButtonReader] Keyboard: Button 0 toggled OFF (key '0')
+[2025-11-19 20:24:15,897] [INFO] [ButtonReader] Keyboard: Button 0 toggled ON (key '0')
+[2025-11-19 20:24:18,996] [INFO] [ButtonReader] Keyboard: Button 0 toggled OFF (key '0')
+[2025-11-19 20:24:23,595] [INFO] [ButtonReader] Keyboard: Button 0 toggled ON (key '0')
+[2025-11-19 20:24:24,057] [INFO] [ButtonReader] Keyboard: Button 0 toggled OFF (key '0')
+[2025-11-19 20:24:24,923] [INFO] [ButtonReader] Keyboard: Button 0 toggled ON (key '0')
+[2025-11-19 20:24:34,930] [INFO] [ButtonReader] Keyboard: Button 0 toggled OFF (key '0')
+[2025-11-19 20:24:36,878] [INFO] [ButtonReader] Keyboard: Button 0 toggled ON (key '0')
+[2025-11-19 20:24:37,440] [INFO] [ButtonReader] Keyboard: Button 0 toggled OFF (key '0')
+[2025-11-19 20:24:43,046] [INFO] [GameManager] 💾 Memory - Process: 82.6MB | System: 236/907MB (26.1%, 670MB free)
+[2025-11-19 20:25:21,042] [INFO] [ButtonReader] Keyboard: Button 4 toggled OFF (key '4')
+[2025-11-19 20:25:21,645] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-19 20:25:23,011] [INFO] [ButtonReader] Keyboard: Button 5 toggled OFF (key '5')
+[2025-11-19 20:25:23,413] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-19 20:25:30,648] [INFO] [PartyState] Reduction complete!
+[2025-11-19 20:25:30,649] [INFO] [GameManager] State transition: PartyState → IdleState
+[2025-11-19 20:25:43,062] [INFO] [GameManager] 💾 Memory - Process: 82.6MB | System: 237/907MB (26.1%, 670MB free)
+[2025-11-19 20:26:43,064] [INFO] [GameManager] 💾 Memory - Process: 82.6MB | System: 237/907MB (26.2%, 669MB free)
+[2025-11-19 20:27:43,081] [INFO] [GameManager] 💾 Memory - Process: 82.6MB | System: 240/907MB (26.5%, 667MB free)
+[2025-11-19 20:28:43,095] [INFO] [GameManager] 💾 Memory - Process: 82.6MB | System: 237/907MB (26.2%, 669MB free)
+[2025-11-19 20:29:43,102] [INFO] [GameManager] 💾 Memory - Process: 82.6MB | System: 236/907MB (26.1%, 670MB free)
+[2025-11-19 20:30:43,105] [INFO] [GameManager] 💾 Memory - Process: 82.6MB | System: 239/907MB (26.3%, 668MB free)
+[2025-11-19 20:31:43,107] [INFO] [GameManager] 💾 Memory - Process: 82.6MB | System: 240/907MB (26.4%, 667MB free)
+[2025-11-19 20:32:43,117] [INFO] [GameManager] 💾 Memory - Process: 82.6MB | System: 240/907MB (26.4%, 667MB free)

@@ -29,3 +29,7 @@
 [2025-11-18 23:41:02,057] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
 [2025-11-18 23:41:02,057] [INFO] [GameManager] Starting game loop with 20ms frame duration
 [2025-11-18 23:41:02,058] [INFO] [GameManager] 💾 Memory - Process: 81.6MB | System: 265/907MB (29.2%, 642MB free)
+[2025-11-18 23:41:42,981] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 15 - Process terminating
+[2025-11-18 23:41:42,981] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-18 23:41:43,007] [INFO] [GameManager] Game stopped
+[2025-11-18 23:41:43,008] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

@@ -1,0 +1,387 @@
+[2025-11-19 20:04:05,868] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-19 20:04:05,869] [INFO] [Amplifier] Button configuration: 10 buttons on GPIO [6, 5, 22, 17, 4, 23, 24, 25, 16, 20]
+[2025-11-19 20:04:05,870] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-19 20:04:05,870] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-19 20:04:05,870] [INFO] [Amplifier]   Strip 2: 300 LEDs on GPIO 18
+[2025-11-19 20:04:05,870] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-19 20:04:05,871] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-19 20:04:05,871] [INFO] [Amplifier] Audio folder: songs
+[2025-11-19 20:04:05,871] [INFO] [Amplifier] Schedule: 2 daily, 1 special entries
+[2025-11-19 20:04:05,872] [INFO] [ButtonReader] GPIO sampler initialized: 10 pins (no pulls)
+[2025-11-19 20:04:05,872] [INFO] [ButtonReader] Pin mapping: Btn0=GPIO6, Btn1=GPIO5, Btn2=GPIO22, Btn3=GPIO17, Btn4=GPIO4, Btn5=GPIO23, Btn6=GPIO24, Btn7=GPIO25, Btn8=GPIO16, Btn9=GPIO20
+[2025-11-19 20:04:05,872] [INFO] [ButtonReader] 🎮 Keyboard debug enabled: Press digit keys 0-9 to toggle buttons (works over SSH)
+[2025-11-19 20:04:05,872] [INFO] [ButtonReader]    Each keypress toggles button ON/OFF
+[2025-11-19 20:04:05,873] [INFO] [ButtonReader] ButtonReader initialized with 10 buttons
+[2025-11-19 20:04:05,874] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-19 20:04:07,874] [INFO] [SongLibrary] Loaded 549 song codes from 10 collections
+[2025-11-19 20:04:07,875] [INFO] [SongLibrary] Collections updated: ['MAIJAM']
+[2025-11-19 20:04:09,720] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-19 20:04:09,721] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-19 20:04:09,721] [INFO] [Amplifier] Hardware: 10 buttons, 2 LED strips, 20ms frame duration
+[2025-11-19 20:04:09,722] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['TV', 'VIRAL', 'GENERAL', 'DISNEY', 'MORNING', 'FESTIGAL', 'CLASSIC', 'SPANISH', 'PARTY', 'MAIJAM'], 'total_codes': 549, 'daily_schedule_entries': 2, 'special_schedule_entries': 1}
+[2025-11-19 20:04:09,722] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-19 20:04:09,722] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-19 20:04:09,723] [INFO] [Amplifier] Hardware status: 10 buttons, 2 LED strips
+[2025-11-19 20:04:09,723] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-19 20:04:09,723] [INFO] [Amplifier]   Strip 2: 300 LEDs active
+[2025-11-19 20:04:09,724] [INFO] [Amplifier] Audio system: 549 song codes, 12 sound effects
+[2025-11-19 20:04:09,724] [INFO] [Amplifier] Available collections: TV, VIRAL, GENERAL, DISNEY, MORNING, FESTIGAL, CLASSIC, SPANISH, PARTY, MAIJAM
+[2025-11-19 20:04:09,725] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-19 20:04:09,725] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-19 20:04:09,726] [INFO] [GameManager] 💾 Memory - Process: 81.7MB | System: 245/907MB (27.0%, 662MB free)
+[2025-11-19 20:04:15,409] [INFO] [ButtonReader] Keyboard: Button 1 toggled ON (key '1')
+[2025-11-19 20:04:15,410] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-19 20:04:15,411] [DEBUG] [GameManager] Button sequence: 1
+[2025-11-19 20:04:15,411] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 20:04:15,425] [INFO] [SoundController] Song "Backstreet Boys - Tell Me Why (Official Lyrics Video).mp3" was randomly started
+[2025-11-19 20:04:15,426] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [1]
+[2025-11-19 20:04:16,253] [INFO] [ButtonReader] Keyboard: Button 1 toggled OFF (key '1')
+[2025-11-19 20:04:16,255] [DEBUG] [ButtonReader] Button state changed: [(1, 'released')]
+[2025-11-19 20:04:16,256] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 20:04:17,761] [INFO] [ButtonReader] Keyboard: Button 1 toggled ON (key '1')
+[2025-11-19 20:04:17,763] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-19 20:04:17,763] [DEBUG] [GameManager] Button sequence: 1
+[2025-11-19 20:04:17,764] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 20:04:17,776] [INFO] [SoundController] Song "Mark Ronson - Uptown Funk (Official Video) ft. Bruno Mars.mp3" was randomly started
+[2025-11-19 20:04:17,777] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [1]
+[2025-11-19 20:04:21,939] [INFO] [ButtonReader] Keyboard: Button 1 toggled OFF (key '1')
+[2025-11-19 20:04:21,940] [DEBUG] [ButtonReader] Button state changed: [(1, 'released')]
+[2025-11-19 20:04:21,940] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 20:05:09,731] [INFO] [GameManager] 💾 Memory - Process: 82.4MB | System: 228/907MB (25.2%, 679MB free)
+[2025-11-19 20:06:09,743] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 234/907MB (25.8%, 673MB free)
+[2025-11-19 20:06:48,628] [INFO] [ButtonReader] Keyboard: Button 1 toggled ON (key '1')
+[2025-11-19 20:06:48,629] [DEBUG] [ButtonReader] Button state changed: [(1, 'pressed')]
+[2025-11-19 20:06:48,630] [DEBUG] [GameManager] Button sequence: 1
+[2025-11-19 20:06:48,630] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 20:06:48,641] [INFO] [SoundController] Song "Backstreet Boys - Tell Me Why (Official Lyrics Video).mp3" was randomly started
+[2025-11-19 20:06:48,642] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [1]
+[2025-11-19 20:06:50,797] [INFO] [ButtonReader] Keyboard: Button 2 toggled ON (key '2')
+[2025-11-19 20:06:50,798] [DEBUG] [ButtonReader] Button state changed: [(2, 'pressed')]
+[2025-11-19 20:06:50,798] [DEBUG] [GameManager] Button sequence: 12
+[2025-11-19 20:06:50,798] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [1, 2]
+[2025-11-19 20:06:51,179] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-19 20:06:51,180] [DEBUG] [ButtonReader] Button state changed: [(3, 'pressed')]
+[2025-11-19 20:06:51,180] [DEBUG] [GameManager] Button sequence: 123
+[2025-11-19 20:06:51,181] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [1, 2, 3]
+[2025-11-19 20:06:51,663] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-19 20:06:51,664] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-19 20:06:51,664] [DEBUG] [GameManager] Button sequence: 1234
+[2025-11-19 20:06:51,665] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [1, 2, 3, 4]
+[2025-11-19 20:06:52,044] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-19 20:06:52,045] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-19 20:06:52,046] [DEBUG] [GameManager] Button sequence: 12345
+[2025-11-19 20:06:52,046] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [1, 2, 3, 4, 5]
+[2025-11-19 20:06:52,467] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-19 20:06:52,468] [DEBUG] [ButtonReader] Button state changed: [(6, 'pressed')]
+[2025-11-19 20:06:52,469] [DEBUG] [GameManager] Button sequence: 123456
+[2025-11-19 20:06:52,469] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [1, 2, 3, 4, 5, 6]
+[2025-11-19 20:06:52,860] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-19 20:06:52,861] [DEBUG] [ButtonReader] Button state changed: [(7, 'pressed')]
+[2025-11-19 20:06:52,861] [DEBUG] [GameManager] Button sequence: 1234567
+[2025-11-19 20:06:52,862] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [1, 2, 3, 4, 5, 6, 7]
+[2025-11-19 20:06:53,251] [INFO] [ButtonReader] Keyboard: Button 8 toggled ON (key '8')
+[2025-11-19 20:06:53,252] [DEBUG] [ButtonReader] Button state changed: [(8, 'pressed')]
+[2025-11-19 20:06:53,252] [DEBUG] [GameManager] Button sequence: 12345678
+[2025-11-19 20:06:53,252] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [1, 2, 3, 4, 5, 6, 7, 8]
+[2025-11-19 20:06:55,659] [INFO] [ButtonReader] Keyboard: Button 9 toggled ON (key '9')
+[2025-11-19 20:06:55,660] [DEBUG] [ButtonReader] Button state changed: [(9, 'pressed')]
+[2025-11-19 20:06:55,661] [DEBUG] [GameManager] Button sequence: 123456789
+[2025-11-19 20:06:55,661] [DEBUG] [AmplifyState] AmplifyState button change - currently pressed: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+[2025-11-19 20:07:01,605] [INFO] [ButtonReader] Keyboard: Button 0 toggled ON (key '0')
+[2025-11-19 20:07:01,646] [DEBUG] [ButtonReader] Button state changed: [(0, 'pressed')]
+[2025-11-19 20:07:01,647] [DEBUG] [GameManager] Button sequence: 1234567890
+[2025-11-19 20:07:01,649] [DEBUG] [ButtonReader] Button 0 will be ignored until released
+[2025-11-19 20:07:01,650] [DEBUG] [ButtonReader] Button 1 will be ignored until released
+[2025-11-19 20:07:01,651] [DEBUG] [ButtonReader] Button 2 will be ignored until released
+[2025-11-19 20:07:01,652] [DEBUG] [ButtonReader] Button 3 will be ignored until released
+[2025-11-19 20:07:01,652] [DEBUG] [ButtonReader] Button 4 will be ignored until released
+[2025-11-19 20:07:01,653] [DEBUG] [ButtonReader] Button 5 will be ignored until released
+[2025-11-19 20:07:01,654] [DEBUG] [ButtonReader] Button 6 will be ignored until released
+[2025-11-19 20:07:01,655] [DEBUG] [ButtonReader] Button 7 will be ignored until released
+[2025-11-19 20:07:01,657] [DEBUG] [ButtonReader] Button 8 will be ignored until released
+[2025-11-19 20:07:01,658] [DEBUG] [ButtonReader] Button 9 will be ignored until released
+[2025-11-19 20:07:01,659] [INFO] [GameManager] State transition: AmplifyState → PartyState
+[2025-11-19 20:07:01,660] [DEBUG] [ButtonReader] Button 0 will be ignored until released
+[2025-11-19 20:07:01,661] [DEBUG] [ButtonReader] Button 1 will be ignored until released
+[2025-11-19 20:07:01,662] [DEBUG] [ButtonReader] Button 2 will be ignored until released
+[2025-11-19 20:07:01,663] [DEBUG] [ButtonReader] Button 3 will be ignored until released
+[2025-11-19 20:07:01,664] [DEBUG] [ButtonReader] Button 4 will be ignored until released
+[2025-11-19 20:07:01,666] [DEBUG] [ButtonReader] Button 5 will be ignored until released
+[2025-11-19 20:07:01,667] [DEBUG] [ButtonReader] Button 6 will be ignored until released
+[2025-11-19 20:07:01,668] [DEBUG] [ButtonReader] Button 7 will be ignored until released
+[2025-11-19 20:07:01,670] [DEBUG] [ButtonReader] Button 8 will be ignored until released
+[2025-11-19 20:07:01,671] [DEBUG] [ButtonReader] Button 9 will be ignored until released
+[2025-11-19 20:07:01,683] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED!
+[2025-11-19 20:07:09,760] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 236/907MB (26.0%, 671MB free)
+[2025-11-19 20:07:16,690] [DEBUG] [PartyState] Reduction feature enabled!
+[2025-11-19 20:07:22,558] [INFO] [ButtonReader] Keyboard: Button 4 toggled OFF (key '4')
+[2025-11-19 20:07:22,559] [DEBUG] [ButtonReader] Button 4 released, no longer ignored
+[2025-11-19 20:07:23,241] [INFO] [ButtonReader] Keyboard: Button 5 toggled OFF (key '5')
+[2025-11-19 20:07:23,242] [DEBUG] [ButtonReader] Button 5 released, no longer ignored
+[2025-11-19 20:07:26,514] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-19 20:07:26,515] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-19 20:07:26,515] [DEBUG] [GameManager] Button sequence: 2345678904
+[2025-11-19 20:07:26,876] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-19 20:07:26,876] [DEBUG] [ButtonReader] Button state changed: [(5, 'pressed')]
+[2025-11-19 20:07:26,877] [DEBUG] [GameManager] Button sequence: 3456789045
+[2025-11-19 20:07:34,110] [INFO] [PartyState] Reduction complete!
+[2025-11-19 20:07:34,110] [DEBUG] [ButtonReader] Button 0 will be ignored until released
+[2025-11-19 20:07:34,111] [DEBUG] [ButtonReader] Button 1 will be ignored until released
+[2025-11-19 20:07:34,111] [DEBUG] [ButtonReader] Button 2 will be ignored until released
+[2025-11-19 20:07:34,111] [DEBUG] [ButtonReader] Button 3 will be ignored until released
+[2025-11-19 20:07:34,111] [DEBUG] [ButtonReader] Button 4 will be ignored until released
+[2025-11-19 20:07:34,112] [DEBUG] [ButtonReader] Button 5 will be ignored until released
+[2025-11-19 20:07:34,112] [DEBUG] [ButtonReader] Button 6 will be ignored until released
+[2025-11-19 20:07:34,112] [DEBUG] [ButtonReader] Button 7 will be ignored until released
+[2025-11-19 20:07:34,112] [DEBUG] [ButtonReader] Button 8 will be ignored until released
+[2025-11-19 20:07:34,113] [DEBUG] [ButtonReader] Button 9 will be ignored until released
+[2025-11-19 20:07:34,113] [INFO] [GameManager] State transition: PartyState → IdleState
+[2025-11-19 20:08:09,776] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 235/907MB (25.9%, 672MB free)
+[2025-11-19 20:09:09,779] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 235/907MB (25.9%, 671MB free)
+[2025-11-19 20:10:09,792] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 233/907MB (25.7%, 673MB free)
+[2025-11-19 20:11:09,800] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 232/907MB (25.6%, 675MB free)
+[2025-11-19 20:12:09,820] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 234/907MB (25.8%, 672MB free)
+[2025-11-19 20:13:09,824] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 237/907MB (26.1%, 670MB free)
+[2025-11-19 20:14:09,843] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 236/907MB (26.0%, 671MB free)
+[2025-11-19 20:15:09,846] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 235/907MB (25.9%, 672MB free)
+[2025-11-19 20:16:09,864] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 235/907MB (25.9%, 672MB free)
+[2025-11-19 20:17:09,870] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 233/907MB (25.7%, 674MB free)
+[2025-11-19 20:17:11,035] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-19 20:17:11,035] [DEBUG] [ButtonReader] Button 7 released, no longer ignored
+[2025-11-19 20:17:11,275] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-19 20:17:11,276] [DEBUG] [ButtonReader] Button state changed: [(7, 'pressed')]
+[2025-11-19 20:17:11,277] [DEBUG] [GameManager] Button sequence: 7
+[2025-11-19 20:17:11,278] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 20:17:11,288] [INFO] [SoundController] Song "Backstreet Boys - Tell Me Why (Official Lyrics Video).mp3" was randomly started
+[2025-11-19 20:17:11,289] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [7]
+[2025-11-19 20:17:11,516] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-19 20:17:11,517] [DEBUG] [ButtonReader] Button state changed: [(7, 'released')]
+[2025-11-19 20:17:11,518] [DEBUG] [ButtonReader] Button 0 will be ignored until released
+[2025-11-19 20:17:11,519] [DEBUG] [ButtonReader] Button 1 will be ignored until released
+[2025-11-19 20:17:11,519] [DEBUG] [ButtonReader] Button 2 will be ignored until released
+[2025-11-19 20:17:11,520] [DEBUG] [ButtonReader] Button 3 will be ignored until released
+[2025-11-19 20:17:11,520] [DEBUG] [ButtonReader] Button 4 will be ignored until released
+[2025-11-19 20:17:11,521] [DEBUG] [ButtonReader] Button 5 will be ignored until released
+[2025-11-19 20:17:11,521] [DEBUG] [ButtonReader] Button 6 will be ignored until released
+[2025-11-19 20:17:11,522] [DEBUG] [ButtonReader] Button 8 will be ignored until released
+[2025-11-19 20:17:11,522] [DEBUG] [ButtonReader] Button 9 will be ignored until released
+[2025-11-19 20:17:11,523] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 20:17:11,717] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-19 20:17:11,718] [DEBUG] [ButtonReader] Button state changed: [(7, 'pressed')]
+[2025-11-19 20:17:11,718] [DEBUG] [GameManager] Button sequence: 77
+[2025-11-19 20:17:11,719] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 20:17:11,730] [INFO] [SoundController] Song "Baccara - Yes Sir, I Can Boogie (Starparade 02.06.1977).mp3" was randomly started
+[2025-11-19 20:17:11,731] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [7]
+[2025-11-19 20:17:11,898] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-19 20:17:11,899] [DEBUG] [ButtonReader] Button state changed: [(7, 'released')]
+[2025-11-19 20:17:11,900] [DEBUG] [ButtonReader] Button 0 will be ignored until released
+[2025-11-19 20:17:11,900] [DEBUG] [ButtonReader] Button 1 will be ignored until released
+[2025-11-19 20:17:11,901] [DEBUG] [ButtonReader] Button 2 will be ignored until released
+[2025-11-19 20:17:11,901] [DEBUG] [ButtonReader] Button 3 will be ignored until released
+[2025-11-19 20:17:11,902] [DEBUG] [ButtonReader] Button 4 will be ignored until released
+[2025-11-19 20:17:11,902] [DEBUG] [ButtonReader] Button 5 will be ignored until released
+[2025-11-19 20:17:11,903] [DEBUG] [ButtonReader] Button 6 will be ignored until released
+[2025-11-19 20:17:11,903] [DEBUG] [ButtonReader] Button 8 will be ignored until released
+[2025-11-19 20:17:11,903] [DEBUG] [ButtonReader] Button 9 will be ignored until released
+[2025-11-19 20:17:11,904] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 20:17:12,078] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-19 20:17:12,079] [DEBUG] [ButtonReader] Button state changed: [(7, 'pressed')]
+[2025-11-19 20:17:12,080] [DEBUG] [GameManager] Button sequence: 777
+[2025-11-19 20:17:12,080] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-19 20:17:12,081] [INFO] [GameManager] State transition: IdleState → CodeModeState
+[2025-11-19 20:17:12,081] [DEBUG] [ButtonReader] Button 0 will be ignored until released
+[2025-11-19 20:17:12,082] [DEBUG] [ButtonReader] Button 1 will be ignored until released
+[2025-11-19 20:17:12,082] [DEBUG] [ButtonReader] Button 2 will be ignored until released
+[2025-11-19 20:17:12,083] [DEBUG] [ButtonReader] Button 3 will be ignored until released
+[2025-11-19 20:17:12,083] [DEBUG] [ButtonReader] Button 4 will be ignored until released
+[2025-11-19 20:17:12,084] [DEBUG] [ButtonReader] Button 5 will be ignored until released
+[2025-11-19 20:17:12,084] [DEBUG] [ButtonReader] Button 6 will be ignored until released
+[2025-11-19 20:17:12,085] [DEBUG] [ButtonReader] Button 7 will be ignored until released
+[2025-11-19 20:17:12,086] [DEBUG] [ButtonReader] Button 8 will be ignored until released
+[2025-11-19 20:17:12,086] [DEBUG] [ButtonReader] Button 9 will be ignored until released
+[2025-11-19 20:17:12,099] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-19 20:17:12,261] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-19 20:17:12,262] [DEBUG] [ButtonReader] Button 7 released, no longer ignored
+[2025-11-19 20:17:12,442] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-19 20:17:12,442] [DEBUG] [ButtonReader] Button state changed: [(7, 'pressed')]
+[2025-11-19 20:17:12,443] [DEBUG] [GameManager] Button sequence: 7
+[2025-11-19 20:17:16,583] [INFO] [ButtonReader] Keyboard: Button 6 toggled OFF (key '6')
+[2025-11-19 20:17:16,584] [DEBUG] [ButtonReader] Button 6 released, no longer ignored
+[2025-11-19 20:17:18,751] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-19 20:17:18,752] [DEBUG] [ButtonReader] Button state changed: [(6, 'pressed')]
+[2025-11-19 20:17:18,752] [DEBUG] [GameManager] Button sequence: 76
+[2025-11-19 20:17:20,758] [INFO] [ButtonReader] Keyboard: Button 3 toggled OFF (key '3')
+[2025-11-19 20:17:20,759] [DEBUG] [ButtonReader] Button 3 released, no longer ignored
+[2025-11-19 20:17:21,726] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-19 20:17:21,727] [DEBUG] [ButtonReader] Button state changed: [(3, 'pressed')]
+[2025-11-19 20:17:21,731] [DEBUG] [GameManager] Button sequence: 763
+[2025-11-19 20:17:22,491] [INFO] [ButtonReader] Keyboard: Button 8 toggled OFF (key '8')
+[2025-11-19 20:17:22,492] [DEBUG] [ButtonReader] Button 8 released, no longer ignored
+[2025-11-19 20:17:23,153] [INFO] [ButtonReader] Keyboard: Button 8 toggled ON (key '8')
+[2025-11-19 20:17:23,155] [DEBUG] [ButtonReader] Button state changed: [(8, 'pressed')]
+[2025-11-19 20:17:23,156] [DEBUG] [GameManager] Button sequence: 7638
+[2025-11-19 20:17:25,964] [INFO] [ButtonReader] Keyboard: Button 0 toggled OFF (key '0')
+[2025-11-19 20:17:25,984] [DEBUG] [ButtonReader] Button 0 released, no longer ignored
+[2025-11-19 20:17:26,928] [INFO] [ButtonReader] Keyboard: Button 0 toggled ON (key '0')
+[2025-11-19 20:17:26,948] [DEBUG] [ButtonReader] Button state changed: [(0, 'pressed')]
+[2025-11-19 20:17:26,949] [DEBUG] [GameManager] Button sequence: 76380
+[2025-11-19 20:17:26,950] [INFO] [CodeModeState] Code entered: 76380
+[2025-11-19 20:17:26,950] [INFO] [CodeModeState] Code mode failed: Invalid code: 76380
+[2025-11-19 20:17:26,951] [DEBUG] [ButtonReader] Button 0 will be ignored until released
+[2025-11-19 20:17:26,952] [DEBUG] [ButtonReader] Button 1 will be ignored until released
+[2025-11-19 20:17:26,952] [DEBUG] [ButtonReader] Button 2 will be ignored until released
+[2025-11-19 20:17:26,953] [DEBUG] [ButtonReader] Button 3 will be ignored until released
+[2025-11-19 20:17:26,953] [DEBUG] [ButtonReader] Button 4 will be ignored until released
+[2025-11-19 20:17:26,953] [DEBUG] [ButtonReader] Button 5 will be ignored until released
+[2025-11-19 20:17:26,954] [DEBUG] [ButtonReader] Button 6 will be ignored until released
+[2025-11-19 20:17:26,954] [DEBUG] [ButtonReader] Button 7 will be ignored until released
+[2025-11-19 20:17:26,955] [DEBUG] [ButtonReader] Button 8 will be ignored until released
+[2025-11-19 20:17:26,956] [DEBUG] [ButtonReader] Button 9 will be ignored until released
+[2025-11-19 20:17:26,956] [INFO] [GameManager] State transition: CodeModeState → IdleState
+[2025-11-19 20:17:49,298] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-19 20:17:49,299] [DEBUG] [ButtonReader] Button 7 released, no longer ignored
+[2025-11-19 20:17:49,699] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-19 20:17:49,700] [DEBUG] [ButtonReader] Button state changed: [(7, 'pressed')]
+[2025-11-19 20:17:49,701] [DEBUG] [GameManager] Button sequence: 7
+[2025-11-19 20:17:49,702] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 20:17:49,712] [INFO] [SoundController] Song "Michael Jackson - Thriller (Official 4K Video).mp3" was randomly started
+[2025-11-19 20:17:49,713] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [7]
+[2025-11-19 20:17:50,101] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-19 20:17:50,102] [DEBUG] [ButtonReader] Button state changed: [(7, 'released')]
+[2025-11-19 20:17:50,103] [DEBUG] [ButtonReader] Button 0 will be ignored until released
+[2025-11-19 20:17:50,103] [DEBUG] [ButtonReader] Button 1 will be ignored until released
+[2025-11-19 20:17:50,104] [DEBUG] [ButtonReader] Button 2 will be ignored until released
+[2025-11-19 20:17:50,104] [DEBUG] [ButtonReader] Button 3 will be ignored until released
+[2025-11-19 20:17:50,105] [DEBUG] [ButtonReader] Button 4 will be ignored until released
+[2025-11-19 20:17:50,105] [DEBUG] [ButtonReader] Button 5 will be ignored until released
+[2025-11-19 20:17:50,106] [DEBUG] [ButtonReader] Button 6 will be ignored until released
+[2025-11-19 20:17:50,106] [DEBUG] [ButtonReader] Button 8 will be ignored until released
+[2025-11-19 20:17:50,107] [DEBUG] [ButtonReader] Button 9 will be ignored until released
+[2025-11-19 20:17:50,107] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 20:17:50,482] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-19 20:17:50,483] [DEBUG] [ButtonReader] Button state changed: [(7, 'pressed')]
+[2025-11-19 20:17:50,484] [DEBUG] [GameManager] Button sequence: 77
+[2025-11-19 20:17:50,484] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 20:17:50,495] [INFO] [SoundController] Song "Wham! - Wake Me Up Before You Go-Go (Official Video).mp3" was randomly started
+[2025-11-19 20:17:50,496] [DEBUG] [AmplifyState] AmplifyState activated with buttons: [7]
+[2025-11-19 20:17:50,884] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-19 20:17:50,885] [DEBUG] [ButtonReader] Button state changed: [(7, 'released')]
+[2025-11-19 20:17:50,886] [DEBUG] [ButtonReader] Button 0 will be ignored until released
+[2025-11-19 20:17:50,887] [DEBUG] [ButtonReader] Button 1 will be ignored until released
+[2025-11-19 20:17:50,887] [DEBUG] [ButtonReader] Button 2 will be ignored until released
+[2025-11-19 20:17:50,888] [DEBUG] [ButtonReader] Button 3 will be ignored until released
+[2025-11-19 20:17:50,888] [DEBUG] [ButtonReader] Button 4 will be ignored until released
+[2025-11-19 20:17:50,889] [DEBUG] [ButtonReader] Button 5 will be ignored until released
+[2025-11-19 20:17:50,889] [DEBUG] [ButtonReader] Button 6 will be ignored until released
+[2025-11-19 20:17:50,889] [DEBUG] [ButtonReader] Button 8 will be ignored until released
+[2025-11-19 20:17:50,890] [DEBUG] [ButtonReader] Button 9 will be ignored until released
+[2025-11-19 20:17:50,891] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 20:17:51,306] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-19 20:17:51,307] [DEBUG] [ButtonReader] Button state changed: [(7, 'pressed')]
+[2025-11-19 20:17:51,307] [DEBUG] [GameManager] Button sequence: 777
+[2025-11-19 20:17:51,308] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-19 20:17:51,308] [INFO] [GameManager] State transition: IdleState → CodeModeState
+[2025-11-19 20:17:51,309] [DEBUG] [ButtonReader] Button 0 will be ignored until released
+[2025-11-19 20:17:51,309] [DEBUG] [ButtonReader] Button 1 will be ignored until released
+[2025-11-19 20:17:51,310] [DEBUG] [ButtonReader] Button 2 will be ignored until released
+[2025-11-19 20:17:51,310] [DEBUG] [ButtonReader] Button 3 will be ignored until released
+[2025-11-19 20:17:51,311] [DEBUG] [ButtonReader] Button 4 will be ignored until released
+[2025-11-19 20:17:51,311] [DEBUG] [ButtonReader] Button 5 will be ignored until released
+[2025-11-19 20:17:51,312] [DEBUG] [ButtonReader] Button 6 will be ignored until released
+[2025-11-19 20:17:51,312] [DEBUG] [ButtonReader] Button 7 will be ignored until released
+[2025-11-19 20:17:51,312] [DEBUG] [ButtonReader] Button 8 will be ignored until released
+[2025-11-19 20:17:51,313] [DEBUG] [ButtonReader] Button 9 will be ignored until released
+[2025-11-19 20:17:51,324] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-19 20:17:56,169] [INFO] [ButtonReader] Keyboard: Button 6 toggled OFF (key '6')
+[2025-11-19 20:17:56,170] [DEBUG] [ButtonReader] Button 6 released, no longer ignored
+[2025-11-19 20:17:59,485] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-19 20:17:59,486] [DEBUG] [ButtonReader] Button state changed: [(6, 'pressed')]
+[2025-11-19 20:17:59,486] [DEBUG] [GameManager] Button sequence: 6
+[2025-11-19 20:18:00,529] [INFO] [ButtonReader] Keyboard: Button 3 toggled OFF (key '3')
+[2025-11-19 20:18:00,529] [DEBUG] [ButtonReader] Button 3 released, no longer ignored
+[2025-11-19 20:18:01,251] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-19 20:18:01,252] [DEBUG] [ButtonReader] Button state changed: [(3, 'pressed')]
+[2025-11-19 20:18:01,253] [DEBUG] [GameManager] Button sequence: 63
+[2025-11-19 20:18:03,989] [INFO] [ButtonReader] Keyboard: Button 8 toggled OFF (key '8')
+[2025-11-19 20:18:03,990] [DEBUG] [ButtonReader] Button 8 released, no longer ignored
+[2025-11-19 20:18:04,552] [INFO] [ButtonReader] Keyboard: Button 8 toggled ON (key '8')
+[2025-11-19 20:18:04,553] [DEBUG] [ButtonReader] Button state changed: [(8, 'pressed')]
+[2025-11-19 20:18:04,555] [DEBUG] [GameManager] Button sequence: 638
+[2025-11-19 20:18:05,556] [INFO] [ButtonReader] Keyboard: Button 0 toggled OFF (key '0')
+[2025-11-19 20:18:05,576] [DEBUG] [ButtonReader] Button 0 released, no longer ignored
+[2025-11-19 20:18:06,259] [INFO] [ButtonReader] Keyboard: Button 0 toggled ON (key '0')
+[2025-11-19 20:18:06,279] [DEBUG] [ButtonReader] Button state changed: [(0, 'pressed')]
+[2025-11-19 20:18:06,279] [DEBUG] [GameManager] Button sequence: 6380
+[2025-11-19 20:18:06,962] [INFO] [ButtonReader] Keyboard: Button 4 toggled OFF (key '4')
+[2025-11-19 20:18:06,963] [DEBUG] [ButtonReader] Button 4 released, no longer ignored
+[2025-11-19 20:18:07,524] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-19 20:18:07,525] [DEBUG] [ButtonReader] Button state changed: [(4, 'pressed')]
+[2025-11-19 20:18:07,526] [DEBUG] [GameManager] Button sequence: 63804
+[2025-11-19 20:18:07,526] [INFO] [CodeModeState] Code entered: 63804
+[2025-11-19 20:18:07,527] [INFO] [CodeModeState] Valid code! Transitioning to CodeRevealState
+[2025-11-19 20:18:07,528] [DEBUG] [ButtonReader] Button 0 will be ignored until released
+[2025-11-19 20:18:07,528] [DEBUG] [ButtonReader] Button 1 will be ignored until released
+[2025-11-19 20:18:07,529] [DEBUG] [ButtonReader] Button 2 will be ignored until released
+[2025-11-19 20:18:07,529] [DEBUG] [ButtonReader] Button 3 will be ignored until released
+[2025-11-19 20:18:07,530] [DEBUG] [ButtonReader] Button 4 will be ignored until released
+[2025-11-19 20:18:07,530] [DEBUG] [ButtonReader] Button 5 will be ignored until released
+[2025-11-19 20:18:07,531] [DEBUG] [ButtonReader] Button 6 will be ignored until released
+[2025-11-19 20:18:07,531] [DEBUG] [ButtonReader] Button 7 will be ignored until released
+[2025-11-19 20:18:07,532] [DEBUG] [ButtonReader] Button 8 will be ignored until released
+[2025-11-19 20:18:07,532] [DEBUG] [ButtonReader] Button 9 will be ignored until released
+[2025-11-19 20:18:07,532] [INFO] [GameManager] State transition: CodeModeState → CodeRevealState
+[2025-11-19 20:18:07,543] [INFO] [CodeRevealState] Code reveal started for code: 63804
+[2025-11-19 20:18:08,348] [DEBUG] [CodeRevealState] CODE_SOUND finished, playing ONE_TWO_THREE sound
+[2025-11-19 20:18:09,881] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 237/907MB (26.2%, 670MB free)
+[2025-11-19 20:18:11,507] [INFO] [CodeRevealState] Loading song by code: 63804
+[2025-11-19 20:18:11,508] [INFO] [SoundController] Playing song by code 63804: "Bach - Aria (from) Hunt Cantata.mp3"
+[2025-11-19 20:18:11,508] [INFO] [CodeRevealState] Song loaded successfully, transitioning to PartyState
+[2025-11-19 20:18:11,509] [DEBUG] [ButtonReader] Button 0 will be ignored until released
+[2025-11-19 20:18:11,509] [DEBUG] [ButtonReader] Button 1 will be ignored until released
+[2025-11-19 20:18:11,509] [DEBUG] [ButtonReader] Button 2 will be ignored until released
+[2025-11-19 20:18:11,510] [DEBUG] [ButtonReader] Button 3 will be ignored until released
+[2025-11-19 20:18:11,510] [DEBUG] [ButtonReader] Button 4 will be ignored until released
+[2025-11-19 20:18:11,510] [DEBUG] [ButtonReader] Button 5 will be ignored until released
+[2025-11-19 20:18:11,511] [DEBUG] [ButtonReader] Button 6 will be ignored until released
+[2025-11-19 20:18:11,511] [DEBUG] [ButtonReader] Button 7 will be ignored until released
+[2025-11-19 20:18:11,511] [DEBUG] [ButtonReader] Button 8 will be ignored until released
+[2025-11-19 20:18:11,512] [DEBUG] [ButtonReader] Button 9 will be ignored until released
+[2025-11-19 20:18:11,512] [INFO] [GameManager] State transition: CodeRevealState → PartyState
+[2025-11-19 20:18:11,512] [DEBUG] [ButtonReader] Button 0 will be ignored until released
+[2025-11-19 20:18:11,512] [DEBUG] [ButtonReader] Button 1 will be ignored until released
+[2025-11-19 20:18:11,513] [DEBUG] [ButtonReader] Button 2 will be ignored until released
+[2025-11-19 20:18:11,513] [DEBUG] [ButtonReader] Button 3 will be ignored until released
+[2025-11-19 20:18:11,513] [DEBUG] [ButtonReader] Button 4 will be ignored until released
+[2025-11-19 20:18:11,514] [DEBUG] [ButtonReader] Button 5 will be ignored until released
+[2025-11-19 20:18:11,514] [DEBUG] [ButtonReader] Button 6 will be ignored until released
+[2025-11-19 20:18:11,514] [DEBUG] [ButtonReader] Button 7 will be ignored until released
+[2025-11-19 20:18:11,514] [DEBUG] [ButtonReader] Button 8 will be ignored until released
+[2025-11-19 20:18:11,515] [DEBUG] [ButtonReader] Button 9 will be ignored until released
+[2025-11-19 20:18:11,525] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED!
+[2025-11-19 20:18:26,545] [DEBUG] [PartyState] Reduction feature enabled!
+[2025-11-19 20:19:09,892] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 237/907MB (26.1%, 670MB free)
+[2025-11-19 20:20:09,893] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 237/907MB (26.1%, 670MB free)
+[2025-11-19 20:21:03,780] [INFO] [ButtonReader] Keyboard: Button 0 toggled OFF (key '0')
+[2025-11-19 20:21:03,801] [DEBUG] [ButtonReader] Button 0 released, no longer ignored
+[2025-11-19 20:21:04,928] [INFO] [ButtonReader] Keyboard: Button 0 toggled ON (key '0')
+[2025-11-19 20:21:04,948] [DEBUG] [ButtonReader] Button state changed: [(0, 'pressed')]
+[2025-11-19 20:21:04,949] [DEBUG] [GameManager] Button sequence: 638040
+[2025-11-19 20:21:04,949] [DEBUG] [PartyState] Amazing sound started
+[2025-11-19 20:21:09,912] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 237/907MB (26.2%, 669MB free)
+[2025-11-19 20:22:09,916] [INFO] [GameManager] 💾 Memory - Process: 82.5MB | System: 236/907MB (26.0%, 671MB free)
+[2025-11-19 20:22:11,924] [INFO] [PartyState] Song finished, returning to idle
+[2025-11-19 20:22:11,924] [DEBUG] [ButtonReader] Button 0 will be ignored until released
+[2025-11-19 20:22:11,925] [DEBUG] [ButtonReader] Button 1 will be ignored until released
+[2025-11-19 20:22:11,925] [DEBUG] [ButtonReader] Button 2 will be ignored until released
+[2025-11-19 20:22:11,925] [DEBUG] [ButtonReader] Button 3 will be ignored until released
+[2025-11-19 20:22:11,926] [DEBUG] [ButtonReader] Button 4 will be ignored until released
+[2025-11-19 20:22:11,926] [DEBUG] [ButtonReader] Button 5 will be ignored until released
+[2025-11-19 20:22:11,927] [DEBUG] [ButtonReader] Button 6 will be ignored until released
+[2025-11-19 20:22:11,927] [DEBUG] [ButtonReader] Button 7 will be ignored until released
+[2025-11-19 20:22:11,927] [DEBUG] [ButtonReader] Button 8 will be ignored until released
+[2025-11-19 20:22:11,927] [DEBUG] [ButtonReader] Button 9 will be ignored until released
+[2025-11-19 20:22:11,928] [INFO] [GameManager] State transition: PartyState → IdleState
+[2025-11-19 20:22:32,465] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 2 - Process terminating
+[2025-11-19 20:22:32,467] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-19 20:22:32,478] [INFO] [GameManager] Game stopped
+[2025-11-19 20:22:32,479] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

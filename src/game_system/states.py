@@ -319,8 +319,6 @@ class PartyState(GameState):
         
         # First button amazing feature (enabled after 15 seconds, 10s cooldown)
         self.first_button_index = 0
-        self.first_button_held = False
-        self.amazing_channel = None
         self.amazing_last_play_time = 0  # Track last play time for throttling
         self.amazing_cooldown = 10.0  # seconds
         
@@ -359,21 +357,21 @@ class PartyState(GameState):
         import time
         self.party_start_time = time.time()
         
-        self.logger.info("🎉 PARTY MODE ACTIVATED!")
+        # Get current song name
+        import os
+        current_song = self.game_manager.sound_controller.current_song
+        song_name = os.path.basename(current_song) if current_song else "Unknown"
+        
+        self.logger.info(f"🎉 PARTY MODE ACTIVATED for song: {song_name}")
     
     def custom_on_exit(self) -> None:
-        """Stop music, applause, and amazing when exiting"""
+        """Stop music and applause when exiting"""
         self.game_manager.sound_controller.stop_music()
         
         # Stop and clear applause channel
         if self.applause_channel:
             self.applause_channel.stop()
             self.applause_channel = None
-        
-        # Stop and clear amazing channel
-        if self.amazing_channel:
-            self.amazing_channel.stop()
-            self.amazing_channel = None
         
         # Clear animation references to help GC
         self.party_anim.strip = None
@@ -560,37 +558,29 @@ class PartyState(GameState):
     def _handle_amazing_button(self, button_state: 'ButtonState', current_time: float) -> None:
         """
         Handle amazing sound for first button.
-        When first button is pressed, play amazing sound (if cooldown passed).
-        When released, stop it. 10-second cooldown between plays.
+        When first button is pressed (edge detection), play amazing sound if cooldown passed.
+        Sound plays to completion regardless of button state. 10-second cooldown between plays.
         """
         first_button_pressed = button_state.for_button[self.first_button_index]
+        first_button_prev = button_state.previous_state_of[self.first_button_index]
         
-        # Button pressed - play amazing (if cooldown passed)
-        if first_button_pressed and not self.first_button_held:
+        # Detect button press edge (prev=False, current=True)
+        if not first_button_prev and first_button_pressed:
             time_since_last_play = current_time - self.amazing_last_play_time
             
             if time_since_last_play >= self.amazing_cooldown:
-                self.first_button_held = True
+                # Cooldown passed - play sound
                 from audio_system.sound_controller import GameSounds
-                self.amazing_channel = self.game_manager.sound_controller.play_sound_with_volume(
+                self.game_manager.sound_controller.play_sound_with_volume(
                     GameSounds.AMAZING_SOUND,
                     volume=1.0
                 )
                 self.amazing_last_play_time = current_time
                 self.logger.debug("Amazing sound started")
             else:
-                # Cooldown not passed, just mark as held without playing
-                self.first_button_held = True
+                # Cooldown not passed
                 remaining = self.amazing_cooldown - time_since_last_play
                 self.logger.debug(f"Amazing sound on cooldown ({remaining:.1f}s remaining)")
-        
-        # Button released - stop amazing
-        elif not first_button_pressed and self.first_button_held:
-            self.first_button_held = False
-            if self.amazing_channel:
-                self.amazing_channel.stop()
-                self.amazing_channel = None
-            self.logger.debug("Amazing sound stopped")
 
 
 class CodeModeState(GameState):

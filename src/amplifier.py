@@ -157,8 +157,8 @@ def create_game_system(config: GameConfig, amplifier_logger):
     config.validate()
     
     # Create class loggers for components
-    game_manager_logger = amplifier_logger.create_class_logger("GameManager", logging.DEBUG)
-    button_reader_logger = amplifier_logger.create_class_logger("ButtonReader", logging.DEBUG)
+    game_manager_logger = amplifier_logger.create_class_logger("GameManager", logging.INFO)
+    button_reader_logger = amplifier_logger.create_class_logger("ButtonReader", logging.INFO)
     song_library_logger = amplifier_logger.create_class_logger("SongLibrary", logging.INFO)
     sound_controller_logger = amplifier_logger.create_class_logger("SoundController", logging.INFO)
     
