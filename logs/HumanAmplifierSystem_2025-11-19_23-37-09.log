@@ -1,0 +1,66 @@
+[2025-11-19 23:37:09,133] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-19 23:37:09,134] [INFO] [Amplifier] Button configuration: 10 buttons on GPIO [6, 5, 22, 17, 4, 23, 24, 25, 16, 20]
+[2025-11-19 23:37:09,134] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-19 23:37:09,135] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-19 23:37:09,135] [INFO] [Amplifier]   Strip 2: 293 LEDs on GPIO 18
+[2025-11-19 23:37:09,136] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-19 23:37:09,136] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-19 23:37:09,137] [INFO] [Amplifier] Audio folder: songs
+[2025-11-19 23:37:09,137] [INFO] [Amplifier] Schedule: 2 daily, 1 special entries
+[2025-11-19 23:37:09,138] [INFO] [ButtonReader] GPIO sampler initialized: 10 pins (no pulls)
+[2025-11-19 23:37:09,139] [INFO] [ButtonReader] Pin mapping: Btn0=GPIO6, Btn1=GPIO5, Btn2=GPIO22, Btn3=GPIO17, Btn4=GPIO4, Btn5=GPIO23, Btn6=GPIO24, Btn7=GPIO25, Btn8=GPIO16, Btn9=GPIO20
+[2025-11-19 23:37:09,139] [INFO] [ButtonReader] 🎮 Keyboard debug enabled: Press digit keys 0-9 to toggle buttons (works over SSH)
+[2025-11-19 23:37:09,140] [INFO] [ButtonReader]    Each keypress toggles button ON/OFF
+[2025-11-19 23:37:09,140] [INFO] [ButtonReader] ButtonReader initialized with 10 buttons
+[2025-11-19 23:37:09,141] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-19 23:37:11,239] [INFO] [SongLibrary] Loaded 547 song codes from 10 collections
+[2025-11-19 23:37:11,240] [INFO] [SongLibrary] Collections updated: ['MAIJAM']
+[2025-11-19 23:37:19,438] [INFO] [SoundController] Sound controller initialized - mixer ready, first song will load on demand
+[2025-11-19 23:37:19,445] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-19 23:37:19,446] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-19 23:37:19,446] [INFO] [Amplifier] Hardware: 10 buttons, 2 LED strips, 20ms frame duration
+[2025-11-19 23:37:19,447] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['GENERAL', 'VIRAL', 'TV', 'FESTIGAL', 'MAIJAM', 'SPANISH', 'DISNEY', 'CLASSIC', 'MORNING', 'PARTY'], 'total_codes': 547, 'daily_schedule_entries': 2, 'special_schedule_entries': 1}
+[2025-11-19 23:37:19,447] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-19 23:37:19,448] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-19 23:37:19,448] [INFO] [Amplifier] Hardware status: 10 buttons, 2 LED strips
+[2025-11-19 23:37:19,449] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-19 23:37:19,450] [INFO] [Amplifier]   Strip 2: 293 LEDs active
+[2025-11-19 23:37:19,450] [INFO] [Amplifier] Audio system: 547 song codes, 12 sound effects
+[2025-11-19 23:37:19,451] [INFO] [Amplifier] Available collections: GENERAL, VIRAL, TV, FESTIGAL, MAIJAM, SPANISH, DISNEY, CLASSIC, MORNING, PARTY
+[2025-11-19 23:37:19,451] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-19 23:37:19,451] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-19 23:37:19,455] [INFO] [GameManager] 💾 Memory - Process: 86.1MB | System: 316/907MB (34.9%, 591MB free) | ⚙️  CPU - Process: 0.0% | System: 34.5% | Cores: [16%, 15%, 99%, 6%]
+[2025-11-19 23:37:23,171] [INFO] [ButtonReader] Keyboard: Button 1 toggled ON (key '1')
+[2025-11-19 23:37:23,172] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 23:37:23,188] [INFO] [SoundController] Song "Michael Jackson - Thriller (Official 4K Video).mp3" was randomly started
+[2025-11-19 23:37:25,663] [INFO] [ButtonReader] Keyboard: Button 2 toggled ON (key '2')
+[2025-11-19 23:37:26,406] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-19 23:37:26,909] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-19 23:37:30,234] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-19 23:37:33,853] [INFO] [ButtonReader] Keyboard: Button 5 toggled OFF (key '5')
+[2025-11-19 23:37:34,385] [INFO] [ButtonReader] Keyboard: Button 4 toggled OFF (key '4')
+[2025-11-19 23:37:34,851] [INFO] [ButtonReader] Keyboard: Button 3 toggled OFF (key '3')
+[2025-11-19 23:37:35,236] [INFO] [ButtonReader] Keyboard: Button 2 toggled OFF (key '2')
+[2025-11-19 23:37:35,724] [INFO] [ButtonReader] Keyboard: Button 1 toggled OFF (key '1')
+[2025-11-19 23:37:35,727] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 23:37:36,347] [INFO] [ButtonReader] Keyboard: Button 1 toggled ON (key '1')
+[2025-11-19 23:37:36,348] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 23:37:36,363] [INFO] [SoundController] Song "Queen - Don_t Stop Me Now (Official Video).mp3" was randomly started
+[2025-11-19 23:37:39,202] [INFO] [ButtonReader] Keyboard: Button 1 toggled OFF (key '1')
+[2025-11-19 23:37:39,203] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 23:37:42,038] [INFO] [ButtonReader] Keyboard: Button 1 toggled ON (key '1')
+[2025-11-19 23:37:42,039] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-19 23:37:42,057] [INFO] [SoundController] Song "Dua Lipa - Levitating Featuring DaBaby (Official Music Video).mp3" was randomly started
+[2025-11-19 23:37:44,977] [INFO] [ButtonReader] Keyboard: Button 2 toggled ON (key '2')
+[2025-11-19 23:37:45,339] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-19 23:37:47,770] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-19 23:37:48,560] [INFO] [ButtonReader] Keyboard: Button 4 toggled OFF (key '4')
+[2025-11-19 23:37:49,391] [INFO] [ButtonReader] Keyboard: Button 3 toggled OFF (key '3')
+[2025-11-19 23:37:50,536] [INFO] [ButtonReader] Keyboard: Button 2 toggled OFF (key '2')
+[2025-11-19 23:37:56,776] [INFO] [ButtonReader] Keyboard: Button 1 toggled OFF (key '1')
+[2025-11-19 23:37:56,790] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-19 23:38:13,970] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 2 - Process terminating
+[2025-11-19 23:38:13,971] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-19 23:38:14,149] [INFO] [SoundController] Sound controller cleaned up successfully
+[2025-11-19 23:38:14,160] [INFO] [GameManager] Game stopped
+[2025-11-19 23:38:14,160] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

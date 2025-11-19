@@ -66,8 +66,9 @@ class SoundController:
         
         # Initialize pygame mixer with larger buffer to prevent underruns
         # Using 48kHz (Raspberry Pi native rate) for better compatibility
+        # Buffer size 16384 matches ALSA's actual buffer (16 periods × 1024 samples)
         self.mixer = pygame.mixer
-        self.mixer.pre_init(frequency=48000, size=-16, channels=2, buffer=4096)
+        self.mixer.pre_init(frequency=48000, size=-16, channels=2, buffer=16384)
         self.mixer.init()
         
         # Give ALSA time to fully initialize before loading sounds (prevents race condition underruns)

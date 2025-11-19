@@ -418,14 +418,22 @@ class AmplifyPyramidAnimation(Animation):
         self.pressed_buttons = pressed_buttons.copy()
     
     def advance(self) -> None:
-        """Update pyramid LEDs based on number of pressed buttons"""
+        """Update pyramid LEDs based on number of pressed buttons with analog noise"""
         from game_system.animation_helpers import pyramidHeight
+        import random
         
         # Count how many buttons are pressed
         buttons_pressed = sum(self.pressed_buttons)
         
-        # Calculate fill percentage: (buttons_pressed / total_buttons) * 100
-        fill_percent = int((buttons_pressed / self.button_count) * 100)
+        # Calculate base fill percentage: (buttons_pressed / total_buttons) * 100
+        base_fill_percent = int((buttons_pressed / self.button_count) * 100)
+        
+        # Add analog noise: ±2 heights for organic feel
+        noise = random.randint(-2, 2)
+        fill_percent = base_fill_percent + noise
+        
+        # Clamp to valid range (0-100)
+        fill_percent = max(0, min(100, fill_percent))
         
         # Get LEDs to light (from bottom to fill_percent height)
         leds_to_light = pyramidHeight[0:fill_percent]
@@ -666,47 +674,335 @@ class PermutationColorsPyramidAnimation(Animation):
                 break  # Start fresh next advance call
 
 
-def create_party_pyramid_animation(strip: 'LedStrip') -> SequenceAnimation:
+class PyramidMusicBarAnimation(Animation):
     """
-    Factory function to create party pyramid animation sequence.
+    Music bar visualization - entire pyramid fills from bottom with white light.
     
-    Sequence:
-    1. Blink for 5 seconds
-    2. Random loop of rainbow wave and permutation colors (20s each)
+    Simulates realistic music amplitude with 160 BPM beat, analog noise, and harmonics.
+    """
+    
+    def __init__(self, strip: 'LedStrip', speed_ms: int = 15):
+        super().__init__(strip, speed_ms)
+    
+    def _calculate_current_height(self) -> int:
+        """
+        Calculate current fill height (0-100) simulating realistic music amplitude.
+        
+        Smooth, rhythmic beat with minimal flicker - emphasis on beat feeling.
+        """
+        from game_system.animation_helpers import AnimationHelpers
+        
+        # === 140 BPM BASE BEAT (primary rhythm) ===
+        # Slightly slower for more dramatic, smooth pulses
+        # 140 BPM = 2.33 Hz
+        beat_raw = AnimationHelpers.sin8(2.33) / 255.0
+        # Power of 3 for smooth but pronounced beat
+        base_beat = beat_raw ** 3  # Strong but smooth
+        
+        # === SUB-BASS (half tempo) ===
+        # 70 BPM = 1.17 Hz - slower depth layer
+        sub_bass_raw = AnimationHelpers.sin8(1.17, 45) / 255.0
+        sub_bass = sub_bass_raw ** 2  # Gentle, rolling bass
+        
+        # === MELODIC WAVE (slower movement) ===
+        # Simulates melody/bassline - 35 BPM = 0.58 Hz
+        melodic = AnimationHelpers.sin8(0.58, 180) / 255.0
+        # No power - pure smooth sine
+        
+        # === COMBINE LAYERS (weighted mix, emphasis on beat) ===
+        combined = (
+            base_beat * 0.55 +      # Main beat (55% - more prominent)
+            sub_bass * 0.25 +       # Sub-bass depth (25%)
+            melodic * 0.20          # Melodic content (20%)
+        )
+        
+        # Clamp to 0-1 range
+        combined = max(0.0, min(1.0, combined))
+        
+        # === DYNAMIC RANGE COMPRESSION (emphasize rhythm) ===
+        # Gentler compression for more natural flow
+        compressed = combined ** 0.85  # Lighter compression
+        
+        # Scale to 10-90 range
+        height = int(10 + compressed * 80)
+        
+        return max(10, min(100, height))
+    
+    def advance(self) -> None:
+        """Fill pyramid from bottom to current height with white light"""
+        from game_system.animation_helpers import pyramidHeight
+        from led_system.pixel import Pixel
+        
+        white = Pixel(255, 255, 255)
+        black = Pixel(0, 0, 0)
+        
+        # Calculate current height
+        current_height = self._calculate_current_height()
+        
+        # Get all pixels below current height
+        lit_pixels = pyramidHeight[0:current_height]
+        
+        # Clear entire strip first
+        num_pixels = self.strip.num_pixels()
+        for i in range(num_pixels):
+            if i in lit_pixels:
+                self.strip[i] = white
+            else:
+                self.strip[i] = black
+
+
+class PyramidVerticalColorWipe(Animation):
+    """
+    Vertical color wipe animation - fills pyramid with solid colors from bottom-up, then top-down.
+    
+    Wipes alternate directions: bottom→top, top→bottom, repeat.
+    Each wipe uses a new hue (incremented by constant amount).
+    """
+    
+    def __init__(self, strip: 'LedStrip', speed_ms: int = 20, hue_increment: int = 46):
+        super().__init__(strip, speed_ms)
+        
+        self.current_hue = 0  # Starting hue (0-360)
+        self.hue_increment = hue_increment  # Hue change per wipe
+        self.wipe_direction = 'up'  # 'up' or 'down'
+        self.wipe_progress = 0  # Current height of wipe (0-100)
+        self.wipe_speed = 4  # Height units to advance per frame
+        
+        # Initialize strip with starting color
+        from game_system.animation_helpers import AnimationHelpers, pyramidHeight
+        from led_system.pixel import Pixel
+        
+        start_color = AnimationHelpers.hsv_to_pixel(self.current_hue, 1.0, 1.0)
+        for i in range(strip.num_pixels()):
+            strip[i] = start_color
+    
+    def advance(self) -> None:
+        """Advance wipe animation - fill pyramid progressively with new color"""
+        from game_system.animation_helpers import AnimationHelpers, pyramidHeight
+        
+        # Advance wipe progress
+        self.wipe_progress += self.wipe_speed
+        
+        # Calculate colors
+        old_hue = (self.current_hue - self.hue_increment) % 360
+        new_hue = self.current_hue
+        
+        old_color = AnimationHelpers.hsv_to_pixel(old_hue, 1.0, 1.0)
+        new_color = AnimationHelpers.hsv_to_pixel(new_hue, 1.0, 1.0)
+        
+        if self.wipe_direction == 'up':
+            # Wipe from bottom to top
+            if self.wipe_progress <= 100:
+                # Fill bottom part with new color, top part with old color
+                lit_pixels = pyramidHeight[0:self.wipe_progress]
+                remaining_pixels = pyramidHeight[self.wipe_progress:100] if self.wipe_progress < 100 else set()
+                
+                for i in range(self.strip.num_pixels()):
+                    if i in lit_pixels:
+                        self.strip[i] = new_color
+                    elif i in remaining_pixels:
+                        self.strip[i] = old_color
+            else:
+                # Wipe complete - switch direction and increment hue
+                self.wipe_direction = 'down'
+                self.wipe_progress = 0
+                self.current_hue = (self.current_hue + self.hue_increment) % 360
+        
+        else:  # wipe_direction == 'down'
+            # Wipe from top to bottom
+            if self.wipe_progress <= 100:
+                # Fill top part with new color, bottom part with old color
+                start_height = 100 - self.wipe_progress
+                lit_pixels = pyramidHeight[start_height:100] if start_height >= 0 else pyramidHeight[0:100]
+                remaining_pixels = pyramidHeight[0:start_height] if start_height > 0 else set()
+                
+                for i in range(self.strip.num_pixels()):
+                    if i in lit_pixels:
+                        self.strip[i] = new_color
+                    elif i in remaining_pixels:
+                        self.strip[i] = old_color
+            else:
+                # Wipe complete - switch direction and increment hue
+                self.wipe_direction = 'up'
+                self.wipe_progress = 0
+                self.current_hue = (self.current_hue + self.hue_increment) % 360
+
+
+class CodeModePyramidAnimation(Animation):
+    """
+    Code mode pyramid animation - lights up pixels in permutation order with blue gradient.
+    
+    Phase 1: Light up pixels one by one (permutation order) with blue gradient
+    Phase 2: Turn off pixels one by one (same permutation order)
+    Repeat.
+    """
+    
+    def __init__(self, strip: 'LedStrip', speed_ms: int = 20):
+        super().__init__(strip, speed_ms)
+        
+        self.phase = 'lighting'  # 'lighting' or 'clearing'
+        self.pixel_index = 0
+        self.num_pixels = strip.num_pixels()
+        
+        # Pre-calculate blue gradient for each pixel (based on pixel index)
+        # Darker blue (hue=240, low value) → Lighter blue (hue=200, high value)
+        from game_system.animation_helpers import AnimationHelpers
+        self.pixel_colors = []
+        for i in range(self.num_pixels):
+            progress = i / max(1, self.num_pixels - 1)
+            # Hue: 240 (pure blue) → 200 (cyan-blue)
+            hue = 240 - (progress * 40)
+            # Value: 0.4 → 1.0 (darker → lighter)
+            value = 0.4 + (progress * 0.6)
+            color = AnimationHelpers.hsv_to_pixel(hue, 1.0, value)
+            self.pixel_colors.append(color)
+        
+        # Start with all black
+        from led_system.pixel import Pixel
+        black = Pixel(0, 0, 0)
+        for i in range(self.num_pixels):
+            strip[i] = black
+    
+    def advance(self) -> None:
+        """Light or clear 2 pixels per advance in permutation order"""
+        from game_system.animation_helpers import STRIP_PERMUTATIONS
+        from led_system.pixel import Pixel
+        
+        # Strip 1 (pyramid) uses index 1
+        strip_index = 1
+        
+        if strip_index not in STRIP_PERMUTATIONS:
+            return
+        
+        permutation = STRIP_PERMUTATIONS[strip_index]
+        black = Pixel(0, 0, 0)
+        
+        # Process 2 pixels per advance call
+        pixels_per_advance = 2
+        for _ in range(pixels_per_advance):
+            if self.pixel_index < len(permutation):
+                pixel_to_modify = permutation[self.pixel_index]
+                
+                if self.phase == 'lighting':
+                    # Light up with gradient color
+                    self.strip[pixel_to_modify] = self.pixel_colors[pixel_to_modify]
+                else:  # phase == 'clearing'
+                    # Turn off
+                    self.strip[pixel_to_modify] = black
+                
+                self.pixel_index += 1
+            else:
+                # Phase complete - switch phase
+                if self.phase == 'lighting':
+                    self.phase = 'clearing'
+                else:
+                    self.phase = 'lighting'
+                self.pixel_index = 0
+                break  # Start fresh next advance call
+
+
+class PartyPyramidAnimation(Animation):
+    """
+    Party pyramid animation with red override support.
+    
+    Wraps a SequenceAnimation and applies red override (from top down) 
+    after the child animation renders.
+    """
+    
+    def __init__(self, strip: 'LedStrip', speed_ms: int = 20, max_spread: int = None):
+        super().__init__(strip, speed_ms)
+        
+        # Store max_spread for red override calculation
+        self.max_spread = max_spread if max_spread else 0
+        
+        # Red override state
+        self.a_red_pixels = 0
+        self.b_red_pixels = 0
+        
+        # Create the child sequence animation (all pyramid animations)
+        blink = BlinkPyramidAnimation(strip, speed_ms=50)
+        
+        random_anims = [
+            RainbowWavePyramidAnimation(strip, speed_ms=50),
+            PermutationColorsPyramidAnimation(strip, speed_ms=20),
+            PyramidMusicBarAnimation(strip, speed_ms=15),
+            PyramidVerticalColorWipe(strip, speed_ms=20, hue_increment=46)
+        ]
+        random.shuffle(random_anims)
+        
+        random_loop = SequenceAnimation(
+            strip=strip,
+            animation_sequence=[(a, 20.0) for a in random_anims],
+            repeat=True,
+            frame_speed_ms=20
+        )
+        
+        self.child_animation = SequenceAnimation(
+            strip=strip,
+            animation_sequence=[
+                (blink, 5.0),
+                (random_loop, None)
+            ],
+            repeat=False,
+            frame_speed_ms=20
+        )
+    
+    def set_red_override(self, a_red_pixels: int, b_red_pixels: int) -> None:
+        """
+        Set red override pixels.
+        
+        Args:
+            a_red_pixels: Number of spread pixels from button A
+            b_red_pixels: Number of spread pixels from button B
+        """
+        self.a_red_pixels = a_red_pixels
+        self.b_red_pixels = b_red_pixels
+    
+    def advance(self) -> None:
+        """Render child animation, then apply red override on top"""
+        # Let child animation render first
+        self.child_animation.update_if_needed()
+        
+        # Apply red override on top if any buttons held
+        if self.a_red_pixels > 0 or self.b_red_pixels > 0:
+            self._apply_red_override()
+    
+    def _apply_red_override(self) -> None:
+        """Apply red override from top down based on spread percentage"""
+        from game_system.animation_helpers import pyramidHeight
+        from led_system.pixel import Pixel
+        
+        if self.max_spread == 0:
+            return  # Avoid division by zero
+        
+        # Calculate red override percentage
+        total_spread = self.a_red_pixels + self.b_red_pixels
+        red_override_percent = int(100 * total_spread / (2 * self.max_spread))
+        red_override_percent = max(0, min(100, red_override_percent))
+        
+        # Get pixels to override (from top down)
+        # If redOverridePercent is 30%, light red from height 70 to 100
+        if red_override_percent > 0:
+            start_height = 100 - red_override_percent
+            red_pixels = pyramidHeight[start_height:100]
+            
+            red = Pixel(255, 0, 0)
+            for pixel_idx in red_pixels:
+                self.strip[pixel_idx] = red
+
+
+def create_party_pyramid_animation(strip: 'LedStrip', max_spread: int = None) -> PartyPyramidAnimation:
+    """
+    Factory function to create party pyramid animation with red override support.
     
     Args:
         strip: LED strip to animate (pyramid strip)
+        max_spread: Maximum spread value from PartyAnimation (for red override calculation)
         
     Returns:
-        SequenceAnimation with nested random loop
+        PartyPyramidAnimation with red override support
     """
-    # Phase 1: Initial blink
-    blink = BlinkPyramidAnimation(strip, speed_ms=50)
-    
-    # Phase 2: Random loop of other animations
-    random_anims = [
-        RainbowWavePyramidAnimation(strip, speed_ms=50),
-        PermutationColorsPyramidAnimation(strip, speed_ms=20)
-    ]
-    random.shuffle(random_anims)  # Randomize order
-    
-    random_loop = SequenceAnimation(
-        strip=strip,
-        animation_sequence=[(a, 20.0) for a in random_anims],
-        repeat=True,  # Loop these forever
-        frame_speed_ms=20
-    )
-    
-    # Overall sequence: blink once, then random loop forever
-    return SequenceAnimation(
-        strip=strip,
-        animation_sequence=[
-            (blink, 5.0),
-            (random_loop, None)  # Forever
-        ],
-        repeat=False,
-        frame_speed_ms=20
-    )
+    return PartyPyramidAnimation(strip, speed_ms=20, max_spread=max_spread)
 
 
 class PartyAnimation(Animation):
@@ -979,3 +1275,156 @@ class CodeRevealAnimation(Animation):
                 start_idx = digit * self.leds_per_button
                 end_idx = (digit + 1) * self.leds_per_button
                 self.strip[start_idx:end_idx] = color
+
+
+class BlueGradientBlinkPyramidAnimation(Animation):
+    """Blue gradient blink animation for pyramid - blinks blue gradient on/off."""
+    
+    def __init__(self, strip: 'LedStrip', speed_ms: int = 100):
+        super().__init__(strip, speed_ms)
+        
+        # Pre-calculate blue gradient colors (same as CodeModePyramidAnimation)
+        from game_system.animation_helpers import AnimationHelpers
+        self.blue_gradient_colors = []
+        for i in range(strip.num_pixels()):
+            progress = i / max(1, strip.num_pixels() - 1)
+            hue = 240 - (progress * 40)  # 240 (pure blue) → 200 (cyan-blue)
+            value = 0.4 + (progress * 0.6)  # 0.4 → 1.0 (darker → lighter)
+            color = AnimationHelpers.hsv_to_pixel(hue, 1.0, value)
+            self.blue_gradient_colors.append(color)
+        
+        self.blink_state = True  # True = on, False = off
+    
+    def advance(self) -> None:
+        """Toggle between blue gradient and black"""
+        from led_system.pixel import Pixel
+        
+        self.blink_state = not self.blink_state
+        
+        if self.blink_state:
+            # On - show blue gradient
+            for i in range(self.strip.num_pixels()):
+                self.strip[i] = self.blue_gradient_colors[i]
+        else:
+            # Off - black
+            black = Pixel(0, 0, 0)
+            for i in range(self.strip.num_pixels()):
+                self.strip[i] = black
+
+
+class PyramidVerticalFillByPieces(Animation):
+    """
+    Fills pyramid vertically in pieces - even pieces (0,2,4,...,18) then odd pieces (1,3,5,...,19).
+    Each piece is 5% of pyramid height.
+    """
+    
+    def __init__(self, strip: 'LedStrip', speed_ms: int = 80):
+        super().__init__(strip, speed_ms)
+        
+        self.fill_pieces_lit = 0  # How many pieces have been lit (0-20)
+        self.fill_stage = 'even'  # 'even' → 'odd'
+        
+        # Start with all black
+        from led_system.pixel import Pixel
+        black = Pixel(0, 0, 0)
+        for i in range(strip.num_pixels()):
+            strip[i] = black
+    
+    def advance(self) -> None:
+        """Light next piece in sequence"""
+        from game_system.animation_helpers import pyramidHeight
+        from led_system.pixel import Pixel
+        
+        white = Pixel(255, 255, 255)
+        
+        if self.fill_stage == 'even':
+            # Light even pieces: 0, 2, 4, ..., 18
+            piece_index = self.fill_pieces_lit * 2
+            
+            if piece_index < 20:
+                # Calculate height range for this piece (each piece is 5% of pyramid)
+                start_height = piece_index * 5
+                end_height = start_height + 5
+                
+                # Light this piece
+                piece_pixels = pyramidHeight[start_height:end_height]
+                for pixel_idx in piece_pixels:
+                    self.strip[pixel_idx] = white
+                
+                self.fill_pieces_lit += 1
+            else:
+                # All even pieces lit, switch to odd
+                self.fill_stage = 'odd'
+                self.fill_pieces_lit = 0
+        
+        else:  # fill_stage == 'odd'
+            # Light odd pieces: 1, 3, 5, ..., 19
+            piece_index = self.fill_pieces_lit * 2 + 1
+            
+            if piece_index < 20:
+                # Calculate height range for this piece
+                start_height = piece_index * 5
+                end_height = start_height + 5
+                
+                # Light this piece
+                piece_pixels = pyramidHeight[start_height:end_height]
+                for pixel_idx in piece_pixels:
+                    self.strip[pixel_idx] = white
+                
+                self.fill_pieces_lit += 1
+
+
+class WhiteBlinkPyramidAnimation(Animation):
+    """Blinks entire pyramid white/black."""
+    
+    def __init__(self, strip: 'LedStrip', speed_ms: int = 400):
+        super().__init__(strip, speed_ms)
+        self.blink_state = True  # True = on, False = off
+    
+    def advance(self) -> None:
+        """Toggle between white and black"""
+        from led_system.pixel import Pixel
+        
+        self.blink_state = not self.blink_state
+        
+        if self.blink_state:
+            # On - white
+            white = Pixel(255, 255, 255)
+            for i in range(self.strip.num_pixels()):
+                self.strip[i] = white
+        else:
+            # Off - black
+            black = Pixel(0, 0, 0)
+            for i in range(self.strip.num_pixels()):
+                self.strip[i] = black
+
+
+def create_code_reveal_pyramid_animation(strip: 'LedStrip') -> SequenceAnimation:
+    """
+    Factory function to create code reveal pyramid animation sequence.
+    
+    Phases:
+    1. Blue gradient blink (1 second)
+    2. White vertical fill by pieces (1.6 seconds)
+    3. White blink (continuous)
+    
+    Args:
+        strip: LED strip to animate (pyramid strip)
+        
+    Returns:
+        SequenceAnimation with all phases
+    """
+    blue_blink = BlueGradientBlinkPyramidAnimation(strip, speed_ms=100)
+    white_fill = PyramidVerticalFillByPieces(strip, speed_ms=80)
+    white_blink = WhiteBlinkPyramidAnimation(strip, speed_ms=400)
+    
+    return SequenceAnimation(
+        strip=strip,
+        animation_sequence=[
+            (blue_blink, 1.0),      # 1 second blue blink
+            (white_fill, 1.6),      # 1.6 seconds fill (20 pieces × 80ms)
+            (white_blink, None)     # Continuous white blink
+        ],
+        repeat=False,
+        frame_speed_ms=20
+    )

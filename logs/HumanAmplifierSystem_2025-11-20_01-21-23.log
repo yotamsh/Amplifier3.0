@@ -1,0 +1,184 @@
+[2025-11-20 01:21:23,200] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-20 01:21:23,201] [INFO] [Amplifier] Button configuration: 10 buttons on GPIO [6, 5, 22, 17, 4, 23, 24, 25, 16, 20]
+[2025-11-20 01:21:23,201] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-20 01:21:23,202] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-20 01:21:23,202] [INFO] [Amplifier]   Strip 2: 293 LEDs on GPIO 18
+[2025-11-20 01:21:23,202] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-20 01:21:23,202] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-20 01:21:23,202] [INFO] [Amplifier] Audio folder: songs
+[2025-11-20 01:21:23,203] [INFO] [Amplifier] Schedule: 2 daily, 1 special entries
+[2025-11-20 01:21:23,203] [INFO] [ButtonReader] GPIO sampler initialized: 10 pins (no pulls)
+[2025-11-20 01:21:23,204] [INFO] [ButtonReader] Pin mapping: Btn0=GPIO6, Btn1=GPIO5, Btn2=GPIO22, Btn3=GPIO17, Btn4=GPIO4, Btn5=GPIO23, Btn6=GPIO24, Btn7=GPIO25, Btn8=GPIO16, Btn9=GPIO20
+[2025-11-20 01:21:23,204] [INFO] [ButtonReader] 🎮 Keyboard debug enabled: Press digit keys 0-9 to toggle buttons (works over SSH)
+[2025-11-20 01:21:23,204] [INFO] [ButtonReader]    Each keypress toggles button ON/OFF
+[2025-11-20 01:21:23,205] [INFO] [ButtonReader] ButtonReader initialized with 10 buttons
+[2025-11-20 01:21:23,206] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-20 01:21:25,228] [INFO] [SongLibrary] Loaded 547 song codes from 10 collections
+[2025-11-20 01:21:25,229] [INFO] [SongLibrary] Collections updated: ['DISNEY', 'TV', 'FESTIGAL', 'MAIJAM', 'MORNING', 'VIRAL', 'GENERAL', 'CLASSIC', 'PARTY', 'SPANISH']
+[2025-11-20 01:21:33,462] [INFO] [SoundController] Sound controller initialized - mixer ready, first song will load on demand
+[2025-11-20 01:21:33,472] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-20 01:21:33,473] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-20 01:21:33,473] [INFO] [Amplifier] Hardware: 10 buttons, 2 LED strips, 20ms frame duration
+[2025-11-20 01:21:33,474] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['DISNEY', 'TV', 'FESTIGAL', 'MAIJAM', 'MORNING', 'VIRAL', 'GENERAL', 'CLASSIC', 'PARTY', 'SPANISH'], 'total_codes': 547, 'daily_schedule_entries': 2, 'special_schedule_entries': 1}
+[2025-11-20 01:21:33,475] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-20 01:21:33,475] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-20 01:21:33,476] [INFO] [Amplifier] Hardware status: 10 buttons, 2 LED strips
+[2025-11-20 01:21:33,476] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-20 01:21:33,476] [INFO] [Amplifier]   Strip 2: 293 LEDs active
+[2025-11-20 01:21:33,477] [INFO] [Amplifier] Audio system: 547 song codes, 12 sound effects
+[2025-11-20 01:21:33,477] [INFO] [Amplifier] Available collections: DISNEY, TV, FESTIGAL, MAIJAM, MORNING, VIRAL, GENERAL, CLASSIC, PARTY, SPANISH
+[2025-11-20 01:21:33,478] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-20 01:21:33,478] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-20 01:21:33,481] [INFO] [GameManager] 💾 Memory - Process: 86.3MB | System: 258/907MB (28.5%, 648MB free) | ⚙️  CPU - Process: 0.0% | System: 27.8% | Cores: [2%, 6%, 3%, 99%]
+[2025-11-20 01:21:33,482] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:21:33,482] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:21:38,479] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:21:38,494] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 01:21:38,513] [INFO] [SoundController] Song "אמיר פיי גוטמן - אל תוותר - מתוך פסטיגל 2007, פסטיגל על הזמן.mp3" was randomly started
+[2025-11-20 01:21:38,756] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 01:21:39,016] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:21:40,104] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:21:40,107] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 01:21:40,119] [INFO] [SoundController] Song "שלומי שבן - שמש עלי אדמות.mp3" was randomly started
+[2025-11-20 01:21:40,970] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:21:40,972] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 01:21:41,875] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:21:41,876] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 01:21:41,887] [INFO] [SoundController] Song "טלויזיה - חוש חש הבלש.mp3" was randomly started
+[2025-11-20 01:21:42,706] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:21:42,708] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 01:21:43,470] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:21:43,481] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 01:21:43,500] [INFO] [SoundController] Song "Carl Douglas  Kung Fu Fighting  (Original Music Video).mp3" was randomly started
+[2025-11-20 01:21:45,087] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:21:45,088] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 01:21:47,758] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:21:47,759] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 01:21:47,770] [INFO] [SoundController] Song "Belinda Carlisle - Heaven Is A Place On Earth (Official HD Music Video).mp3" was randomly started
+[2025-11-20 01:21:48,343] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:21:48,344] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 01:21:48,847] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:21:48,848] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 01:21:48,859] [INFO] [SoundController] Song "Tones And I - Dance Monkey.mp3" was randomly started
+[2025-11-20 01:21:49,691] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:21:49,694] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 01:21:50,515] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:21:50,516] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 01:21:50,527] [INFO] [SoundController] Song "Chopin - Prelude In E Minor, Op.28 No.4.mp3" was randomly started
+[2025-11-20 01:21:51,483] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:21:51,486] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 01:21:52,106] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:21:52,107] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 01:21:52,117] [INFO] [SoundController] Song "Sudan Archives - Come Meh Way.mp3" was randomly started
+[2025-11-20 01:21:52,668] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:21:52,669] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 01:21:53,210] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:21:53,211] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 01:21:53,222] [INFO] [SoundController] Song "Avicii - Addicted To You.mp3" was randomly started
+[2025-11-20 01:21:53,792] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:21:53,794] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 01:21:54,395] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:21:54,406] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 01:21:54,425] [INFO] [SoundController] Song "עדן בן זקן - תרקדו.mp3" was randomly started
+[2025-11-20 01:21:55,028] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:21:55,029] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 01:21:55,530] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:21:55,531] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 01:21:55,544] [INFO] [SoundController] Song "טלויזיה - הקוסם מארץ עוץ.mp3" was randomly started
+[2025-11-20 01:21:56,073] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:21:56,075] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 01:21:56,555] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:21:56,566] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 01:21:56,585] [INFO] [SoundController] Song "Sophie Ellis-Bextor - Murder On The Dancefloor.mp3" was randomly started
+[2025-11-20 01:21:57,652] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:21:57,653] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 01:22:01,089] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:22:01,091] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 01:22:01,104] [INFO] [SoundController] Song "טלויזיה - בימבה.mp3" was randomly started
+[2025-11-20 01:22:01,491] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:22:01,492] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 01:22:01,993] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:22:01,994] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 01:22:02,004] [INFO] [SoundController] Song "טלויזיה - רכבת ההפתעות.mp3" was randomly started
+[2025-11-20 01:22:02,515] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:22:02,521] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 01:22:02,979] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:22:02,980] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-20 01:22:02,996] [INFO] [GameManager] State transition: IdleState → CodeModeState
+[2025-11-20 01:22:03,015] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-20 01:22:08,260] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-20 01:22:09,270] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-20 01:22:10,113] [INFO] [ButtonReader] Keyboard: Button 8 toggled ON (key '8')
+[2025-11-20 01:22:10,856] [INFO] [ButtonReader] Keyboard: Button 0 toggled ON (key '0')
+[2025-11-20 01:22:11,684] [INFO] [ButtonReader] Keyboard: Button 4 toggled OFF (key '4')
+[2025-11-20 01:22:11,685] [INFO] [CodeModeState] Code mode failed: Button was released
+[2025-11-20 01:22:11,687] [INFO] [GameManager] State transition: CodeModeState → IdleState
+[2025-11-20 01:22:20,101] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:22:20,503] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:22:20,504] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 01:22:20,515] [INFO] [SoundController] Song "יוני בלוך - אחריות.mp3" was randomly started
+[2025-11-20 01:22:21,045] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:22:21,048] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 01:22:21,608] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:22:21,619] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 01:22:21,638] [INFO] [SoundController] Song "גידי ומשפחת בוזגלו  הלו יעקב.mp3" was randomly started
+[2025-11-20 01:22:22,162] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:22:22,163] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 01:22:22,724] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:22:22,735] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 01:22:22,754] [INFO] [SoundController] Song "Haddaway - What Is Love [Official 4K].mp3" was randomly started
+[2025-11-20 01:22:23,377] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:22:23,380] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 01:22:23,940] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:22:23,951] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 01:22:23,970] [INFO] [SoundController] Song "Dua Lipa - Levitating Featuring DaBaby (Official Music Video).mp3" was randomly started
+[2025-11-20 01:22:24,535] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:22:24,536] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 01:22:25,097] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:22:25,108] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 01:22:25,127] [INFO] [SoundController] Song "The Weather Girls - It_s Raining Men (Video).mp3" was randomly started
+[2025-11-20 01:22:25,631] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:22:25,634] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 01:22:27,682] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:22:27,696] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 01:22:27,714] [INFO] [SoundController] Song "Aqua - Barbie Girl (Official Music Video).mp3" was randomly started
+[2025-11-20 01:22:28,141] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:22:28,142] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 01:22:28,603] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:22:28,604] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 01:22:28,615] [INFO] [SoundController] Song "Norah Jones - Feels Like Home - 01 - Sunrise.mp3" was randomly started
+[2025-11-20 01:22:29,105] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:22:29,106] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 01:22:29,567] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:22:29,568] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-20 01:22:29,584] [INFO] [GameManager] State transition: IdleState → CodeModeState
+[2025-11-20 01:22:29,604] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-20 01:22:31,513] [INFO] [ButtonReader] Keyboard: Button 6 toggled OFF (key '6')
+[2025-11-20 01:22:33,494] [INFO] [GameManager] 💾 Memory - Process: 86.9MB | System: 243/907MB (26.8%, 663MB free) | ⚙️  CPU - Process: 12.8% | System: 5.9% | Cores: [4%, 6%, 8%, 6%]
+[2025-11-20 01:22:33,532] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-20 01:22:34,356] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-20 01:22:36,086] [INFO] [ButtonReader] Keyboard: Button 8 toggled OFF (key '8')
+[2025-11-20 01:22:37,030] [INFO] [ButtonReader] Keyboard: Button 8 toggled ON (key '8')
+[2025-11-20 01:22:37,795] [INFO] [ButtonReader] Keyboard: Button 0 toggled OFF (key '0')
+[2025-11-20 01:22:39,142] [INFO] [ButtonReader] Keyboard: Button 0 toggled ON (key '0')
+[2025-11-20 01:22:40,547] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-20 01:22:40,549] [INFO] [CodeModeState] Code entered: 63804
+[2025-11-20 01:22:40,549] [INFO] [CodeModeState] Valid code! Transitioning to CodeRevealState
+[2025-11-20 01:22:40,557] [INFO] [GameManager] State transition: CodeModeState → CodeRevealState
+[2025-11-20 01:22:40,576] [INFO] [CodeRevealState] Code reveal started for code: 63804
+[2025-11-20 01:22:44,962] [INFO] [CodeRevealState] Loading song by code: 63804
+[2025-11-20 01:22:44,963] [INFO] [SoundController] Playing song by code 63804: "Bach - Aria (from) Hunt Cantata.mp3"
+[2025-11-20 01:22:44,964] [INFO] [CodeRevealState] Song loaded successfully, transitioning to PartyState
+[2025-11-20 01:22:44,966] [INFO] [GameManager] State transition: CodeRevealState → PartyState
+[2025-11-20 01:22:44,977] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: Bach - Aria (from) Hunt Cantata.mp3
+[2025-11-20 01:23:33,512] [INFO] [GameManager] 💾 Memory - Process: 86.9MB | System: 244/907MB (26.9%, 663MB free) | ⚙️  CPU - Process: 21.0% | System: 7.9% | Cores: [8%, 8%, 7%, 9%]
+[2025-11-20 01:24:33,526] [INFO] [GameManager] 💾 Memory - Process: 86.9MB | System: 245/907MB (27.0%, 662MB free) | ⚙️  CPU - Process: 25.6% | System: 8.8% | Cores: [11%, 8%, 9%, 7%]
+[2025-11-20 01:25:33,535] [INFO] [GameManager] 💾 Memory - Process: 86.9MB | System: 244/907MB (26.9%, 663MB free) | ⚙️  CPU - Process: 27.0% | System: 9.5% | Cores: [8%, 9%, 13%, 8%]
+[2025-11-20 01:26:33,536] [INFO] [GameManager] 💾 Memory - Process: 86.9MB | System: 245/907MB (27.0%, 662MB free) | ⚙️  CPU - Process: 27.2% | System: 9.3% | Cores: [9%, 8%, 13%, 8%]
+[2025-11-20 01:26:45,280] [INFO] [PartyState] Song finished, returning to idle
+[2025-11-20 01:26:45,294] [INFO] [GameManager] State transition: PartyState → IdleState
+[2025-11-20 01:27:31,387] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 2 - Process terminating
+[2025-11-20 01:27:31,388] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-20 01:27:31,867] [INFO] [SoundController] Sound controller cleaned up successfully
+[2025-11-20 01:27:31,878] [INFO] [GameManager] Game stopped
+[2025-11-20 01:27:31,878] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

@@ -125,7 +125,7 @@ class IdleState(GameState):
             # Create the idle scanner animation
             idle_anim = IdleAnimation(
                 strip=strip,
-                speed_ms=30,      # Faster scanner movement (was 50)
+                speed_ms=25,      # Faster scanner movement (was 30ms)
                 hue_increment=5,  # More hue change per frame (was 3)
                 fade_amount=20    # Trail fading strength
             )
@@ -376,10 +376,11 @@ class PartyState(GameState):
             button_count=button_count
         )
         
-        # Create party pyramid animation sequence on strip 2 (index 1)
+        # Create party pyramid animation sequence on strip 2 (index 1) with red override
         from game_system.animations import create_party_pyramid_animation
         pyramid_strip = game_manager.led_strips[1]
-        self.pyramid_party_anim = create_party_pyramid_animation(pyramid_strip)
+        # Pass max_spread for red override calculation
+        self.pyramid_party_anim = create_party_pyramid_animation(pyramid_strip, max_spread=self.max_spread)
         
         # Register animations with base class
         self.strip_animations[0] = self.party_anim
@@ -459,7 +460,7 @@ class PartyState(GameState):
             self.logger.info("Song finished, returning to idle")
             return IdleState(self.game_manager)
         
-        # Update party animation with red override info
+        # Update party animation with red override info (strip 0)
         self.party_anim.set_red_override(
             self.button_A,
             self.button_B,
@@ -468,6 +469,9 @@ class PartyState(GameState):
             self.button_A_held,
             self.button_B_held
         )
+        
+        # Update pyramid animation with red override (strip 1)
+        self.pyramid_party_anim.set_red_override(self.a_red_pixels, self.b_red_pixels)
         
         # No transitions - animations will be handled by generic_update_and_show
         return None
@@ -656,7 +660,7 @@ class CodeModeState(GameState):
         # Create logger
         self.logger = game_manager.logger.create_class_logger("CodeModeState")
         
-        # Create code mode animation on strip 1
+        # Create code mode animation on strip 0 (button strip)
         first_strip = game_manager.led_strips[0]
         from game_system.animations import CodeModeAnimation
         self.code_anim = CodeModeAnimation(
@@ -665,8 +669,17 @@ class CodeModeState(GameState):
             speed_ms=50
         )
         
+        # Create code mode pyramid animation on strip 1 (pyramid)
+        from game_system.animations import CodeModePyramidAnimation
+        pyramid_strip = game_manager.led_strips[1]
+        self.pyramid_code_anim = CodeModePyramidAnimation(
+            strip=pyramid_strip,
+            speed_ms=20
+        )
+        
         # Register with base class
         self.strip_animations[0] = self.code_anim
+        self.strip_animations[1] = self.pyramid_code_anim
     
     def custom_on_enter(self) -> None:
         """Actions when entering code mode"""
@@ -703,6 +716,7 @@ class CodeModeState(GameState):
         
         # Clear animation references to help GC
         self.code_anim.strip = None
+        self.pyramid_code_anim.strip = None
         self.strip_animations.clear()
         
         # Clear logger reference (prevents logger accumulation)
@@ -819,9 +833,9 @@ class CodeRevealState(GameState):
         self.code = code
         self.code_sequence = code_sequence
         
-        # Create code reveal animation
+        # Create code reveal animation for first strip
         first_strip = game_manager.led_strips[0]
-        from game_system.animations import CodeRevealAnimation
+        from game_system.animations import CodeRevealAnimation, create_code_reveal_pyramid_animation
         self.reveal_anim = CodeRevealAnimation(
             strip=first_strip,
             button_count=game_manager.button_reader.get_button_count(),
@@ -830,8 +844,13 @@ class CodeRevealState(GameState):
             blink_speed_ms=blink_speed_ms
         )
         
+        # Create code reveal animation for pyramid (second strip)
+        pyramid_strip = game_manager.led_strips[1]
+        self.pyramid_reveal_anim = create_code_reveal_pyramid_animation(pyramid_strip)
+        
         # Register with base class
         self.strip_animations[0] = self.reveal_anim
+        self.strip_animations[1] = self.pyramid_reveal_anim
         
         # Sound channel tracking
         self.code_sound_channel = None
@@ -864,6 +883,7 @@ class CodeRevealState(GameState):
         
         # Clear animation references to help GC
         self.reveal_anim.strip = None
+        self.pyramid_reveal_anim.strip = None
         self.strip_animations.clear()
         
         # Clear sound channel references
