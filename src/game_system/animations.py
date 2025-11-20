@@ -187,7 +187,7 @@ class IdleAnimation(Animation):
     Based on the classic "Cylon eye" or "scanner" effect.
     """
     
-    def __init__(self, strip: 'LedStrip', speed_ms: int = 50, hue_increment: int = 3, fade_amount: int = 40):
+    def __init__(self, strip: 'LedStrip', speed_ms: int = 50, hue_increment: int = 3, fade_amount: int = 60):
         """
         Initialize idle scanner animation with random starting position and hue.
         
@@ -210,28 +210,38 @@ class IdleAnimation(Animation):
         self.hue_index: int = random.randint(0, 359)
         self.hue_increment: int = hue_increment
         
-        # Fading effect
+        # Fading effect (increased by 1.5x from 40 to 60)
         self.fade_amount: int = fade_amount
     
     def advance(self) -> None:
-        """Advance scanner position, update colors, and apply fading effect"""
+        """Advance scanner position (2 pixels together), update colors, and apply fading effect"""
         # Import here to avoid circular imports
         from led_system.pixel import Pixel
         
         # 1. Fade all existing pixels using HSV to preserve color (trail effect)
         AnimationHelpers.fade_to_black_hsv(self.strip, self.fade_amount)
         
-        # 2. Set current LED to bright rainbow color
+        # 2. Set current 2 LEDs to bright rainbow color (snake of 2 pixels)
         current_color = AnimationHelpers.hsv_to_pixel(self.hue_index % 360, 1.0, 1.0)
         self.strip[self.led_index] = current_color
         
-        # 3. Move LED index (bouncing motion)
+        # Light the adjacent pixel too (in direction of movement)
         if self.reverse:
-            self.led_index -= 1
+            adjacent_index = self.led_index - 1
         else:
-            self.led_index += 1
+            adjacent_index = self.led_index + 1
         
-        # 4. Reverse direction at strip ends
+        # Only light adjacent if within bounds
+        if 0 <= adjacent_index < self.num_pixels:
+            self.strip[adjacent_index] = current_color
+        
+        # 3. Move LED index by 2 (bouncing motion with 2-pixel step)
+        if self.reverse:
+            self.led_index -= 2
+        else:
+            self.led_index += 2
+        
+        # 4. Reverse direction at strip ends (with 2-pixel snake consideration)
         if self.led_index >= self.num_pixels - 1 or self.led_index <= 0:
             self.reverse = not self.reverse
             # Ensure we stay within bounds
@@ -678,19 +688,20 @@ class PyramidMusicBarAnimation(Animation):
     """
     Music bar visualization - entire pyramid fills from bottom with white light.
     
-    Simulates realistic music amplitude with 160 BPM beat, analog noise, and harmonics.
+    Simulates realistic music amplitude with smooth beat and analog noise.
     """
     
-    def __init__(self, strip: 'LedStrip', speed_ms: int = 15):
+    def __init__(self, strip: 'LedStrip', speed_ms: int = 25):
         super().__init__(strip, speed_ms)
     
     def _calculate_current_height(self) -> int:
         """
         Calculate current fill height (0-100) simulating realistic music amplitude.
         
-        Smooth, rhythmic beat with minimal flicker - emphasis on beat feeling.
+        Smooth, rhythmic beat with analog noise - emphasis on beat feeling.
         """
         from game_system.animation_helpers import AnimationHelpers
+        import random
         
         # === 140 BPM BASE BEAT (primary rhythm) ===
         # Slightly slower for more dramatic, smooth pulses
@@ -724,7 +735,11 @@ class PyramidMusicBarAnimation(Animation):
         compressed = combined ** 0.85  # Lighter compression
         
         # Scale to 10-90 range
-        height = int(10 + compressed * 80)
+        base_height = int(10 + compressed * 80)
+        
+        # === ANALOG NOISE (±2 height random variation) ===
+        noise = random.randint(-2, 2)
+        height = base_height + noise
         
         return max(10, min(100, height))
     
@@ -925,7 +940,7 @@ class PartyPyramidAnimation(Animation):
         random_anims = [
             RainbowWavePyramidAnimation(strip, speed_ms=50),
             PermutationColorsPyramidAnimation(strip, speed_ms=20),
-            PyramidMusicBarAnimation(strip, speed_ms=15),
+            PyramidMusicBarAnimation(strip, speed_ms=25),
             PyramidVerticalColorWipe(strip, speed_ms=20, hue_increment=46)
         ]
         random.shuffle(random_anims)
@@ -1151,13 +1166,13 @@ class PartyAnimation(Animation):
 
 class CodeModeAnimation(Animation):
     """
-    Animation for code input mode - shows pure green light on button segments 
-    whose digits appear in the current sequence.
+    Animation for code input mode - fills strip with blue gradient on enter,
+    then shows green segments for active digits (green overrides blue).
     
-    All other segments are black.
+    Green segments fade from bright to darker as more digits are entered.
     """
     
-    def __init__(self, strip: 'LedStrip', button_count: int, speed_ms: int = 50):
+    def __init__(self, strip: 'LedStrip', button_count: int, speed_ms: int = 20):
         """
         Initialize code mode animation.
         
@@ -1169,7 +1184,29 @@ class CodeModeAnimation(Animation):
         super().__init__(strip, speed_ms)
         self.button_count: int = button_count
         self.leds_per_button: int = strip.num_pixels() // button_count
-        self.active_digits: set = set()  # Button indices currently in sequence
+        self.num_pixels = strip.num_pixels()
+        self.active_digits_ordered: List[int] = []  # Ordered list of digits in sequence
+        
+        # Pre-calculate blue gradient for entire strip (darker → lighter)
+        from game_system.animation_helpers import AnimationHelpers
+        self.blue_gradient_colors = []
+        for i in range(self.num_pixels):
+            progress = i / max(1, self.num_pixels - 1)
+            hue = 240 - (progress * 40)  # 240 (pure blue) → 200 (cyan-blue)
+            value = 0.4 + (progress * 0.6)  # 0.4 → 1.0 (darker → lighter)
+            color = AnimationHelpers.hsv_to_pixel(hue, 1.0, value)
+            self.blue_gradient_colors.append(color)
+        
+        # Fill animation state (permutation-based fill)
+        self.fill_complete = False
+        self.pixel_index = 0
+        self.strip_index = 0  # Strip 0 for button strip
+        
+        # Start with all black
+        from led_system.pixel import Pixel
+        black = Pixel(0, 0, 0)
+        for i in range(self.num_pixels):
+            strip[i] = black
     
     def set_active_digits(self, sequence: str) -> None:
         """
@@ -1178,103 +1215,188 @@ class CodeModeAnimation(Animation):
         Args:
             sequence: Current sequence string (e.g., "314")
         """
-        # Convert sequence chars to digit set
-        self.active_digits = set()
+        # Store ordered list of digits to track sequence order
+        self.active_digits_ordered = []
         for char in sequence:
             if char.isdigit():
-                self.active_digits.add(int(char))
+                self.active_digits_ordered.append(int(char))
     
     def advance(self) -> None:
-        """Update strip - pure green for active digits, black for others"""
+        """
+        Update strip:
+        1. Fill blue gradient via permutation (if not complete)
+        2. Always render blue gradient as base
+        3. Override with green segments for active digits (fading brightness)
+        """
+        from game_system.animation_helpers import STRIP_PERMUTATIONS, AnimationHelpers
         from led_system.pixel import Pixel
         
-        green = Pixel(0, 255, 0)  # Pure green
-        black = Pixel(0, 0, 0)
+        # Phase 1: Fill blue gradient by permutation
+        if not self.fill_complete:
+            if self.strip_index in STRIP_PERMUTATIONS:
+                permutation = STRIP_PERMUTATIONS[self.strip_index]
+                
+                # Fill 8 pixels per advance (very fast)
+                pixels_per_advance = 8
+                for _ in range(pixels_per_advance):
+                    if self.pixel_index < len(permutation):
+                        pixel_to_fill = permutation[self.pixel_index]
+                        self.strip[pixel_to_fill] = self.blue_gradient_colors[pixel_to_fill]
+                        self.pixel_index += 1
+                    else:
+                        self.fill_complete = True
+                        break
         
-        num_pixels = self.strip.num_pixels()
+        # Phase 2: Always render base blue gradient (if fill complete)
+        if self.fill_complete:
+            for i in range(self.num_pixels):
+                self.strip[i] = self.blue_gradient_colors[i]
         
-        for led_pos in range(num_pixels):
-            # Calculate which button segment this LED belongs to
-            button_index = led_pos // self.leds_per_button
-            
-            # Light up if this button's digit is in the sequence
-            if button_index < self.button_count and button_index in self.active_digits:
-                self.strip[led_pos] = green
-            else:
-                self.strip[led_pos] = black
+        # Phase 3: Override with green segments (color shifts from green-yellow to green-blue)
+        if self.active_digits_ordered:
+            for seq_index, button_index in enumerate(self.active_digits_ordered):
+                if button_index < self.button_count:
+                    # Calculate hue shift: green-yellow → pure green → green-blue
+                    # Hue 90 = green-yellow, 120 = pure green, 150 = green-blue
+                    # First digit: 90 (green-yellow)
+                    # Last digit (5th): 150 (green-blue)
+                    hue = 90 + (seq_index * 15)  # Shift 15 degrees per digit
+                    
+                    # All segments at full brightness and saturation
+                    green = AnimationHelpers.hsv_to_pixel(hue, 1.0, 1.0)
+                    
+                    # Fill this segment
+                    start_idx = button_index * self.leds_per_button
+                    end_idx = (button_index + 1) * self.leds_per_button
+                    for i in range(start_idx, end_idx):
+                        self.strip[i] = green
 
 
-class CodeRevealAnimation(Animation):
+class CodeRevealFillAnimation(Animation):
     """
-    Animation for code reveal - progressively lights up code digits, then blinks them.
+    Progressive fill animation for code reveal.
     
-    Phases:
-    1. Fill phase: Light up each digit segment one by one (fill_speed_ms interval)
-    2. Blink phase: Blink all revealed digits (blink_speed_ms interval)
+    Lights up one more digit each advance until all are revealed.
+    Uses same green color progression as CodeModeAnimation.
     """
     
-    def __init__(self, strip: 'LedStrip', button_count: int, code_sequence: str,
-                 fill_speed_ms: int = 200, blink_speed_ms: int = 400):
-        """
-        Initialize code reveal animation.
+    def __init__(self, strip: 'LedStrip', button_count: int, code_sequence: str, speed_ms: int = 200):
+        super().__init__(strip, speed_ms)
         
-        Args:
-            strip: LED strip to operate on
-            button_count: Number of buttons (for segment calculation)
-            code_sequence: The code to reveal (e.g., "314")
-            fill_speed_ms: Milliseconds between revealing each digit
-            blink_speed_ms: Milliseconds for blink cycle
-        """
-        super().__init__(strip, fill_speed_ms)
-        
-        # Pre-calculate constants
         self.button_count: int = button_count
-        self.num_pixels: int = strip.num_pixels()
-        self.leds_per_button: int = self.num_pixels // button_count
-        self.fill_speed_ms: int = fill_speed_ms
-        self.blink_speed_ms: int = blink_speed_ms
+        self.leds_per_button: int = strip.num_pixels() // button_count
         
-        # Parse code sequence into list of digit integers
-        self.code_digits: List[int] = [int(char) for char in code_sequence]
+        # Parse code sequence
+        self.code_digits: List[int] = [int(char) for char in code_sequence if char.isdigit()]
+        
+        # Pre-calculate green colors for each digit
+        self.digit_colors = []
+        for seq_index in range(len(self.code_digits)):
+            hue = 90 + (seq_index * 15)  # 90, 105, 120, 135, 150
+            color = AnimationHelpers.hsv_to_pixel(hue, 1.0, 1.0)
+            self.digit_colors.append(color)
         
         # Animation state
-        self.revealed_count: int = 0  # How many digits have been revealed
-        self.is_filling: bool = True  # True during fill phase, False during blink
-        self.blink_state: bool = True  # True = on, False = off
+        self.revealed_count: int = 0  # How many digits are currently revealed
         
-        # Clear strip once on init
+        # Start with all black
         self.strip[:] = AnimationHelpers.BLACK
     
-    def start_blinking(self) -> None:
-        """Transition from fill phase to blink phase"""
-        self.is_filling = False
-        self.speed_ms = self.blink_speed_ms
-        self.last_update = time.time()  # Reset timing for blink
+    def advance(self) -> None:
+        """Reveal one more digit, then keep rendering all revealed digits"""
+        # Increment revealed count (but not beyond total)
+        if self.revealed_count < len(self.code_digits):
+            self.revealed_count += 1
+        
+        # Render all currently revealed digits
+        for seq_index in range(self.revealed_count):
+            digit = self.code_digits[seq_index]
+            digit_color = self.digit_colors[seq_index]
+            
+            start_idx = digit * self.leds_per_button
+            end_idx = (digit + 1) * self.leds_per_button
+            self.strip[start_idx:end_idx] = digit_color
+
+
+class CodeRevealBlinkAnimation(Animation):
+    """
+    Blink animation for code reveal.
     
-    def is_fill_complete(self) -> bool:
-        """Check if all digits have been revealed"""
-        return self.revealed_count >= len(self.code_digits)
+    Blinks all code digit segments with their respective hue-shifted colors.
+    """
+    
+    def __init__(self, strip: 'LedStrip', button_count: int, code_sequence: str, speed_ms: int = 400):
+        super().__init__(strip, speed_ms)
+        
+        self.button_count: int = button_count
+        self.leds_per_button: int = strip.num_pixels() // button_count
+        
+        # Parse code sequence
+        self.code_digits: List[int] = [int(char) for char in code_sequence if char.isdigit()]
+        
+        # Pre-calculate green colors for each digit
+        self.digit_colors = []
+        for seq_index in range(len(self.code_digits)):
+            hue = 90 + (seq_index * 15)
+            color = AnimationHelpers.hsv_to_pixel(hue, 1.0, 1.0)
+            self.digit_colors.append(color)
+        
+        # Start with digits shown (will toggle to black on first advance)
+        self.blink_state: bool = False  # Will toggle to True on first advance
+        
+        # Render initial state (all digits lit)
+        for seq_index, digit in enumerate(self.code_digits):
+            start_idx = digit * self.leds_per_button
+            end_idx = (digit + 1) * self.leds_per_button
+            self.strip[start_idx:end_idx] = self.digit_colors[seq_index]
     
     def advance(self) -> None:
-        """Update animation - fill or blink based on current phase"""
-        if self.is_filling:
-            # Fill phase: reveal one more digit
-            if not self.is_fill_complete():
-                digit = self.code_digits[self.revealed_count]
-                start_idx = digit * self.leds_per_button
-                end_idx = (digit + 1) * self.leds_per_button
-                self.strip[start_idx:end_idx] = AnimationHelpers.GREEN
-                self.revealed_count += 1
-        else:
-            # Blink phase: toggle all code digit segments
-            self.blink_state = not self.blink_state
-            color = AnimationHelpers.GREEN if self.blink_state else AnimationHelpers.BLACK
+        """Toggle blink state and render all digits"""
+        self.blink_state = not self.blink_state
+        
+        # Render all code digit segments
+        for seq_index, digit in enumerate(self.code_digits):
+            start_idx = digit * self.leds_per_button
+            end_idx = (digit + 1) * self.leds_per_button
             
-            # Update all code digit segments using slices
-            for digit in self.code_digits:
-                start_idx = digit * self.leds_per_button
-                end_idx = (digit + 1) * self.leds_per_button
-                self.strip[start_idx:end_idx] = color
+            # Use hue-shifted color if on, black if off
+            color = self.digit_colors[seq_index] if self.blink_state else AnimationHelpers.BLACK
+            self.strip[start_idx:end_idx] = color
+
+
+def create_code_reveal_button_animation(strip: 'LedStrip', button_count: int, code_sequence: str) -> SequenceAnimation:
+    """
+    Factory function to create button strip code reveal animation.
+    
+    Phases:
+    1. Progressive fill - reveal one digit at a time (200ms per digit)
+    2. Continuous blink - blink all revealed digits (400ms cycle)
+    
+    Args:
+        strip: LED strip to animate
+        button_count: Number of buttons for segment calculation
+        code_sequence: Code sequence to reveal (e.g., "314")
+        
+    Returns:
+        SequenceAnimation with fill and blink phases
+    """
+    fill_anim = CodeRevealFillAnimation(strip, button_count, code_sequence, speed_ms=200)
+    blink_anim = CodeRevealBlinkAnimation(strip, button_count, code_sequence, speed_ms=400)
+    
+    # Calculate fill duration based on number of digits
+    num_digits = len([c for c in code_sequence if c.isdigit()])
+    # Add one extra interval so last digit is visible for 200ms before transition
+    fill_duration = (num_digits + 1) * 0.2  # 200ms per digit + 200ms for last digit
+    
+    return SequenceAnimation(
+        strip=strip,
+        animation_sequence=[
+            (fill_anim, fill_duration),  # Fill all digits
+            (blink_anim, None)           # Continuous blink
+        ],
+        repeat=False,
+        frame_speed_ms=20
+    )
 
 
 class BlueGradientBlinkPyramidAnimation(Animation):
@@ -1305,6 +1427,128 @@ class BlueGradientBlinkPyramidAnimation(Animation):
             # On - show blue gradient
             for i in range(self.strip.num_pixels()):
                 self.strip[i] = self.blue_gradient_colors[i]
+        else:
+            # Off - black
+            black = Pixel(0, 0, 0)
+            for i in range(self.strip.num_pixels()):
+                self.strip[i] = black
+
+
+class PyramidHeightFillAnimation(Animation):
+    """
+    Progressive fill animation for pyramid - fills height segments one by one.
+    
+    Reveals height segments [0:20], [20:40], [40:60], [60:80], [80:100] progressively,
+    each colored with the corresponding code sequence digit color.
+    Synchronized with button strip code reveal (200ms per segment).
+    """
+    
+    def __init__(self, strip: 'LedStrip', code_sequence: str, speed_ms: int = 200):
+        super().__init__(strip, speed_ms)
+        
+        from game_system.animation_helpers import AnimationHelpers, pyramidHeight
+        
+        # Parse code sequence
+        code_digits = [int(char) for char in code_sequence if char.isdigit()]
+        
+        # Pre-calculate green colors for each sequence digit
+        self.digit_colors = []
+        for seq_index in range(len(code_digits)):
+            hue = 90 + (seq_index * 15)  # Same as CodeModeAnimation
+            color = AnimationHelpers.hsv_to_pixel(hue, 1.0, 1.0)
+            self.digit_colors.append(color)
+        
+        # Pre-calculate height zones and their pixel sets
+        self.height_zones = []
+        for zone_index in range(5):
+            start_height = zone_index * 20
+            end_height = start_height + 20
+            zone_pixels = pyramidHeight[start_height:end_height]
+            
+            # Get color for this zone (or fallback to last color)
+            if zone_index < len(self.digit_colors):
+                zone_color = self.digit_colors[zone_index]
+            else:
+                zone_color = self.digit_colors[-1] if self.digit_colors else AnimationHelpers.hsv_to_pixel(120, 1.0, 1.0)
+            
+            self.height_zones.append((zone_pixels, zone_color))
+        
+        # Animation state
+        self.revealed_count: int = 0  # How many zones are currently revealed
+        
+        # Start with all black
+        self.strip[:] = AnimationHelpers.BLACK
+    
+    def advance(self) -> None:
+        """Reveal one more height zone, then keep rendering all revealed zones"""
+        # Increment revealed count (but not beyond total zones)
+        if self.revealed_count < len(self.height_zones):
+            self.revealed_count += 1
+        
+        # Render all currently revealed zones
+        for zone_index in range(self.revealed_count):
+            zone_pixels, zone_color = self.height_zones[zone_index]
+            for pixel_idx in zone_pixels:
+                self.strip[pixel_idx] = zone_color
+
+
+class GreenGradientBlinkPyramidAnimation(Animation):
+    """
+    Green gradient blink animation for pyramid - uses code sequence colors by height.
+    
+    Divides pyramid into 5 height zones (0-20, 20-40, 40-60, 60-80, 80-100),
+    each colored with the corresponding code sequence digit color.
+    """
+    
+    def __init__(self, strip: 'LedStrip', code_sequence: str, speed_ms: int = 100):
+        super().__init__(strip, speed_ms)
+        
+        from game_system.animation_helpers import AnimationHelpers
+        
+        # Pre-calculate green colors for each sequence digit
+        code_digits = [int(char) for char in code_sequence if char.isdigit()]
+        self.digit_colors = []
+        for seq_index in range(len(code_digits)):
+            hue = 90 + (seq_index * 15)  # Same as CodeModeAnimation
+            color = AnimationHelpers.hsv_to_pixel(hue, 1.0, 1.0)
+            self.digit_colors.append(color)
+        
+        # Pre-calculate which color each pixel should be based on height
+        from game_system.animation_helpers import pyramidHeight
+        self.pixel_colors = []
+        
+        for i in range(strip.num_pixels()):
+            # Determine which height zone this pixel belongs to
+            pixel_color = None
+            for height_zone in range(5):
+                start_height = height_zone * 20
+                end_height = start_height + 20
+                zone_pixels = pyramidHeight[start_height:end_height]
+                
+                if i in zone_pixels:
+                    # Use corresponding digit color (if available)
+                    if height_zone < len(self.digit_colors):
+                        pixel_color = self.digit_colors[height_zone]
+                    else:
+                        # Fallback to last color if sequence is shorter than 5
+                        pixel_color = self.digit_colors[-1] if self.digit_colors else AnimationHelpers.hsv_to_pixel(120, 1.0, 1.0)
+                    break
+            
+            # Store color for this pixel
+            self.pixel_colors.append(pixel_color if pixel_color else AnimationHelpers.hsv_to_pixel(120, 1.0, 1.0))
+        
+        self.blink_state = True  # True = on, False = off
+    
+    def advance(self) -> None:
+        """Toggle between green gradient and black"""
+        from led_system.pixel import Pixel
+        
+        self.blink_state = not self.blink_state
+        
+        if self.blink_state:
+            # On - show green gradient by height
+            for i in range(self.strip.num_pixels()):
+                self.strip[i] = self.pixel_colors[i]
         else:
             # Off - black
             black = Pixel(0, 0, 0)
@@ -1399,31 +1643,275 @@ class WhiteBlinkPyramidAnimation(Animation):
                 self.strip[i] = black
 
 
-def create_code_reveal_pyramid_animation(strip: 'LedStrip') -> SequenceAnimation:
+def create_code_reveal_pyramid_animation(strip: 'LedStrip', code_sequence: str = "") -> SequenceAnimation:
     """
     Factory function to create code reveal pyramid animation sequence.
     
     Phases:
-    1. Blue gradient blink (1 second)
-    2. White vertical fill by pieces (1.6 seconds)
-    3. White blink (continuous)
+    1. Progressive height fill - reveal segments [0:20], [20:40], [40:60], [60:80], [80:100]
+       one by one with code sequence colors (200ms per segment, synchronized with button reveals)
+    2. Clear to black (brief transition)
+    3. White vertical fill by pieces - even then odd (1.6 seconds)
+    4. White blink (continuous)
     
     Args:
         strip: LED strip to animate (pyramid strip)
+        code_sequence: The code sequence for color mapping (e.g., "314")
         
     Returns:
         SequenceAnimation with all phases
     """
-    blue_blink = BlueGradientBlinkPyramidAnimation(strip, speed_ms=100)
+    from led_system.pixel import Pixel
+    
+    # Calculate fill duration based on number of digits/zones
+    num_digits = len([c for c in code_sequence if c.isdigit()]) if code_sequence else 5
+    # Add one extra interval so last segment is visible for 200ms before transition
+    fill_duration = (num_digits + 1) * 0.2  # 200ms per segment + 200ms for last segment
+    
+    # Phase 1: Progressive height fill with green colors
+    if code_sequence:
+        height_fill = PyramidHeightFillAnimation(strip, code_sequence, speed_ms=200)
+    else:
+        # Fallback to blue if no sequence
+        height_fill = BlueGradientBlinkPyramidAnimation(strip, speed_ms=200)
+        fill_duration = 1.0
+    
+    # Phase 2: Clear to black (brief transition)
+    black = Pixel(0, 0, 0)
+    clear_anim = SolidColorAnimation(strip, black, speed_ms=50)
+    
+    # Phase 3: White fill by pieces
     white_fill = PyramidVerticalFillByPieces(strip, speed_ms=80)
+    
+    # Phase 4: White blink
     white_blink = WhiteBlinkPyramidAnimation(strip, speed_ms=400)
     
     return SequenceAnimation(
         strip=strip,
         animation_sequence=[
-            (blue_blink, 1.0),      # 1 second blue blink
-            (white_fill, 1.6),      # 1.6 seconds fill (20 pieces × 80ms)
-            (white_blink, None)     # Continuous white blink
+            (height_fill, fill_duration),  # Progressive fill (num_digits × 200ms)
+            (clear_anim, 0.05),            # 50ms clear to black
+            (white_fill, 1.68),            # 1.68 seconds: 20 pieces × 80ms + 80ms for last piece to be visible
+            (white_blink, None)            # Continuous white blink
+        ],
+        repeat=False,
+        frame_speed_ms=20
+    )
+
+
+class SolidColorAnimation(Animation):
+    """Displays a solid color across entire strip."""
+    
+    def __init__(self, strip: 'LedStrip', color: 'Pixel', speed_ms: int = 50):
+        super().__init__(strip, speed_ms)
+        self.color = color
+    
+    def advance(self) -> None:
+        """Fill strip with solid color"""
+        for i in range(self.strip.num_pixels()):
+            self.strip[i] = self.color
+
+
+class SegmentColorAnimation(Animation):
+    """Displays a color on specific button segments, black elsewhere."""
+    
+    def __init__(self, strip: 'LedStrip', color: 'Pixel', segment_buttons: List[int], 
+                 button_count: int, speed_ms: int = 50):
+        super().__init__(strip, speed_ms)
+        self.color = color
+        self.segment_buttons = segment_buttons
+        self.button_count = button_count
+        self.leds_per_button = strip.num_pixels() // button_count
+        
+        from led_system.pixel import Pixel
+        self.black = Pixel(0, 0, 0)
+    
+    def advance(self) -> None:
+        """Fill specified segments with color, rest with black"""
+        for i in range(self.strip.num_pixels()):
+            button_index = i // self.leds_per_button
+            
+            if button_index in self.segment_buttons:
+                self.strip[i] = self.color
+            else:
+                self.strip[i] = self.black
+
+
+class ButtonReleasedAnimation(Animation):
+    """
+    Animation for button-released failure.
+    
+    Keeps sequence buttons green (with hue shift) and blinks the released button
+    with the red failure pattern: red → black → darker red → black → darkest red.
+    """
+    
+    def __init__(self, strip: 'LedStrip', sequence_buttons: List[int], released_button: int,
+                 button_count: int, speed_ms: int = 50):
+        super().__init__(strip, speed_ms)
+        self.sequence_buttons = sequence_buttons
+        self.released_button = released_button
+        self.button_count = button_count
+        self.leds_per_button = strip.num_pixels() // button_count
+        
+        from led_system.pixel import Pixel
+        from game_system.animation_helpers import AnimationHelpers
+        
+        # Pre-calculate green colors for sequence buttons (with hue shift)
+        self.green_colors = []
+        for seq_index in range(len(sequence_buttons)):
+            hue = 90 + (seq_index * 15)  # Same as CodeModeAnimation
+            color = AnimationHelpers.hsv_to_pixel(hue, 1.0, 1.0)
+            self.green_colors.append(color)
+        
+        # Red colors for blinking pattern
+        self.red_bright = Pixel(255, 0, 0)
+        self.red_medium = Pixel(150, 0, 0)
+        self.red_dark = Pixel(80, 0, 0)
+        self.black = Pixel(0, 0, 0)
+        
+        # Animation state for blinking
+        self.phase_start_time = time.time()
+        self.current_phase = 0  # 0-4 for the 5 phases
+        self.phase_durations = [0.25, 0.25, 0.25, 0.25, 1.3]  # Same as failure animation
+    
+    def advance(self) -> None:
+        """Update animation - green segments + blinking released button"""
+        from game_system.animation_helpers import AnimationHelpers
+        
+        current_time = time.time()
+        elapsed = current_time - self.phase_start_time
+        
+        # Check if should advance to next phase
+        if self.current_phase < len(self.phase_durations):
+            if elapsed >= self.phase_durations[self.current_phase]:
+                self.current_phase += 1
+                self.phase_start_time = current_time
+        
+        # Determine released button color based on phase
+        if self.current_phase < len(self.phase_durations):
+            phase_colors = [
+                self.red_bright,   # Phase 0: bright red
+                self.black,         # Phase 1: black
+                self.red_medium,    # Phase 2: medium red
+                self.black,         # Phase 3: black
+                self.red_dark       # Phase 4: dark red constant
+            ]
+            released_color = phase_colors[self.current_phase]
+        else:
+            released_color = self.red_dark  # Stay dark red after phases complete
+        
+        # Render all pixels
+        for i in range(self.strip.num_pixels()):
+            button_index = i // self.leds_per_button
+            
+            if button_index == self.released_button:
+                # Released button: blink with red pattern
+                self.strip[i] = released_color
+            elif button_index in self.sequence_buttons:
+                # Sequence buttons: stay green with hue shift
+                seq_position = self.sequence_buttons.index(button_index)
+                self.strip[i] = self.green_colors[seq_position]
+            else:
+                # Other buttons: black
+                self.strip[i] = self.black
+
+
+class ColorBlinkAnimation(Animation):
+    """Blinks between a color and black."""
+    
+    def __init__(self, strip: 'LedStrip', color: 'Pixel', speed_ms: int = 100):
+        super().__init__(strip, speed_ms)
+        self.color = color
+        from led_system.pixel import Pixel
+        self.black = Pixel(0, 0, 0)
+        self.blink_state = False  # Start False so first toggle shows color (True)
+    
+    def advance(self) -> None:
+        """Toggle between color and black"""
+        self.blink_state = not self.blink_state
+        
+        display_color = self.color if self.blink_state else self.black
+        for i in range(self.strip.num_pixels()):
+            self.strip[i] = display_color
+
+
+def create_button_released_failure_animation(strip: 'LedStrip', sequence_buttons: List[int], 
+                                             released_button: int, button_count: int) -> 'Animation':
+    """
+    Factory function to create button-released failure animation.
+    
+    Shows green on sequence buttons and red blinking pattern on the released button.
+    
+    Args:
+        strip: LED strip to animate
+        sequence_buttons: List of button indices in the sequence
+        released_button: Button index that was released
+        button_count: Total number of buttons
+        
+    Returns:
+        ButtonReleasedAnimation instance
+    """
+    return ButtonReleasedAnimation(strip, sequence_buttons, released_button, button_count, speed_ms=50)
+
+
+def create_failure_animation(strip: 'LedStrip', sequence_buttons: List[int] = None, button_count: int = None) -> SequenceAnimation:
+    """
+    Factory function to create failure animation sequence.
+    
+    Progression: red → black → darker red → black → darkest red → stay 1.3s
+    
+    For button strip: Only lights red on sequence button segments (if provided)
+    For pyramid strip: Lights entire strip red
+    
+    Phases:
+    1. Red flash (250ms)
+    2. Black (250ms)
+    3. Darker red flash (250ms)
+    4. Black (250ms)
+    5. Darkest red constant (1300ms)
+    
+    Total duration: 2.3 seconds
+    
+    Args:
+        strip: LED strip to animate
+        sequence_buttons: List of button indices in the sequence (for button strip only)
+        button_count: Total number of buttons (for segment calculation, button strip only)
+        
+    Returns:
+        SequenceAnimation with all phases
+    """
+    from led_system.pixel import Pixel
+    
+    # Define red colors with decreasing brightness
+    red_bright = Pixel(255, 0, 0)      # Bright red
+    red_medium = Pixel(150, 0, 0)      # Medium/darker red
+    red_dark = Pixel(80, 0, 0)         # Darkest red
+    black = Pixel(0, 0, 0)             # Black
+    
+    # Create animations based on whether sequence buttons are provided
+    if sequence_buttons is not None and button_count is not None:
+        # Button strip: only light sequence segments
+        flash1 = SegmentColorAnimation(strip, red_bright, sequence_buttons, button_count, speed_ms=50)
+        black1 = SolidColorAnimation(strip, black, speed_ms=50)
+        flash2 = SegmentColorAnimation(strip, red_medium, sequence_buttons, button_count, speed_ms=50)
+        black2 = SolidColorAnimation(strip, black, speed_ms=50)
+        constant_red = SegmentColorAnimation(strip, red_dark, sequence_buttons, button_count, speed_ms=50)
+    else:
+        # Pyramid strip: light entire strip
+        flash1 = SolidColorAnimation(strip, red_bright, speed_ms=50)
+        black1 = SolidColorAnimation(strip, black, speed_ms=50)
+        flash2 = SolidColorAnimation(strip, red_medium, speed_ms=50)
+        black2 = SolidColorAnimation(strip, black, speed_ms=50)
+        constant_red = SolidColorAnimation(strip, red_dark, speed_ms=50)
+    
+    return SequenceAnimation(
+        strip=strip,
+        animation_sequence=[
+            (flash1, 0.25),          # 250ms: bright red
+            (black1, 0.25),          # 250ms: black
+            (flash2, 0.25),          # 250ms: darker red
+            (black2, 0.25),          # 250ms: black
+            (constant_red, 1.3)      # 1300ms: darkest red constant
         ],
         repeat=False,
         frame_speed_ms=20

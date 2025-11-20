@@ -12,7 +12,7 @@ from typing import Optional
 
 # Constants
 SOUNDS_FOLDER = "sounds/"
-CODE_INPUT_MUSIC_PATH = SOUNDS_FOLDER +"sheshtus_long_voice.mp3"
+CODE_INPUT_MUSIC_PATH = SOUNDS_FOLDER +"sheshtus_new.mp3"
 
 
 class GameSounds(enum.Enum):
@@ -31,6 +31,7 @@ class GameSounds(enum.Enum):
     FAIL_SOUND_2 = "fail2.mp3"
     FAIL_SOUND_3 = "fail3.mp3"
     FAIL_SOUND_4 = "fail4.mp3"
+    RELEASED_BUTTON_SOUND = "ReleasedTheButton.mp3"
     
     def get_sound_path(self) -> str:
         """Get the full path to the sound file"""

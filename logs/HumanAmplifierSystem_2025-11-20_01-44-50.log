@@ -1,0 +1,88 @@
+[2025-11-20 01:44:50,338] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-20 01:44:50,339] [INFO] [Amplifier] Button configuration: 10 buttons on GPIO [6, 5, 22, 17, 4, 23, 24, 25, 16, 20]
+[2025-11-20 01:44:50,339] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-20 01:44:50,340] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-20 01:44:50,340] [INFO] [Amplifier]   Strip 2: 293 LEDs on GPIO 18
+[2025-11-20 01:44:50,341] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-20 01:44:50,341] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-20 01:44:50,342] [INFO] [Amplifier] Audio folder: songs
+[2025-11-20 01:44:50,342] [INFO] [Amplifier] Schedule: 2 daily, 1 special entries
+[2025-11-20 01:44:50,343] [INFO] [ButtonReader] GPIO sampler initialized: 10 pins (no pulls)
+[2025-11-20 01:44:50,343] [INFO] [ButtonReader] Pin mapping: Btn0=GPIO6, Btn1=GPIO5, Btn2=GPIO22, Btn3=GPIO17, Btn4=GPIO4, Btn5=GPIO23, Btn6=GPIO24, Btn7=GPIO25, Btn8=GPIO16, Btn9=GPIO20
+[2025-11-20 01:44:50,344] [INFO] [ButtonReader] 🎮 Keyboard debug enabled: Press digit keys 0-9 to toggle buttons (works over SSH)
+[2025-11-20 01:44:50,344] [INFO] [ButtonReader]    Each keypress toggles button ON/OFF
+[2025-11-20 01:44:50,344] [INFO] [ButtonReader] ButtonReader initialized with 10 buttons
+[2025-11-20 01:44:50,345] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-20 01:44:52,494] [INFO] [SongLibrary] Loaded 547 song codes from 10 collections
+[2025-11-20 01:44:52,495] [INFO] [SongLibrary] Collections updated: ['SPANISH', 'TV', 'GENERAL', 'MAIJAM', 'DISNEY', 'CLASSIC', 'MORNING', 'VIRAL', 'FESTIGAL', 'PARTY']
+[2025-11-20 01:45:00,701] [INFO] [SoundController] Sound controller initialized - mixer ready, first song will load on demand
+[2025-11-20 01:45:00,707] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-20 01:45:00,708] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-20 01:45:00,708] [INFO] [Amplifier] Hardware: 10 buttons, 2 LED strips, 20ms frame duration
+[2025-11-20 01:45:00,709] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['SPANISH', 'TV', 'GENERAL', 'MAIJAM', 'DISNEY', 'CLASSIC', 'MORNING', 'VIRAL', 'FESTIGAL', 'PARTY'], 'total_codes': 547, 'daily_schedule_entries': 2, 'special_schedule_entries': 1}
+[2025-11-20 01:45:00,709] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-20 01:45:00,709] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-20 01:45:00,710] [INFO] [Amplifier] Hardware status: 10 buttons, 2 LED strips
+[2025-11-20 01:45:00,710] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-20 01:45:00,710] [INFO] [Amplifier]   Strip 2: 293 LEDs active
+[2025-11-20 01:45:00,711] [INFO] [Amplifier] Audio system: 547 song codes, 12 sound effects
+[2025-11-20 01:45:00,711] [INFO] [Amplifier] Available collections: SPANISH, TV, GENERAL, MAIJAM, DISNEY, CLASSIC, MORNING, VIRAL, FESTIGAL, PARTY
+[2025-11-20 01:45:00,711] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-20 01:45:00,712] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-20 01:45:00,715] [INFO] [GameManager] 💾 Memory - Process: 86.3MB | System: 264/907MB (29.1%, 643MB free) | ⚙️  CPU - Process: 0.0% | System: 27.7% | Cores: [2%, 99%, 5%, 3%]
+[2025-11-20 01:45:08,493] [INFO] [ButtonReader] Keyboard: Button 2 toggled ON (key '2')
+[2025-11-20 01:45:08,507] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 01:45:08,526] [INFO] [SoundController] Song "Abba - Dancing Queen.mp3" was randomly started
+[2025-11-20 01:45:10,459] [INFO] [ButtonReader] Keyboard: Button 2 toggled OFF (key '2')
+[2025-11-20 01:45:10,460] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-20 01:45:11,505] [INFO] [ButtonReader] Keyboard: Button 3 toggled OFF (key '3')
+[2025-11-20 01:45:11,508] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 01:45:15,020] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:45:15,022] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 01:45:15,033] [INFO] [SoundController] Song "לידוי, אסטמה ושקד פררה - עור ברווז (ביט של מנטוס).mp3" was randomly started
+[2025-11-20 01:45:15,402] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:45:15,403] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 01:45:15,824] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:45:15,825] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 01:45:15,836] [INFO] [SoundController] Song "טלויזיה - עכבר העיר עכבר הכפר.mp3" was randomly started
+[2025-11-20 01:45:16,306] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:45:16,309] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 01:45:16,728] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:45:16,729] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-20 01:45:16,747] [INFO] [GameManager] State transition: IdleState → CodeModeState
+[2025-11-20 01:45:16,766] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-20 01:45:20,911] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-20 01:45:24,743] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-20 01:45:30,860] [INFO] [ButtonReader] Keyboard: Button 4 toggled OFF (key '4')
+[2025-11-20 01:45:30,862] [INFO] [GameManager] State transition: CodeModeState → CodeFailState
+[2025-11-20 01:45:30,863] [INFO] [CodeFailState] Code mode failed: Button was released
+[2025-11-20 01:45:32,671] [INFO] [CodeFailState] Failure animation complete, returning to IdleState
+[2025-11-20 01:45:32,673] [INFO] [GameManager] State transition: CodeFailState → IdleState
+[2025-11-20 01:45:37,253] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:45:37,675] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:45:37,677] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 01:45:37,690] [INFO] [SoundController] Song "Alberta Hunter - Darktown Strutters Ball.mp3" was randomly started
+[2025-11-20 01:45:38,057] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:45:38,075] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 01:45:38,520] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:45:38,531] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 01:45:38,550] [INFO] [SoundController] Song "TONES AND I - FLY AWAY.mp3" was randomly started
+[2025-11-20 01:45:38,993] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:45:38,996] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 01:45:39,435] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 01:45:39,436] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-20 01:45:39,453] [INFO] [GameManager] State transition: IdleState → CodeModeState
+[2025-11-20 01:45:39,472] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-20 01:45:40,096] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 01:45:56,396] [INFO] [GameManager] State transition: CodeModeState → CodeFailState
+[2025-11-20 01:45:56,396] [INFO] [CodeFailState] Code mode failed: Button was released
+[2025-11-20 01:45:58,206] [INFO] [CodeFailState] Failure animation complete, returning to IdleState
+[2025-11-20 01:45:58,218] [INFO] [GameManager] State transition: CodeFailState → IdleState
+[2025-11-20 01:46:00,719] [INFO] [GameManager] 💾 Memory - Process: 86.7MB | System: 242/907MB (26.7%, 664MB free) | ⚙️  CPU - Process: 13.7% | System: 6.8% | Cores: [6%, 9%, 6%, 6%]
+[2025-11-20 01:47:00,730] [INFO] [GameManager] 💾 Memory - Process: 86.7MB | System: 245/907MB (27.0%, 662MB free) | ⚙️  CPU - Process: 24.9% | System: 9.6% | Cores: [6%, 10%, 11%, 12%]
+[2025-11-20 01:48:00,738] [INFO] [GameManager] 💾 Memory - Process: 86.7MB | System: 244/907MB (26.9%, 663MB free) | ⚙️  CPU - Process: 24.7% | System: 9.5% | Cores: [10%, 7%, 13%, 8%]
+[2025-11-20 01:48:04,492] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 2 - Process terminating
+[2025-11-20 01:48:04,492] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-20 01:48:05,015] [INFO] [SoundController] Sound controller cleaned up successfully
+[2025-11-20 01:48:05,026] [INFO] [GameManager] Game stopped
+[2025-11-20 01:48:05,026] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

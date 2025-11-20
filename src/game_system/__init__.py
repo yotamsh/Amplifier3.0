@@ -10,7 +10,7 @@ from .animations import Animation
 from .sequence_tracker import ButtonsSequenceTracker
 from .game_manager import GameManager
 from .states import IdleState, AmplifyState, PartyState, CodeModeState, CodeRevealState
-from .animations import RainbowAnimation, BreathingAnimation, StaticColorAnimation, CodeModeAnimation, CodeRevealAnimation
+from .animations import RainbowAnimation, BreathingAnimation, StaticColorAnimation, CodeModeAnimation
 from .animation_helpers import AnimationHelpers
 from .config import GameConfig, LedStripConfig, ButtonConfig, AudioConfig
 
@@ -31,7 +31,6 @@ __all__ = [
     "BreathingAnimation",
     "StaticColorAnimation",
     "CodeModeAnimation",
-    "CodeRevealAnimation",
     "AnimationHelpers",
     # Configuration
     "GameConfig",

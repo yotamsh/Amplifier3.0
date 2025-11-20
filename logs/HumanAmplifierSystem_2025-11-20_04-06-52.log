@@ -1,0 +1,68 @@
+[2025-11-20 04:06:52,773] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-20 04:06:52,774] [INFO] [Amplifier] Button configuration: 10 buttons on GPIO [6, 5, 22, 17, 4, 23, 24, 25, 16, 20]
+[2025-11-20 04:06:52,774] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-20 04:06:52,774] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-20 04:06:52,774] [INFO] [Amplifier]   Strip 2: 293 LEDs on GPIO 18
+[2025-11-20 04:06:52,775] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-20 04:06:52,775] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-20 04:06:52,775] [INFO] [Amplifier] Audio folder: songs
+[2025-11-20 04:06:52,775] [INFO] [Amplifier] Schedule: 2 daily, 1 special entries
+[2025-11-20 04:06:52,776] [INFO] [ButtonReader] GPIO sampler initialized: 10 pins (no pulls)
+[2025-11-20 04:06:52,776] [INFO] [ButtonReader] Pin mapping: Btn0=GPIO6, Btn1=GPIO5, Btn2=GPIO22, Btn3=GPIO17, Btn4=GPIO4, Btn5=GPIO23, Btn6=GPIO24, Btn7=GPIO25, Btn8=GPIO16, Btn9=GPIO20
+[2025-11-20 04:06:52,776] [INFO] [ButtonReader] 🎮 Keyboard debug enabled: Press digit keys 0-9 to toggle buttons (works over SSH)
+[2025-11-20 04:06:52,777] [INFO] [ButtonReader]    Each keypress toggles button ON/OFF
+[2025-11-20 04:06:52,777] [INFO] [ButtonReader] ButtonReader initialized with 10 buttons
+[2025-11-20 04:06:52,778] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-20 04:06:54,912] [INFO] [SongLibrary] Loaded 547 song codes from 10 collections
+[2025-11-20 04:06:54,913] [INFO] [SongLibrary] Collections updated: ['DISNEY', 'TV', 'MORNING', 'MAIJAM', 'GENERAL', 'PARTY', 'VIRAL', 'FESTIGAL', 'SPANISH', 'CLASSIC']
+[2025-11-20 04:07:03,322] [INFO] [SoundController] Sound controller initialized - mixer ready, first song will load on demand
+[2025-11-20 04:07:03,328] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-20 04:07:03,329] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-20 04:07:03,329] [INFO] [Amplifier] Hardware: 10 buttons, 2 LED strips, 20ms frame duration
+[2025-11-20 04:07:03,330] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['DISNEY', 'TV', 'MORNING', 'MAIJAM', 'GENERAL', 'PARTY', 'VIRAL', 'FESTIGAL', 'SPANISH', 'CLASSIC'], 'total_codes': 547, 'daily_schedule_entries': 2, 'special_schedule_entries': 1}
+[2025-11-20 04:07:03,330] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-20 04:07:03,331] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-20 04:07:03,331] [INFO] [Amplifier] Hardware status: 10 buttons, 2 LED strips
+[2025-11-20 04:07:03,332] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-20 04:07:03,332] [INFO] [Amplifier]   Strip 2: 293 LEDs active
+[2025-11-20 04:07:03,332] [INFO] [Amplifier] Audio system: 547 song codes, 13 sound effects
+[2025-11-20 04:07:03,333] [INFO] [Amplifier] Available collections: DISNEY, TV, MORNING, MAIJAM, GENERAL, PARTY, VIRAL, FESTIGAL, SPANISH, CLASSIC
+[2025-11-20 04:07:03,333] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-20 04:07:03,334] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-20 04:07:03,337] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 265/907MB (29.2%, 642MB free) | ⚙️  CPU - Process: 0.0% | System: 29.3% | Cores: [7%, 99%, 5%, 5%]
+[2025-11-20 04:07:46,844] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 04:07:46,859] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 04:07:46,877] [INFO] [SoundController] Song "טלויזיה - סדריק.mp3" was randomly started
+[2025-11-20 04:07:47,180] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 04:07:47,181] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 04:07:47,202] [ERROR] [SoundController] ❌ Failed to load song '‏‏מירב פלדמן - אם אני אוהבת אותך - מתוך פסטיגל 2007, פסטיגל על הזמן - עותק.mp3' (attempt 1/3): mpg123_getformat: Failed to find valid MPEG data within limit on resync. (code 28)
+[2025-11-20 04:07:47,726] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 04:07:47,727] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 04:07:47,738] [INFO] [SoundController] Song "Beauty and the Beast (Live Action) - Belle.mp3" was randomly started
+[2025-11-20 04:07:48,087] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 04:07:48,090] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 04:07:48,670] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 04:07:48,671] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-20 04:07:48,694] [INFO] [GameManager] State transition: IdleState → CodeModeState
+[2025-11-20 04:07:48,713] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-20 04:07:49,096] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 04:07:56,392] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-20 04:07:57,236] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-20 04:07:57,919] [INFO] [ButtonReader] Keyboard: Button 8 toggled ON (key '8')
+[2025-11-20 04:07:58,630] [INFO] [ButtonReader] Keyboard: Button 0 toggled ON (key '0')
+[2025-11-20 04:08:02,468] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-20 04:08:02,469] [INFO] [CodeModeState] Code entered: 63804
+[2025-11-20 04:08:02,470] [INFO] [CodeModeState] Valid code! Transitioning to CodeRevealState
+[2025-11-20 04:08:02,485] [INFO] [GameManager] State transition: CodeModeState → CodeRevealState
+[2025-11-20 04:08:02,504] [INFO] [CodeRevealState] Code reveal started for code: 63804
+[2025-11-20 04:08:03,350] [INFO] [GameManager] 💾 Memory - Process: 88.7MB | System: 239/907MB (26.3%, 668MB free) | ⚙️  CPU - Process: 21.0% | System: 8.6% | Cores: [9%, 9%, 9%, 8%]
+[2025-11-20 04:08:06,805] [INFO] [CodeRevealState] Loading song by code: 63804
+[2025-11-20 04:08:06,806] [INFO] [SoundController] Playing song by code 63804: "Bach - Aria (from) Hunt Cantata.mp3"
+[2025-11-20 04:08:06,806] [INFO] [CodeRevealState] Song loaded successfully, transitioning to PartyState
+[2025-11-20 04:08:06,818] [INFO] [GameManager] State transition: CodeRevealState → PartyState
+[2025-11-20 04:08:06,837] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: Bach - Aria (from) Hunt Cantata.mp3
+[2025-11-20 04:08:50,392] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 2 - Process terminating
+[2025-11-20 04:08:50,393] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-20 04:08:50,682] [INFO] [SoundController] Sound controller cleaned up successfully
+[2025-11-20 04:08:50,692] [INFO] [GameManager] Game stopped
+[2025-11-20 04:08:50,693] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

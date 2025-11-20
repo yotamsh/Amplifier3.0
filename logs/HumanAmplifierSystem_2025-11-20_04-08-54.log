@@ -1,0 +1,38 @@
+[2025-11-20 04:08:54,752] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-20 04:08:54,753] [INFO] [Amplifier] Button configuration: 10 buttons on GPIO [6, 5, 22, 17, 4, 23, 24, 25, 16, 20]
+[2025-11-20 04:08:54,753] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-20 04:08:54,754] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-20 04:08:54,754] [INFO] [Amplifier]   Strip 2: 293 LEDs on GPIO 18
+[2025-11-20 04:08:54,754] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-20 04:08:54,754] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-20 04:08:54,755] [INFO] [Amplifier] Audio folder: songs
+[2025-11-20 04:08:54,755] [INFO] [Amplifier] Schedule: 2 daily, 1 special entries
+[2025-11-20 04:08:54,755] [INFO] [ButtonReader] GPIO sampler initialized: 10 pins (no pulls)
+[2025-11-20 04:08:54,756] [INFO] [ButtonReader] Pin mapping: Btn0=GPIO6, Btn1=GPIO5, Btn2=GPIO22, Btn3=GPIO17, Btn4=GPIO4, Btn5=GPIO23, Btn6=GPIO24, Btn7=GPIO25, Btn8=GPIO16, Btn9=GPIO20
+[2025-11-20 04:08:54,756] [INFO] [ButtonReader] 🎮 Keyboard debug enabled: Press digit keys 0-9 to toggle buttons (works over SSH)
+[2025-11-20 04:08:54,756] [INFO] [ButtonReader]    Each keypress toggles button ON/OFF
+[2025-11-20 04:08:54,756] [INFO] [ButtonReader] ButtonReader initialized with 10 buttons
+[2025-11-20 04:08:54,758] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-20 04:08:56,777] [INFO] [SongLibrary] Loaded 547 song codes from 10 collections
+[2025-11-20 04:08:56,778] [INFO] [SongLibrary] Collections updated: ['MAIJAM', 'PARTY', 'CLASSIC', 'DISNEY', 'VIRAL', 'MORNING', 'GENERAL', 'FESTIGAL', 'TV', 'SPANISH']
+[2025-11-20 04:09:05,219] [INFO] [SoundController] Sound controller initialized - mixer ready, first song will load on demand
+[2025-11-20 04:09:05,226] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-20 04:09:05,226] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-20 04:09:05,227] [INFO] [Amplifier] Hardware: 10 buttons, 2 LED strips, 20ms frame duration
+[2025-11-20 04:09:05,227] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['MAIJAM', 'PARTY', 'CLASSIC', 'DISNEY', 'VIRAL', 'MORNING', 'GENERAL', 'FESTIGAL', 'TV', 'SPANISH'], 'total_codes': 547, 'daily_schedule_entries': 2, 'special_schedule_entries': 1}
+[2025-11-20 04:09:05,227] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-20 04:09:05,228] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-20 04:09:05,228] [INFO] [Amplifier] Hardware status: 10 buttons, 2 LED strips
+[2025-11-20 04:09:05,228] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-20 04:09:05,228] [INFO] [Amplifier]   Strip 2: 293 LEDs active
+[2025-11-20 04:09:05,229] [INFO] [Amplifier] Audio system: 547 song codes, 13 sound effects
+[2025-11-20 04:09:05,229] [INFO] [Amplifier] Available collections: MAIJAM, PARTY, CLASSIC, DISNEY, VIRAL, MORNING, GENERAL, FESTIGAL, TV, SPANISH
+[2025-11-20 04:09:05,230] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-20 04:09:05,230] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-20 04:09:05,233] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 262/907MB (28.9%, 645MB free) | ⚙️  CPU - Process: 0.0% | System: 28.6% | Cores: [4%, 69%, 5%, 36%]
+[2025-11-20 04:10:05,236] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 239/907MB (26.4%, 667MB free) | ⚙️  CPU - Process: 29.5% | System: 11.0% | Cores: [11%, 14%, 10%, 9%]
+[2025-11-20 04:10:12,866] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 2 - Process terminating
+[2025-11-20 04:10:12,867] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-20 04:10:13,394] [INFO] [SoundController] Sound controller cleaned up successfully
+[2025-11-20 04:10:13,405] [INFO] [GameManager] Game stopped
+[2025-11-20 04:10:13,405] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

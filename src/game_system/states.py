@@ -722,26 +722,27 @@ class CodeModeState(GameState):
         # Clear logger reference (prevents logger accumulation)
         self.logger = None
     
-    def _fail_and_return_to_idle(self, reason: str) -> 'GameState':
+    def _fail_and_return_to_idle(self, reason: str, released_button: int = None) -> 'GameState':
         """
-        Handle code mode failure - stop music, play fail sound, return to idle.
+        Handle code mode failure - transition to CodeFailState.
         
         Args:
             reason: Description of why code mode failed (for logging)
+            released_button: Button index that was released (if applicable)
             
         Returns:
-            IdleState instance
+            CodeFailState instance (which will handle sound, animations, and transition to idle)
         """
-        self.logger.info(f"Code mode failed: {reason}")
+        # Get current sequence
+        sequence = self.game_manager.sequence_tracker.get_sequence()
         
-        # Stop code input music
-        self.game_manager.sound_controller.stop_music()
-        
-        # Play random fail sound
-        self.game_manager.sound_controller.play_random_fail_sound(volume=0.8)
-        
-        # Return to idle
-        return IdleState(self.game_manager)
+        # Transition to fail state (which will handle music, sound, and animations)
+        return CodeFailState(
+            self.game_manager, 
+            fail_reason=reason,
+            sequence=sequence,
+            released_button=released_button
+        )
     
     def state_update(self, button_state: 'ButtonState') -> Optional['GameState']:
         """Update code mode - track sequence, check for completion and failures"""
@@ -751,7 +752,7 @@ class CodeModeState(GameState):
         for i, currently_pressed in enumerate(button_state.for_button):
             prev_pressed = button_state.previous_state_of[i]
             if prev_pressed and not currently_pressed:
-                return self._fail_and_return_to_idle("Button was released")
+                return self._fail_and_return_to_idle("Button was released", released_button=i)
         
         # FAILURE CONDITION 2: Check if song ended (timeout)
         if not self.game_manager.sound_controller.is_song_playing():
@@ -803,9 +804,11 @@ class CodeRevealState(GameState):
     Code reveal state - animated transition from valid code entry to party mode.
     
     Sequence:
-    1. Play CODE_SOUND on enter, animate code reveal (fill digits progressively)
-    2. When CODE_SOUND finishes, play ONE_TWO_THREE_SOUND and switch to blink animation
+    1. Play CODE_SOUND on enter, animate code reveal (fill digits progressively, then blink)
+    2. When CODE_SOUND finishes, play ONE_TWO_THREE_SOUND (animation continues blinking)
     3. When ONE_TWO_THREE_SOUND finishes, play song by code and transition to PartyState
+    
+    Animation automatically transitions from fill → blink using SequenceAnimation.
     
     Transitions:
     - Song loaded successfully → PartyState
@@ -821,8 +824,8 @@ class CodeRevealState(GameState):
             game_manager: GameManager instance
             code_sequence: The button sequence entered (e.g., "314")
             code: The validated code (same as sequence for now)
-            fill_speed_ms: Speed of filling animation (ms per digit)
-            blink_speed_ms: Speed of blinking animation (ms per cycle)
+            fill_speed_ms: Speed of filling animation (ms per digit) - unused, kept for compatibility
+            blink_speed_ms: Speed of blinking animation (ms per cycle) - unused, kept for compatibility
         """
         super().__init__(game_manager)
         
@@ -833,20 +836,23 @@ class CodeRevealState(GameState):
         self.code = code
         self.code_sequence = code_sequence
         
-        # Create code reveal animation for first strip
+        # Create code reveal animations using factory functions
         first_strip = game_manager.led_strips[0]
-        from game_system.animations import CodeRevealAnimation, create_code_reveal_pyramid_animation
-        self.reveal_anim = CodeRevealAnimation(
+        pyramid_strip = game_manager.led_strips[1]
+        
+        from game_system.animations import (create_code_reveal_button_animation, 
+                                            create_code_reveal_pyramid_animation)
+        
+        self.reveal_anim = create_code_reveal_button_animation(
             strip=first_strip,
             button_count=game_manager.button_reader.get_button_count(),
-            code_sequence=code_sequence,
-            fill_speed_ms=fill_speed_ms,
-            blink_speed_ms=blink_speed_ms
+            code_sequence=code_sequence
         )
         
-        # Create code reveal animation for pyramid (second strip)
-        pyramid_strip = game_manager.led_strips[1]
-        self.pyramid_reveal_anim = create_code_reveal_pyramid_animation(pyramid_strip)
+        self.pyramid_reveal_anim = create_code_reveal_pyramid_animation(
+            strip=pyramid_strip, 
+            code_sequence=code_sequence
+        )
         
         # Register with base class
         self.strip_animations[0] = self.reveal_anim
@@ -882,8 +888,6 @@ class CodeRevealState(GameState):
         self.game_manager.button_reader.ignore_pressed_until_released()
         
         # Clear animation references to help GC
-        self.reveal_anim.strip = None
-        self.pyramid_reveal_anim.strip = None
         self.strip_animations.clear()
         
         # Clear sound channel references
@@ -906,8 +910,8 @@ class CodeRevealState(GameState):
                     volume=0.9
                 )
                 
-                # Switch animation to blink mode
-                self.reveal_anim.start_blinking()
+                # Animation automatically transitions from fill to blink via SequenceAnimation
+                # No need to manually switch phases
                 
                 # Move to next phase
                 self.phase = "ONE_TWO_THREE"
@@ -931,4 +935,151 @@ class CodeRevealState(GameState):
                     return IdleState(self.game_manager)
         
         # No transitions - animations will be handled by generic_update_and_show
+        return None
+
+
+class CodeFailState(GameState):
+    """
+    Code failure state - shows failure animation and plays fail sound.
+    
+    Displays red failure animation on both strips,
+    plays fail sound based on reason, then transitions back to IdleState.
+    
+    Button strip behavior:
+    - Button released: Sequence buttons stay green, released button blinks red
+    - Other failures: Only sequence buttons light red
+    
+    Pyramid strip: Always lights entire strip red
+    
+    Fail sounds:
+    - Button released: ReleasedTheButton.mp3
+    - Wrong code: fail2.mp3
+    - Timeout: fail4.mp3
+    
+    Transitions:
+    - After sound finishes → IdleState
+    """
+    
+    def __init__(self, game_manager: 'GameManager', fail_reason: str, 
+                 sequence: str = "", released_button: int = None):
+        """
+        Initialize code fail state.
+        
+        Args:
+            game_manager: GameManager instance
+            fail_reason: Description of why code entry failed
+            sequence: The sequence entered so far (for button strip animation)
+            released_button: Button index that was released (if applicable)
+        """
+        super().__init__(game_manager)
+        
+        # Create logger
+        self.logger = game_manager.logger.create_class_logger("CodeFailState")
+        
+        # Store fail reason and details for logging
+        self.fail_reason = fail_reason
+        self.sequence = sequence
+        self.released_button = released_button
+        
+        # Convert sequence to button indices
+        sequence_buttons = []
+        for char in sequence:
+            if char.isdigit():
+                sequence_buttons.append(int(char))
+        
+        # Create failure animations based on fail reason
+        from game_system.animations import (create_failure_animation, 
+                                            create_button_released_failure_animation)
+        
+        first_strip = game_manager.led_strips[0]
+        button_count = game_manager.button_reader.get_button_count()
+        
+        # Determine if this is a button-released failure
+        is_button_released = "released" in fail_reason.lower()
+        
+        if is_button_released and released_button is not None:
+            # Button released: green sequence + blinking red on released button
+            self.fail_anim_strip0 = create_button_released_failure_animation(
+                first_strip,
+                sequence_buttons=sequence_buttons,
+                released_button=released_button,
+                button_count=button_count
+            )
+        else:
+            # Other failures: red only on sequence segments
+            self.fail_anim_strip0 = create_failure_animation(
+                first_strip, 
+                sequence_buttons=sequence_buttons,
+                button_count=button_count
+            )
+        
+        # Pyramid strip: always show red on entire strip
+        pyramid_strip = game_manager.led_strips[1]
+        self.fail_anim_strip1 = create_failure_animation(pyramid_strip)
+        
+        # Register with base class
+        self.strip_animations[0] = self.fail_anim_strip0
+        self.strip_animations[1] = self.fail_anim_strip1
+        
+        # Sound channel tracking (exit when sound ends)
+        self.fail_sound_channel = None
+    
+    def custom_on_enter(self) -> None:
+        """Actions when entering code fail state"""
+        self.logger.info(f"Code mode failed: {self.fail_reason}")
+        
+        # Stop code input music
+        self.game_manager.sound_controller.stop_music()
+        
+        # Don't clear strips - animations will render immediately, preserving smooth transition
+        
+        # Play appropriate fail sound based on reason
+        from audio_system.sound_controller import GameSounds
+        
+        if "released" in self.fail_reason.lower():
+            # Button was released
+            sound = GameSounds.RELEASED_BUTTON_SOUND
+            self.logger.debug("Playing ReleasedTheButton sound")
+        elif "invalid code" in self.fail_reason.lower() or "unsupported" in self.fail_reason.lower():
+            # Wrong code
+            sound = GameSounds.FAIL_SOUND_2
+            self.logger.debug("Playing fail2 sound (wrong code)")
+        elif "timeout" in self.fail_reason.lower() or "song ended" in self.fail_reason.lower():
+            # Timeout
+            sound = GameSounds.FAIL_SOUND_4
+            self.logger.debug("Playing fail4 sound (timeout)")
+        else:
+            # Default to fail2
+            sound = GameSounds.FAIL_SOUND_2
+            self.logger.debug("Playing fail2 sound (default)")
+        
+        # Play the selected sound and store channel
+        self.fail_sound_channel = self.game_manager.sound_controller.play_sound_with_volume(
+            sound,
+            volume=0.8
+        )
+    
+    def custom_on_exit(self) -> None:
+        """Actions when exiting code fail state"""
+        # Ignore currently pressed buttons until released
+        self.game_manager.button_reader.ignore_pressed_until_released()
+        
+        # Clear animation references to help GC
+        self.strip_animations.clear()
+        
+        # Clear sound channel reference
+        self.fail_sound_channel = None
+        
+        # Clear logger reference (prevents logger accumulation)
+        self.logger = None
+    
+    def state_update(self, button_state: 'ButtonState') -> Optional['GameState']:
+        """Update code fail state - wait for sound to finish before transitioning"""
+        
+        # Check if fail sound has finished playing
+        if self.fail_sound_channel and not self.fail_sound_channel.get_busy():
+            self.logger.info("Failure sound complete, returning to IdleState")
+            return IdleState(self.game_manager)
+        
+        # No transitions yet - animations will be handled by generic_update_and_show
         return None
