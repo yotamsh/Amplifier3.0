@@ -10,6 +10,7 @@ from .interfaces import IButtonReader, IButtonSampler
 from .button_reader import ButtonReader
 from .gpio_sampler import GPIOSampler
 from .gpio_keyboard_sampler import GPIOWithKeyboardSampler
+from .keyboard_sampler import KeyboardSampler, KeyboardSamplerLineMode
 
 __all__ = [
     "ButtonState",
@@ -17,5 +18,7 @@ __all__ = [
     "IButtonSampler",
     "ButtonReader",
     "GPIOSampler",
-    "GPIOWithKeyboardSampler"
+    "GPIOWithKeyboardSampler",
+    "KeyboardSampler",
+    "KeyboardSamplerLineMode"
 ]

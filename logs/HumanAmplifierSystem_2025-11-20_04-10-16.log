@@ -30,3 +30,58 @@
 [2025-11-20 04:10:26,834] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
 [2025-11-20 04:10:26,835] [INFO] [GameManager] Starting game loop with 20ms frame duration
 [2025-11-20 04:10:26,837] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 267/907MB (29.4%, 640MB free) | ⚙️  CPU - Process: 0.0% | System: 28.8% | Cores: [5%, 82%, 4%, 23%]
+[2025-11-20 04:11:01,057] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 04:11:01,073] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 04:11:01,092] [INFO] [SoundController] Song "Queeen - Somebody To Love.mp3" was randomly started
+[2025-11-20 04:11:01,636] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 04:11:01,637] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 04:11:02,198] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 04:11:02,209] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 04:11:02,228] [INFO] [SoundController] Song "Meghan Trainor - All About That Bass (Official Video) (320kbps).mp3" was randomly started
+[2025-11-20 04:11:02,590] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 04:11:02,592] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 04:11:03,133] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 04:11:03,134] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 04:11:03,144] [INFO] [SoundController] Song "La Sonora Dinamita - Se Me Perdio La Cadenita (Official Audio) (320kbps).mp3" was randomly started
+[2025-11-20 04:11:03,655] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 04:11:03,661] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 04:11:04,502] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 04:11:04,513] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 04:11:04,532] [INFO] [SoundController] Song "טיפקס ועלמה זק- פרח השכונות.mp3" was randomly started
+[2025-11-20 04:11:04,958] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 04:11:04,960] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 04:11:05,401] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 04:11:05,412] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 04:11:05,431] [INFO] [SoundController] Song "Toto la momposina - Yo Me Llamo Cumbia.mp3" was randomly started
+[2025-11-20 04:11:05,833] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 04:11:05,835] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 04:11:06,275] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 04:11:06,286] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 04:11:06,305] [INFO] [SoundController] Song "Dua Lipa - Levitating Featuring DaBaby (Official Music Video).mp3" was randomly started
+[2025-11-20 04:11:06,668] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 04:11:06,669] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 04:11:07,089] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 04:11:07,090] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-20 04:11:07,114] [INFO] [GameManager] State transition: IdleState → CodeModeState
+[2025-11-20 04:11:07,133] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-20 04:11:07,515] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-20 04:11:09,082] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-20 04:11:09,745] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-20 04:11:10,991] [INFO] [ButtonReader] Keyboard: Button 8 toggled ON (key '8')
+[2025-11-20 04:11:11,715] [INFO] [ButtonReader] Keyboard: Button 0 toggled ON (key '0')
+[2025-11-20 04:11:14,611] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-20 04:11:14,612] [INFO] [CodeModeState] Code entered: 63804
+[2025-11-20 04:11:14,613] [INFO] [CodeModeState] Valid code! Transitioning to CodeRevealState
+[2025-11-20 04:11:14,619] [INFO] [GameManager] State transition: CodeModeState → CodeRevealState
+[2025-11-20 04:11:14,638] [INFO] [CodeRevealState] Code reveal started for code: 63804
+[2025-11-20 04:11:19,044] [INFO] [CodeRevealState] Loading song by code: 63804
+[2025-11-20 04:11:19,045] [INFO] [SoundController] Playing song by code 63804: "Bach - Aria (from) Hunt Cantata.mp3"
+[2025-11-20 04:11:19,045] [INFO] [CodeRevealState] Song loaded successfully, transitioning to PartyState
+[2025-11-20 04:11:19,057] [INFO] [GameManager] State transition: CodeRevealState → PartyState
+[2025-11-20 04:11:19,076] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: Bach - Aria (from) Hunt Cantata.mp3
+[2025-11-20 04:11:26,847] [INFO] [GameManager] 💾 Memory - Process: 88.7MB | System: 242/907MB (26.7%, 665MB free) | ⚙️  CPU - Process: 22.3% | System: 9.3% | Cores: [8%, 11%, 10%, 7%]
+[2025-11-20 04:11:41,971] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 2 - Process terminating
+[2025-11-20 04:11:41,971] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-20 04:11:42,443] [INFO] [SoundController] Sound controller cleaned up successfully
+[2025-11-20 04:11:42,454] [INFO] [GameManager] Game stopped
+[2025-11-20 04:11:42,454] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

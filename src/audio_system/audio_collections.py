@@ -15,15 +15,16 @@ class AudioCollection(Enum):
     
     Hardcoded collection definitions.
     """
-    GENERAL = "general"
-    MORNING = "morning"
-    PARTY = "party"
-    TV = "tv"
     CLASSIC = "classic"
     DISNEY = "disney"
-    SPANISH = "spanish"
-    MAIJAM = "maijam"
     FESTIGAL = "festigal"
+    GENERAL = "general"
+    HAFLA = "hafla"
+    MAIJAM = "maijam"
+    MORNING = "morning"
+    PARTY = "party"
+    SPANISH = "spanish"
+    TV = "tv"
     VIRAL = "viral"
 
 

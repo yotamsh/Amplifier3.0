@@ -101,6 +101,7 @@ class CodeGeneratorHelper:
         num_collides = 0
         num_errors = 0
         existing_codes: dict[str, str] = {}  # Maps code -> song_path for duplicate detection
+        collection_stats = {}  # Maps collection name -> {existing: int, new: int}
         
         # Create CSV file
         with open(csv_output_path, 'w', newline='', encoding='utf-8') as csv_file:
@@ -111,6 +112,7 @@ class CodeGeneratorHelper:
             print("🔍 Phase 1: Scanning existing codes...")
             for collection in ALL_COLLECTIONS:
                 collection_path = os.path.join(songs_folder, collection.value)
+                collection_stats[collection.name] = {'existing': 0, 'new': 0}
                 
                 print(f"  Scanning {collection.name}...", end=" ", flush=True)
                 collection_song_count = 0
@@ -136,9 +138,9 @@ class CodeGeneratorHelper:
                                 if existing_code in existing_codes:
                                     num_errors += 1
                                     original_song = existing_codes[existing_code]
-                                    print(f"\n    ❌ Error: Duplicate code '{existing_code}'")
-                                    print(f"       Song 1: {original_song}")
-                                    print(f"       Song 2: {song_path}")
+                                    print(f"\n    ⚠️  DUPLICATE CODE '{existing_code}' FOUND!")
+                                    print(f"       Song 1: {os.path.basename(original_song)}")
+                                    print(f"       Song 2: {os.path.basename(song_path)}")
                                 else:
                                     existing_codes[existing_code] = song_path
                                     writer.writerow([
@@ -147,6 +149,7 @@ class CodeGeneratorHelper:
                                         existing_code
                                     ])
                                     collection_song_count += 1
+                                    collection_stats[collection.name]['existing'] += 1
                         
                         except Exception as e:
                             print(f"\n    ⚠️  Failed to process {filename}: {e}")
@@ -164,7 +167,10 @@ class CodeGeneratorHelper:
             for collection in ALL_COLLECTIONS:
                 collection_path = os.path.join(songs_folder, collection.value)
                 
-                print(f"  Processing {collection.name}...", end=" ", flush=True)
+                if collection.name not in collection_stats:
+                    collection_stats[collection.name] = {'existing': 0, 'new': 0}
+                
+                print(f"  Processing {collection.name}...")
                 collection_new_count = 0
                 
                 try:
@@ -209,25 +215,56 @@ class CodeGeneratorHelper:
                                     new_code
                                 ])
                                 collection_new_count += 1
+                                collection_stats[collection.name]['new'] += 1
+                                
+                                # Print the file that got a new code
+                                print(f"    ✨ NEW CODE: {new_code} → {filename}")
                         
                         except Exception as e:
-                            print(f"\n    ⚠️  Failed to process {filename}: {e}")
+                            print(f"    ⚠️  Failed to process {filename}: {e}")
                             
                 except Exception as e:
-                    print(f"\n  ❌ Failed to process collection {collection.name}: {e}")
+                    print(f"  ❌ Failed to process collection {collection.name}: {e}")
                     continue
                 
-                print(f"({collection_new_count} new codes)")
+                # Print collection summary
+                existing_count = collection_stats[collection.name]['existing']
+                new_count = collection_stats[collection.name]['new']
+                total_count = existing_count + new_count
+                print(f"    📊 Summary: {total_count} total ({existing_count} existing + {new_count} new)")
+                print()
         
         # Final statistics
         print()
+        print("=" * 70)
         print("✅ Code generation complete!")
-        print(f"📊 Statistics:")
-        print(f"  • Total codes: {len(existing_codes)}")
-        print(f"  • New songs: {num_new_songs}")
-        print(f"  • Code collisions: {num_collides}")
-        print(f"  • Errors: {num_errors}")
-        print(f"  • CSV file: {csv_output_path}")
+        print("=" * 70)
+        print()
+        
+        # Collection breakdown
+        print("📊 COLLECTION BREAKDOWN:")
+        print("-" * 70)
+        for collection in ALL_COLLECTIONS:
+            stats = collection_stats.get(collection.name, {'existing': 0, 'new': 0})
+            existing = stats['existing']
+            new = stats['new']
+            total = existing + new
+            print(f"  {collection.name:20s}: {total:3d} total ({existing:3d} existing + {new:3d} new)")
+        print()
+        
+        # Overall statistics
+        print("📈 OVERALL STATISTICS:")
+        print("-" * 70)
+        print(f"  • Total codes:       {len(existing_codes)}")
+        print(f"  • New codes:         {num_new_songs}")
+        print(f"  • Code collisions:   {num_collides}")
+        if num_errors > 0:
+            print(f"  • ⚠️  DUPLICATE CODES: {num_errors}")
+        print(f"  • CSV file:          {csv_output_path}")
+        print()
+        
+        if num_errors > 0:
+            print("⚠️  WARNING: Duplicate codes were found! Please review the output above.")
     
     @staticmethod
     def _is_audio_file(filename: str) -> bool:
