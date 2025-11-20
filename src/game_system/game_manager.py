@@ -204,10 +204,10 @@ class GameManager:
         # Call exit handler on current state
         self.current_state.on_exit()
 
-        # Log state transition
+        # Log state transition at DEBUG level
         old_state_name = self.current_state.__class__.__name__
         new_state_name = new_state.__class__.__name__
-        self.logger.info(f"State transition: {old_state_name} → {new_state_name}")
+        self.logger.debug(f"State transition: {old_state_name} → {new_state_name}")
 
         # Switch to new state
         self.current_state = new_state

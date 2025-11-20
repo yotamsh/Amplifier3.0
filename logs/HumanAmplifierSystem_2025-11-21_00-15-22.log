@@ -1,0 +1,76 @@
+[2025-11-21 00:15:22,448] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-21 00:15:22,449] [INFO] [Amplifier] Button configuration: 10 buttons on GPIO [6, 5, 22, 17, 4, 23, 24, 25, 16, 20]
+[2025-11-21 00:15:22,449] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-21 00:15:22,450] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-21 00:15:22,452] [INFO] [Amplifier]   Strip 2: 293 LEDs on GPIO 18
+[2025-11-21 00:15:22,453] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-21 00:15:22,453] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-21 00:15:22,454] [INFO] [Amplifier] Audio folder: songs
+[2025-11-21 00:15:22,454] [INFO] [Amplifier] Schedule: 13 daily, 1 special entries
+[2025-11-21 00:15:22,455] [INFO] [ButtonReader] 🎮 Keyboard sampler initialized (NO GPIO)
+[2025-11-21 00:15:22,455] [INFO] [ButtonReader]    10 virtual buttons mapped to digit keys 0-9
+[2025-11-21 00:15:22,456] [INFO] [ButtonReader]    Press digit keys to toggle buttons ON/OFF
+[2025-11-21 00:15:22,456] [INFO] [ButtonReader]    Each keypress toggles button ON/OFF
+[2025-11-21 00:15:22,457] [INFO] [ButtonReader] ButtonReader initialized with 10 buttons
+[2025-11-21 00:15:22,459] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-21 00:15:24,883] [INFO] [SongLibrary] Loaded 722 song codes from 11 collections
+[2025-11-21 00:15:24,884] [INFO] [SongLibrary] Collections updated: ['MAIJAM']
+[2025-11-21 00:15:24,969] [INFO] [SoundController] Pygame mixer initialized: 48000Hz, format=-16, channels=2
+[2025-11-21 00:15:33,188] [INFO] [SoundController] Sound controller initialized - mixer ready, first song will load on demand
+[2025-11-21 00:15:33,195] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-21 00:15:33,196] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-21 00:15:33,196] [INFO] [Amplifier] Hardware: 10 buttons, 2 LED strips, 20ms frame duration
+[2025-11-21 00:15:33,197] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['CLASSIC', 'PARTY', 'GENERAL', 'FESTIGAL', 'HAFLA', 'DISNEY', 'SPANISH', 'MAIJAM', 'TV', 'MORNING', 'VIRAL'], 'total_codes': 722, 'daily_schedule_entries': 13, 'special_schedule_entries': 1}
+[2025-11-21 00:15:33,197] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-21 00:15:33,198] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-21 00:15:33,198] [INFO] [Amplifier] Hardware status: 10 buttons, 2 LED strips
+[2025-11-21 00:15:33,199] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-21 00:15:33,199] [INFO] [Amplifier]   Strip 2: 293 LEDs active
+[2025-11-21 00:15:33,200] [INFO] [Amplifier] Audio system: 722 song codes, 13 sound effects
+[2025-11-21 00:15:33,200] [INFO] [Amplifier] Available collections: CLASSIC, PARTY, GENERAL, FESTIGAL, HAFLA, DISNEY, SPANISH, MAIJAM, TV, MORNING, VIRAL
+[2025-11-21 00:15:33,200] [INFO] [Amplifier] ===========================
+[2025-11-21 00:15:33,201] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-21 00:15:33,201] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-21 00:15:33,204] [INFO] [GameManager] 💾 Memory - Process: 87.8MB | System: 247/907MB (27.2%, 660MB free) | ⚙️  CPU - Process: 0.0% | System: 27.8% | Cores: [99%, 3%, 5%, 4%]
+[2025-11-21 00:15:42,062] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-21 00:15:42,063] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-21 00:15:42,063] [DEBUG] [SequenceTracker] UPDATE: '' → '5' (added buttons: [5], elapsed: 0.00s)
+[2025-11-21 00:15:42,063] [DEBUG] [IdleState] Checking sequence: '5' (need '777' for code mode)
+[2025-11-21 00:15:42,098] [INFO] [AmplifyState] Song "Boney M. - Sunny (Official Audio).mp3" was randomly started 🎚️
+[2025-11-21 00:15:44,868] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-21 00:15:44,870] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-21 00:15:44,871] [DEBUG] [SequenceTracker] UPDATE: '5' → '56' (added buttons: [6], elapsed: 2.81s)
+[2025-11-21 00:15:46,857] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 00:15:46,858] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 00:15:46,859] [DEBUG] [SequenceTracker] UPDATE: '56' → '567' (added buttons: [7], elapsed: 4.80s)
+[2025-11-21 00:15:48,938] [INFO] [ButtonReader] Keyboard: Button 5 toggled OFF (key '5')
+[2025-11-21 00:15:53,398] [INFO] [ButtonReader] Keyboard: Button 6 toggled OFF (key '6')
+[2025-11-21 00:15:53,398] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 00:15:53,399] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-21 00:15:53,399] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-21 00:15:53,399] [DEBUG] [SequenceTracker] UPDATE: '567' → '5675' (added buttons: [5], elapsed: 11.34s)
+[2025-11-21 00:15:55,249] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-21 00:15:55,250] [INFO] [ButtonReader] Keyboard: Button 6 toggled OFF (key '6')
+[2025-11-21 00:15:55,251] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 00:15:55,251] [INFO] [ButtonReader] Keyboard: Button 5 toggled OFF (key '5')
+[2025-11-21 00:15:55,252] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 00:15:55,253] [DEBUG] [SequenceTracker] UPDATE: '5675' → '56757' (added buttons: [7], elapsed: 13.19s)
+[2025-11-21 00:15:56,736] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 00:15:56,737] [INFO] [AmplifyState] Song "Boney M. - Sunny (Official Audio).mp3" was released 🤷🏻‍♀️
+[2025-11-21 00:15:56,756] [DEBUG] [SequenceTracker] RESET: cleared sequence '56757', elapsed: 14.69s
+[2025-11-21 00:15:58,904] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 00:15:58,905] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 00:15:58,905] [DEBUG] [SequenceTracker] UPDATE: '' → '7' (added buttons: [7], elapsed: 0.00s)
+[2025-11-21 00:15:58,906] [DEBUG] [IdleState] Checking sequence: '7' (need '777' for code mode)
+[2025-11-21 00:15:58,940] [INFO] [AmplifyState] Song "Spice Girls - Wannabe [Lyrics].mp3" was randomly started 🎚️
+[2025-11-21 00:16:02,036] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 00:16:02,037] [INFO] [AmplifyState] Song "Spice Girls - Wannabe [Lyrics].mp3" was released 🤷🏻‍♀️
+[2025-11-21 00:16:02,057] [DEBUG] [SequenceTracker] RESET: cleared sequence '7', elapsed: 3.15s
+[2025-11-21 00:16:33,205] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 252/907MB (27.8%, 655MB free) | ⚙️  CPU - Process: 23.7% | System: 9.7% | Cores: [8%, 11%, 8%, 12%]
+[2025-11-21 00:17:33,217] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 253/907MB (27.9%, 654MB free) | ⚙️  CPU - Process: 30.7% | System: 11.4% | Cores: [9%, 10%, 13%, 14%]
+[2025-11-21 00:18:33,234] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 249/907MB (27.5%, 658MB free) | ⚙️  CPU - Process: 30.7% | System: 11.5% | Cores: [11%, 18%, 11%, 5%]
+[2025-11-21 00:19:04,376] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 2 - Process terminating
+[2025-11-21 00:19:04,376] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-21 00:19:05,984] [INFO] [SoundController] Sound controller cleaned up successfully
+[2025-11-21 00:19:05,995] [INFO] [GameManager] Game stopped
+[2025-11-21 00:19:05,995] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

@@ -2,10 +2,12 @@
 Game state base class and concrete implementations
 """
 
+import logging
+import os
 from abc import ABC, abstractmethod
 from typing import Dict, List, Optional, TYPE_CHECKING
 
-from .animations import AmplifyAnimation, AnimationDelayWrapper, IdleAnimation, PartyAnimation
+from .animations import AmplifyAnimation, AnimationDelayWrapper, HueShiftSnakeAnimation, IdleAnimation, PartyAnimation
 
 if TYPE_CHECKING:
     from button_system.button_state import ButtonState
@@ -120,15 +122,28 @@ class IdleState(GameState):
     def __init__(self, game_manager: 'GameManager'):
         super().__init__(game_manager)
         
+        # Create class logger for this state at DEBUG level
+        self.logger = game_manager.logger.create_class_logger("IdleState", logging.DEBUG)
+        
         # Register animations for each strip (idle scanner with delay)
         for strip_index, strip in enumerate(self.game_manager.led_strips):
-            # Create the idle scanner animation
-            idle_anim = IdleAnimation(
-                strip=strip,
-                speed_ms=25,      # Faster scanner movement (was 30ms)
-                hue_increment=5,  # More hue change per frame (was 3)
-                fade_amount=20    # Trail fading strength
-            )
+            # Create the appropriate idle animation for each strip
+            if strip_index == 0:
+                # Button strip: Use new hue-shifting snake animation
+                idle_anim = HueShiftSnakeAnimation(
+                    strip=strip,
+                    speed_ms=25,      # Fast snake movement
+                    hue_shift=5,      # Shift trail hue by 5 degrees per frame
+                    fade_amount=60    # Trail fading strength
+                )
+            else:
+                # Pyramid strip: Use original IdleAnimation
+                idle_anim = IdleAnimation(
+                    strip=strip,
+                    speed_ms=25,      # Faster scanner movement (was 30ms)
+                    hue_increment=5,  # More hue change per frame (was 3)
+                    fade_amount=20    # Trail fading strength
+                )
             
             # Wrap it with a 2-second delay
             delayed_idle = AnimationDelayWrapper(
@@ -154,6 +169,9 @@ class IdleState(GameState):
             if anim and hasattr(anim, 'strip'):
                 anim.strip = None
         self.strip_animations.clear()
+        
+        # Clear logger reference (prevents logger accumulation)
+        self.logger = None
     
     def state_update(self, button_state: 'ButtonState') -> Optional['GameState']:
         """Update idle state - handle buttons and state transitions"""
@@ -163,14 +181,19 @@ class IdleState(GameState):
             time_elapsed = self.game_manager.sequence_tracker.get_time_since_first_char()
             
             # Reset sequence if timed out (>2 seconds)
-            if time_elapsed is not None and time_elapsed > 2.0:
+            if time_elapsed is not None and time_elapsed > 3.0:
                 self.game_manager.sequence_tracker.reset()
             
         # Check for "777" pattern - enter code mode
-        if self.game_manager.sequence_tracker.get_sequence() == "777":
+        current_sequence = self.game_manager.sequence_tracker.get_sequence()
+        if current_sequence == "777":
             self.game_manager.logger.info("Triple 777 detected - entering code mode!")
             self.game_manager.sequence_tracker.reset()
             return CodeModeState(self.game_manager)
+        
+        # Debug log sequence check (only when buttons are pressed)
+        if button_state.total_buttons_pressed > 0 and current_sequence:
+            self.logger.debug(f"Checking sequence: '{current_sequence}' (need '777' for code mode)")
         
         # Check for state transitions - any button pressed goes to Amplify
         # ButtonReader handles ignore logic, so this is simple
@@ -246,6 +269,13 @@ class AmplifyState(GameState):
         )
         self.game_manager.sound_controller.start_loaded_song()
         
+        # Store current song name for logging throughout amplify state
+        current_song = self.game_manager.sound_controller.current_song
+        self.song_name = os.path.basename(current_song) if current_song else "Unknown"
+        
+        # Log song started
+        self.logger.info(f'Song "{self.song_name}" was randomly started 🎚️')
+        
         # Debug logging
         pressed_indexes = [i for i, pressed in enumerate(self.pressed_buttons) if pressed]
         if pressed_indexes:
@@ -284,11 +314,13 @@ class AmplifyState(GameState):
         
         # Check if song finished playing
         if not self.game_manager.sound_controller.is_song_playing():
+            self.logger.info(f'Song "{self.song_name}" was finished while amplifing! 👑')
             self.game_manager.sound_controller.stop_music()
             return IdleState(self.game_manager)
         
         # Check for state transitions - no buttons pressed goes back to Idle
         if button_state.total_buttons_pressed == 0:
+            self.logger.info(f'Song "{self.song_name}" was released 🤷🏻‍♀️')
             self.game_manager.sound_controller.stop_music()
             return IdleState(self.game_manager)
         
@@ -404,12 +436,11 @@ class PartyState(GameState):
         import time
         self.party_start_time = time.time()
         
-        # Get current song name
-        import os
+        # Store current song name for logging throughout party state
         current_song = self.game_manager.sound_controller.current_song
-        song_name = os.path.basename(current_song) if current_song else "Unknown"
+        self.song_name = os.path.basename(current_song) if current_song else "Unknown"
         
-        self.logger.info(f"🎉 PARTY MODE ACTIVATED for song: {song_name}")
+        self.logger.info(f"🎉 PARTY MODE ACTIVATED for song: {self.song_name}")
     
     def custom_on_exit(self) -> None:
         """Stop music and applause when exiting"""
@@ -457,7 +488,7 @@ class PartyState(GameState):
         
         # Check if song finished playing
         if not self.game_manager.sound_controller.is_song_playing():
-            self.logger.info("Song finished, returning to idle")
+            self.logger.info(f"Song finished, returning to idle: {self.song_name}")
             return IdleState(self.game_manager)
         
         # Update party animation with red override info (strip 0)
@@ -569,7 +600,7 @@ class PartyState(GameState):
         
         # End condition: total spread == 2*max_spread
         if total_spread >= 2 * self.max_spread:
-            self.logger.info("Reduction complete!")
+            self.logger.info(f'Party Mode for song "{self.song_name}" was quite-down! 🤫')
             from audio_system.sound_controller import GameSounds
             self.game_manager.sound_controller.play_sound_with_volume(
                 GameSounds.BOOM_SOUND,
@@ -787,7 +818,7 @@ class CodeModeState(GameState):
             is_valid = self.game_manager.sound_controller.is_code_supported(sequence)
             
             if is_valid:
-                self.logger.info("Valid code! Transitioning to CodeRevealState")
+                self.logger.debug("Valid code! Transitioning to CodeRevealState")
                 # Stop code input music before transitioning
                 self.game_manager.sound_controller.stop_music()
                 return CodeRevealState(self.game_manager, sequence, sequence)
@@ -880,7 +911,11 @@ class CodeRevealState(GameState):
             volume=0.9
         )
         
-        self.logger.info(f"Code reveal started for code: {self.code}")
+        # Get song name for logging
+        song_path = self.game_manager.sound_controller.song_library.get_song_by_code(self.code)
+        song_name = os.path.basename(song_path) if song_path else "Unknown"
+        
+        self.logger.info(f'Code reveal started for code: {self.code} for song "{song_name}"')
     
     def custom_on_exit(self) -> None:
         """Actions when exiting code reveal state"""
@@ -921,14 +956,11 @@ class CodeRevealState(GameState):
             # Phase 2: Wait for ONE_TWO_THREE_SOUND to finish
             if self.one_two_three_channel and not self.one_two_three_channel.get_busy():
                 # Sound finished - play song by code and transition
-                self.logger.info(f"Loading song by code: {self.code}")
-                
                 success = self.game_manager.sound_controller.play_song_by_code(self.code)
                 
                 self.phase = "LOADING_SONG"
                 
                 if success:
-                    self.logger.info("Song loaded successfully, transitioning to PartyState")
                     return PartyState(self.game_manager)
                 else:
                     self.logger.error("Failed to load song, returning to IdleState")
@@ -1078,7 +1110,7 @@ class CodeFailState(GameState):
         
         # Check if fail sound has finished playing
         if self.fail_sound_channel and not self.fail_sound_channel.get_busy():
-            self.logger.info("Failure sound complete, returning to IdleState")
+            self.logger.debug("Failure sound complete, returning to IdleState")
             return IdleState(self.game_manager)
         
         # No transitions yet - animations will be handled by generic_update_and_show

@@ -1,0 +1,70 @@
+[2025-11-20 23:35:35,540] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-20 23:35:35,541] [INFO] [Amplifier] Button configuration: 10 buttons on GPIO [6, 5, 22, 17, 4, 23, 24, 25, 16, 20]
+[2025-11-20 23:35:35,542] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-20 23:35:35,543] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-20 23:35:35,543] [INFO] [Amplifier]   Strip 2: 293 LEDs on GPIO 18
+[2025-11-20 23:35:35,544] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-20 23:35:35,544] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-20 23:35:35,545] [INFO] [Amplifier] Audio folder: songs
+[2025-11-20 23:35:35,545] [INFO] [Amplifier] Schedule: 13 daily, 1 special entries
+[2025-11-20 23:35:35,545] [INFO] [ButtonReader] 🎮 Keyboard sampler initialized (NO GPIO)
+[2025-11-20 23:35:35,546] [INFO] [ButtonReader]    10 virtual buttons mapped to digit keys 0-9
+[2025-11-20 23:35:35,546] [INFO] [ButtonReader]    Press digit keys to toggle buttons ON/OFF
+[2025-11-20 23:35:35,547] [INFO] [ButtonReader]    Each keypress toggles button ON/OFF
+[2025-11-20 23:35:35,547] [INFO] [ButtonReader] ButtonReader initialized with 10 buttons
+[2025-11-20 23:35:35,549] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-20 23:35:37,955] [INFO] [SongLibrary] Loaded 722 song codes from 11 collections
+[2025-11-20 23:35:37,956] [INFO] [SongLibrary] Collections updated: ['HAFLA', 'CLASSIC', 'MORNING', 'PARTY', 'FESTIGAL', 'TV', 'MAIJAM', 'SPANISH', 'DISNEY', 'VIRAL', 'GENERAL']
+[2025-11-20 23:35:46,330] [INFO] [SoundController] Sound controller initialized - mixer ready, first song will load on demand
+[2025-11-20 23:35:46,337] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-20 23:35:46,337] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-20 23:35:46,338] [INFO] [Amplifier] Hardware: 10 buttons, 2 LED strips, 20ms frame duration
+[2025-11-20 23:35:46,339] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['HAFLA', 'CLASSIC', 'MORNING', 'PARTY', 'FESTIGAL', 'TV', 'MAIJAM', 'SPANISH', 'DISNEY', 'VIRAL', 'GENERAL'], 'total_codes': 722, 'daily_schedule_entries': 13, 'special_schedule_entries': 1}
+[2025-11-20 23:35:46,339] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-20 23:35:46,340] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-20 23:35:46,340] [INFO] [Amplifier] Hardware status: 10 buttons, 2 LED strips
+[2025-11-20 23:35:46,341] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-20 23:35:46,341] [INFO] [Amplifier]   Strip 2: 293 LEDs active
+[2025-11-20 23:35:46,342] [INFO] [Amplifier] Audio system: 722 song codes, 13 sound effects
+[2025-11-20 23:35:46,342] [INFO] [Amplifier] Available collections: HAFLA, CLASSIC, MORNING, PARTY, FESTIGAL, TV, MAIJAM, SPANISH, DISNEY, VIRAL, GENERAL
+[2025-11-20 23:35:46,342] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-20 23:35:46,343] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-20 23:35:46,345] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 260/907MB (28.7%, 647MB free) | ⚙️  CPU - Process: 0.0% | System: 25.4% | Cores: [1%, 99%, 0%, 1%]
+[2025-11-20 23:36:46,361] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 243/907MB (26.8%, 663MB free) | ⚙️  CPU - Process: 29.3% | System: 8.9% | Cores: [4%, 16%, 6%, 9%]
+[2025-11-20 23:37:30,628] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-20 23:37:30,629] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-20 23:37:30,642] [INFO] [AmplifyState] Song "Beauty and the Beast (Live Action) - Belle.mp3" was randomly started 🎚️
+[2025-11-20 23:37:31,572] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-20 23:37:31,573] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-20 23:37:32,335] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-20 23:37:32,336] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-20 23:37:33,159] [INFO] [ButtonReader] Keyboard: Button 9 toggled ON (key '9')
+[2025-11-20 23:37:33,160] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-20 23:37:33,802] [INFO] [ButtonReader] Keyboard: Button 0 toggled ON (key '0')
+[2025-11-20 23:37:33,822] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-20 23:37:37,748] [INFO] [ButtonReader] Keyboard: Button 1 toggled ON (key '1')
+[2025-11-20 23:37:37,748] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-20 23:37:38,213] [INFO] [ButtonReader] Keyboard: Button 2 toggled ON (key '2')
+[2025-11-20 23:37:38,213] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-20 23:37:38,640] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-20 23:37:38,641] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-20 23:37:39,215] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-20 23:37:39,215] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-20 23:37:40,208] [INFO] [ButtonReader] Keyboard: Button 5 toggled OFF (key '5')
+[2025-11-20 23:37:41,746] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-20 23:37:41,747] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-20 23:37:42,699] [INFO] [ButtonReader] Keyboard: Button 4 toggled OFF (key '4')
+[2025-11-20 23:37:43,564] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-20 23:37:43,565] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-20 23:37:44,244] [INFO] [ButtonReader] Keyboard: Button 3 toggled OFF (key '3')
+[2025-11-20 23:37:44,988] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-20 23:37:44,989] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-20 23:37:46,364] [INFO] [GameManager] 💾 Memory - Process: 88.4MB | System: 244/907MB (26.9%, 663MB free) | ⚙️  CPU - Process: 27.3% | System: 7.3% | Cores: [1%, 3%, 11%, 15%]
+[2025-11-20 23:37:47,565] [INFO] [ButtonReader] Keyboard: Button 8 toggled ON (key '8')
+[2025-11-20 23:37:47,565] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-20 23:37:47,578] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: Beauty and the Beast (Live Action) - Belle.mp3
+[2025-11-20 23:37:56,061] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 2 - Process terminating
+[2025-11-20 23:37:56,062] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-20 23:37:56,549] [INFO] [SoundController] Sound controller cleaned up successfully
+[2025-11-20 23:37:56,560] [INFO] [GameManager] Game stopped
+[2025-11-20 23:37:56,561] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

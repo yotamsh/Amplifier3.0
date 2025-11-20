@@ -7,6 +7,7 @@ from typing import TYPE_CHECKING, Optional
 
 if TYPE_CHECKING:
     from button_system.button_state import ButtonState
+    from utils import ClassLogger
 
 
 class ButtonsSequenceTracker:
@@ -29,16 +30,18 @@ class ButtonsSequenceTracker:
         tracker.get_time_since_first_char()  # Time since '2' was pressed
     """
     
-    def __init__(self, max_sequence_length: int):
+    def __init__(self, max_sequence_length: int, logger: 'ClassLogger'):
         """
         Initialize sequence tracker.
         
         Args:
             max_sequence_length: Maximum number of button presses to remember
+            logger: ClassLogger instance for debug logging
         """
         self.max_length = max_sequence_length
         self.sequence = ""  # String of button indices, e.g., "23456"
         self.first_char_time: Optional[float] = None  # Timestamp of first character
+        self.logger = logger
     
     def update(self, button_state: 'ButtonState') -> None:
         """
@@ -52,6 +55,9 @@ class ButtonsSequenceTracker:
             button_state: ButtonState with edge detection
         """
         current_time = time.time()
+        
+        # Store old sequence for logging
+        old_sequence = self.sequence
         
         # Find all buttons that were just pressed (edge: false→true)
         newly_pressed = []
@@ -68,14 +74,37 @@ class ButtonsSequenceTracker:
             self.sequence += self._button_to_char(button_index)
         
         # Trim sequence to max length (keep most recent)
+        was_trimmed = False
         if len(self.sequence) > self.max_length:
             self.sequence = self.sequence[-self.max_length:]
+            was_trimmed = True
             # Note: Trimming loses first_char_time accuracy for very long sequences
+        
+        # Debug log if sequence changed
+        if newly_pressed:
+            time_since_first = self.get_time_since_first_char()
+            time_str = f"{time_since_first:.2f}s" if time_since_first else "N/A"
+            trim_str = " [TRIMMED]" if was_trimmed else ""
+            self.logger.debug(
+                f"UPDATE: '{old_sequence}' → '{self.sequence}' "
+                f"(added buttons: {newly_pressed}, elapsed: {time_str}){trim_str}"
+            )
     
     def reset(self) -> None:
         """Clear the sequence memory and timing."""
+        old_sequence = self.sequence
+        old_time = self.first_char_time
+        
         self.sequence = ""
         self.first_char_time = None
+        
+        # Debug log
+        if old_sequence:
+            time_since_first = time.time() - old_time if old_time else None
+            time_str = f", elapsed: {time_since_first:.2f}s" if time_since_first else ""
+            self.logger.debug(
+                f"RESET: cleared sequence '{old_sequence}'{time_str}"
+            )
     
     def ends_with(self, pattern: str) -> bool:
         """

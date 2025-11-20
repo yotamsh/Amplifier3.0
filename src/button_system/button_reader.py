@@ -116,12 +116,17 @@ class ButtonReader(IButtonReader):
         # Update previous state with FILTERED state (important!)
         self._previous_state = filtered_current_state.copy()
         
-        # Log significant changes
-        if state.any_changed:
-            changed_buttons = [
-                (i, "pressed" if state.for_button[i] else "released") 
-                for i, changed in enumerate(state.was_changed) if changed]
-            self._logger.debug(f"Button state changed: {changed_buttons}")
+        # Log each button press (rising edge) individually at INFO level
+        # Rising edge: changed AND currently pressed
+        for i in range(len(state.for_button)):
+            if state.was_changed[i] and state.for_button[i]:
+                self._logger.info(f"Button {i} pressed")
+        
+        # Log each button release (falling edge) individually at DEBUG level
+        # Falling edge: changed AND currently NOT pressed
+        for i in range(len(state.for_button)):
+            if state.was_changed[i] and not state.for_button[i]:
+                self._logger.debug(f"Button {i} released")
         
         return state
     

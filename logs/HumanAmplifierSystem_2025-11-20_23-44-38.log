@@ -1,0 +1,78 @@
+[2025-11-20 23:44:38,031] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-20 23:44:38,032] [INFO] [Amplifier] Button configuration: 10 buttons on GPIO [6, 5, 22, 17, 4, 23, 24, 25, 16, 20]
+[2025-11-20 23:44:38,033] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-20 23:44:38,033] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-20 23:44:38,034] [INFO] [Amplifier]   Strip 2: 293 LEDs on GPIO 18
+[2025-11-20 23:44:38,034] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-20 23:44:38,035] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-20 23:44:38,035] [INFO] [Amplifier] Audio folder: songs
+[2025-11-20 23:44:38,036] [INFO] [Amplifier] Schedule: 13 daily, 1 special entries
+[2025-11-20 23:44:38,036] [INFO] [ButtonReader] 🎮 Keyboard sampler initialized (NO GPIO)
+[2025-11-20 23:44:38,037] [INFO] [ButtonReader]    10 virtual buttons mapped to digit keys 0-9
+[2025-11-20 23:44:38,037] [INFO] [ButtonReader]    Press digit keys to toggle buttons ON/OFF
+[2025-11-20 23:44:38,038] [INFO] [ButtonReader]    Each keypress toggles button ON/OFF
+[2025-11-20 23:44:38,038] [INFO] [ButtonReader] ButtonReader initialized with 10 buttons
+[2025-11-20 23:44:38,040] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-20 23:44:40,481] [INFO] [SongLibrary] Loaded 722 song codes from 11 collections
+[2025-11-20 23:44:40,482] [INFO] [SongLibrary] Collections updated: ['DISNEY', 'GENERAL', 'SPANISH', 'FESTIGAL', 'TV', 'CLASSIC', 'VIRAL', 'PARTY', 'MORNING', 'HAFLA', 'MAIJAM']
+[2025-11-20 23:44:40,578] [INFO] [SoundController] Pygame mixer initialized: 48000Hz, format=-16, channels=2
+[2025-11-20 23:44:48,792] [INFO] [SoundController] Sound controller initialized - mixer ready, first song will load on demand
+[2025-11-20 23:44:48,798] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-20 23:44:48,799] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-20 23:44:48,799] [INFO] [Amplifier] Hardware: 10 buttons, 2 LED strips, 20ms frame duration
+[2025-11-20 23:44:48,800] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['DISNEY', 'GENERAL', 'SPANISH', 'FESTIGAL', 'TV', 'CLASSIC', 'VIRAL', 'PARTY', 'MORNING', 'HAFLA', 'MAIJAM'], 'total_codes': 722, 'daily_schedule_entries': 13, 'special_schedule_entries': 1}
+[2025-11-20 23:44:48,801] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-20 23:44:48,801] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-20 23:44:48,802] [INFO] [Amplifier] Hardware status: 10 buttons, 2 LED strips
+[2025-11-20 23:44:48,802] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-20 23:44:48,803] [INFO] [Amplifier]   Strip 2: 293 LEDs active
+[2025-11-20 23:44:48,803] [INFO] [Amplifier] Audio system: 722 song codes, 13 sound effects
+[2025-11-20 23:44:48,804] [INFO] [Amplifier] Available collections: DISNEY, GENERAL, SPANISH, FESTIGAL, TV, CLASSIC, VIRAL, PARTY, MORNING, HAFLA, MAIJAM
+[2025-11-20 23:44:48,804] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-20 23:44:48,805] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-20 23:44:48,808] [INFO] [GameManager] 💾 Memory - Process: 88.0MB | System: 256/907MB (28.3%, 650MB free) | ⚙️  CPU - Process: 0.0% | System: 28.7% | Cores: [3%, 99%, 8%, 4%]
+[2025-11-20 23:44:50,843] [ERROR] [GameManager] Game loop error: 'Pixel' object has no attribute 'red' | Type: AttributeError | File: /home/yotam/AmpSync/Amp3/src/game_system/animations.py | Line: 297
+Traceback (most recent call last):
+  File "/home/yotam/AmpSync/Amp3/src/game_system/game_manager.py", line 89, in run_game_loop
+    self.update()
+  File "/home/yotam/AmpSync/Amp3/src/game_system/game_manager.py", line 138, in update
+    new_state = self.current_state.generic_update_and_show(button_state)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yotam/AmpSync/Amp3/src/game_system/states.py", line 61, in generic_update_and_show
+    self._update_and_render_strips()
+  File "/home/yotam/AmpSync/Amp3/src/game_system/states.py", line 70, in _update_and_render_strips
+    was_updated = animation.update_if_needed()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yotam/AmpSync/Amp3/src/game_system/animations.py", line 56, in update_if_needed
+    self.advance()
+  File "/home/yotam/AmpSync/Amp3/src/game_system/animations.py", line 367, in advance
+    self.target_animation.advance()
+  File "/home/yotam/AmpSync/Amp3/src/game_system/animations.py", line 297, in advance
+    h, s, v = AnimationHelpers._rgb_to_hsv(pixel.red, pixel.green, pixel.blue)
+                                           ^^^^^^^^^
+AttributeError: 'Pixel' object has no attribute 'red'
+[2025-11-20 23:44:52,732] [INFO] [SoundController] Sound controller cleaned up successfully
+[2025-11-20 23:44:52,742] [INFO] [GameManager] Game stopped
+[2025-11-20 23:44:52,746] [ERROR] [Amplifier] HumanAmplifier system error: 'Pixel' object has no attribute 'red' | Type: AttributeError | File: /home/yotam/AmpSync/Amp3/src/game_system/animations.py | Line: 297
+Traceback (most recent call last):
+  File "/home/yotam/AmpSync/Amp3/src/amplifier.py", line 327, in main
+    game_manager.run_game_loop()
+  File "/home/yotam/AmpSync/Amp3/src/game_system/game_manager.py", line 89, in run_game_loop
+    self.update()
+  File "/home/yotam/AmpSync/Amp3/src/game_system/game_manager.py", line 138, in update
+    new_state = self.current_state.generic_update_and_show(button_state)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yotam/AmpSync/Amp3/src/game_system/states.py", line 61, in generic_update_and_show
+    self._update_and_render_strips()
+  File "/home/yotam/AmpSync/Amp3/src/game_system/states.py", line 70, in _update_and_render_strips
+    was_updated = animation.update_if_needed()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yotam/AmpSync/Amp3/src/game_system/animations.py", line 56, in update_if_needed
+    self.advance()
+  File "/home/yotam/AmpSync/Amp3/src/game_system/animations.py", line 367, in advance
+    self.target_animation.advance()
+  File "/home/yotam/AmpSync/Amp3/src/game_system/animations.py", line 297, in advance
+    h, s, v = AnimationHelpers._rgb_to_hsv(pixel.red, pixel.green, pixel.blue)
+                                           ^^^^^^^^^
+AttributeError: 'Pixel' object has no attribute 'red'
+[2025-11-20 23:44:52,751] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

@@ -1,0 +1,78 @@
+[2025-11-21 00:00:43,181] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-21 00:00:43,182] [INFO] [Amplifier] Button configuration: 10 buttons on GPIO [6, 5, 22, 17, 4, 23, 24, 25, 16, 20]
+[2025-11-21 00:00:43,183] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-21 00:00:43,184] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-21 00:00:43,185] [INFO] [Amplifier]   Strip 2: 293 LEDs on GPIO 18
+[2025-11-21 00:00:43,185] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-21 00:00:43,186] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-21 00:00:43,186] [INFO] [Amplifier] Audio folder: songs
+[2025-11-21 00:00:43,187] [INFO] [Amplifier] Schedule: 13 daily, 1 special entries
+[2025-11-21 00:00:43,188] [INFO] [ButtonReader] 🎮 Keyboard sampler initialized (NO GPIO)
+[2025-11-21 00:00:43,188] [INFO] [ButtonReader]    10 virtual buttons mapped to digit keys 0-9
+[2025-11-21 00:00:43,189] [INFO] [ButtonReader]    Press digit keys to toggle buttons ON/OFF
+[2025-11-21 00:00:43,189] [INFO] [ButtonReader]    Each keypress toggles button ON/OFF
+[2025-11-21 00:00:43,189] [INFO] [ButtonReader] ButtonReader initialized with 10 buttons
+[2025-11-21 00:00:43,191] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-21 00:00:45,617] [INFO] [SongLibrary] Loaded 722 song codes from 11 collections
+[2025-11-21 00:00:45,618] [INFO] [SongLibrary] Collections updated: ['MAIJAM']
+[2025-11-21 00:00:45,704] [INFO] [SoundController] Pygame mixer initialized: 48000Hz, format=-16, channels=2
+[2025-11-21 00:00:53,983] [INFO] [SoundController] Sound controller initialized - mixer ready, first song will load on demand
+[2025-11-21 00:00:53,991] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-21 00:00:53,992] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-21 00:00:53,992] [INFO] [Amplifier] Hardware: 10 buttons, 2 LED strips, 20ms frame duration
+[2025-11-21 00:00:53,993] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['PARTY', 'MAIJAM', 'HAFLA', 'VIRAL', 'TV', 'CLASSIC', 'SPANISH', 'MORNING', 'DISNEY', 'GENERAL', 'FESTIGAL'], 'total_codes': 722, 'daily_schedule_entries': 13, 'special_schedule_entries': 1}
+[2025-11-21 00:00:53,993] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-21 00:00:53,994] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-21 00:00:53,995] [INFO] [Amplifier] Hardware status: 10 buttons, 2 LED strips
+[2025-11-21 00:00:53,996] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-21 00:00:53,996] [INFO] [Amplifier]   Strip 2: 293 LEDs active
+[2025-11-21 00:00:53,998] [INFO] [Amplifier] Audio system: 722 song codes, 13 sound effects
+[2025-11-21 00:00:53,999] [INFO] [Amplifier] Available collections: PARTY, MAIJAM, HAFLA, VIRAL, TV, CLASSIC, SPANISH, MORNING, DISNEY, GENERAL, FESTIGAL
+[2025-11-21 00:00:53,999] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-21 00:00:54,001] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-21 00:00:54,004] [INFO] [GameManager] 💾 Memory - Process: 87.7MB | System: 248/907MB (27.3%, 659MB free) | ⚙️  CPU - Process: 0.0% | System: 28.1% | Cores: [6%, 59%, 4%, 44%]
+[2025-11-21 00:01:54,012] [INFO] [GameManager] 💾 Memory - Process: 87.8MB | System: 252/907MB (27.8%, 655MB free) | ⚙️  CPU - Process: 29.7% | System: 11.2% | Cores: [8%, 11%, 14%, 13%]
+[2025-11-21 00:02:11,866] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-21 00:02:11,867] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-21 00:02:11,867] [DEBUG] [IdleState] Checking sequence: '5' (need '777' for code mode)
+[2025-11-21 00:02:11,880] [INFO] [AmplifyState] Song "אשליות - ניסים סרוסי.mp3" was randomly started 🎚️
+[2025-11-21 00:02:14,625] [INFO] [ButtonReader] Keyboard: Button 5 toggled OFF (key '5')
+[2025-11-21 00:02:14,626] [INFO] [AmplifyState] Song "אשליות - ניסים סרוסי.mp3" was released 🤷🏻‍♀️
+[2025-11-21 00:02:15,448] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-21 00:02:15,449] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-21 00:02:15,450] [DEBUG] [IdleState] Checking sequence: '5' (need '777' for code mode)
+[2025-11-21 00:02:15,460] [INFO] [AmplifyState] Song "Michael Jackson - Thriller (Official 4K Video).mp3" was randomly started 🎚️
+[2025-11-21 00:02:19,951] [INFO] [ButtonReader] Keyboard: Button 5 toggled OFF (key '5')
+[2025-11-21 00:02:19,952] [INFO] [AmplifyState] Song "Michael Jackson - Thriller (Official 4K Video).mp3" was released 🤷🏻‍♀️
+[2025-11-21 00:02:20,515] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-21 00:02:20,516] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-21 00:02:20,516] [DEBUG] [IdleState] Checking sequence: '5' (need '777' for code mode)
+[2025-11-21 00:02:20,546] [INFO] [AmplifyState] Song "Carl Douglas  Kung Fu Fighting  (Original Music Video).mp3" was randomly started 🎚️
+[2025-11-21 00:02:21,894] [INFO] [ButtonReader] Keyboard: Button 5 toggled OFF (key '5')
+[2025-11-21 00:02:21,894] [INFO] [AmplifyState] Song "Carl Douglas  Kung Fu Fighting  (Original Music Video).mp3" was released 🤷🏻‍♀️
+[2025-11-21 00:02:22,315] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-21 00:02:22,316] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-21 00:02:22,317] [DEBUG] [IdleState] Checking sequence: '55' (need '777' for code mode)
+[2025-11-21 00:02:22,328] [INFO] [AmplifyState] Song "LunchMoney Lewis - Bills (Official Video).mp3" was randomly started 🎚️
+[2025-11-21 00:02:54,019] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 248/907MB (27.3%, 659MB free) | ⚙️  CPU - Process: 18.7% | System: 8.5% | Cores: [7%, 9%, 7%, 11%]
+[2025-11-21 00:03:54,036] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 252/907MB (27.8%, 655MB free) | ⚙️  CPU - Process: 13.4% | System: 7.0% | Cores: [6%, 6%, 9%, 7%]
+[2025-11-21 00:04:54,051] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 250/907MB (27.6%, 656MB free) | ⚙️  CPU - Process: 13.7% | System: 7.1% | Cores: [5%, 8%, 8%, 7%]
+[2025-11-21 00:05:46,501] [INFO] [AmplifyState] Song "LunchMoney Lewis - Bills (Official Video).mp3" was finished while amplifing! 👑
+[2025-11-21 00:05:54,066] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 252/907MB (27.8%, 655MB free) | ⚙️  CPU - Process: 15.4% | System: 7.5% | Cores: [7%, 7%, 9%, 7%]
+[2025-11-21 00:06:54,075] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 251/907MB (27.7%, 656MB free) | ⚙️  CPU - Process: 30.8% | System: 11.3% | Cores: [9%, 12%, 10%, 14%]
+[2025-11-21 00:07:54,083] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 246/907MB (27.2%, 660MB free) | ⚙️  CPU - Process: 30.7% | System: 11.3% | Cores: [7%, 11%, 8%, 19%]
+[2025-11-21 00:08:12,942] [INFO] [ButtonReader] Keyboard: Button 8 toggled ON (key '8')
+[2025-11-21 00:08:12,943] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-21 00:08:12,943] [DEBUG] [IdleState] Checking sequence: '8' (need '777' for code mode)
+[2025-11-21 00:08:12,978] [INFO] [AmplifyState] Song "Blondie - Call me.mp3" was randomly started 🎚️
+[2025-11-21 00:08:14,286] [INFO] [ButtonReader] Keyboard: Button 8 toggled OFF (key '8')
+[2025-11-21 00:08:14,291] [INFO] [AmplifyState] Song "Blondie - Call me.mp3" was released 🤷🏻‍♀️
+[2025-11-21 00:08:15,090] [INFO] [ButtonReader] Keyboard: Button 8 toggled ON (key '8')
+[2025-11-21 00:08:15,091] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-21 00:08:15,091] [DEBUG] [IdleState] Checking sequence: '8' (need '777' for code mode)
+[2025-11-21 00:08:15,121] [INFO] [AmplifyState] Song "M.C. Hammer - U Can_t Touch This.mp3" was randomly started 🎚️
+[2025-11-21 00:08:17,234] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 2 - Process terminating
+[2025-11-21 00:08:17,235] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-21 00:08:18,836] [INFO] [SoundController] Sound controller cleaned up successfully
+[2025-11-21 00:08:18,847] [INFO] [GameManager] Game stopped
+[2025-11-21 00:08:18,847] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

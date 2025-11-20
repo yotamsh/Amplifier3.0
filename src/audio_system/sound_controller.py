@@ -66,11 +66,19 @@ class SoundController:
         self._cleanup_done = False  # Track if cleanup already happened
         
         # Initialize pygame mixer with larger buffer to prevent underruns
-        # Using 48kHz (Raspberry Pi native rate) for better compatibility
+        # Using 48kHz (USB sound card native rate)
         # Buffer size 16384 matches ALSA's actual buffer (16 periods × 1024 samples)
         self.mixer = pygame.mixer
-        self.mixer.pre_init(frequency=48000, size=-16, channels=2, buffer=16384)
+        self.mixer.pre_init(frequency=48000, size=-16, channels=2, buffer=4096)
         self.mixer.init()
+        
+        # Log actual pygame mixer settings after initialization
+        actual_settings = self.mixer.get_init()
+        if actual_settings:
+            freq, fmt, channels = actual_settings
+            self.logger.info(f"Pygame mixer initialized: {freq}Hz, format={fmt}, channels={channels}")
+        else:
+            self.logger.warning("Pygame mixer initialization returned None")
         
         # Give ALSA time to fully initialize before loading sounds (prevents race condition underruns)
         import time
@@ -178,10 +186,10 @@ class SoundController:
         """Start playing the currently loaded song"""
         self.mixer.music.play()
         
-        # Log song name
+        # Log song loading at debug level
         if self.current_song:
             song_name = os.path.basename(self.current_song)
-            self.logger.info(f'Song "{song_name}" was randomly started')
+            self.logger.debug(f'Started playing song: "{song_name}"')
     
     def stop_music(self) -> None:
         """Stop the currently playing music"""
@@ -250,9 +258,9 @@ class SoundController:
             self.mixer.music.set_volume(1.0)
             self.mixer.music.play()
             
-            # Log success
+            # Log success at debug level
             song_name = os.path.basename(song_path)
-            self.logger.info(f'Playing song by code {code}: "{song_name}"')
+            self.logger.debug(f'Playing song by code {code}: "{song_name}"')
             return True
             
         except Exception as e:

@@ -1,0 +1,54 @@
+[2025-11-20 04:13:12,598] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-20 04:13:12,599] [INFO] [Amplifier] Button configuration: 10 buttons on GPIO [6, 5, 22, 17, 4, 23, 24, 25, 16, 20]
+[2025-11-20 04:13:12,599] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-20 04:13:12,600] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-20 04:13:12,600] [INFO] [Amplifier]   Strip 2: 293 LEDs on GPIO 18
+[2025-11-20 04:13:12,600] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-20 04:13:12,601] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-20 04:13:12,601] [INFO] [Amplifier] Audio folder: songs
+[2025-11-20 04:13:12,601] [INFO] [Amplifier] Schedule: 2 daily, 1 special entries
+[2025-11-20 04:13:12,602] [INFO] [ButtonReader] GPIO sampler initialized: 10 pins (no pulls)
+[2025-11-20 04:13:12,603] [INFO] [ButtonReader] Pin mapping: Btn0=GPIO6, Btn1=GPIO5, Btn2=GPIO22, Btn3=GPIO17, Btn4=GPIO4, Btn5=GPIO23, Btn6=GPIO24, Btn7=GPIO25, Btn8=GPIO16, Btn9=GPIO20
+[2025-11-20 04:13:12,603] [INFO] [ButtonReader] 🎮 Keyboard debug enabled: Press digit keys 0-9 to toggle buttons (works over SSH)
+[2025-11-20 04:13:12,603] [INFO] [ButtonReader]    Each keypress toggles button ON/OFF
+[2025-11-20 04:13:12,603] [INFO] [ButtonReader] ButtonReader initialized with 10 buttons
+[2025-11-20 04:13:12,605] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-20 04:13:17,731] [INFO] [SongLibrary] Loaded 547 song codes from 10 collections
+[2025-11-20 04:13:17,731] [INFO] [SongLibrary] Collections updated: ['CLASSIC', 'PARTY', 'MORNING', 'SPANISH', 'DISNEY', 'GENERAL', 'FESTIGAL', 'VIRAL', 'MAIJAM', 'TV']
+[2025-11-20 04:13:26,233] [INFO] [SoundController] Sound controller initialized - mixer ready, first song will load on demand
+[2025-11-20 04:13:26,239] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-20 04:13:26,240] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-20 04:13:26,240] [INFO] [Amplifier] Hardware: 10 buttons, 2 LED strips, 20ms frame duration
+[2025-11-20 04:13:26,240] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['CLASSIC', 'PARTY', 'MORNING', 'SPANISH', 'DISNEY', 'GENERAL', 'FESTIGAL', 'VIRAL', 'MAIJAM', 'TV'], 'total_codes': 547, 'daily_schedule_entries': 2, 'special_schedule_entries': 1}
+[2025-11-20 04:13:26,241] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-20 04:13:26,241] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-20 04:13:26,241] [INFO] [Amplifier] Hardware status: 10 buttons, 2 LED strips
+[2025-11-20 04:13:26,242] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-20 04:13:26,242] [INFO] [Amplifier]   Strip 2: 293 LEDs active
+[2025-11-20 04:13:26,242] [INFO] [Amplifier] Audio system: 547 song codes, 13 sound effects
+[2025-11-20 04:13:26,243] [INFO] [Amplifier] Available collections: CLASSIC, PARTY, MORNING, SPANISH, DISNEY, GENERAL, FESTIGAL, VIRAL, MAIJAM, TV
+[2025-11-20 04:13:26,243] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-20 04:13:26,243] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-20 04:13:26,246] [INFO] [GameManager] 💾 Memory - Process: 87.7MB | System: 238/907MB (26.2%, 669MB free) | ⚙️  CPU - Process: 0.0% | System: 23.5% | Cores: [8%, 16%, 63%, 7%]
+[2025-11-20 04:13:26,247] [INFO] [GameManager] State transition: IdleState → AmplifyState
+[2025-11-20 04:13:26,258] [INFO] [SoundController] Song "Beyoncé - Love On Top.mp3" was randomly started
+[2025-11-20 16:12:52,238] [INFO] [GameManager] 💾 Memory - Process: 87.8MB | System: 215/907MB (23.7%, 692MB free) | ⚙️  CPU - Process: 15.4% | System: 3.8% | Cores: [2%, 0%, 13%, 1%]
+[2025-11-20 16:13:52,251] [INFO] [GameManager] 💾 Memory - Process: 87.8MB | System: 229/907MB (25.3%, 677MB free) | ⚙️  CPU - Process: 18.4% | System: 14.8% | Cores: [14%, 19%, 14%, 12%]
+[2025-11-20 16:14:52,252] [INFO] [GameManager] 💾 Memory - Process: 88.0MB | System: 233/907MB (25.7%, 673MB free) | ⚙️  CPU - Process: 18.8% | System: 16.1% | Cores: [14%, 17%, 16%, 17%]
+[2025-11-20 16:15:45,845] [INFO] [GameManager] State transition: AmplifyState → IdleState
+[2025-11-20 16:15:52,259] [INFO] [GameManager] 💾 Memory - Process: 88.0MB | System: 236/907MB (26.0%, 671MB free) | ⚙️  CPU - Process: 19.0% | System: 14.7% | Cores: [14%, 15%, 16%, 15%]
+[2025-11-20 16:16:52,275] [INFO] [GameManager] 💾 Memory - Process: 88.0MB | System: 241/907MB (26.5%, 666MB free) | ⚙️  CPU - Process: 34.3% | System: 20.6% | Cores: [20%, 19%, 22%, 22%]
+[2025-11-20 16:17:52,275] [INFO] [SongLibrary] Collections updated: ['MAIJAM']
+[2025-11-20 16:17:52,282] [INFO] [GameManager] 💾 Memory - Process: 88.0MB | System: 232/907MB (25.6%, 675MB free) | ⚙️  CPU - Process: 35.0% | System: 23.0% | Cores: [22%, 24%, 23%, 23%]
+[2025-11-20 16:18:52,285] [INFO] [GameManager] 💾 Memory - Process: 88.0MB | System: 233/907MB (25.6%, 674MB free) | ⚙️  CPU - Process: 34.3% | System: 20.4% | Cores: [20%, 20%, 22%, 20%]
+[2025-11-20 16:19:52,290] [INFO] [GameManager] 💾 Memory - Process: 88.0MB | System: 233/907MB (25.7%, 673MB free) | ⚙️  CPU - Process: 34.3% | System: 20.6% | Cores: [19%, 22%, 21%, 20%]
+[2025-11-20 16:20:52,296] [INFO] [GameManager] 💾 Memory - Process: 88.0MB | System: 277/907MB (30.6%, 630MB free) | ⚙️  CPU - Process: 33.6% | System: 19.5% | Cores: [16%, 16%, 21%, 25%]
+[2025-11-20 16:21:52,315] [INFO] [GameManager] 💾 Memory - Process: 88.0MB | System: 231/907MB (25.4%, 676MB free) | ⚙️  CPU - Process: 32.3% | System: 13.9% | Cores: [8%, 7%, 16%, 25%]
+[2025-11-20 16:22:52,333] [INFO] [GameManager] 💾 Memory - Process: 88.0MB | System: 230/907MB (25.4%, 677MB free) | ⚙️  CPU - Process: 31.4% | System: 11.8% | Cores: [11%, 12%, 12%, 12%]
+[2025-11-20 16:23:52,339] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 238/907MB (26.3%, 669MB free) | ⚙️  CPU - Process: 31.5% | System: 11.9% | Cores: [8%, 8%, 19%, 13%]
+[2025-11-20 16:24:52,351] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 236/907MB (26.0%, 671MB free) | ⚙️  CPU - Process: 31.4% | System: 11.5% | Cores: [5%, 14%, 18%, 10%]
+[2025-11-20 16:25:47,970] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 15 - Process terminating
+[2025-11-20 16:25:47,971] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-20 16:25:48,161] [INFO] [SoundController] Sound controller cleaned up successfully
+[2025-11-20 16:25:48,172] [INFO] [GameManager] Game stopped
+[2025-11-20 16:25:48,173] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

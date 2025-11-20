@@ -9,6 +9,12 @@ and scheduled audio playback.
 
 import sys
 import os
+
+# # Configure SDL audio before pygame imports (force ALSA to use USB sound card)
+os.environ['SDL_AUDIODRIVER'] = 'alsa'
+# os.environ['AUDIODEV'] = 'hw:0,0'  # these make us delay!
+# os.environ['AUDIODEV'] = 'plughw:0,0'  # these make us delay!
+
 import logging
 import signal
 import atexit
@@ -52,20 +58,26 @@ atexit.register(lambda: emergency_flush_and_log())
 sys.path.insert(0, str(Path(__file__).parent))
 
 try:
-    from button_system import ButtonReader, GPIOSampler, GPIOWithKeyboardSampler
+    from button_system import ButtonReader, KeyboardSampler
     from led_system import PixelStripAdapter, Pixel
     from game_system import GameManager, ButtonsSequenceTracker
     from game_system.config import GameConfig, ButtonConfig, LedStripConfig, AudioConfig
     from audio_system import Schedule, DailyScheduleEntry, SpecialScheduleEntry, AudioCollection, SongLibrary, SoundController, ALL_COLLECTIONS
     from audio_system.mock_sound_controller import MockSoundController
     from utils import HybridLogger
-    import RPi.GPIO as GPIO
+    # GPIO import commented out - using KeyboardSampler for testing
+    # import RPi.GPIO as GPIO
+    # Dummy GPIO for config compatibility
+    class GPIO:
+        PUD_OFF = 0
+        PUD_UP = 1
+        PUD_DOWN = 2
 except ImportError as e:
     import traceback
     print(f"❌ Import error: {e}")
     print("\nFull traceback:")
     traceback.print_exc()
-    print("\nMake sure you're running this on a Raspberry Pi with required libraries installed")
+    print("\nMake sure required libraries are installed")
     sys.exit(1)
 
 
@@ -112,16 +124,19 @@ def create_amplifier_config() -> GameConfig:
     audio_config = AudioConfig(
         songs_folder="songs",
         daily_schedule=[
-            DailyScheduleEntry(time(0, 0), ALL_COLLECTIONS),
-            DailyScheduleEntry(time(16, 17), {AudioCollection.MAIJAM}),
-            # DailyScheduleEntry(time(4, 0), {Collection.CLASSIC}),
-            # DailyScheduleEntry(time(7, 0), {Collection.MORNING}),
-            # DailyScheduleEntry(time(10, 0), ALL_COLLECTIONS),
-            # DailyScheduleEntry(time(14, 0), {Collection.TV}),
-            # DailyScheduleEntry(time(16, 0), {Collection.TV, Collection.GENERAL, Collection.DISNEY, Collection.PARTY, Collection.MORNING}),
-            # DailyScheduleEntry(time(17, 0), {Collection.GENERAL, Collection.PARTY}),
-            # DailyScheduleEntry(time(20, 0), {Collection.DISNEY}),
-            # DailyScheduleEntry(time(20, 30), {Collection.GENERAL, Collection.DISNEY, Collection.PARTY}),
+            DailyScheduleEntry(time(0, 0), {AudioCollection.MAIJAM}),
+            DailyScheduleEntry(time(2, 0), {AudioCollection.PARTY, AudioCollection.MAIJAM, AudioCollection.VIRAL, AudioCollection.HAFLA, AudioCollection.FESTIGAL}),
+            DailyScheduleEntry(time(4, 0), {AudioCollection.CLASSIC}),
+            DailyScheduleEntry(time(6, 0), {AudioCollection.MORNING}),
+            DailyScheduleEntry(time(10, 0), ALL_COLLECTIONS),
+            DailyScheduleEntry(time(14, 0), {AudioCollection.TV}),
+            DailyScheduleEntry(time(16, 0), {AudioCollection.FESTIGAL}),
+            DailyScheduleEntry(time(17, 0), {AudioCollection.GENERAL, AudioCollection.PARTY, AudioCollection.MAIJAM, AudioCollection.HAFLA}),
+            DailyScheduleEntry(time(20, 0), {AudioCollection.DISNEY}),
+            DailyScheduleEntry(time(20, 30), ALL_COLLECTIONS),
+            DailyScheduleEntry(time(22, 0), {AudioCollection.VIRAL}),
+            DailyScheduleEntry(time(22, 30), {AudioCollection.HAFLA}),
+            DailyScheduleEntry(time(23, 0), ALL_COLLECTIONS),
         ],
         special_schedule=[
             # Example special schedule entry
@@ -161,16 +176,14 @@ def create_game_system(config: GameConfig, amplifier_logger):
     button_reader_logger = amplifier_logger.create_class_logger("ButtonReader", logging.INFO)
     song_library_logger = amplifier_logger.create_class_logger("SongLibrary", logging.INFO)
     sound_controller_logger = amplifier_logger.create_class_logger("SoundController", logging.INFO)
+    sequence_tracker_logger = amplifier_logger.create_class_logger("SequenceTracker", logging.DEBUG)
     
     try:        
-        # Initialize button sampler (GPIO hardware abstraction)
-        # button_sampler = GPIOSampler(
-# Initialize button sampler (GPIO + keyboard for debugging)
-        # Use GPIOWithKeyboardSampler for debug mode (keyboard toggles work over SSH)
-        # Use GPIOSampler for production (pure GPIO, no keyboard)
-        button_sampler = GPIOWithKeyboardSampler(
-            button_pins=config.button_config.pins,
-            pull_mode=config.button_config.pull_mode,
+        # Initialize button sampler (NO GPIO - pure keyboard for testing)
+        # Using KeyboardSampler for development/testing without Raspberry Pi
+        # Switch back to GPIOSampler or GPIOWithKeyboardSampler for production
+        button_sampler = KeyboardSampler(
+            num_buttons=len(config.button_config.pins),
             logger=button_reader_logger
         )
         
@@ -241,8 +254,8 @@ def create_game_system(config: GameConfig, amplifier_logger):
             animation_helpers.STRIP_PERMUTATIONS[strip_idx] = indices
         
         
-        # Create button sequence tracker
-        sequence_tracker = ButtonsSequenceTracker(max_sequence_length=10)
+        # Create button sequence tracker with its own ClassLogger at DEBUG level
+        sequence_tracker = ButtonsSequenceTracker(max_sequence_length=10, logger=sequence_tracker_logger)
         
         # Create game manager (starts with IdleState by default)
         game_manager = GameManager(
@@ -310,6 +323,7 @@ def main():
         amplifier_logger.info(f"Audio system: {audio_stats['total_codes']} song codes, {sound_effects_count} sound effects")
         amplifier_logger.info(f"Available collections: {', '.join(audio_stats['all_collections'])}")
         
+        amplifier_logger.info("===========================")
         amplifier_logger.info("🚀 Starting HumanAmplifier system...")
         
         # Run the game with automatic frame limiting

@@ -1,0 +1,226 @@
+[2025-11-21 00:08:22,265] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-21 00:08:22,266] [INFO] [Amplifier] Button configuration: 10 buttons on GPIO [6, 5, 22, 17, 4, 23, 24, 25, 16, 20]
+[2025-11-21 00:08:22,267] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-21 00:08:22,267] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-21 00:08:22,268] [INFO] [Amplifier]   Strip 2: 293 LEDs on GPIO 18
+[2025-11-21 00:08:22,268] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-21 00:08:22,268] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-21 00:08:22,269] [INFO] [Amplifier] Audio folder: songs
+[2025-11-21 00:08:22,269] [INFO] [Amplifier] Schedule: 13 daily, 1 special entries
+[2025-11-21 00:08:22,270] [INFO] [ButtonReader] 🎮 Keyboard sampler initialized (NO GPIO)
+[2025-11-21 00:08:22,270] [INFO] [ButtonReader]    10 virtual buttons mapped to digit keys 0-9
+[2025-11-21 00:08:22,271] [INFO] [ButtonReader]    Press digit keys to toggle buttons ON/OFF
+[2025-11-21 00:08:22,271] [INFO] [ButtonReader]    Each keypress toggles button ON/OFF
+[2025-11-21 00:08:22,271] [INFO] [ButtonReader] ButtonReader initialized with 10 buttons
+[2025-11-21 00:08:22,273] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-21 00:08:24,907] [INFO] [SongLibrary] Loaded 722 song codes from 11 collections
+[2025-11-21 00:08:24,908] [INFO] [SongLibrary] Collections updated: ['MAIJAM']
+[2025-11-21 00:08:24,992] [INFO] [SoundController] Pygame mixer initialized: 48000Hz, format=-16, channels=2
+[2025-11-21 00:08:33,217] [INFO] [SoundController] Sound controller initialized - mixer ready, first song will load on demand
+[2025-11-21 00:08:33,223] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-21 00:08:33,224] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-21 00:08:33,225] [INFO] [Amplifier] Hardware: 10 buttons, 2 LED strips, 20ms frame duration
+[2025-11-21 00:08:33,225] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['MORNING', 'TV', 'DISNEY', 'HAFLA', 'MAIJAM', 'CLASSIC', 'GENERAL', 'PARTY', 'VIRAL', 'SPANISH', 'FESTIGAL'], 'total_codes': 722, 'daily_schedule_entries': 13, 'special_schedule_entries': 1}
+[2025-11-21 00:08:33,226] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-21 00:08:33,226] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-21 00:08:33,227] [INFO] [Amplifier] Hardware status: 10 buttons, 2 LED strips
+[2025-11-21 00:08:33,227] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-21 00:08:33,228] [INFO] [Amplifier]   Strip 2: 293 LEDs active
+[2025-11-21 00:08:33,228] [INFO] [Amplifier] Audio system: 722 song codes, 13 sound effects
+[2025-11-21 00:08:33,228] [INFO] [Amplifier] Available collections: MORNING, TV, DISNEY, HAFLA, MAIJAM, CLASSIC, GENERAL, PARTY, VIRAL, SPANISH, FESTIGAL
+[2025-11-21 00:08:33,229] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-21 00:08:33,229] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-21 00:08:33,232] [INFO] [GameManager] 💾 Memory - Process: 87.7MB | System: 266/907MB (29.4%, 640MB free) | ⚙️  CPU - Process: 0.0% | System: 29.7% | Cores: [6%, 78%, 27%, 6%]
+[2025-11-21 00:09:33,237] [INFO] [GameManager] 💾 Memory - Process: 87.7MB | System: 249/907MB (27.5%, 658MB free) | ⚙️  CPU - Process: 30.3% | System: 11.3% | Cores: [12%, 9%, 16%, 8%]
+[2025-11-21 00:09:33,637] [INFO] [ButtonReader] Keyboard: Button 8 toggled ON (key '8')
+[2025-11-21 00:09:33,637] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-21 00:09:33,638] [DEBUG] [SequenceTracker] UPDATE: '' → '8' (added buttons: [8], elapsed: 0.00s)
+[2025-11-21 00:09:33,639] [DEBUG] [IdleState] Checking sequence: '8' (need '777' for code mode)
+[2025-11-21 00:09:33,674] [INFO] [AmplifyState] Song "Scatman (ski-ba-bop-ba-dop-bop) Official Video HD - Scatman John.mp3" was randomly started 🎚️
+[2025-11-21 00:09:40,226] [INFO] [ButtonReader] Keyboard: Button 8 toggled OFF (key '8')
+[2025-11-21 00:09:40,227] [INFO] [AmplifyState] Song "Scatman (ski-ba-bop-ba-dop-bop) Official Video HD - Scatman John.mp3" was released 🤷🏻‍♀️
+[2025-11-21 00:09:40,247] [DEBUG] [SequenceTracker] RESET: cleared sequence '8', elapsed: 6.61s
+[2025-11-21 00:09:46,094] [INFO] [ButtonReader] Keyboard: Button 8 toggled ON (key '8')
+[2025-11-21 00:09:46,095] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-21 00:09:46,096] [DEBUG] [SequenceTracker] UPDATE: '' → '8' (added buttons: [8], elapsed: 0.00s)
+[2025-11-21 00:09:46,097] [DEBUG] [IdleState] Checking sequence: '8' (need '777' for code mode)
+[2025-11-21 00:09:46,132] [INFO] [AmplifyState] Song "Fame  Theme Song  Irene Cara.mp3" was randomly started 🎚️
+[2025-11-21 00:09:47,901] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 00:09:47,902] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 00:09:47,903] [DEBUG] [SequenceTracker] UPDATE: '8' → '87' (added buttons: [7], elapsed: 1.81s)
+[2025-11-21 00:09:49,779] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-21 00:09:49,780] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-21 00:09:49,781] [DEBUG] [SequenceTracker] UPDATE: '87' → '876' (added buttons: [6], elapsed: 3.69s)
+[2025-11-21 00:09:52,268] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-21 00:09:52,268] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-21 00:09:52,269] [DEBUG] [SequenceTracker] UPDATE: '876' → '8765' (added buttons: [5], elapsed: 6.17s)
+[2025-11-21 00:09:55,147] [INFO] [ButtonReader] Keyboard: Button 5 toggled OFF (key '5')
+[2025-11-21 00:09:56,320] [INFO] [ButtonReader] Keyboard: Button 6 toggled OFF (key '6')
+[2025-11-21 00:09:58,769] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 00:09:59,733] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 00:09:59,734] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 00:09:59,734] [DEBUG] [SequenceTracker] UPDATE: '8765' → '87657' (added buttons: [7], elapsed: 13.64s)
+[2025-11-21 00:10:00,556] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-21 00:10:00,557] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-21 00:10:00,557] [DEBUG] [SequenceTracker] UPDATE: '87657' → '876574' (added buttons: [4], elapsed: 14.46s)
+[2025-11-21 00:10:01,099] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 00:10:02,893] [INFO] [ButtonReader] Keyboard: Button 4 toggled OFF (key '4')
+[2025-11-21 00:10:03,959] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 00:10:03,960] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 00:10:03,960] [DEBUG] [SequenceTracker] UPDATE: '876574' → '8765747' (added buttons: [7], elapsed: 17.86s)
+[2025-11-21 00:10:06,472] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 00:10:07,657] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 00:10:07,658] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 00:10:07,659] [DEBUG] [SequenceTracker] UPDATE: '8765747' → '87657477' (added buttons: [7], elapsed: 21.56s)
+[2025-11-21 00:10:13,495] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 00:10:14,780] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-21 00:10:14,781] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-21 00:10:14,782] [DEBUG] [SequenceTracker] UPDATE: '87657477' → '876574775' (added buttons: [5], elapsed: 28.69s)
+[2025-11-21 00:10:15,725] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-21 00:10:15,727] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-21 00:10:15,728] [DEBUG] [SequenceTracker] UPDATE: '876574775' → '8765747754' (added buttons: [4], elapsed: 29.63s)
+[2025-11-21 00:10:16,435] [INFO] [ButtonReader] Keyboard: Button 4 toggled OFF (key '4')
+[2025-11-21 00:10:17,308] [INFO] [ButtonReader] Keyboard: Button 5 toggled OFF (key '5')
+[2025-11-21 00:10:18,948] [INFO] [ButtonReader] Keyboard: Button 8 toggled OFF (key '8')
+[2025-11-21 00:10:18,949] [INFO] [AmplifyState] Song "Fame  Theme Song  Irene Cara.mp3" was released 🤷🏻‍♀️
+[2025-11-21 00:10:18,968] [DEBUG] [SequenceTracker] RESET: cleared sequence '8765747754', elapsed: 32.87s
+[2025-11-21 00:10:23,267] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 00:10:23,268] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 00:10:23,268] [DEBUG] [SequenceTracker] UPDATE: '' → '7' (added buttons: [7], elapsed: 0.00s)
+[2025-11-21 00:10:23,269] [DEBUG] [IdleState] Checking sequence: '7' (need '777' for code mode)
+[2025-11-21 00:10:23,282] [INFO] [AmplifyState] Song "Whitney Houston - I Wanna Dance With Somebody.mp3" was randomly started 🎚️
+[2025-11-21 00:10:23,931] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 00:10:23,931] [INFO] [AmplifyState] Song "Whitney Houston - I Wanna Dance With Somebody.mp3" was released 🤷🏻‍♀️
+[2025-11-21 00:10:25,280] [DEBUG] [SequenceTracker] RESET: cleared sequence '7', elapsed: 2.01s
+[2025-11-21 00:10:25,340] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 00:10:25,341] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 00:10:25,342] [DEBUG] [SequenceTracker] UPDATE: '' → '7' (added buttons: [7], elapsed: 0.00s)
+[2025-11-21 00:10:25,343] [DEBUG] [IdleState] Checking sequence: '7' (need '777' for code mode)
+[2025-11-21 00:10:25,373] [INFO] [AmplifyState] Song "Smash Mouth - I_m A Believer.mp3" was randomly started 🎚️
+[2025-11-21 00:10:26,438] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 00:10:26,439] [INFO] [AmplifyState] Song "Smash Mouth - I_m A Believer.mp3" was released 🤷🏻‍♀️
+[2025-11-21 00:10:27,362] [DEBUG] [SequenceTracker] RESET: cleared sequence '7', elapsed: 2.02s
+[2025-11-21 00:10:27,924] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 00:10:27,925] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 00:10:27,925] [DEBUG] [SequenceTracker] UPDATE: '' → '7' (added buttons: [7], elapsed: 0.00s)
+[2025-11-21 00:10:27,926] [DEBUG] [IdleState] Checking sequence: '7' (need '777' for code mode)
+[2025-11-21 00:10:27,956] [INFO] [AmplifyState] Song "Boney M. - Daddy Cool (Sopot Festival 1979).mp3" was randomly started 🎚️
+[2025-11-21 00:10:28,720] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 00:10:28,720] [INFO] [AmplifyState] Song "Boney M. - Daddy Cool (Sopot Festival 1979).mp3" was released 🤷🏻‍♀️
+[2025-11-21 00:10:29,944] [DEBUG] [SequenceTracker] RESET: cleared sequence '7', elapsed: 2.02s
+[2025-11-21 00:10:30,125] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 00:10:30,126] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 00:10:30,126] [DEBUG] [SequenceTracker] UPDATE: '' → '7' (added buttons: [7], elapsed: 0.00s)
+[2025-11-21 00:10:30,127] [DEBUG] [IdleState] Checking sequence: '7' (need '777' for code mode)
+[2025-11-21 00:10:30,156] [INFO] [AmplifyState] Song "Technotronic - Pump Up The Jam (Official Music Video).mp3" was randomly started 🎚️
+[2025-11-21 00:10:30,902] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 00:10:30,903] [INFO] [AmplifyState] Song "Technotronic - Pump Up The Jam (Official Music Video).mp3" was released 🤷🏻‍♀️
+[2025-11-21 00:10:32,129] [DEBUG] [SequenceTracker] RESET: cleared sequence '7', elapsed: 2.00s
+[2025-11-21 00:10:33,255] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 250/907MB (27.5%, 657MB free) | ⚙️  CPU - Process: 16.4% | System: 8.0% | Cores: [7%, 9%, 9%, 7%]
+[2025-11-21 00:10:36,023] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 00:10:36,024] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 00:10:36,025] [DEBUG] [SequenceTracker] UPDATE: '' → '7' (added buttons: [7], elapsed: 0.00s)
+[2025-11-21 00:10:36,025] [DEBUG] [IdleState] Checking sequence: '7' (need '777' for code mode)
+[2025-11-21 00:10:36,037] [INFO] [AmplifyState] Song "Baccara - Yes Sir, I Can Boogie (Starparade 02.06.1977).mp3" was randomly started 🎚️
+[2025-11-21 00:10:39,164] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 00:10:39,165] [INFO] [AmplifyState] Song "Baccara - Yes Sir, I Can Boogie (Starparade 02.06.1977).mp3" was released 🤷🏻‍♀️
+[2025-11-21 00:10:39,184] [DEBUG] [SequenceTracker] RESET: cleared sequence '7', elapsed: 3.16s
+[2025-11-21 00:10:41,091] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 00:10:41,092] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 00:10:41,093] [DEBUG] [SequenceTracker] UPDATE: '' → '7' (added buttons: [7], elapsed: 0.00s)
+[2025-11-21 00:10:41,093] [DEBUG] [IdleState] Checking sequence: '7' (need '777' for code mode)
+[2025-11-21 00:10:41,123] [INFO] [AmplifyState] Song "The Weather Girls - It's Raining Men (Video).mp3" was randomly started 🎚️
+[2025-11-21 00:10:41,485] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 00:10:41,486] [INFO] [AmplifyState] Song "The Weather Girls - It's Raining Men (Video).mp3" was released 🤷🏻‍♀️
+[2025-11-21 00:10:43,112] [DEBUG] [SequenceTracker] RESET: cleared sequence '7', elapsed: 2.02s
+[2025-11-21 00:10:45,047] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 00:10:45,047] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 00:10:45,048] [DEBUG] [SequenceTracker] UPDATE: '' → '7' (added buttons: [7], elapsed: 0.00s)
+[2025-11-21 00:10:45,048] [DEBUG] [IdleState] Checking sequence: '7' (need '777' for code mode)
+[2025-11-21 00:10:45,083] [INFO] [AmplifyState] Song "Lizzo - Boys (Official Video).mp3" was randomly started 🎚️
+[2025-11-21 00:10:45,345] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 00:10:45,346] [INFO] [AmplifyState] Song "Lizzo - Boys (Official Video).mp3" was released 🤷🏻‍♀️
+[2025-11-21 00:10:47,052] [DEBUG] [SequenceTracker] RESET: cleared sequence '7', elapsed: 2.00s
+[2025-11-21 00:10:48,578] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 00:10:48,579] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 00:10:48,579] [DEBUG] [SequenceTracker] UPDATE: '' → '7' (added buttons: [7], elapsed: 0.00s)
+[2025-11-21 00:10:48,580] [DEBUG] [IdleState] Checking sequence: '7' (need '777' for code mode)
+[2025-11-21 00:10:48,592] [INFO] [AmplifyState] Song "Boney M. - Sunny (Official Audio).mp3" was randomly started 🎚️
+[2025-11-21 00:10:49,000] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 00:10:49,000] [INFO] [AmplifyState] Song "Boney M. - Sunny (Official Audio).mp3" was released 🤷🏻‍♀️
+[2025-11-21 00:10:49,602] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 00:10:49,603] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 00:10:49,603] [DEBUG] [SequenceTracker] UPDATE: '7' → '77' (added buttons: [7], elapsed: 1.02s)
+[2025-11-21 00:10:49,603] [DEBUG] [IdleState] Checking sequence: '77' (need '777' for code mode)
+[2025-11-21 00:10:49,633] [INFO] [AmplifyState] Song "יהודית רביץ - הכל בסדר - עמרי סמדר רמיקס  Yehudit Ravitz - Hakol Beseder - Omri Smadar RMX.mp3" was randomly started 🎚️
+[2025-11-21 00:10:50,055] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 00:10:50,056] [INFO] [AmplifyState] Song "יהודית רביץ - הכל בסדר - עמרי סמדר רמיקס  Yehudit Ravitz - Hakol Beseder - Omri Smadar RMX.mp3" was released 🤷🏻‍♀️
+[2025-11-21 00:10:50,599] [DEBUG] [SequenceTracker] RESET: cleared sequence '77', elapsed: 2.02s
+[2025-11-21 00:10:55,941] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 00:10:55,942] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 00:10:55,942] [DEBUG] [SequenceTracker] UPDATE: '' → '7' (added buttons: [7], elapsed: 0.00s)
+[2025-11-21 00:10:55,943] [DEBUG] [IdleState] Checking sequence: '7' (need '777' for code mode)
+[2025-11-21 00:10:55,956] [INFO] [AmplifyState] Song "Queen - Don't Stop Me Now (Official Video).mp3" was randomly started 🎚️
+[2025-11-21 00:10:56,407] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 00:10:56,408] [INFO] [AmplifyState] Song "Queen - Don't Stop Me Now (Official Video).mp3" was released 🤷🏻‍♀️
+[2025-11-21 00:10:56,849] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 00:10:56,850] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 00:10:56,851] [DEBUG] [SequenceTracker] UPDATE: '7' → '77' (added buttons: [7], elapsed: 0.91s)
+[2025-11-21 00:10:56,851] [DEBUG] [IdleState] Checking sequence: '77' (need '777' for code mode)
+[2025-11-21 00:10:56,882] [INFO] [AmplifyState] Song "Blondie - Call me.mp3" was randomly started 🎚️
+[2025-11-21 00:10:57,369] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 00:10:57,370] [INFO] [AmplifyState] Song "Blondie - Call me.mp3" was released 🤷🏻‍♀️
+[2025-11-21 00:10:57,855] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 00:10:57,857] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 00:10:57,858] [DEBUG] [SequenceTracker] UPDATE: '77' → '777' (added buttons: [7], elapsed: 1.92s)
+[2025-11-21 00:10:57,859] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-21 00:10:57,860] [DEBUG] [SequenceTracker] RESET: cleared sequence '777', elapsed: 1.92s
+[2025-11-21 00:10:57,905] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-21 00:11:10,043] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 00:11:10,932] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 00:11:10,933] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 00:11:10,933] [DEBUG] [SequenceTracker] UPDATE: '' → '7' (added buttons: [7], elapsed: 0.00s)
+[2025-11-21 00:11:11,578] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-21 00:11:11,579] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-21 00:11:11,579] [DEBUG] [SequenceTracker] UPDATE: '7' → '76' (added buttons: [6], elapsed: 0.65s)
+[2025-11-21 00:11:16,237] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 00:11:16,239] [INFO] [CodeFailState] Code mode failed: Button was released
+[2025-11-21 00:11:21,862] [DEBUG] [SequenceTracker] RESET: cleared sequence '76', elapsed: 10.93s
+[2025-11-21 00:11:24,415] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 00:11:24,416] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 00:11:24,417] [DEBUG] [SequenceTracker] UPDATE: '' → '7' (added buttons: [7], elapsed: 0.00s)
+[2025-11-21 00:11:24,419] [DEBUG] [IdleState] Checking sequence: '7' (need '777' for code mode)
+[2025-11-21 00:11:24,454] [INFO] [AmplifyState] Song "יהודית רביץ - הכל בסדר - עמרי סמדר רמיקס  Yehudit Ravitz - Hakol Beseder - Omri Smadar RMX.mp3" was randomly started 🎚️
+[2025-11-21 00:11:26,443] [INFO] [ButtonReader] Keyboard: Button 6 toggled OFF (key '6')
+[2025-11-21 00:11:28,773] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-21 00:11:28,773] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-21 00:11:28,774] [DEBUG] [SequenceTracker] UPDATE: '7' → '76' (added buttons: [6], elapsed: 4.36s)
+[2025-11-21 00:11:33,261] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 251/907MB (27.7%, 656MB free) | ⚙️  CPU - Process: 12.6% | System: 6.8% | Cores: [5%, 9%, 8%, 5%]
+[2025-11-21 00:11:34,342] [INFO] [ButtonReader] Keyboard: Button 6 toggled OFF (key '6')
+[2025-11-21 00:11:35,526] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 00:11:35,527] [INFO] [AmplifyState] Song "יהודית רביץ - הכל בסדר - עמרי סמדר רמיקס  Yehudit Ravitz - Hakol Beseder - Omri Smadar RMX.mp3" was released 🤷🏻‍♀️
+[2025-11-21 00:11:35,547] [DEBUG] [SequenceTracker] RESET: cleared sequence '76', elapsed: 11.13s
+[2025-11-21 00:12:33,271] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 251/907MB (27.7%, 656MB free) | ⚙️  CPU - Process: 29.6% | System: 11.1% | Cores: [8%, 10%, 4%, 22%]
+[2025-11-21 00:13:33,285] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 249/907MB (27.4%, 658MB free) | ⚙️  CPU - Process: 31.2% | System: 11.5% | Cores: [10%, 15%, 13%, 8%]
+[2025-11-21 00:14:33,286] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 248/907MB (27.4%, 659MB free) | ⚙️  CPU - Process: 31.2% | System: 11.6% | Cores: [9%, 12%, 17%, 10%]
+[2025-11-21 00:14:35,091] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 00:14:35,092] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 00:14:35,092] [DEBUG] [SequenceTracker] UPDATE: '' → '7' (added buttons: [7], elapsed: 0.00s)
+[2025-11-21 00:14:35,093] [DEBUG] [IdleState] Checking sequence: '7' (need '777' for code mode)
+[2025-11-21 00:14:35,106] [INFO] [AmplifyState] Song "Lady Gaga - Bad Romance (Official Music Video).mp3" was randomly started 🎚️
+[2025-11-21 00:14:37,485] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 00:14:37,486] [INFO] [AmplifyState] Song "Lady Gaga - Bad Romance (Official Music Video).mp3" was released 🤷🏻‍♀️
+[2025-11-21 00:14:37,505] [DEBUG] [SequenceTracker] RESET: cleared sequence '7', elapsed: 2.41s
+[2025-11-21 00:14:39,352] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 00:14:39,353] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 00:14:39,354] [DEBUG] [SequenceTracker] UPDATE: '' → '7' (added buttons: [7], elapsed: 0.00s)
+[2025-11-21 00:14:39,354] [DEBUG] [IdleState] Checking sequence: '7' (need '777' for code mode)
+[2025-11-21 00:14:39,365] [INFO] [AmplifyState] Song "Dead Or Alive - You Spin Me Round (Like a Record) (Official Video) (1).mp3" was randomly started 🎚️
+[2025-11-21 00:14:41,261] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 00:14:41,262] [INFO] [AmplifyState] Song "Dead Or Alive - You Spin Me Round (Like a Record) (Official Video) (1).mp3" was released 🤷🏻‍♀️
+[2025-11-21 00:14:41,362] [DEBUG] [SequenceTracker] RESET: cleared sequence '7', elapsed: 2.01s
+[2025-11-21 00:15:16,943] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 2 - Process terminating
+[2025-11-21 00:15:16,943] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-21 00:15:18,538] [INFO] [SoundController] Sound controller cleaned up successfully
+[2025-11-21 00:15:18,549] [INFO] [GameManager] Game stopped
+[2025-11-21 00:15:18,549] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

@@ -251,6 +251,92 @@ class IdleAnimation(Animation):
         self.hue_index += self.hue_increment
 
 
+class HueShiftSnakeAnimation(Animation):
+    """
+    Snake animation where the head maintains its color and trail pixels shift their hue.
+    
+    Unlike IdleAnimation which fades pixels but keeps their hue, this animation
+    shifts the hue of trail pixels (+10 degrees) creating a color-morphing snake effect.
+    """
+    
+    def __init__(self, strip: 'LedStrip', speed_ms: int = 25, hue_shift: int = 10, fade_amount: int = 60):
+        """
+        Initialize hue-shifting snake animation.
+        
+        Args:
+            strip: LED strip to operate on
+            speed_ms: Animation update interval in milliseconds
+            hue_shift: Amount to shift hue of trail pixels each frame (degrees)
+            fade_amount: Fade strength for tail (0-255, where 255 = fade completely)
+        """
+        super().__init__(strip, speed_ms)
+        
+        # Strip length
+        self.num_pixels: int = strip.num_pixels()
+        
+        # Snake position and movement - start from random position
+        self.led_index: int = random.randint(0, self.num_pixels - 1)
+        self.reverse: bool = random.choice([True, False])
+        
+        # Snake color - start from random hue
+        self.snake_hue: int = random.randint(0, 359)
+        self.hue_shift: int = hue_shift
+        
+        # Fading effect for tail end
+        self.fade_amount: int = fade_amount
+    
+    def advance(self) -> None:
+        """Advance snake position with hue-shifting trail"""
+        from led_system.pixel import Pixel
+        
+        # 1. Shift hue of all existing pixels relative to their previous frame hue
+        for i in range(self.num_pixels):
+            pixel = self.strip[i]
+            
+            # Convert pixel to HSV (get pixel's current hue from previous frame)
+            h, s, v = AnimationHelpers._rgb_to_hsv(pixel.r, pixel.g, pixel.b)
+            
+            # Only process pixels that are lit (have brightness > 0)
+            if v > 0:
+                # Shift hue forward relative to previous frame (hue += self.hue_shift)
+                new_hue = (h + self.hue_shift) % 360
+                
+                # Also fade brightness slightly for tail effect
+                new_v = max(0, v - (self.fade_amount / 255.0) * 0.15)  # Gentle fade
+                
+                # Convert back to RGB
+                new_pixel = AnimationHelpers.hsv_to_pixel(new_hue, s, new_v)
+                self.strip[i] = new_pixel
+        
+        # 2. Set current position (2 pixels) to snake's color
+        snake_color = AnimationHelpers.hsv_to_pixel(self.snake_hue % 360, 1.0, 1.0)
+        self.strip[self.led_index] = snake_color
+        
+        # Light the adjacent pixel in direction of movement
+        if self.reverse:
+            adjacent_index = self.led_index - 1
+        else:
+            adjacent_index = self.led_index + 1
+        
+        if 0 <= adjacent_index < self.num_pixels:
+            self.strip[adjacent_index] = snake_color
+        
+        # 3. Move LED index by 2 pixels
+        if self.reverse:
+            self.led_index -= 2
+        else:
+            self.led_index += 2
+        
+        # 4. Reverse direction at strip ends
+        if self.led_index >= self.num_pixels - 1 or self.led_index <= 0:
+            self.reverse = not self.reverse
+            # Ensure we stay within bounds
+            self.led_index = max(0, min(self.led_index, self.num_pixels - 1))
+        
+        # 5. Shift snake head hue backward by 3 degrees for next frame
+        self.snake_hue = (self.snake_hue - 3) % 360
+
+
 class AnimationDelayWrapper(Animation):
     """
     Generic wrapper that adds a delay before starting a target animation.
