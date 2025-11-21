@@ -369,6 +369,9 @@ class PartyState(GameState):
         first_strip = game_manager.led_strips[0]
         self.leds_per_button = first_strip.num_pixels() // button_count
         
+        # Track special buttons (excluded from dot firing)
+        self.special_buttons = {0, button_count - 1, self.button_A, self.button_B}  # First, last, A, B
+        
         # Reduction feature state
         self.reduction_enabled = False
         self.party_start_time = None

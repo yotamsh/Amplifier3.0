@@ -410,6 +410,7 @@ class AmplifySnakeAnimation(Animation):
         self.snake_hue: int = random.randint(0, 359)
         self.snake_direction: int = random.choice([1, -1])  # 1=forward, -1=backward
         self.hue_increment: int = 5  # Hue change per snake movement
+        self.snake_speed: int = 2  # Pixels to advance per frame
         self.initialized: bool = False
         
     def set_pressed_buttons(self, pressed_buttons: List[bool]) -> None:
@@ -422,6 +423,7 @@ class AmplifySnakeAnimation(Animation):
             if pressed_buttons[i] and not old_pressed[i]:
                 self.last_pressed_button = i
                 self.initialized = False  # Reset snake position
+                # Note: Will fill segment with matching colors in advance() after snake direction is set
                 break
         
         # If no new press, use rightmost pressed button
@@ -430,6 +432,33 @@ class AmplifySnakeAnimation(Animation):
                 if pressed_buttons[i]:
                     self.last_pressed_button = i
                     break
+    
+    def _fill_segment_with_snake_trail(self, button_index: int, center_pos: int, direction: int) -> None:
+        """Fill a segment with colors matching the snake's trail in opposite direction."""
+        segment_start = button_index * self.leds_per_button
+        segment_end = (button_index + 1) * self.leds_per_button
+        
+        # Fill opposite direction from snake movement with matching hues
+        if direction > 0:
+            # Snake going right, fill left side
+            pixels_to_fill = center_pos - segment_start
+            for offset in range(1, pixels_to_fill + 1):
+                pixel_idx = center_pos - offset
+                if segment_start <= pixel_idx < segment_end:
+                    # Hue decreases going backwards (opposite of snake's increment)
+                    hue = (self.snake_hue - offset * self.hue_increment * self.snake_speed) % 360
+                    color = AnimationHelpers.hsv_to_pixel(hue, 1.0, 1.0)
+                    self.strip[pixel_idx] = color
+        else:
+            # Snake going left, fill right side
+            pixels_to_fill = segment_end - center_pos - 1
+            for offset in range(1, pixels_to_fill + 1):
+                pixel_idx = center_pos + offset
+                if segment_start <= pixel_idx < segment_end:
+                    # Hue decreases going backwards (opposite of snake's increment)
+                    hue = (self.snake_hue - offset * self.hue_increment * self.snake_speed) % 360
+                    color = AnimationHelpers.hsv_to_pixel(hue, 1.0, 1.0)
+                    self.strip[pixel_idx] = color
     
     def _get_button_center_pixel(self, button_index: int) -> int:
         """Get the center pixel index for a button segment."""
@@ -497,14 +526,16 @@ class AmplifySnakeAnimation(Animation):
         if not self.initialized and self.last_pressed_button is not None:
             self.snake_position = self._get_button_center_pixel(self.last_pressed_button)
             self.snake_direction = random.choice([1, -1])
+            # Fill the opposite direction with matching trail colors
+            self._fill_segment_with_snake_trail(self.last_pressed_button, self.snake_position, self.snake_direction)
             self.initialized = True
         
-        # 2. Move snake with segment skipping
+        # 2. Move snake with segment skipping (faster movement)
         current_seg_idx = self._get_current_segment(self.snake_position, active_segments)
         
         if current_seg_idx is not None:
             current_seg_start, current_seg_end = active_segments[current_seg_idx]
-            next_pos = self.snake_position + self.snake_direction
+            next_pos = self.snake_position + (self.snake_direction * self.snake_speed)
             
             # Check if we've reached the boundary of current segment
             if self.snake_direction > 0 and next_pos > current_seg_end:
@@ -512,37 +543,43 @@ class AmplifySnakeAnimation(Animation):
                 next_seg_idx = self._find_next_segment(current_seg_idx, active_segments, 1)
                 if next_seg_idx is not None:
                     # Jump to start of next segment
-                    next_pos = active_segments[next_seg_idx][0]
+                    overshoot = next_pos - current_seg_end - 1
+                    next_pos = active_segments[next_seg_idx][0] + overshoot
                 else:
                     # No more segments forward - reverse direction
                     self.snake_direction = -1
-                    next_pos = self.snake_position + self.snake_direction
+                    next_pos = current_seg_end + (next_pos - current_seg_end) * self.snake_direction
+                    next_pos = max(current_seg_start, min(next_pos, current_seg_end))
             
             elif self.snake_direction < 0 and next_pos < current_seg_start:
                 # Moving backward, reached start of segment
                 next_seg_idx = self._find_next_segment(current_seg_idx, active_segments, -1)
                 if next_seg_idx is not None:
                     # Jump to end of previous segment
-                    next_pos = active_segments[next_seg_idx][1]
+                    undershoot = current_seg_start - next_pos - 1
+                    next_pos = active_segments[next_seg_idx][1] - undershoot
                 else:
                     # No more segments backward - reverse direction
                     self.snake_direction = 1
-                    next_pos = self.snake_position + self.snake_direction
+                    next_pos = current_seg_start + (current_seg_start - next_pos) * self.snake_direction
+                    next_pos = max(current_seg_start, min(next_pos, current_seg_end))
             
             self.snake_position = next_pos
         
-        # 3. Paint snake head (3 pixels wide) - permanent color
+        # 3. Paint snake head (wider for faster movement) - permanent color
         snake_color = AnimationHelpers.hsv_to_pixel(self.snake_hue % 360, 1.0, 1.0)
         
-        for offset in range(-1, 2):  # -1, 0, 1
+        # Paint wider head to cover the speed (snake_speed * 2 + 1 pixels)
+        head_width = self.snake_speed + 1
+        for offset in range(-head_width, head_width + 1):
             pixel_idx = self.snake_position + offset
             if 0 <= pixel_idx < self.num_pixels:
                 button_idx = pixel_idx // self.leds_per_button
                 if button_idx < self.button_count and self.pressed_buttons[button_idx]:
                     self.strip[pixel_idx] = snake_color
         
-        # Increment snake hue for next movement
-        self.snake_hue = (self.snake_hue + self.hue_increment) % 360
+        # Increment snake hue for next movement (proportional to speed)
+        self.snake_hue = (self.snake_hue + self.hue_increment * self.snake_speed) % 360
         
         # 4. Add blinking OrangeRed indicators on unpressed button centers
         beat_value = AnimationHelpers.beat8(40)
@@ -1472,6 +1509,341 @@ class RainbowBlinkAnimation(Animation):
                 self.strip[i] = self.black
 
 
+class RainbowSinWaveAnimation(Animation):
+    """
+    Rainbow animation with complex sin-based hue offset.
+    
+    Uses combination of three sine waves: sin(13) + sin(59) + sin(17)
+    Creates an organic, unpredictable color shifting pattern.
+    """
+    
+    def __init__(self, strip: 'LedStrip', speed_ms: int = 50):
+        """
+        Initialize rainbow sin wave animation.
+        
+        Args:
+            strip: LED strip to operate on
+            speed_ms: Animation update interval in milliseconds
+        """
+        super().__init__(strip, speed_ms)
+        self.num_pixels: int = strip.num_pixels()
+        self.button_count: int = 10  # Assume 10 segments for rainbow distribution
+        self.leds_per_button: int = strip.num_pixels() // self.button_count
+    
+    def advance(self) -> None:
+        """Render rainbow with complex sin-based hue offset"""
+        from game_system.animation_helpers import AnimationHelpers
+        
+        # Calculate complex hue offset using three sin waves
+        sin_13 = AnimationHelpers.sin8(13 / 60.0)  # Slow wave (13 BPM = 0.217 Hz)
+        sin_59 = AnimationHelpers.sin8(59 / 60.0)  # Medium wave (59 BPM = 0.983 Hz)
+        sin_17 = AnimationHelpers.sin8(17 / 60.0)  # Medium-slow wave (17 BPM = 0.283 Hz)
+        
+        # Combine and scale to hue degrees (0-360)
+        hue_offset = (sin_13 + sin_59 + sin_17) * 360 / (255 * 3)
+        
+        # Render rainbow across segments
+        for button_idx in range(self.button_count):
+            segment_start = button_idx * self.leds_per_button
+            segment_end = min((button_idx + 1) * self.leds_per_button, self.num_pixels)
+            
+            # Base hue for this segment
+            base_hue = (button_idx * 360 / self.button_count) % 360
+            
+            # Apply offset
+            final_hue = (base_hue + hue_offset) % 360
+            color = AnimationHelpers.hsv_to_pixel(final_hue, 0.93, 1.0)
+            
+            # Fill segment
+            for i in range(segment_start, segment_end):
+                self.strip[i] = color
+
+
+class BoomsAnimation(Animation):
+    """
+    Booms animation - overlapping explosions with ripple effects.
+    
+    Multiple booms can be active simultaneously. Each boom expands with
+    a ripple pattern (like water waves) and fades gradually, spreading
+    far across the strip for minimal black areas.
+    """
+    
+    def __init__(self, strip: 'LedStrip', speed_ms: int = 20):
+        """
+        Initialize booms animation.
+        
+        Args:
+            strip: LED strip to operate on
+            speed_ms: Animation update interval in milliseconds
+        """
+        super().__init__(strip, speed_ms)
+        self.num_pixels: int = strip.num_pixels()
+        
+        # Track multiple active booms (list of boom dictionaries)
+        self.active_booms: List[dict] = []
+        self.frames_since_last_boom: int = 0
+        self.boom_interval: int = 15  # Start new boom every 15 frames (overlapping)
+        
+        # Initialize strip to black
+        from led_system.pixel import Pixel
+        self.black = Pixel(0, 0, 0)
+        for i in range(self.num_pixels):
+            strip[i] = self.black
+    
+    def _create_boom(self) -> dict:
+        """Create a new boom with random properties"""
+        import random
+        return {
+            'center': random.randint(0, self.num_pixels - 1),
+            'radius': 0.0,
+            'max_radius': random.randint(40, 60),  # Larger radius for less black
+            'hue': random.random() * 360,
+            'age': 0,
+            'speed': random.uniform(2.5, 3.5)  # Faster expansion
+        }
+    
+    def _get_ripple_brightness(self, distance: float, radius: float, max_radius: float, age: int) -> float:
+        """
+        Calculate brightness with ripple effect.
+        
+        Creates a pattern like: x x x+1 x+1 x+2 x+2 x+1 x+1 x...
+        """
+        import math
+        
+        if distance > radius:
+            return 0.0
+        
+        # Base brightness (bright at center, fades outward)
+        base_brightness = 1.0 - (distance / max_radius) * 0.5
+        
+        # Ripple effect: creates waves using sine
+        # Frequency increases with distance from center
+        ripple_freq = 0.3  # How many ripples
+        ripple = math.sin((distance - radius) * ripple_freq * math.pi) * 0.5 + 0.5
+        
+        # Combine base brightness with ripple
+        final_brightness = base_brightness * (0.6 + ripple * 0.4)
+        
+        # Fade out over time (but slowly)
+        age_factor = max(0, 1.0 - (age / 80.0))  # Slow fade over 80 frames
+        
+        return final_brightness * age_factor
+    
+    def advance(self) -> None:
+        """Update all booms - expand, fade, and spawn new ones"""
+        from game_system.animation_helpers import AnimationHelpers
+        import random
+        
+        # Spawn new boom if interval passed
+        self.frames_since_last_boom += 1
+        if self.frames_since_last_boom >= self.boom_interval:
+            self.active_booms.append(self._create_boom())
+            self.frames_since_last_boom = 0
+        
+        # Clear strip (will redraw all booms)
+        for i in range(self.num_pixels):
+            self.strip[i] = self.black
+        
+        # Update and render all active booms
+        booms_to_remove = []
+        for boom_idx, boom in enumerate(self.active_booms):
+            # Expand boom
+            boom['radius'] += boom['speed']
+            boom['age'] += 1
+            
+            # Render this boom with ripple effect
+            for i in range(self.num_pixels):
+                distance = abs(i - boom['center'])
+                
+                if distance <= boom['radius']:
+                    brightness = self._get_ripple_brightness(
+                        distance, 
+                        boom['radius'], 
+                        boom['max_radius'], 
+                        boom['age']
+                    )
+                    
+                    if brightness > 0.05:  # Only render if visible
+                        # Get existing pixel color
+                        existing_pixel = self.strip[i]
+                        existing_h, existing_s, existing_v = AnimationHelpers._rgb_to_hsv(
+                            existing_pixel.r, existing_pixel.g, existing_pixel.b
+                        )
+                        
+                        # New color from this boom
+                        new_color = AnimationHelpers.hsv_to_pixel(boom['hue'], 0.95, brightness)
+                        
+                        # Blend with existing (additive-like blending)
+                        if existing_v > 0.05:
+                            # Mix colors if pixel already lit
+                            blended_h = (existing_h + boom['hue']) / 2
+                            blended_v = min(1.0, existing_v + brightness * 0.5)
+                            blended_color = AnimationHelpers.hsv_to_pixel(blended_h, 0.95, blended_v)
+                            self.strip[i] = blended_color
+                        else:
+                            self.strip[i] = new_color
+            
+            # Remove boom if fully faded
+            if boom['age'] > 80:  # Complete lifecycle
+                booms_to_remove.append(boom_idx)
+        
+        # Remove completed booms (reverse order to maintain indices)
+        for idx in reversed(booms_to_remove):
+            self.active_booms.pop(idx)
+
+
+class SparkleFlowAnimation(Animation):
+    """
+    Sparkle Flow animation - flowing streams of sparkles with color gradients.
+    
+    Creates multiple flowing "streams" of bright sparkles that travel along
+    the strip, each with its own color gradient. Sparkles twinkle and shimmer
+    as they move, creating a magical, flowing effect with depth.
+    """
+    
+    def __init__(self, strip: 'LedStrip', speed_ms: int = 25):
+        """
+        Initialize sparkle flow animation.
+        
+        Args:
+            strip: LED strip to operate on
+            speed_ms: Animation update interval in milliseconds
+        """
+        super().__init__(strip, speed_ms)
+        self.num_pixels: int = strip.num_pixels()
+        
+        # Track multiple sparkle streams
+        self.streams: List[dict] = []
+        self.max_streams: int = 5
+        self.frames_since_last_stream: int = 0
+        self.stream_interval: int = 20  # New stream every 20 frames
+        
+        # Initialize strip
+        from led_system.pixel import Pixel
+        self.black = Pixel(0, 0, 0)
+        for i in range(self.num_pixels):
+            strip[i] = self.black
+    
+    def _create_stream(self) -> dict:
+        """Create a new sparkle stream with random properties"""
+        import random
+        return {
+            'position': random.choice([0, self.num_pixels - 1]),  # Start from either end
+            'direction': 1 if random.random() > 0.5 else -1,
+            'hue': random.random() * 360,
+            'hue_shift': random.uniform(-2, 2),  # Hue changes as stream moves
+            'speed': random.uniform(1.5, 2.5),
+            'sparkle_density': random.uniform(0.3, 0.6),  # How many pixels sparkle
+            'age': 0,
+            'lifetime': random.randint(80, 120)  # How long stream lasts
+        }
+    
+    def _get_sparkle_brightness(self, position: float, stream_pos: float, 
+                                  stream_age: int, stream_lifetime: int) -> float:
+        """Calculate sparkle brightness with twinkling effect"""
+        import random
+        import math
+        
+        distance = abs(position - stream_pos)
+        
+        # Sparkles form a comet tail
+        if distance > 20:
+            return 0.0
+        
+        # Base brightness (bright at head, fades in tail)
+        base_brightness = 1.0 - (distance / 20.0) * 0.7
+        
+        # Twinkle effect (random variations)
+        twinkle = random.uniform(0.5, 1.0)
+        
+        # Pulse effect (breathing)
+        pulse = (math.sin(stream_age * 0.2) + 1) / 2 * 0.3 + 0.7
+        
+        # Lifetime fade (fade in at start, fade out at end)
+        if stream_age < 10:
+            lifetime_factor = stream_age / 10.0
+        elif stream_age > stream_lifetime - 15:
+            lifetime_factor = (stream_lifetime - stream_age) / 15.0
+        else:
+            lifetime_factor = 1.0
+        
+        return base_brightness * twinkle * pulse * lifetime_factor
+    
+    def advance(self) -> None:
+        """Update sparkle streams and render"""
+        from game_system.animation_helpers import AnimationHelpers
+        import random
+        
+        # Spawn new stream if needed
+        self.frames_since_last_stream += 1
+        if self.frames_since_last_stream >= self.stream_interval and len(self.streams) < self.max_streams:
+            self.streams.append(self._create_stream())
+            self.frames_since_last_stream = 0
+        
+        # Fade existing pixels (create trails)
+        for i in range(self.num_pixels):
+            pixel = self.strip[i]
+            h, s, v = AnimationHelpers._rgb_to_hsv(pixel.r, pixel.g, pixel.b)
+            if v > 0:
+                new_v = max(0, v - 0.08)  # Gentle fade
+                self.strip[i] = AnimationHelpers.hsv_to_pixel(h, s, new_v)
+        
+        # Update and render streams
+        streams_to_remove = []
+        for stream_idx, stream in enumerate(self.streams):
+            # Move stream
+            stream['position'] += stream['direction'] * stream['speed']
+            stream['age'] += 1
+            stream['hue'] = (stream['hue'] + stream['hue_shift']) % 360
+            
+            # Check if stream left the strip
+            if stream['position'] < -20 or stream['position'] > self.num_pixels + 20:
+                streams_to_remove.append(stream_idx)
+                continue
+            
+            # Check if stream lifetime expired
+            if stream['age'] > stream['lifetime']:
+                streams_to_remove.append(stream_idx)
+                continue
+            
+            # Render sparkles in this stream
+            for offset in range(-20, 5):  # Comet tail
+                pixel_idx = int(stream['position']) + offset
+                
+                if 0 <= pixel_idx < self.num_pixels:
+                    # Random sparkle density
+                    if random.random() < stream['sparkle_density']:
+                        brightness = self._get_sparkle_brightness(
+                            pixel_idx,
+                            stream['position'],
+                            stream['age'],
+                            stream['lifetime']
+                        )
+                        
+                        if brightness > 0.1:
+                            # Calculate hue with gradient along tail
+                            tail_progress = (offset + 20) / 25.0  # 0 at tail end, 1 at head
+                            sparkle_hue = (stream['hue'] + tail_progress * 30) % 360
+                            
+                            # Get existing pixel
+                            existing_pixel = self.strip[pixel_idx]
+                            existing_h, existing_s, existing_v = AnimationHelpers._rgb_to_hsv(
+                                existing_pixel.r, existing_pixel.g, existing_pixel.b
+                            )
+                            
+                            # Additive blending
+                            if existing_v > 0.1:
+                                blended_v = min(1.0, existing_v + brightness * 0.5)
+                                blended_h = (existing_h + sparkle_hue) / 2
+                                self.strip[pixel_idx] = AnimationHelpers.hsv_to_pixel(blended_h, 0.9, blended_v)
+                            else:
+                                self.strip[pixel_idx] = AnimationHelpers.hsv_to_pixel(sparkle_hue, 0.9, brightness)
+        
+        # Remove completed streams
+        for idx in reversed(streams_to_remove):
+            self.streams.pop(idx)
+
+
 class RainbowScrollAnimation(Animation):
     """
     Rainbow scroll animation - scrolls the rainbow pattern left and right.
@@ -1527,10 +1899,11 @@ class RainbowScrollAnimation(Animation):
 
 class PartyAnimation(Animation):
     """
-    Party animation with red override support.
+    Party animation with red override and dot projectile effects.
     
-    Combines a sequence of underlying animations with red override for
-    the reduction feature. Red override is applied on top after child renders.
+    Combines a sequence of underlying animations with:
+    - Red override for reduction feature (buttons A and B)
+    - Dot projectiles fired from button segments (other buttons)
     """
     
     def __init__(self, strip: 'LedStrip', speed_ms: int = None, button_count: int = None):
@@ -1555,6 +1928,18 @@ class PartyAnimation(Animation):
         self.button_A_held = False
         self.button_B_held = False
         
+        # Dot projectile system
+        self.active_dots: List[dict] = []  # List of active dot projectiles
+        self.dot_speed: float = 3.0  # Pixels per frame
+        self.dot_width: int = 3  # Width of each dot (pixels)
+        
+        # Pre-calculate button colors (each button gets unique hue)
+        self.button_hues: List[float] = []
+        if button_count:
+            for i in range(button_count):
+                hue = (i * 360 / button_count) % 360
+                self.button_hues.append(hue)
+        
         # Create child animation sequence
         # Phase 1: Win effect (rainbow fill from segment centers)
         win_effect = WinEffectAnimation(strip, button_count, speed_ms=50)
@@ -1564,26 +1949,132 @@ class PartyAnimation(Animation):
         rainbow_blink = RainbowBlinkAnimation(strip, blink_count=5, speed_ms=200)
         blink_duration = 5 * 2 * 0.2  # 5 blinks × 2 states × 200ms
         
-        # Phase 3: Rainbow scroll (continuous)
+        # Phase 3: Rainbow scroll (5 seconds)
         rainbow_scroll = RainbowScrollAnimation(strip, speed_ms=30)
+        
+        # Phase 4: Random repeating sequence of party animations
+        # Create animations for the random sequence
+        pushing_bands = PushingBandsAnimation(strip, speed_ms=None)
+        rainbow_sin = RainbowSinWaveAnimation(strip, speed_ms=50)
+        booms = BoomsAnimation(strip, speed_ms=20)  # Faster speed
+        sparkle_flow = SparkleFlowAnimation(strip, speed_ms=25)  # New creative animation
+        
+        # Randomize order
+        party_animations = [
+            (pushing_bands, 20.0),  # 20 seconds each
+            (rainbow_sin, 20.0),
+            (booms, 20.0),
+            (sparkle_flow, 20.0)
+        ]
+        random.shuffle(party_animations)
+        
+        # Create repeating random sequence
+        random_party_loop = SequenceAnimation(
+            strip=strip,
+            animation_sequence=party_animations,
+            repeat=True,  # Loop forever
+            frame_speed_ms=20
+        )
         
         self.child_animation = SequenceAnimation(
             strip=strip,
             animation_sequence=[
                 (win_effect, win_duration),
                 (rainbow_blink, blink_duration),
-                (rainbow_scroll, None)  # Continuous
+                (rainbow_scroll, 5.0),  # 5 seconds
+                (random_party_loop, None)  # Continuous loop
             ],
             repeat=False,
             frame_speed_ms=20
         )
     
+    def trigger_dot(self, button_index: int) -> None:
+        """
+        Trigger a dot projectile from a button segment.
+        
+        Args:
+            button_index: Index of button that fired the dot
+        """
+        if button_index >= self.button_count:
+            return
+        
+        # Calculate segment center position
+        segment_start = button_index * self.leds_per_button
+        segment_end = (button_index + 1) * self.leds_per_button
+        center_pos = (segment_start + segment_end) / 2.0
+        
+        # Create new dot projectile
+        dot = {
+            'origin': center_pos,
+            'left_pos': center_pos,
+            'right_pos': center_pos,
+            'hue': self.button_hues[button_index] if button_index < len(self.button_hues) else 0,
+            'active': True
+        }
+        self.active_dots.append(dot)
+    
+    def _update_dots(self) -> None:
+        """Update all active dot projectiles"""
+        dots_to_remove = []
+        
+        for dot_idx, dot in enumerate(self.active_dots):
+            # Move dots outward in both directions
+            dot['left_pos'] -= self.dot_speed
+            dot['right_pos'] += self.dot_speed
+            
+            # Check if both dots are off-screen
+            if dot['left_pos'] < -self.dot_width and dot['right_pos'] > self.num_pixels + self.dot_width:
+                dots_to_remove.append(dot_idx)
+        
+        # Remove completed dots (reverse order to maintain indices)
+        for idx in reversed(dots_to_remove):
+            self.active_dots.pop(idx)
+    
+    def _render_dots(self) -> None:
+        """Render all active dot projectiles on top of base animation"""
+        from game_system.animation_helpers import AnimationHelpers
+        
+        for dot in self.active_dots:
+            color = AnimationHelpers.hsv_to_pixel(dot['hue'], 1.0, 1.0)
+            
+            # Render left-traveling dot
+            left_center = int(dot['left_pos'])
+            for offset in range(-self.dot_width, self.dot_width + 1):
+                pixel_idx = left_center + offset
+                if 0 <= pixel_idx < self.num_pixels:
+                    # Brightness falloff from center
+                    brightness_factor = 1.0 - (abs(offset) / (self.dot_width + 1))
+                    dot_color = AnimationHelpers.hsv_to_pixel(
+                        dot['hue'], 
+                        1.0, 
+                        brightness_factor
+                    )
+                    self.strip[pixel_idx] = dot_color
+            
+            # Render right-traveling dot
+            right_center = int(dot['right_pos'])
+            for offset in range(-self.dot_width, self.dot_width + 1):
+                pixel_idx = right_center + offset
+                if 0 <= pixel_idx < self.num_pixels:
+                    # Brightness falloff from center
+                    brightness_factor = 1.0 - (abs(offset) / (self.dot_width + 1))
+                    dot_color = AnimationHelpers.hsv_to_pixel(
+                        dot['hue'], 
+                        1.0, 
+                        brightness_factor
+                    )
+                    self.strip[pixel_idx] = dot_color
+    
     def advance(self) -> None:
-        """Render child animation, then apply red override on top"""
+        """Render child animation, then apply overrides on top"""
         # Let child animation render first
         self.child_animation.update_if_needed()
         
-        # Apply red override on top if any buttons held
+        # Update and render dot projectiles
+        self._update_dots()
+        self._render_dots()
+        
+        # Apply red override on top if any buttons held (highest priority)
         if self.button_A_held or self.button_B_held:
             self._apply_red_override()
     

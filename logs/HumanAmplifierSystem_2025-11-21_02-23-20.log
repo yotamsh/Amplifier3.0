@@ -1,0 +1,169 @@
+[2025-11-21 02:23:20,979] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-21 02:23:20,980] [INFO] [Amplifier] Button configuration: 10 buttons on GPIO [6, 5, 22, 17, 4, 23, 24, 25, 16, 20]
+[2025-11-21 02:23:20,981] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-21 02:23:20,981] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-21 02:23:20,982] [INFO] [Amplifier]   Strip 2: 293 LEDs on GPIO 18
+[2025-11-21 02:23:20,982] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-21 02:23:20,983] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-21 02:23:20,983] [INFO] [Amplifier] Audio folder: songs
+[2025-11-21 02:23:20,984] [INFO] [Amplifier] Schedule: 13 daily, 1 special entries
+[2025-11-21 02:23:20,984] [INFO] [ButtonReader] 🎮 Keyboard sampler initialized (NO GPIO)
+[2025-11-21 02:23:20,985] [INFO] [ButtonReader]    10 virtual buttons mapped to digit keys 0-9
+[2025-11-21 02:23:20,985] [INFO] [ButtonReader]    Press digit keys to toggle buttons ON/OFF
+[2025-11-21 02:23:20,986] [INFO] [ButtonReader]    Each keypress toggles button ON/OFF
+[2025-11-21 02:23:20,986] [INFO] [ButtonReader] ButtonReader initialized with 10 buttons
+[2025-11-21 02:23:20,988] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-21 02:23:23,648] [INFO] [SongLibrary] Loaded 722 song codes from 11 collections
+[2025-11-21 02:23:23,649] [INFO] [SongLibrary] Collections updated: ['PARTY', 'MAIJAM', 'VIRAL', 'FESTIGAL', 'HAFLA']
+[2025-11-21 02:23:23,752] [INFO] [SoundController] Pygame mixer initialized: 48000Hz, format=-16, channels=2
+[2025-11-21 02:23:31,974] [INFO] [SoundController] Sound controller initialized - mixer ready, first song will load on demand
+[2025-11-21 02:23:31,980] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-21 02:23:31,981] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-21 02:23:31,981] [INFO] [Amplifier] Hardware: 10 buttons, 2 LED strips, 20ms frame duration
+[2025-11-21 02:23:31,982] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['PARTY', 'DISNEY', 'MAIJAM', 'MORNING', 'GENERAL', 'SPANISH', 'VIRAL', 'CLASSIC', 'TV', 'FESTIGAL', 'HAFLA'], 'total_codes': 722, 'daily_schedule_entries': 13, 'special_schedule_entries': 1}
+[2025-11-21 02:23:31,983] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-21 02:23:31,983] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-21 02:23:31,984] [INFO] [Amplifier] Hardware status: 10 buttons, 2 LED strips
+[2025-11-21 02:23:31,984] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-21 02:23:31,985] [INFO] [Amplifier]   Strip 2: 293 LEDs active
+[2025-11-21 02:23:31,985] [INFO] [Amplifier] Audio system: 722 song codes, 13 sound effects
+[2025-11-21 02:23:31,986] [INFO] [Amplifier] Available collections: PARTY, DISNEY, MAIJAM, MORNING, GENERAL, SPANISH, VIRAL, CLASSIC, TV, FESTIGAL, HAFLA
+[2025-11-21 02:23:31,986] [INFO] [Amplifier] ===========================
+[2025-11-21 02:23:31,987] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-21 02:23:31,987] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-21 02:23:31,990] [INFO] [GameManager] 💾 Memory - Process: 87.9MB | System: 257/907MB (28.4%, 650MB free) | ⚙️  CPU - Process: 0.0% | System: 29.9% | Cores: [6%, 8%, 5%, 99%]
+[2025-11-21 02:23:31,991] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-21 02:23:31,992] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-21 02:23:31,993] [DEBUG] [SequenceTracker] UPDATE: '' → '4' (added buttons: [4], elapsed: 0.00s)
+[2025-11-21 02:23:31,993] [DEBUG] [IdleState] Checking sequence: '4' (need '777' for code mode)
+[2025-11-21 02:23:32,005] [INFO] [AmplifyState] Song "Arctic Monkeys - R U Mine_ (320kbps).mp3" was randomly started 🎚️
+[2025-11-21 02:23:34,961] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-21 02:23:34,963] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-21 02:23:34,963] [DEBUG] [SequenceTracker] UPDATE: '4' → '46' (added buttons: [6], elapsed: 2.97s)
+[2025-11-21 02:23:36,873] [INFO] [ButtonReader] Keyboard: Button 1 toggled ON (key '1')
+[2025-11-21 02:23:36,873] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-21 02:23:36,874] [DEBUG] [SequenceTracker] UPDATE: '46' → '461' (added buttons: [1], elapsed: 4.88s)
+[2025-11-21 02:23:42,527] [INFO] [ButtonReader] Keyboard: Button 9 toggled ON (key '9')
+[2025-11-21 02:23:42,527] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-21 02:23:42,528] [DEBUG] [SequenceTracker] UPDATE: '461' → '4619' (added buttons: [9], elapsed: 10.54s)
+[2025-11-21 02:23:44,596] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 02:23:44,596] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 02:23:44,597] [DEBUG] [SequenceTracker] UPDATE: '4619' → '46197' (added buttons: [7], elapsed: 12.60s)
+[2025-11-21 02:23:52,675] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-21 02:23:52,676] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-21 02:23:52,676] [DEBUG] [SequenceTracker] UPDATE: '46197' → '461973' (added buttons: [3], elapsed: 20.68s)
+[2025-11-21 02:24:32,001] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 249/907MB (27.5%, 658MB free) | ⚙️  CPU - Process: 18.6% | System: 9.6% | Cores: [8%, 11%, 10%, 10%]
+[2025-11-21 02:25:32,005] [INFO] [GameManager] 💾 Memory - Process: 88.3MB | System: 249/907MB (27.5%, 658MB free) | ⚙️  CPU - Process: 17.6% | System: 9.9% | Cores: [9%, 10%, 10%, 11%]
+[2025-11-21 02:26:32,022] [INFO] [GameManager] 💾 Memory - Process: 88.3MB | System: 250/907MB (27.5%, 657MB free) | ⚙️  CPU - Process: 18.1% | System: 9.9% | Cores: [9%, 10%, 12%, 9%]
+[2025-11-21 02:26:37,928] [INFO] [ButtonReader] Keyboard: Button 3 toggled OFF (key '3')
+[2025-11-21 02:26:39,741] [INFO] [ButtonReader] Keyboard: Button 2 toggled ON (key '2')
+[2025-11-21 02:26:39,743] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-21 02:26:39,743] [DEBUG] [SequenceTracker] UPDATE: '461973' → '4619732' (added buttons: [2], elapsed: 187.75s)
+[2025-11-21 02:26:40,425] [INFO] [ButtonReader] Keyboard: Button 2 toggled OFF (key '2')
+[2025-11-21 02:26:41,148] [INFO] [ButtonReader] Keyboard: Button 2 toggled ON (key '2')
+[2025-11-21 02:26:41,148] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-21 02:26:41,149] [DEBUG] [SequenceTracker] UPDATE: '4619732' → '46197322' (added buttons: [2], elapsed: 189.16s)
+[2025-11-21 02:26:42,594] [INFO] [ButtonReader] Keyboard: Button 2 toggled OFF (key '2')
+[2025-11-21 02:26:42,996] [INFO] [ButtonReader] Keyboard: Button 2 toggled ON (key '2')
+[2025-11-21 02:26:42,997] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-21 02:26:42,998] [DEBUG] [SequenceTracker] UPDATE: '46197322' → '461973222' (added buttons: [2], elapsed: 191.00s)
+[2025-11-21 02:26:44,362] [INFO] [ButtonReader] Keyboard: Button 1 toggled OFF (key '1')
+[2025-11-21 02:26:45,247] [INFO] [ButtonReader] Keyboard: Button 2 toggled OFF (key '2')
+[2025-11-21 02:26:45,831] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-21 02:26:45,832] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-21 02:26:45,832] [DEBUG] [SequenceTracker] UPDATE: '461973222' → '4619732223' (added buttons: [3], elapsed: 193.84s)
+[2025-11-21 02:26:46,474] [INFO] [ButtonReader] Keyboard: Button 3 toggled OFF (key '3')
+[2025-11-21 02:26:46,936] [INFO] [ButtonReader] Keyboard: Button 4 toggled OFF (key '4')
+[2025-11-21 02:26:47,679] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-21 02:26:47,680] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-21 02:26:47,681] [DEBUG] [SequenceTracker] UPDATE: '4619732223' → '6197322235' (added buttons: [5], elapsed: 195.69s) [TRIMMED]
+[2025-11-21 02:26:48,403] [INFO] [ButtonReader] Keyboard: Button 5 toggled OFF (key '5')
+[2025-11-21 02:26:48,805] [INFO] [ButtonReader] Keyboard: Button 6 toggled OFF (key '6')
+[2025-11-21 02:26:49,468] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 02:26:50,854] [INFO] [ButtonReader] Keyboard: Button 8 toggled ON (key '8')
+[2025-11-21 02:26:50,854] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-21 02:26:50,855] [DEBUG] [SequenceTracker] UPDATE: '6197322235' → '1973222358' (added buttons: [8], elapsed: 198.86s) [TRIMMED]
+[2025-11-21 02:26:51,457] [INFO] [ButtonReader] Keyboard: Button 8 toggled OFF (key '8')
+[2025-11-21 02:26:52,484] [INFO] [ButtonReader] Keyboard: Button 9 toggled OFF (key '9')
+[2025-11-21 02:26:52,485] [INFO] [AmplifyState] Song "Arctic Monkeys - R U Mine_ (320kbps).mp3" was released 🤷🏻‍♀️
+[2025-11-21 02:26:52,504] [DEBUG] [SequenceTracker] RESET: cleared sequence '1973222358', elapsed: 200.51s
+[2025-11-21 02:26:54,493] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 02:26:54,494] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 02:26:54,499] [DEBUG] [SequenceTracker] UPDATE: '' → '7' (added buttons: [7], elapsed: 0.00s)
+[2025-11-21 02:26:54,500] [DEBUG] [IdleState] Checking sequence: '7' (need '777' for code mode)
+[2025-11-21 02:26:54,534] [INFO] [AmplifyState] Song "אמיר פיי גוטמן - אל תוותר - מתוך פסטיגל 2007, פסטיגל על הזמן2.mp3" was randomly started 🎚️
+[2025-11-21 02:26:54,836] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 02:26:54,837] [INFO] [AmplifyState] Song "אמיר פיי גוטמן - אל תוותר - מתוך פסטיגל 2007, פסטיגל על הזמן2.mp3" was released 🤷🏻‍♀️
+[2025-11-21 02:26:55,178] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 02:26:55,179] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 02:26:55,179] [DEBUG] [SequenceTracker] UPDATE: '7' → '77' (added buttons: [7], elapsed: 0.68s)
+[2025-11-21 02:26:55,180] [DEBUG] [IdleState] Checking sequence: '77' (need '777' for code mode)
+[2025-11-21 02:26:55,191] [INFO] [AmplifyState] Song "Elvis Presley - A Little Less Conversation (JXL Radio Edit Remix) (Audio) (320kbps).mp3" was randomly started 🎚️
+[2025-11-21 02:26:55,600] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 02:26:55,601] [INFO] [AmplifyState] Song "Elvis Presley - A Little Less Conversation (JXL Radio Edit Remix) (Audio) (320kbps).mp3" was released 🤷🏻‍♀️
+[2025-11-21 02:26:55,961] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 02:26:55,962] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 02:26:55,963] [DEBUG] [SequenceTracker] UPDATE: '77' → '777' (added buttons: [7], elapsed: 1.46s)
+[2025-11-21 02:26:55,963] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-21 02:26:55,964] [DEBUG] [SequenceTracker] RESET: cleared sequence '777', elapsed: 1.47s
+[2025-11-21 02:26:56,006] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-21 02:27:00,517] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-21 02:27:00,517] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-21 02:27:00,518] [DEBUG] [SequenceTracker] UPDATE: '' → '6' (added buttons: [6], elapsed: 0.00s)
+[2025-11-21 02:27:01,100] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-21 02:27:01,100] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-21 02:27:01,101] [DEBUG] [SequenceTracker] UPDATE: '6' → '63' (added buttons: [3], elapsed: 0.58s)
+[2025-11-21 02:27:01,602] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 02:27:02,465] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 02:27:02,466] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 02:27:02,467] [DEBUG] [SequenceTracker] UPDATE: '63' → '637' (added buttons: [7], elapsed: 1.95s)
+[2025-11-21 02:27:03,068] [INFO] [ButtonReader] Keyboard: Button 6 toggled OFF (key '6')
+[2025-11-21 02:27:03,073] [INFO] [CodeFailState] Code mode failed: Button was released
+[2025-11-21 02:27:08,617] [DEBUG] [SequenceTracker] RESET: cleared sequence '637', elapsed: 8.10s
+[2025-11-21 02:27:10,768] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 02:27:11,150] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 02:27:11,152] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 02:27:11,152] [DEBUG] [SequenceTracker] UPDATE: '' → '7' (added buttons: [7], elapsed: 0.00s)
+[2025-11-21 02:27:11,153] [DEBUG] [IdleState] Checking sequence: '7' (need '777' for code mode)
+[2025-11-21 02:27:11,168] [INFO] [AmplifyState] Song "Sophie Ellis-Bextor - Murder On The Dancefloor.mp3" was randomly started 🎚️
+[2025-11-21 02:27:11,613] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 02:27:11,614] [INFO] [AmplifyState] Song "Sophie Ellis-Bextor - Murder On The Dancefloor.mp3" was released 🤷🏻‍♀️
+[2025-11-21 02:27:12,036] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 02:27:12,036] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 02:27:12,037] [DEBUG] [SequenceTracker] UPDATE: '7' → '77' (added buttons: [7], elapsed: 0.88s)
+[2025-11-21 02:27:12,038] [DEBUG] [IdleState] Checking sequence: '77' (need '777' for code mode)
+[2025-11-21 02:27:12,049] [INFO] [AmplifyState] Song "Fame  Theme Song  Irene Cara.mp3" was randomly started 🎚️
+[2025-11-21 02:27:12,398] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 02:27:12,399] [INFO] [AmplifyState] Song "Fame  Theme Song  Irene Cara.mp3" was released 🤷🏻‍♀️
+[2025-11-21 02:27:12,436] [ERROR] [SoundController] ❌ Failed to load song 'אגם רודברג ועדי הימלבלוי - מטרה מספר אחת - מתוך פסטיגל 2009, קונגפו פסטיגל.m4a' (attempt 1/3): mpg123_getformat: Failed to find valid MPEG data within limit on resync. (code 28)
+[2025-11-21 02:27:12,839] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 02:27:12,840] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 02:27:12,841] [DEBUG] [SequenceTracker] UPDATE: '77' → '777' (added buttons: [7], elapsed: 1.69s)
+[2025-11-21 02:27:12,841] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-21 02:27:12,842] [DEBUG] [SequenceTracker] RESET: cleared sequence '777', elapsed: 1.69s
+[2025-11-21 02:27:12,884] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-21 02:27:16,079] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-21 02:27:16,080] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-21 02:27:16,081] [DEBUG] [SequenceTracker] UPDATE: '' → '6' (added buttons: [6], elapsed: 0.00s)
+[2025-11-21 02:27:17,750] [INFO] [ButtonReader] Keyboard: Button 3 toggled OFF (key '3')
+[2025-11-21 02:27:19,183] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-21 02:27:19,184] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-21 02:27:19,185] [DEBUG] [SequenceTracker] UPDATE: '6' → '63' (added buttons: [3], elapsed: 3.10s)
+[2025-11-21 02:27:19,706] [INFO] [ButtonReader] Keyboard: Button 8 toggled ON (key '8')
+[2025-11-21 02:27:19,707] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-21 02:27:19,707] [DEBUG] [SequenceTracker] UPDATE: '63' → '638' (added buttons: [8], elapsed: 3.63s)
+[2025-11-21 02:27:21,493] [INFO] [ButtonReader] Keyboard: Button 0 toggled ON (key '0')
+[2025-11-21 02:27:21,513] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-21 02:27:21,514] [DEBUG] [SequenceTracker] UPDATE: '638' → '6380' (added buttons: [0], elapsed: 5.43s)
+[2025-11-21 02:27:25,059] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-21 02:27:25,060] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-21 02:27:25,060] [DEBUG] [SequenceTracker] UPDATE: '6380' → '63804' (added buttons: [4], elapsed: 8.98s)
+[2025-11-21 02:27:25,060] [INFO] [CodeModeState] Code entered: 63804
+[2025-11-21 02:27:25,083] [INFO] [CodeRevealState] Code reveal started for code: 63804 for song "Bach - Aria (from) Hunt Cantata.mp3"
+[2025-11-21 02:27:29,114] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: Bach - Aria (from) Hunt Cantata.mp3
+[2025-11-21 02:27:32,032] [INFO] [GameManager] 💾 Memory - Process: 88.3MB | System: 250/907MB (27.6%, 656MB free) | ⚙️  CPU - Process: 14.1% | System: 8.2% | Cores: [7%, 8%, 8%, 10%]
+[2025-11-21 02:27:57,414] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 2 - Process terminating
+[2025-11-21 02:27:57,415] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-21 02:27:57,628] [INFO] [SoundController] Sound controller cleaned up successfully
+[2025-11-21 02:27:57,638] [INFO] [GameManager] Game stopped
+[2025-11-21 02:27:57,639] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

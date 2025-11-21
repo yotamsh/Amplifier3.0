@@ -152,3 +152,107 @@
 [2025-11-21 02:09:16,303] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 250/907MB (27.6%, 657MB free) | ⚙️  CPU - Process: 20.7% | System: 8.6% | Cores: [9%, 9%, 6%, 11%]
 [2025-11-21 02:10:16,315] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 249/907MB (27.5%, 658MB free) | ⚙️  CPU - Process: 31.6% | System: 11.5% | Cores: [8%, 12%, 13%, 13%]
 [2025-11-21 02:11:16,332] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 251/907MB (27.6%, 656MB free) | ⚙️  CPU - Process: 31.8% | System: 11.5% | Cores: [8%, 13%, 11%, 14%]
+[2025-11-21 02:11:57,768] [INFO] [ButtonReader] Keyboard: Button 1 toggled OFF (key '1')
+[2025-11-21 02:11:58,612] [INFO] [ButtonReader] Keyboard: Button 2 toggled OFF (key '2')
+[2025-11-21 02:11:59,114] [INFO] [ButtonReader] Keyboard: Button 1 toggled ON (key '1')
+[2025-11-21 02:11:59,115] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-21 02:11:59,115] [DEBUG] [SequenceTracker] UPDATE: '' → '1' (added buttons: [1], elapsed: 0.00s)
+[2025-11-21 02:11:59,116] [DEBUG] [IdleState] Checking sequence: '1' (need '777' for code mode)
+[2025-11-21 02:11:59,128] [INFO] [AmplifyState] Song "Lady Gaga - Bad Romance.mp3" was randomly started 🎚️
+[2025-11-21 02:11:59,696] [INFO] [ButtonReader] Keyboard: Button 2 toggled ON (key '2')
+[2025-11-21 02:11:59,697] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-21 02:11:59,698] [DEBUG] [SequenceTracker] UPDATE: '1' → '12' (added buttons: [2], elapsed: 0.58s)
+[2025-11-21 02:12:00,440] [INFO] [ButtonReader] Keyboard: Button 3 toggled OFF (key '3')
+[2025-11-21 02:12:01,185] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-21 02:12:01,185] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-21 02:12:01,187] [DEBUG] [SequenceTracker] UPDATE: '12' → '123' (added buttons: [3], elapsed: 2.07s)
+[2025-11-21 02:12:01,627] [INFO] [ButtonReader] Keyboard: Button 4 toggled OFF (key '4')
+[2025-11-21 02:12:02,133] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-21 02:12:02,134] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-21 02:12:02,134] [DEBUG] [SequenceTracker] UPDATE: '123' → '1234' (added buttons: [4], elapsed: 3.02s)
+[2025-11-21 02:12:02,635] [INFO] [ButtonReader] Keyboard: Button 5 toggled OFF (key '5')
+[2025-11-21 02:12:03,077] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-21 02:12:03,078] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-21 02:12:03,082] [DEBUG] [SequenceTracker] UPDATE: '1234' → '12345' (added buttons: [5], elapsed: 3.97s)
+[2025-11-21 02:12:03,519] [INFO] [ButtonReader] Keyboard: Button 6 toggled OFF (key '6')
+[2025-11-21 02:12:04,001] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-21 02:12:04,001] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-21 02:12:04,002] [DEBUG] [SequenceTracker] UPDATE: '12345' → '123456' (added buttons: [6], elapsed: 4.89s)
+[2025-11-21 02:12:04,463] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 02:12:04,965] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 02:12:04,966] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 02:12:04,967] [DEBUG] [SequenceTracker] UPDATE: '123456' → '1234567' (added buttons: [7], elapsed: 5.85s)
+[2025-11-21 02:12:05,488] [INFO] [ButtonReader] Keyboard: Button 8 toggled OFF (key '8')
+[2025-11-21 02:12:06,011] [INFO] [ButtonReader] Keyboard: Button 8 toggled ON (key '8')
+[2025-11-21 02:12:06,012] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-21 02:12:06,013] [DEBUG] [SequenceTracker] UPDATE: '1234567' → '12345678' (added buttons: [8], elapsed: 6.90s)
+[2025-11-21 02:12:06,614] [INFO] [ButtonReader] Keyboard: Button 9 toggled OFF (key '9')
+[2025-11-21 02:12:07,359] [INFO] [ButtonReader] Keyboard: Button 9 toggled ON (key '9')
+[2025-11-21 02:12:07,360] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-21 02:12:07,360] [DEBUG] [SequenceTracker] UPDATE: '12345678' → '123456789' (added buttons: [9], elapsed: 8.25s)
+[2025-11-21 02:12:09,171] [INFO] [ButtonReader] Keyboard: Button 0 toggled OFF (key '0')
+[2025-11-21 02:12:10,437] [INFO] [ButtonReader] Keyboard: Button 0 toggled ON (key '0')
+[2025-11-21 02:12:10,457] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-21 02:12:10,458] [DEBUG] [SequenceTracker] UPDATE: '123456789' → '1234567890' (added buttons: [0], elapsed: 11.34s)
+[2025-11-21 02:12:10,491] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: Lady Gaga - Bad Romance.mp3
+[2025-11-21 02:12:16,346] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 250/907MB (27.6%, 656MB free) | ⚙️  CPU - Process: 27.8% | System: 10.5% | Cores: [5%, 16%, 15%, 6%]
+[2025-11-21 02:12:40,217] [INFO] [ButtonReader] Keyboard: Button 5 toggled OFF (key '5')
+[2025-11-21 02:12:40,519] [INFO] [ButtonReader] Keyboard: Button 6 toggled OFF (key '6')
+[2025-11-21 02:12:41,202] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-21 02:12:41,204] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-21 02:12:41,210] [DEBUG] [SequenceTracker] UPDATE: '1234567890' → '2345678905' (added buttons: [5], elapsed: 42.09s) [TRIMMED]
+[2025-11-21 02:12:41,444] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-21 02:12:41,445] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-21 02:12:41,445] [DEBUG] [SequenceTracker] UPDATE: '2345678905' → '3456789056' (added buttons: [6], elapsed: 42.33s) [TRIMMED]
+[2025-11-21 02:12:42,834] [INFO] [ButtonReader] Keyboard: Button 5 toggled OFF (key '5')
+[2025-11-21 02:12:43,437] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-21 02:12:43,437] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-21 02:12:43,438] [DEBUG] [SequenceTracker] UPDATE: '3456789056' → '4567890565' (added buttons: [5], elapsed: 44.32s) [TRIMMED]
+[2025-11-21 02:12:43,798] [INFO] [ButtonReader] Keyboard: Button 6 toggled OFF (key '6')
+[2025-11-21 02:12:45,505] [INFO] [ButtonReader] Keyboard: Button 4 toggled OFF (key '4')
+[2025-11-21 02:12:46,268] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-21 02:12:46,269] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-21 02:12:46,270] [DEBUG] [SequenceTracker] UPDATE: '4567890565' → '5678905654' (added buttons: [4], elapsed: 47.15s) [TRIMMED]
+[2025-11-21 02:12:48,804] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 02:12:49,568] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 02:12:49,570] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 02:12:49,570] [DEBUG] [SequenceTracker] UPDATE: '5678905654' → '6789056547' (added buttons: [7], elapsed: 50.46s) [TRIMMED]
+[2025-11-21 02:12:50,734] [INFO] [ButtonReader] Keyboard: Button 8 toggled OFF (key '8')
+[2025-11-21 02:12:51,497] [INFO] [ButtonReader] Keyboard: Button 8 toggled ON (key '8')
+[2025-11-21 02:12:51,498] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-21 02:12:51,500] [DEBUG] [SequenceTracker] UPDATE: '6789056547' → '7890565478' (added buttons: [8], elapsed: 52.38s) [TRIMMED]
+[2025-11-21 02:12:52,822] [INFO] [ButtonReader] Keyboard: Button 9 toggled OFF (key '9')
+[2025-11-21 02:12:53,666] [INFO] [ButtonReader] Keyboard: Button 9 toggled ON (key '9')
+[2025-11-21 02:12:53,667] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-21 02:12:53,667] [DEBUG] [SequenceTracker] UPDATE: '7890565478' → '8905654789' (added buttons: [9], elapsed: 54.55s) [TRIMMED]
+[2025-11-21 02:12:55,721] [INFO] [ButtonReader] Keyboard: Button 0 toggled OFF (key '0')
+[2025-11-21 02:12:56,829] [INFO] [ButtonReader] Keyboard: Button 9 toggled OFF (key '9')
+[2025-11-21 02:13:00,444] [INFO] [ButtonReader] Keyboard: Button 5 toggled OFF (key '5')
+[2025-11-21 02:13:01,047] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-21 02:13:01,048] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-21 02:13:01,049] [DEBUG] [SequenceTracker] UPDATE: '8905654789' → '9056547895' (added buttons: [5], elapsed: 61.93s) [TRIMMED]
+[2025-11-21 02:13:03,060] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-21 02:13:03,061] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-21 02:13:03,062] [DEBUG] [SequenceTracker] UPDATE: '9056547895' → '0565478956' (added buttons: [6], elapsed: 63.95s) [TRIMMED]
+[2025-11-21 02:13:04,245] [INFO] [ButtonReader] Keyboard: Button 6 toggled OFF (key '6')
+[2025-11-21 02:13:05,350] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 02:13:06,455] [INFO] [ButtonReader] Keyboard: Button 8 toggled OFF (key '8')
+[2025-11-21 02:13:08,366] [INFO] [ButtonReader] Keyboard: Button 5 toggled OFF (key '5')
+[2025-11-21 02:13:08,991] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-21 02:13:09,010] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-21 02:13:09,011] [DEBUG] [SequenceTracker] UPDATE: '0565478956' → '5654789565' (added buttons: [5], elapsed: 69.90s) [TRIMMED]
+[2025-11-21 02:13:16,253] [INFO] [PartyState] Party Mode for song "Lady Gaga - Bad Romance.mp3" was quite-down! 🤫
+[2025-11-21 02:13:16,273] [DEBUG] [SequenceTracker] RESET: cleared sequence '5654789565', elapsed: 77.16s
+[2025-11-21 02:13:16,355] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 250/907MB (27.5%, 657MB free) | ⚙️  CPU - Process: 19.2% | System: 8.6% | Cores: [7%, 11%, 9%, 7%]
+[2025-11-21 02:13:26,979] [INFO] [ButtonReader] Keyboard: Button 4 toggled OFF (key '4')
+[2025-11-21 02:13:27,662] [INFO] [ButtonReader] Keyboard: Button 8 toggled ON (key '8')
+[2025-11-21 02:13:27,663] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-21 02:13:27,663] [DEBUG] [SequenceTracker] UPDATE: '' → '8' (added buttons: [8], elapsed: 0.00s)
+[2025-11-21 02:13:27,664] [DEBUG] [IdleState] Checking sequence: '8' (need '777' for code mode)
+[2025-11-21 02:13:27,699] [INFO] [AmplifyState] Song "Lady Gaga - Alejandro.mp3" was randomly started 🎚️
+[2025-11-21 02:14:16,360] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 249/907MB (27.5%, 657MB free) | ⚙️  CPU - Process: 22.5% | System: 9.4% | Cores: [8%, 6%, 10%, 14%]
+[2025-11-21 02:14:56,875] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 2 - Process terminating
+[2025-11-21 02:14:56,876] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-21 02:14:57,129] [INFO] [SoundController] Sound controller cleaned up successfully
+[2025-11-21 02:14:57,140] [INFO] [GameManager] Game stopped
+[2025-11-21 02:14:57,140] [INFO] [Amplifier] ✅ HumanAmplifier system shut down
