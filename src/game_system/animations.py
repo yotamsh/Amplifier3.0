@@ -1933,6 +1933,9 @@ class PartyAnimation(Animation):
         self.dot_speed: float = 3.0  # Pixels per frame
         self.dot_width: int = 3  # Width of each dot (pixels)
         
+        # Charging button tracking
+        self.charging_buttons: dict = {}  # Dict[button_index, charge_level]
+        
         # Pre-calculate button colors (each button gets unique hue)
         self.button_hues: List[float] = []
         if button_count:
@@ -1988,12 +1991,13 @@ class PartyAnimation(Animation):
             frame_speed_ms=20
         )
     
-    def trigger_dot(self, button_index: int) -> None:
+    def trigger_dot(self, button_index: int, dot_type: str = 'normal') -> None:
         """
         Trigger a dot projectile from a button segment.
         
         Args:
             button_index: Index of button that fired the dot
+            dot_type: 'normal' (tap), 'stream' (hold), or 'burst' (stream release)
         """
         if button_index >= self.button_count:
             return
@@ -2003,27 +2007,120 @@ class PartyAnimation(Animation):
         segment_end = (button_index + 1) * self.leds_per_button
         center_pos = (segment_start + segment_end) / 2.0
         
+        # Adjust properties based on dot type
+        if dot_type == 'normal':
+            size = 3
+            speed = 3.0
+            brightness = 1.0
+        elif dot_type == 'stream':
+            size = 2
+            speed = 2.0
+            brightness = 0.7
+        else:  # 'burst'
+            size = 4
+            speed = 3.5
+            brightness = 1.0
+        
         # Create new dot projectile
         dot = {
             'origin': center_pos,
             'left_pos': center_pos,
             'right_pos': center_pos,
             'hue': self.button_hues[button_index] if button_index < len(self.button_hues) else 0,
+            'type': dot_type,
+            'size': size,
+            'speed': speed,
+            'brightness': brightness,
             'active': True
         }
         self.active_dots.append(dot)
     
+    def trigger_explosion(self, button_index: int, power: float) -> None:
+        """
+        Fire explosion based on charge power (0.0 to 1.0).
+        
+        Args:
+            button_index: Index of button that charged up
+            power: Explosion power from 0.0 to 1.0
+        """
+        if button_index >= self.button_count:
+            return
+        
+        import random
+        
+        # Calculate segment center position
+        segment_start = button_index * self.leds_per_button
+        segment_end = (button_index + 1) * self.leds_per_button
+        center_pos = (segment_start + segment_end) / 2.0
+        
+        # More particles for higher power (5-20 particles)
+        num_particles = int(5 + power * 15)
+        base_hue = self.button_hues[button_index] if button_index < len(self.button_hues) else 0
+        
+        for _ in range(num_particles):
+            # Random direction (left or right)
+            goes_left = random.random() < 0.5
+            speed = random.uniform(2.0, 5.0) * (1 + power * 0.5)
+            
+            explosion_dot = {
+                'origin': center_pos,
+                'left_pos': center_pos if goes_left else 999999,  # Only one travels
+                'right_pos': center_pos if not goes_left else -999999,
+                'hue': (base_hue + random.uniform(-30, 30)) % 360,
+                'type': 'explosion',
+                'size': int(2 + power * 4),  # 2-6 pixels
+                'speed': speed,
+                'brightness': 1.0,
+                'birth_time': time.time(),
+                'lifetime': random.uniform(0.3, 0.8),  # Short-lived
+                'active': True
+            }
+            self.active_dots.append(explosion_dot)
+    
+    def set_button_charge(self, button_index: int, charge_level: float) -> None:
+        """
+        Set charging visual for a button.
+        
+        Args:
+            button_index: Index of button being charged
+            charge_level: Charge level from 0.0 to 1.0
+        """
+        self.charging_buttons[button_index] = charge_level
+    
+    def clear_button_charge(self, button_index: int) -> None:
+        """
+        Clear charging visual for a button.
+        
+        Args:
+            button_index: Index of button to clear
+        """
+        if button_index in self.charging_buttons:
+            del self.charging_buttons[button_index]
+    
     def _update_dots(self) -> None:
         """Update all active dot projectiles"""
         dots_to_remove = []
+        current_time = time.time()
         
         for dot_idx, dot in enumerate(self.active_dots):
+            # Get dot-specific speed
+            speed = dot.get('speed', self.dot_speed)
+            
             # Move dots outward in both directions
-            dot['left_pos'] -= self.dot_speed
-            dot['right_pos'] += self.dot_speed
+            dot['left_pos'] -= speed
+            dot['right_pos'] += speed
+            
+            # Check lifetime for explosion particles
+            if dot.get('type') == 'explosion':
+                birth_time = dot.get('birth_time', current_time)
+                lifetime = dot.get('lifetime', 0.5)
+                if current_time - birth_time > lifetime:
+                    dots_to_remove.append(dot_idx)
+                    continue
             
             # Check if both dots are off-screen
-            if dot['left_pos'] < -self.dot_width and dot['right_pos'] > self.num_pixels + self.dot_width:
+            dot_size = dot.get('size', self.dot_width)
+            if dot['left_pos'] < -dot_size and dot['right_pos'] > self.num_pixels + dot_size:
                 dots_to_remove.append(dot_idx)
         
         # Remove completed dots (reverse order to maintain indices)
@@ -2035,40 +2132,69 @@ class PartyAnimation(Animation):
         from game_system.animation_helpers import AnimationHelpers
         
         for dot in self.active_dots:
-            color = AnimationHelpers.hsv_to_pixel(dot['hue'], 1.0, 1.0)
+            # Get dot-specific properties
+            dot_size = dot.get('size', self.dot_width)
+            base_brightness = dot.get('brightness', 1.0)
             
-            # Render left-traveling dot
-            left_center = int(dot['left_pos'])
-            for offset in range(-self.dot_width, self.dot_width + 1):
-                pixel_idx = left_center + offset
-                if 0 <= pixel_idx < self.num_pixels:
-                    # Brightness falloff from center
-                    brightness_factor = 1.0 - (abs(offset) / (self.dot_width + 1))
-                    dot_color = AnimationHelpers.hsv_to_pixel(
-                        dot['hue'], 
-                        1.0, 
-                        brightness_factor
-                    )
-                    self.strip[pixel_idx] = dot_color
+            # Render left-traveling dot (if active)
+            if dot['left_pos'] >= -dot_size:
+                left_center = int(dot['left_pos'])
+                for offset in range(-dot_size, dot_size + 1):
+                    pixel_idx = left_center + offset
+                    if 0 <= pixel_idx < self.num_pixels:
+                        # Brightness falloff from center
+                        brightness_factor = (1.0 - (abs(offset) / (dot_size + 1))) * base_brightness
+                        dot_color = AnimationHelpers.hsv_to_pixel(
+                            dot['hue'], 
+                            1.0, 
+                            brightness_factor
+                        )
+                        self.strip[pixel_idx] = dot_color
             
-            # Render right-traveling dot
-            right_center = int(dot['right_pos'])
-            for offset in range(-self.dot_width, self.dot_width + 1):
-                pixel_idx = right_center + offset
-                if 0 <= pixel_idx < self.num_pixels:
-                    # Brightness falloff from center
-                    brightness_factor = 1.0 - (abs(offset) / (self.dot_width + 1))
-                    dot_color = AnimationHelpers.hsv_to_pixel(
-                        dot['hue'], 
-                        1.0, 
-                        brightness_factor
-                    )
-                    self.strip[pixel_idx] = dot_color
+            # Render right-traveling dot (if active)
+            if dot['right_pos'] <= self.num_pixels + dot_size:
+                right_center = int(dot['right_pos'])
+                for offset in range(-dot_size, dot_size + 1):
+                    pixel_idx = right_center + offset
+                    if 0 <= pixel_idx < self.num_pixels:
+                        # Brightness falloff from center
+                        brightness_factor = (1.0 - (abs(offset) / (dot_size + 1))) * base_brightness
+                        dot_color = AnimationHelpers.hsv_to_pixel(
+                            dot['hue'], 
+                            1.0, 
+                            brightness_factor
+                        )
+                        self.strip[pixel_idx] = dot_color
+    
+    def _render_charging_effects(self) -> None:
+        """Render charging visual on held buttons"""
+        from game_system.animation_helpers import AnimationHelpers
+        import math
+        
+        for button_idx, charge_level in self.charging_buttons.items():
+            segment_start = button_idx * self.leds_per_button
+            segment_end = (button_idx + 1) * self.leds_per_button
+            
+            # Pulsing white glow that intensifies with charge
+            pulse = (math.sin(time.time() * 10) + 1) / 2  # Fast pulse (10 Hz)
+            brightness = 0.3 + charge_level * 0.7 * pulse
+            
+            # White with hint of button color
+            hue = self.button_hues[button_idx] if button_idx < len(self.button_hues) else 0
+            saturation = 0.3 - charge_level * 0.2  # More white as charge increases
+            charge_color = AnimationHelpers.hsv_to_pixel(hue, saturation, brightness)
+            
+            # Fill segment with charging glow
+            for i in range(segment_start, segment_end):
+                self.strip[i] = charge_color
     
     def advance(self) -> None:
         """Render child animation, then apply overrides on top"""
         # Let child animation render first
         self.child_animation.update_if_needed()
+        
+        # Render charging effects (before dots, so dots appear on top)
+        self._render_charging_effects()
         
         # Update and render dot projectiles
         self._update_dots()
@@ -2250,7 +2376,7 @@ class CodeRevealFillAnimation(Animation):
     Uses same green color progression as CodeModeAnimation.
     """
     
-    def __init__(self, strip: 'LedStrip', button_count: int, code_sequence: str, speed_ms: int = 200):
+    def __init__(self, strip: 'LedStrip', button_count: int, code_sequence: str, speed_ms: int = 140):
         super().__init__(strip, speed_ms)
         
         self.button_count: int = button_count
@@ -2339,7 +2465,7 @@ def create_code_reveal_button_animation(strip: 'LedStrip', button_count: int, co
     Factory function to create button strip code reveal animation.
     
     Phases:
-    1. Progressive fill - reveal one digit at a time (200ms per digit)
+    1. Progressive fill - reveal one digit at a time (140ms per digit)
     2. Continuous blink - blink all revealed digits (400ms cycle)
     
     Args:
@@ -2350,13 +2476,13 @@ def create_code_reveal_button_animation(strip: 'LedStrip', button_count: int, co
     Returns:
         SequenceAnimation with fill and blink phases
     """
-    fill_anim = CodeRevealFillAnimation(strip, button_count, code_sequence, speed_ms=200)
+    fill_anim = CodeRevealFillAnimation(strip, button_count, code_sequence, speed_ms=140)
     blink_anim = CodeRevealBlinkAnimation(strip, button_count, code_sequence, speed_ms=400)
     
     # Calculate fill duration based on number of digits
     num_digits = len([c for c in code_sequence if c.isdigit()])
-    # Add one extra interval so last digit is visible for 200ms before transition
-    fill_duration = (num_digits + 1) * 0.2  # 200ms per digit + 200ms for last digit
+    # Add one extra interval so last digit is visible for 140ms before transition
+    fill_duration = (num_digits + 1) * 0.14  # 140ms per digit + 140ms for last digit
     
     return SequenceAnimation(
         strip=strip,

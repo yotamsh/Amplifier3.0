@@ -122,8 +122,8 @@ class IdleState(GameState):
     def __init__(self, game_manager: 'GameManager'):
         super().__init__(game_manager)
         
-        # Create class logger for this state at DEBUG level
-        self.logger = game_manager.logger.create_class_logger("IdleState", logging.DEBUG)
+        # Create class logger for this state
+        self.logger = game_manager.logger.create_class_logger("IdleState")
         
         # Register animations for each strip (idle scanner with delay)
         for strip_index, strip in enumerate(self.game_manager.led_strips):
@@ -372,6 +372,9 @@ class PartyState(GameState):
         # Track special buttons (excluded from dot firing)
         self.special_buttons = {0, button_count - 1, self.button_A, self.button_B}  # First, last, A, B
         
+        # Button hold tracking for tap/hold/charge detection
+        self.button_hold_states = {}  # Dict[button_index, hold_info]
+        
         # Reduction feature state
         self.reduction_enabled = False
         self.party_start_time = None
@@ -488,15 +491,75 @@ class PartyState(GameState):
             # Handle first button amazing (also enabled after 15 seconds, with cooldown)
             self._handle_amazing_button(button_state, current_time)
         
-        # Handle dot firing for non-special buttons (any time during party)
+        # Handle button hold effects for non-special buttons (any time during party)
         button_count = len(button_state.for_button)
         for i in range(button_count):
-            # Check for button press edge (rising edge: was not pressed, now pressed)
-            if button_state.was_changed[i] and button_state.for_button[i]:
-                # Fire dot only if not a special button
-                if i not in self.special_buttons:
-                    self.party_anim.trigger_dot(i)
-                    self.logger.debug(f"Button {i} fired dot projectile")
+            if i in self.special_buttons:
+                continue
+            
+            currently_pressed = button_state.for_button[i]
+            was_pressed = button_state.previous_state_of[i]
+            
+            # RISING EDGE: Button just pressed
+            if not was_pressed and currently_pressed:
+                self.button_hold_states[i] = {
+                    'start_time': current_time,
+                    'last_stream_fire': current_time,
+                    'is_charging': False,
+                    'charge_level': 0.0
+                }
+                # Fire initial dot (tap)
+                self.party_anim.trigger_dot(i, dot_type='normal')
+                self.logger.debug(f"Button {i} pressed - initial dot fired")
+            
+            # HELD: Button still pressed
+            elif was_pressed and currently_pressed:
+                hold_info = self.button_hold_states.get(i)
+                if hold_info:
+                    hold_duration = current_time - hold_info['start_time']
+                    
+                    # STREAM MODE (0.3s - 2s)
+                    if 0.3 <= hold_duration < 2.0:
+                        # Fire stream particles every 0.15s
+                        if current_time - hold_info['last_stream_fire'] >= 0.15:
+                            self.party_anim.trigger_dot(i, dot_type='stream')
+                            hold_info['last_stream_fire'] = current_time
+                    
+                    # CHARGE MODE (> 2s)
+                    elif hold_duration >= 2.0:
+                        if not hold_info['is_charging']:
+                            hold_info['is_charging'] = True
+                            self.logger.debug(f"Button {i} charging mode activated")
+                        
+                        # Charge level increases: 0 at 2s, 1.0 at 5s
+                        hold_info['charge_level'] = min(1.0, (hold_duration - 2.0) / 3.0)
+                        # Update charging visual on button segment
+                        self.party_anim.set_button_charge(i, hold_info['charge_level'])
+            
+            # FALLING EDGE: Button released
+            elif was_pressed and not currently_pressed:
+                hold_info = self.button_hold_states.get(i)
+                if hold_info:
+                    hold_duration = current_time - hold_info['start_time']
+                    
+                    # Quick tap (< 0.3s): Already fired single dot
+                    if hold_duration < 0.3:
+                        pass  # Single dot already fired on press
+                    
+                    # Release from charge (> 2s): Fire explosion
+                    elif hold_duration >= 2.0:
+                        explosion_power = hold_info['charge_level']
+                        self.party_anim.trigger_explosion(i, explosion_power)
+                        self.logger.info(f"Button {i} explosion! Power: {explosion_power:.2f}")
+                    
+                    # Release from stream (0.3s - 2s): Small burst
+                    else:
+                        self.party_anim.trigger_dot(i, dot_type='burst')
+                        self.logger.debug(f"Button {i} stream burst")
+                    
+                    # Clear hold state
+                    self.party_anim.clear_button_charge(i)
+                    del self.button_hold_states[i]
         
         # Check if song finished playing
         if not self.game_manager.sound_controller.is_song_playing():

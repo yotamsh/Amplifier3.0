@@ -1,0 +1,38 @@
+[2025-11-21 03:16:46,618] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-21 03:16:46,619] [INFO] [Amplifier] Button configuration: 10 buttons on GPIO [6, 5, 22, 17, 4, 23, 24, 25, 16, 20]
+[2025-11-21 03:16:46,620] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-21 03:16:46,620] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-21 03:16:46,621] [INFO] [Amplifier]   Strip 2: 293 LEDs on GPIO 18
+[2025-11-21 03:16:46,621] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-21 03:16:46,622] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-21 03:16:46,622] [INFO] [Amplifier] Audio folder: songs
+[2025-11-21 03:16:46,623] [INFO] [Amplifier] Schedule: 16 daily, 1 special entries
+[2025-11-21 03:16:46,623] [INFO] [ButtonReader] 🎮 Keyboard sampler initialized (NO GPIO)
+[2025-11-21 03:16:46,624] [INFO] [ButtonReader]    10 virtual buttons mapped to digit keys 0-9
+[2025-11-21 03:16:46,624] [INFO] [ButtonReader]    Press digit keys to toggle buttons ON/OFF
+[2025-11-21 03:16:46,625] [INFO] [ButtonReader]    Each keypress toggles button ON/OFF
+[2025-11-21 03:16:46,625] [INFO] [ButtonReader] ButtonReader initialized with 10 buttons
+[2025-11-21 03:16:46,630] [ERROR] [Amplifier] Failed to initialize HumanAmplifier system: Schedule references missing collection folders: ['fourA4tNight (daily schedule)', 'fourA4tNight (daily schedule)', 'fourA4tNight (daily schedule)', 'fourA4tNight (daily schedule)']. Create these folders in songs/ or update schedule configuration. | Type: FileNotFoundError | File: /home/yotam/AmpSync/Amp3/src/audio_system/audio_collections.py | Line: 125
+Traceback (most recent call last):
+  File "/home/yotam/AmpSync/Amp3/src/amplifier.py", line 200, in create_game_system
+    schedule = Schedule(
+               ^^^^^^^^^
+  File "/home/yotam/AmpSync/Amp3/src/audio_system/audio_collections.py", line 72, in __init__
+    self._validate_schedule(songs_folder)
+  File "/home/yotam/AmpSync/Amp3/src/audio_system/audio_collections.py", line 125, in _validate_schedule
+    raise FileNotFoundError(
+FileNotFoundError: Schedule references missing collection folders: ['fourA4tNight (daily schedule)', 'fourA4tNight (daily schedule)', 'fourA4tNight (daily schedule)', 'fourA4tNight (daily schedule)']. Create these folders in songs/ or update schedule configuration.
+[2025-11-21 03:16:46,634] [ERROR] [Amplifier] HumanAmplifier system error: Schedule references missing collection folders: ['fourA4tNight (daily schedule)', 'fourA4tNight (daily schedule)', 'fourA4tNight (daily schedule)', 'fourA4tNight (daily schedule)']. Create these folders in songs/ or update schedule configuration. | Type: FileNotFoundError | File: /home/yotam/AmpSync/Amp3/src/audio_system/audio_collections.py | Line: 125
+Traceback (most recent call last):
+  File "/home/yotam/AmpSync/Amp3/src/amplifier.py", line 314, in main
+    game_manager = create_game_system(config, amplifier_logger)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yotam/AmpSync/Amp3/src/amplifier.py", line 200, in create_game_system
+    schedule = Schedule(
+               ^^^^^^^^^
+  File "/home/yotam/AmpSync/Amp3/src/audio_system/audio_collections.py", line 72, in __init__
+    self._validate_schedule(songs_folder)
+  File "/home/yotam/AmpSync/Amp3/src/audio_system/audio_collections.py", line 125, in _validate_schedule
+    raise FileNotFoundError(
+FileNotFoundError: Schedule references missing collection folders: ['fourA4tNight (daily schedule)', 'fourA4tNight (daily schedule)', 'fourA4tNight (daily schedule)', 'fourA4tNight (daily schedule)']. Create these folders in songs/ or update schedule configuration.
+[2025-11-21 03:16:46,638] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

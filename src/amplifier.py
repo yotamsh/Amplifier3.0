@@ -178,8 +178,8 @@ def create_game_system(config: GameConfig, amplifier_logger):
     game_manager_logger = amplifier_logger.create_class_logger("GameManager", logging.INFO)
     button_reader_logger = amplifier_logger.create_class_logger("ButtonReader", logging.INFO)
     song_library_logger = amplifier_logger.create_class_logger("SongLibrary", logging.INFO)
-    sound_controller_logger = amplifier_logger.create_class_logger("SoundController", logging.INFO)
-    sequence_tracker_logger = amplifier_logger.create_class_logger("SequenceTracker", logging.DEBUG)
+    sound_controller_logger = amplifier_logger.create_class_logger("SoundController", logging.DEBUG)
+    sequence_tracker_logger = amplifier_logger.create_class_logger("SequenceTracker", logging.INFO)
     
     try:        
         # Initialize button sampler (NO GPIO - pure keyboard for testing)

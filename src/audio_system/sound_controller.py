@@ -289,7 +289,12 @@ class SoundController:
         """
         sound_obj = self._sound_objects[sound]
         sound_obj.set_volume(volume)
-        return sound_obj.play()
+        channel = sound_obj.play()
+        
+        # Debug log sound playback
+        self.logger.debug(f"Playing sound: {sound.name} (volume: {volume:.2f})")
+        
+        return channel
     
     def play_random_fail_sound(self, volume: float = 1.0) -> None:
         """
