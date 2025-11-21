@@ -1961,8 +1961,8 @@ class PartyAnimation(Animation):
         
         # Randomize order
         party_animations = [
-            (pushing_bands, 20.0),  # 20 seconds each
-            (rainbow_sin, 20.0),
+            (pushing_bands, 10.0), 
+            (rainbow_sin, 15.0),
             (booms, 20.0),
             (sparkle_flow, 20.0)
         ]

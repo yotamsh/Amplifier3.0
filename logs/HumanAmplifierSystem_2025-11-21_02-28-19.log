@@ -88,3 +88,47 @@
 [2025-11-21 02:35:21,607] [INFO] [ButtonReader] Button 7 pressed
 [2025-11-21 02:35:21,607] [DEBUG] [SequenceTracker] UPDATE: '3' → '37' (added buttons: [7], elapsed: 2.63s)
 [2025-11-21 02:35:30,894] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 248/907MB (27.3%, 659MB free) | ⚙️  CPU - Process: 29.7% | System: 11.4% | Cores: [16%, 10%, 11%, 9%]
+[2025-11-21 02:36:30,909] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 248/907MB (27.3%, 659MB free) | ⚙️  CPU - Process: 21.3% | System: 9.9% | Cores: [9%, 12%, 10%, 8%]
+[2025-11-21 02:37:17,482] [INFO] [ButtonReader] Keyboard: Button 4 toggled OFF (key '4')
+[2025-11-21 02:37:18,868] [INFO] [ButtonReader] Keyboard: Button 3 toggled OFF (key '3')
+[2025-11-21 02:37:20,555] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 02:37:20,555] [INFO] [AmplifyState] Song "דמיקולו - bloody.mori (320kbps).mp3" was released 🤷🏻‍♀️
+[2025-11-21 02:37:20,575] [DEBUG] [SequenceTracker] RESET: cleared sequence '37', elapsed: 121.60s
+[2025-11-21 02:37:21,257] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 02:37:21,258] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 02:37:21,259] [DEBUG] [SequenceTracker] UPDATE: '' → '7' (added buttons: [7], elapsed: 0.00s)
+[2025-11-21 02:37:21,259] [DEBUG] [IdleState] Checking sequence: '7' (need '777' for code mode)
+[2025-11-21 02:37:21,270] [INFO] [AmplifyState] Song "נורופן קוויק - שמלה אדומה- כאב ראש כאב ראש.mp3" was randomly started 🎚️
+[2025-11-21 02:37:22,525] [INFO] [ButtonReader] Keyboard: Button 6 toggled OFF (key '6')
+[2025-11-21 02:37:24,173] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-21 02:37:24,174] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-21 02:37:24,175] [DEBUG] [SequenceTracker] UPDATE: '7' → '76' (added buttons: [6], elapsed: 2.92s)
+[2025-11-21 02:37:24,595] [INFO] [ButtonReader] Keyboard: Button 5 toggled OFF (key '5')
+[2025-11-21 02:37:25,117] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-21 02:37:25,118] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-21 02:37:25,119] [DEBUG] [SequenceTracker] UPDATE: '76' → '764' (added buttons: [4], elapsed: 3.86s)
+[2025-11-21 02:37:25,820] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-21 02:37:25,821] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-21 02:37:25,821] [DEBUG] [SequenceTracker] UPDATE: '764' → '7643' (added buttons: [3], elapsed: 4.56s)
+[2025-11-21 02:37:26,925] [INFO] [ButtonReader] Keyboard: Button 2 toggled OFF (key '2')
+[2025-11-21 02:37:28,552] [INFO] [ButtonReader] Keyboard: Button 1 toggled OFF (key '1')
+[2025-11-21 02:37:30,788] [INFO] [ButtonReader] Keyboard: Button 0 toggled OFF (key '0')
+[2025-11-21 02:37:30,910] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 253/907MB (28.0%, 653MB free) | ⚙️  CPU - Process: 20.6% | System: 9.3% | Cores: [14%, 6%, 8%, 8%]
+[2025-11-21 02:37:32,093] [INFO] [ButtonReader] Keyboard: Button 0 toggled ON (key '0')
+[2025-11-21 02:37:32,113] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-21 02:37:32,114] [DEBUG] [SequenceTracker] UPDATE: '7643' → '76430' (added buttons: [0], elapsed: 10.86s)
+[2025-11-21 02:37:33,700] [INFO] [ButtonReader] Keyboard: Button 9 toggled OFF (key '9')
+[2025-11-21 02:37:35,534] [INFO] [ButtonReader] Keyboard: Button 9 toggled ON (key '9')
+[2025-11-21 02:37:35,535] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-21 02:37:35,535] [DEBUG] [SequenceTracker] UPDATE: '76430' → '764309' (added buttons: [9], elapsed: 14.28s)
+[2025-11-21 02:37:37,989] [INFO] [ButtonReader] Keyboard: Button 8 toggled OFF (key '8')
+[2025-11-21 02:37:38,793] [INFO] [ButtonReader] Keyboard: Button 8 toggled ON (key '8')
+[2025-11-21 02:37:38,793] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-21 02:37:38,794] [DEBUG] [SequenceTracker] UPDATE: '764309' → '7643098' (added buttons: [8], elapsed: 17.54s)
+[2025-11-21 02:37:53,387] [INFO] [AmplifyState] Song "נורופן קוויק - שמלה אדומה- כאב ראש כאב ראש.mp3" was finished while amplifing! 👑
+[2025-11-21 02:37:53,408] [DEBUG] [SequenceTracker] RESET: cleared sequence '7643098', elapsed: 32.15s
+[2025-11-21 02:38:25,781] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 2 - Process terminating
+[2025-11-21 02:38:25,782] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-21 02:38:25,960] [INFO] [SoundController] Sound controller cleaned up successfully
+[2025-11-21 02:38:25,971] [INFO] [GameManager] Game stopped
+[2025-11-21 02:38:25,972] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

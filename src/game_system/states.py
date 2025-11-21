@@ -488,6 +488,16 @@ class PartyState(GameState):
             # Handle first button amazing (also enabled after 15 seconds, with cooldown)
             self._handle_amazing_button(button_state, current_time)
         
+        # Handle dot firing for non-special buttons (any time during party)
+        button_count = len(button_state.for_button)
+        for i in range(button_count):
+            # Check for button press edge (rising edge: was not pressed, now pressed)
+            if button_state.was_changed[i] and button_state.for_button[i]:
+                # Fire dot only if not a special button
+                if i not in self.special_buttons:
+                    self.party_anim.trigger_dot(i)
+                    self.logger.debug(f"Button {i} fired dot projectile")
+        
         # Check if song finished playing
         if not self.game_manager.sound_controller.is_song_playing():
             self.logger.info(f"Song finished, returning to idle: {self.song_name}")
