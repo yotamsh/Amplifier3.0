@@ -1,0 +1,60 @@
+[2025-11-21 01:32:36,772] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-21 01:32:36,773] [INFO] [Amplifier] Button configuration: 10 buttons on GPIO [6, 5, 22, 17, 4, 23, 24, 25, 16, 20]
+[2025-11-21 01:32:36,774] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-21 01:32:36,774] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-21 01:32:36,775] [INFO] [Amplifier]   Strip 2: 293 LEDs on GPIO 18
+[2025-11-21 01:32:36,775] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-21 01:32:36,776] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-21 01:32:36,776] [INFO] [Amplifier] Audio folder: songs
+[2025-11-21 01:32:36,777] [INFO] [Amplifier] Schedule: 13 daily, 1 special entries
+[2025-11-21 01:32:36,777] [INFO] [ButtonReader] 🎮 Keyboard sampler initialized (NO GPIO)
+[2025-11-21 01:32:36,778] [INFO] [ButtonReader]    10 virtual buttons mapped to digit keys 0-9
+[2025-11-21 01:32:36,778] [INFO] [ButtonReader]    Press digit keys to toggle buttons ON/OFF
+[2025-11-21 01:32:36,778] [INFO] [ButtonReader]    Each keypress toggles button ON/OFF
+[2025-11-21 01:32:36,779] [INFO] [ButtonReader] ButtonReader initialized with 10 buttons
+[2025-11-21 01:32:36,781] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-21 01:32:39,431] [INFO] [SongLibrary] Loaded 722 song codes from 11 collections
+[2025-11-21 01:32:39,432] [INFO] [SongLibrary] Collections updated: ['MAIJAM']
+[2025-11-21 01:32:39,532] [INFO] [SoundController] Pygame mixer initialized: 48000Hz, format=-16, channels=2
+[2025-11-21 01:32:47,737] [INFO] [SoundController] Sound controller initialized - mixer ready, first song will load on demand
+[2025-11-21 01:32:47,743] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-21 01:32:47,744] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-21 01:32:47,744] [INFO] [Amplifier] Hardware: 10 buttons, 2 LED strips, 20ms frame duration
+[2025-11-21 01:32:47,745] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['GENERAL', 'CLASSIC', 'MAIJAM', 'PARTY', 'SPANISH', 'TV', 'FESTIGAL', 'VIRAL', 'DISNEY', 'MORNING', 'HAFLA'], 'total_codes': 722, 'daily_schedule_entries': 13, 'special_schedule_entries': 1}
+[2025-11-21 01:32:47,745] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-21 01:32:47,746] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-21 01:32:47,746] [INFO] [Amplifier] Hardware status: 10 buttons, 2 LED strips
+[2025-11-21 01:32:47,747] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-21 01:32:47,747] [INFO] [Amplifier]   Strip 2: 293 LEDs active
+[2025-11-21 01:32:47,748] [INFO] [Amplifier] Audio system: 722 song codes, 13 sound effects
+[2025-11-21 01:32:47,748] [INFO] [Amplifier] Available collections: GENERAL, CLASSIC, MAIJAM, PARTY, SPANISH, TV, FESTIGAL, VIRAL, DISNEY, MORNING, HAFLA
+[2025-11-21 01:32:47,748] [INFO] [Amplifier] ===========================
+[2025-11-21 01:32:47,749] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-21 01:32:47,749] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-21 01:32:47,752] [INFO] [GameManager] 💾 Memory - Process: 87.8MB | System: 244/907MB (26.9%, 663MB free) | ⚙️  CPU - Process: 0.0% | System: 29.8% | Cores: [6%, 81%, 26%, 5%]
+[2025-11-21 01:32:49,858] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 01:32:49,859] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 01:32:49,859] [DEBUG] [SequenceTracker] UPDATE: '' → '7' (added buttons: [7], elapsed: 0.00s)
+[2025-11-21 01:32:49,859] [DEBUG] [IdleState] Checking sequence: '7' (need '777' for code mode)
+[2025-11-21 01:32:49,893] [INFO] [AmplifyState] Song "Boney M. - Rasputin (Sopot Festival 1979).mp3" was randomly started 🎚️
+[2025-11-21 01:32:54,297] [INFO] [ButtonReader] Keyboard: Button 8 toggled ON (key '8')
+[2025-11-21 01:32:54,298] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-21 01:32:54,299] [DEBUG] [SequenceTracker] UPDATE: '7' → '78' (added buttons: [8], elapsed: 4.44s)
+[2025-11-21 01:33:15,328] [INFO] [ButtonReader] Keyboard: Button 2 toggled ON (key '2')
+[2025-11-21 01:33:15,329] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-21 01:33:15,330] [DEBUG] [SequenceTracker] UPDATE: '78' → '782' (added buttons: [2], elapsed: 25.47s)
+[2025-11-21 01:33:47,771] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 246/907MB (27.1%, 661MB free) | ⚙️  CPU - Process: 20.5% | System: 9.0% | Cores: [7%, 9%, 9%, 10%]
+[2025-11-21 01:34:47,771] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 250/907MB (27.6%, 657MB free) | ⚙️  CPU - Process: 21.4% | System: 9.2% | Cores: [10%, 10%, 8%, 9%]
+[2025-11-21 01:35:47,777] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 246/907MB (27.1%, 661MB free) | ⚙️  CPU - Process: 19.7% | System: 8.3% | Cores: [8%, 10%, 8%, 7%]
+[2025-11-21 01:36:47,779] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 248/907MB (27.3%, 659MB free) | ⚙️  CPU - Process: 19.8% | System: 8.4% | Cores: [7%, 9%, 7%, 10%]
+[2025-11-21 01:37:19,421] [INFO] [AmplifyState] Song "Boney M. - Rasputin (Sopot Festival 1979).mp3" was finished while amplifing! 👑
+[2025-11-21 01:37:19,442] [DEBUG] [SequenceTracker] RESET: cleared sequence '782', elapsed: 269.58s
+[2025-11-21 01:37:47,798] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 248/907MB (27.4%, 659MB free) | ⚙️  CPU - Process: 24.8% | System: 10.3% | Cores: [8%, 10%, 10%, 13%]
+[2025-11-21 01:38:47,798] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 248/907MB (27.3%, 659MB free) | ⚙️  CPU - Process: 32.3% | System: 11.7% | Cores: [12%, 15%, 8%, 11%]
+[2025-11-21 01:39:47,799] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 252/907MB (27.8%, 655MB free) | ⚙️  CPU - Process: 32.1% | System: 11.6% | Cores: [8%, 14%, 8%, 16%]
+[2025-11-21 01:40:47,801] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 251/907MB (27.7%, 656MB free) | ⚙️  CPU - Process: 32.3% | System: 11.7% | Cores: [8%, 12%, 15%, 11%]
+[2025-11-21 01:41:03,241] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 2 - Process terminating
+[2025-11-21 01:41:03,242] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-21 01:41:03,543] [INFO] [SoundController] Sound controller cleaned up successfully
+[2025-11-21 01:41:03,554] [INFO] [GameManager] Game stopped
+[2025-11-21 01:41:03,555] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

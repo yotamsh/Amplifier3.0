@@ -7,7 +7,7 @@ import os
 from abc import ABC, abstractmethod
 from typing import Dict, List, Optional, TYPE_CHECKING
 
-from .animations import AmplifyAnimation, AnimationDelayWrapper, HueShiftSnakeAnimation, IdleAnimation, PartyAnimation
+from .animations import AmplifyAnimation, AmplifySnakeAnimation, AnimationDelayWrapper, HueShiftSnakeAnimation, IdleAnimation, PartyAnimation
 
 if TYPE_CHECKING:
     from button_system.button_state import ButtonState
@@ -225,13 +225,12 @@ class AmplifyState(GameState):
         # Set initial pressed buttons state
         self.pressed_buttons: List[bool] = button_state.for_button
         
-        # Create amplify animation object on strip 1 (index 0)
+        # Create amplify snake animation object on strip 1 (index 0)
         first_strip = game_manager.led_strips[0]
-        self.amplify_anim = AmplifyAnimation(
+        self.amplify_anim = AmplifySnakeAnimation(
             strip=first_strip,
             button_count=game_manager.button_reader.get_button_count(),
-            speed_ms=100,  # Slower animation (100ms vs 50ms)
-            hue_shift_per_frame=10  # Slower hue rotation
+            speed_ms=30  # Fast smooth snake movement
         )
         
         # Create pyramid animation on strip 2 (index 1)

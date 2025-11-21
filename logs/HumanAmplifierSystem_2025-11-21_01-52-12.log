@@ -1,0 +1,63 @@
+[2025-11-21 01:52:12,841] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-21 01:52:12,842] [INFO] [Amplifier] Button configuration: 10 buttons on GPIO [6, 5, 22, 17, 4, 23, 24, 25, 16, 20]
+[2025-11-21 01:52:12,843] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-21 01:52:12,843] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-21 01:52:12,844] [INFO] [Amplifier]   Strip 2: 293 LEDs on GPIO 18
+[2025-11-21 01:52:12,844] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-21 01:52:12,844] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-21 01:52:12,845] [INFO] [Amplifier] Audio folder: songs
+[2025-11-21 01:52:12,845] [INFO] [Amplifier] Schedule: 13 daily, 1 special entries
+[2025-11-21 01:52:12,846] [INFO] [ButtonReader] 🎮 Keyboard sampler initialized (NO GPIO)
+[2025-11-21 01:52:12,847] [INFO] [ButtonReader]    10 virtual buttons mapped to digit keys 0-9
+[2025-11-21 01:52:12,847] [INFO] [ButtonReader]    Press digit keys to toggle buttons ON/OFF
+[2025-11-21 01:52:12,847] [INFO] [ButtonReader]    Each keypress toggles button ON/OFF
+[2025-11-21 01:52:12,848] [INFO] [ButtonReader] ButtonReader initialized with 10 buttons
+[2025-11-21 01:52:12,850] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-21 01:52:15,268] [INFO] [SongLibrary] Loaded 722 song codes from 11 collections
+[2025-11-21 01:52:15,269] [INFO] [SongLibrary] Collections updated: ['MAIJAM']
+[2025-11-21 01:52:15,368] [INFO] [SoundController] Pygame mixer initialized: 48000Hz, format=-16, channels=2
+[2025-11-21 01:52:23,647] [INFO] [SoundController] Sound controller initialized - mixer ready, first song will load on demand
+[2025-11-21 01:52:23,654] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-21 01:52:23,655] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-21 01:52:23,655] [INFO] [Amplifier] Hardware: 10 buttons, 2 LED strips, 20ms frame duration
+[2025-11-21 01:52:23,656] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['HAFLA', 'GENERAL', 'CLASSIC', 'MAIJAM', 'MORNING', 'FESTIGAL', 'VIRAL', 'TV', 'DISNEY', 'PARTY', 'SPANISH'], 'total_codes': 722, 'daily_schedule_entries': 13, 'special_schedule_entries': 1}
+[2025-11-21 01:52:23,656] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-21 01:52:23,657] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-21 01:52:23,657] [INFO] [Amplifier] Hardware status: 10 buttons, 2 LED strips
+[2025-11-21 01:52:23,657] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-21 01:52:23,658] [INFO] [Amplifier]   Strip 2: 293 LEDs active
+[2025-11-21 01:52:23,658] [INFO] [Amplifier] Audio system: 722 song codes, 13 sound effects
+[2025-11-21 01:52:23,658] [INFO] [Amplifier] Available collections: HAFLA, GENERAL, CLASSIC, MAIJAM, MORNING, FESTIGAL, VIRAL, TV, DISNEY, PARTY, SPANISH
+[2025-11-21 01:52:23,659] [INFO] [Amplifier] ===========================
+[2025-11-21 01:52:23,659] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-21 01:52:23,660] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-21 01:52:23,663] [INFO] [GameManager] 💾 Memory - Process: 87.8MB | System: 245/907MB (27.0%, 662MB free) | ⚙️  CPU - Process: 0.0% | System: 29.3% | Cores: [6%, 4%, 99%, 7%]
+[2025-11-21 01:52:23,664] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-21 01:52:23,664] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-21 01:52:23,665] [DEBUG] [SequenceTracker] UPDATE: '' → '4' (added buttons: [4], elapsed: 0.00s)
+[2025-11-21 01:52:23,665] [DEBUG] [IdleState] Checking sequence: '4' (need '777' for code mode)
+[2025-11-21 01:52:23,676] [INFO] [AmplifyState] Song "Gloria Gaynor - I Will Survive [6dYWe1c3OyU].mp3" was randomly started 🎚️
+[2025-11-21 01:52:25,690] [INFO] [ButtonReader] Keyboard: Button 4 toggled OFF (key '4')
+[2025-11-21 01:52:25,690] [INFO] [AmplifyState] Song "Gloria Gaynor - I Will Survive [6dYWe1c3OyU].mp3" was released 🤷🏻‍♀️
+[2025-11-21 01:52:26,232] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-21 01:52:26,233] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-21 01:52:26,233] [DEBUG] [SequenceTracker] UPDATE: '4' → '44' (added buttons: [4], elapsed: 2.57s)
+[2025-11-21 01:52:26,233] [DEBUG] [IdleState] Checking sequence: '44' (need '777' for code mode)
+[2025-11-21 01:52:26,244] [INFO] [AmplifyState] Song "Dr. Alban - Sing Hallelujah (Official HD Video).mp3" was randomly started 🎚️
+[2025-11-21 01:52:31,843] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-21 01:52:31,843] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-21 01:52:31,844] [DEBUG] [SequenceTracker] UPDATE: '44' → '445' (added buttons: [5], elapsed: 8.18s)
+[2025-11-21 01:52:44,384] [INFO] [ButtonReader] Keyboard: Button 1 toggled ON (key '1')
+[2025-11-21 01:52:44,385] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-21 01:52:44,385] [DEBUG] [SequenceTracker] UPDATE: '445' → '4451' (added buttons: [1], elapsed: 20.72s)
+[2025-11-21 01:53:23,665] [INFO] [GameManager] 💾 Memory - Process: 88.0MB | System: 249/907MB (27.4%, 658MB free) | ⚙️  CPU - Process: 21.2% | System: 8.9% | Cores: [9%, 9%, 9%, 8%]
+[2025-11-21 01:54:23,673] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 251/907MB (27.6%, 656MB free) | ⚙️  CPU - Process: 20.3% | System: 8.4% | Cores: [6%, 9%, 10%, 8%]
+[2025-11-21 01:55:23,676] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 248/907MB (27.3%, 659MB free) | ⚙️  CPU - Process: 20.1% | System: 8.5% | Cores: [6%, 11%, 8%, 9%]
+[2025-11-21 01:56:23,686] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 249/907MB (27.4%, 658MB free) | ⚙️  CPU - Process: 20.3% | System: 8.6% | Cores: [9%, 7%, 8%, 11%]
+[2025-11-21 01:56:26,558] [INFO] [AmplifyState] Song "Dr. Alban - Sing Hallelujah (Official HD Video).mp3" was finished while amplifing! 👑
+[2025-11-21 01:56:26,579] [DEBUG] [SequenceTracker] RESET: cleared sequence '4451', elapsed: 242.91s
+[2025-11-21 01:56:55,808] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 2 - Process terminating
+[2025-11-21 01:56:55,809] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-21 01:56:56,056] [INFO] [SoundController] Sound controller cleaned up successfully
+[2025-11-21 01:56:56,067] [INFO] [GameManager] Game stopped
+[2025-11-21 01:56:56,067] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

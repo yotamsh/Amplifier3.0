@@ -379,6 +379,182 @@ class AnimationDelayWrapper(Animation):
             self.target_animation.advance()
 
 
+class AmplifySnakeAnimation(Animation):
+    """
+    Snake animation that travels only through pressed button segments.
+    
+    A snake moves back and forth through active segments, leaving permanent
+    rainbow colors behind. All active segment pixels shift hue together.
+    """
+    
+    def __init__(self, strip: 'LedStrip', button_count: int, speed_ms: int = 25):
+        """
+        Initialize amplify snake animation.
+        
+        Args:
+            strip: LED strip to operate on
+            button_count: Number of buttons that control segments
+            speed_ms: Animation update interval in milliseconds
+        """
+        super().__init__(strip, speed_ms)
+        self.button_count: int = button_count
+        self.leds_per_button: int = strip.num_pixels() // button_count
+        self.num_pixels: int = strip.num_pixels()
+        
+        # Track which buttons are currently pressed
+        self.pressed_buttons: List[bool] = [False] * button_count
+        self.last_pressed_button: Optional[int] = None
+        
+        # Snake state
+        self.snake_position: int = 0
+        self.snake_hue: int = random.randint(0, 359)
+        self.snake_direction: int = random.choice([1, -1])  # 1=forward, -1=backward
+        self.hue_increment: int = 5  # Hue change per snake movement
+        self.initialized: bool = False
+        
+    def set_pressed_buttons(self, pressed_buttons: List[bool]) -> None:
+        """Update which buttons are currently pressed."""
+        old_pressed = self.pressed_buttons.copy()
+        self.pressed_buttons = pressed_buttons.copy()
+        
+        # Track last pressed button (find newly pressed or rightmost pressed)
+        for i in range(self.button_count - 1, -1, -1):
+            if pressed_buttons[i] and not old_pressed[i]:
+                self.last_pressed_button = i
+                self.initialized = False  # Reset snake position
+                break
+        
+        # If no new press, use rightmost pressed button
+        if self.last_pressed_button is None or not pressed_buttons[self.last_pressed_button]:
+            for i in range(self.button_count - 1, -1, -1):
+                if pressed_buttons[i]:
+                    self.last_pressed_button = i
+                    break
+    
+    def _get_button_center_pixel(self, button_index: int) -> int:
+        """Get the center pixel index for a button segment."""
+        center = int(self.num_pixels / self.button_count * (button_index + 0.5) - 1)
+        return max(0, min(center, self.num_pixels - 1))
+    
+    def _get_active_segments(self) -> List[Tuple[int, int]]:
+        """Get list of all active segment ranges as (start, end) tuples."""
+        active_segments = []
+        for button_idx in range(self.button_count):
+            if self.pressed_buttons[button_idx]:
+                segment_start = button_idx * self.leds_per_button
+                segment_end = (button_idx + 1) * self.leds_per_button - 1
+                active_segments.append((segment_start, segment_end))
+        return active_segments
+    
+    def _get_current_segment(self, position: int, segments: List[Tuple[int, int]]) -> Optional[int]:
+        """Find which segment index the position is in."""
+        for i, (start, end) in enumerate(segments):
+            if start <= position <= end:
+                return i
+        return None
+    
+    def _find_next_segment(self, current_seg_idx: int, segments: List[Tuple[int, int]], direction: int) -> Optional[int]:
+        """Find the next active segment in the given direction."""
+        if direction > 0:  # Forward
+            if current_seg_idx + 1 < len(segments):
+                return current_seg_idx + 1
+        else:  # Backward
+            if current_seg_idx - 1 >= 0:
+                return current_seg_idx - 1
+        return None
+    
+    def advance(self) -> None:
+        """Advance snake position and update strip pixels"""
+        from led_system.pixel import Pixel
+        
+        # 1. Fade inactive segments to black
+        for i in range(self.num_pixels):
+            button_idx = i // self.leds_per_button
+            if button_idx >= self.button_count or not self.pressed_buttons[button_idx]:
+                # Fade inactive segments
+                pixel = self.strip[i]
+                h, s, v = AnimationHelpers._rgb_to_hsv(pixel.r, pixel.g, pixel.b)
+                if v > 0:
+                    new_v = max(0, v - 0.15)  # Fade brightness
+                    self.strip[i] = AnimationHelpers.hsv_to_pixel(h, s, new_v)
+        
+        # Get list of active segments
+        active_segments = self._get_active_segments()
+        
+        if not active_segments:
+            # No active segments - show only blinking dots
+            beat_value = AnimationHelpers.beat8(40)
+            for button_index in range(self.button_count):
+                if not self.pressed_buttons[button_index]:
+                    center_pixel = self._get_button_center_pixel(button_index)
+                    if beat_value > 240:
+                        self.strip[center_pixel] = AnimationHelpers.ORANGE_RED
+                    else:
+                        self.strip[center_pixel] = AnimationHelpers.BLACK
+            return
+        
+        # Initialize snake position if needed
+        if not self.initialized and self.last_pressed_button is not None:
+            self.snake_position = self._get_button_center_pixel(self.last_pressed_button)
+            self.snake_direction = random.choice([1, -1])
+            self.initialized = True
+        
+        # 2. Move snake with segment skipping
+        current_seg_idx = self._get_current_segment(self.snake_position, active_segments)
+        
+        if current_seg_idx is not None:
+            current_seg_start, current_seg_end = active_segments[current_seg_idx]
+            next_pos = self.snake_position + self.snake_direction
+            
+            # Check if we've reached the boundary of current segment
+            if self.snake_direction > 0 and next_pos > current_seg_end:
+                # Moving forward, reached end of segment
+                next_seg_idx = self._find_next_segment(current_seg_idx, active_segments, 1)
+                if next_seg_idx is not None:
+                    # Jump to start of next segment
+                    next_pos = active_segments[next_seg_idx][0]
+                else:
+                    # No more segments forward - reverse direction
+                    self.snake_direction = -1
+                    next_pos = self.snake_position + self.snake_direction
+            
+            elif self.snake_direction < 0 and next_pos < current_seg_start:
+                # Moving backward, reached start of segment
+                next_seg_idx = self._find_next_segment(current_seg_idx, active_segments, -1)
+                if next_seg_idx is not None:
+                    # Jump to end of previous segment
+                    next_pos = active_segments[next_seg_idx][1]
+                else:
+                    # No more segments backward - reverse direction
+                    self.snake_direction = 1
+                    next_pos = self.snake_position + self.snake_direction
+            
+            self.snake_position = next_pos
+        
+        # 3. Paint snake head (3 pixels wide) - permanent color
+        snake_color = AnimationHelpers.hsv_to_pixel(self.snake_hue % 360, 1.0, 1.0)
+        
+        for offset in range(-1, 2):  # -1, 0, 1
+            pixel_idx = self.snake_position + offset
+            if 0 <= pixel_idx < self.num_pixels:
+                button_idx = pixel_idx // self.leds_per_button
+                if button_idx < self.button_count and self.pressed_buttons[button_idx]:
+                    self.strip[pixel_idx] = snake_color
+        
+        # Increment snake hue for next movement
+        self.snake_hue = (self.snake_hue + self.hue_increment) % 360
+        
+        # 4. Add blinking OrangeRed indicators on unpressed button centers
+        beat_value = AnimationHelpers.beat8(40)
+        for button_index in range(self.button_count):
+            if not self.pressed_buttons[button_index]:
+                center_pixel = self._get_button_center_pixel(button_index)
+                if beat_value > 240:
+                    self.strip[center_pixel] = AnimationHelpers.ORANGE_RED
+                else:
+                    self.strip[center_pixel] = AnimationHelpers.BLACK
+
+
 class AmplifyAnimation(Animation):
     """
     Rainbow animation that only illuminates LED segments corresponding to pressed buttons.
@@ -1106,23 +1282,21 @@ def create_party_pyramid_animation(strip: 'LedStrip', max_spread: int = None) ->
     return PartyPyramidAnimation(strip, speed_ms=20, max_spread=max_spread)
 
 
-class PartyAnimation(Animation):
+class PushingBandsAnimation(Animation):
     """
-    Elegant pushing wave party animation.
+    Elegant pushing wave animation - bands emanate from center outward.
     
     Creates color bands that appear in the center and push outward symmetrically.
     New colors enter at the center, pushing previous colors toward the edges.
-    Like a wave emanating from the center.
     """
     
-    def __init__(self, strip: 'LedStrip', speed_ms: int = None, button_count: int = None):
+    def __init__(self, strip: 'LedStrip', speed_ms: int = None):
         """
-        Initialize party pushing wave animation.
+        Initialize pushing bands animation.
         
         Args:
             strip: LED strip to operate on
             speed_ms: Animation update interval in milliseconds (random if None)
-            button_count: Number of buttons for reduction feature (optional)
         """
         # Pick random speed if not provided (faster range)
         if speed_ms is None:
@@ -1149,23 +1323,11 @@ class PartyAnimation(Animation):
         self.wave_position: int = 0  # How far the wave has traveled from center
         self.band_width: int = 25  # Fixed width for consistent, smooth bands
         self.speed_change_interval: int = self.band_width * len(self.colors)  # Change speed after full color cycle
-        
-        # Reduction red override state
-        self.button_count = button_count
-        self.leds_per_button = strip.num_pixels() // button_count if button_count else 0
-        self.button_A = None
-        self.button_B = None
-        self.a_red_pixels = 0  # Additional spread pixels (not including segment)
-        self.b_red_pixels = 0  # Additional spread pixels (not including segment)
-        self.button_A_held = False
-        self.button_B_held = False
     
     def advance(self) -> None:
         """
         Stateless wave effect - calculates each pixel's color independently
         based on distance from center and current wave position.
-        This prevents the animation from interfering with red override pixels.
-        Uses fixed band_width for smooth, jump-free animation.
         """
         # Advance wave position
         self.wave_position += 1
@@ -1190,9 +1352,240 @@ class PartyAnimation(Animation):
             # Use modulo to cycle through colors, handle negative with abs
             color_idx = abs(band_position) % len(self.colors)
             self.strip[i] = self.colors[color_idx]
+
+
+class WinEffectAnimation(Animation):
+    """
+    Win effect animation - fills rainbow from center of each segment to edges.
+    
+    All segments fill simultaneously with rainbow gradient (saturation 0.93).
+    Creates a dramatic reveal effect from button centers outward.
+    """
+    
+    def __init__(self, strip: 'LedStrip', button_count: int, speed_ms: int = 50):
+        """
+        Initialize win effect animation.
         
-        # Apply red override on top (after generating base animation)
-        self._apply_red_override()
+        Args:
+            strip: LED strip to operate on
+            button_count: Number of button segments
+            speed_ms: Animation update interval in milliseconds
+        """
+        super().__init__(strip, speed_ms)
+        self.button_count: int = button_count
+        self.leds_per_button: int = strip.num_pixels() // button_count
+        self.num_pixels: int = strip.num_pixels()
+        
+        # Animation state - tracks how many pixels from center have been revealed
+        self.reveal_distance: int = 0  # 0 to leds_per_button/2
+        self.max_distance: int = self.leds_per_button // 2
+        
+        # Start with all black
+        from led_system.pixel import Pixel
+        black = Pixel(0, 0, 0)
+        for i in range(self.num_pixels):
+            strip[i] = black
+    
+    def advance(self) -> None:
+        """Reveal one more pixel distance from each segment center"""
+        from game_system.animation_helpers import AnimationHelpers
+        
+        # Fill all segments from center outward
+        for button_idx in range(self.button_count):
+            # Calculate segment range
+            segment_start = button_idx * self.leds_per_button
+            segment_end = (button_idx + 1) * self.leds_per_button
+            segment_center = (segment_start + segment_end) // 2
+            
+            # Calculate rainbow hue for this segment (spread across strip)
+            base_hue = (button_idx * 360 / self.button_count) % 360
+            
+            # Fill pixels at current reveal distance from center
+            for offset in range(-self.reveal_distance, self.reveal_distance + 1):
+                pixel_idx = segment_center + offset
+                
+                # Bounds check within segment
+                if segment_start <= pixel_idx < segment_end:
+                    # Slight hue variation based on distance from segment center
+                    hue = (base_hue + abs(offset) * 2) % 360
+                    color = AnimationHelpers.hsv_to_pixel(hue, 0.93, 1.0)
+                    self.strip[pixel_idx] = color
+        
+        # Advance reveal distance (stop when full segment is revealed)
+        if self.reveal_distance < self.max_distance:
+            self.reveal_distance += 1
+
+
+class RainbowBlinkAnimation(Animation):
+    """
+    Rainbow blink animation - blinks the current strip pattern several times.
+    
+    Captures the initial strip state on first advance and alternates between showing it and black.
+    """
+    
+    def __init__(self, strip: 'LedStrip', blink_count: int = 5, speed_ms: int = 200):
+        """
+        Initialize rainbow blink animation.
+        
+        Args:
+            strip: LED strip to operate on
+            blink_count: Number of times to blink (on/off cycles)
+            speed_ms: Duration of each blink state (on or off)
+        """
+        super().__init__(strip, speed_ms)
+        self.num_pixels: int = strip.num_pixels()
+        self.blink_count: int = blink_count
+        
+        # Lazy initialization - capture pattern on first advance()
+        from led_system.pixel import Pixel
+        self.saved_pattern: Optional[List['Pixel']] = None
+        self.black = Pixel(0, 0, 0)
+        self.blink_state: bool = True  # Start with pattern visible
+        self.blinks_completed: int = 0
+    
+    def advance(self) -> None:
+        """Toggle between saved pattern and black"""
+        from led_system.pixel import Pixel
+        
+        # Capture pattern on first call (lazy initialization)
+        if self.saved_pattern is None:
+            self.saved_pattern = []
+            for i in range(self.num_pixels):
+                pixel = self.strip[i]
+                self.saved_pattern.append(Pixel(pixel.r, pixel.g, pixel.b))
+        
+        # Toggle blink state
+        self.blink_state = not self.blink_state
+        
+        # Count blinks (one complete blink = on + off)
+        if not self.blink_state:
+            self.blinks_completed += 1
+        
+        # Render current state
+        if self.blink_state:
+            # Show saved pattern
+            for i in range(self.num_pixels):
+                self.strip[i] = self.saved_pattern[i]
+        else:
+            # Show black
+            for i in range(self.num_pixels):
+                self.strip[i] = self.black
+
+
+class RainbowScrollAnimation(Animation):
+    """
+    Rainbow scroll animation - scrolls the rainbow pattern left and right.
+    
+    Continuously shifts the pixel pattern, creating a flowing movement effect.
+    """
+    
+    def __init__(self, strip: 'LedStrip', speed_ms: int = 30):
+        """
+        Initialize rainbow scroll animation.
+        
+        Args:
+            strip: LED strip to operate on
+            speed_ms: Scroll speed (milliseconds per pixel shift)
+        """
+        super().__init__(strip, speed_ms)
+        self.num_pixels: int = strip.num_pixels()
+        
+        # Lazy initialization - capture pattern on first advance()
+        self.base_pattern: Optional[List['Pixel']] = None
+        
+        # Scroll state
+        self.scroll_offset: int = 0
+        self.scroll_direction: int = 1  # 1 = right, -1 = left
+        self.pixels_to_scroll: int = self.num_pixels // 4  # Scroll 1/4 strip before reversing
+        self.pixels_scrolled: int = 0
+    
+    def advance(self) -> None:
+        """Shift the pattern and render"""
+        from led_system.pixel import Pixel
+        
+        # Capture pattern on first call (lazy initialization)
+        if self.base_pattern is None:
+            self.base_pattern = []
+            for i in range(self.num_pixels):
+                pixel = self.strip[i]
+                self.base_pattern.append(Pixel(pixel.r, pixel.g, pixel.b))
+        
+        # Update scroll offset
+        self.scroll_offset += self.scroll_direction
+        self.pixels_scrolled += 1
+        
+        # Reverse direction after scrolling 1/4 of strip
+        if self.pixels_scrolled >= self.pixels_to_scroll:
+            self.scroll_direction *= -1
+            self.pixels_scrolled = 0
+        
+        # Render scrolled pattern (with wrapping)
+        for i in range(self.num_pixels):
+            source_idx = (i - self.scroll_offset) % self.num_pixels
+            self.strip[i] = self.base_pattern[source_idx]
+
+
+class PartyAnimation(Animation):
+    """
+    Party animation with red override support.
+    
+    Combines a sequence of underlying animations with red override for
+    the reduction feature. Red override is applied on top after child renders.
+    """
+    
+    def __init__(self, strip: 'LedStrip', speed_ms: int = None, button_count: int = None):
+        """
+        Initialize party animation with composite child animations.
+        
+        Args:
+            strip: LED strip to operate on
+            speed_ms: Animation update interval in milliseconds (unused, kept for compatibility)
+            button_count: Number of buttons for reduction feature
+        """
+        super().__init__(strip, 20)  # Fixed 20ms for parent wrapper
+        self.num_pixels: int = strip.num_pixels()
+        
+        # Reduction red override state
+        self.button_count = button_count
+        self.leds_per_button = strip.num_pixels() // button_count if button_count else 0
+        self.button_A = None
+        self.button_B = None
+        self.a_red_pixels = 0  # Additional spread pixels (not including segment)
+        self.b_red_pixels = 0  # Additional spread pixels (not including segment)
+        self.button_A_held = False
+        self.button_B_held = False
+        
+        # Create child animation sequence
+        # Phase 1: Win effect (rainbow fill from segment centers)
+        win_effect = WinEffectAnimation(strip, button_count, speed_ms=50)
+        win_duration = (self.leds_per_button / 2) * 0.05  # (ledsPerButton/2)*50ms
+        
+        # Phase 2: Rainbow blink (5 blinks, 200ms per state = 2 seconds total)
+        rainbow_blink = RainbowBlinkAnimation(strip, blink_count=5, speed_ms=200)
+        blink_duration = 5 * 2 * 0.2  # 5 blinks × 2 states × 200ms
+        
+        # Phase 3: Rainbow scroll (continuous)
+        rainbow_scroll = RainbowScrollAnimation(strip, speed_ms=30)
+        
+        self.child_animation = SequenceAnimation(
+            strip=strip,
+            animation_sequence=[
+                (win_effect, win_duration),
+                (rainbow_blink, blink_duration),
+                (rainbow_scroll, None)  # Continuous
+            ],
+            repeat=False,
+            frame_speed_ms=20
+        )
+    
+    def advance(self) -> None:
+        """Render child animation, then apply red override on top"""
+        # Let child animation render first
+        self.child_animation.update_if_needed()
+        
+        # Apply red override on top if any buttons held
+        if self.button_A_held or self.button_B_held:
+            self._apply_red_override()
     
     def set_red_override(self, button_A: int, button_B: int, 
                          a_red_pixels: int, b_red_pixels: int,

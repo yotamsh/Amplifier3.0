@@ -294,3 +294,11 @@
 [2025-11-21 01:00:16,339] [INFO] [GameManager] 💾 Memory - Process: 87.9MB | System: 249/907MB (27.5%, 657MB free) | ⚙️  CPU - Process: 31.6% | System: 11.5% | Cores: [9%, 11%, 20%, 6%]
 [2025-11-21 01:01:16,345] [INFO] [GameManager] 💾 Memory - Process: 87.9MB | System: 248/907MB (27.3%, 659MB free) | ⚙️  CPU - Process: 31.5% | System: 11.5% | Cores: [15%, 12%, 9%, 10%]
 [2025-11-21 01:02:16,362] [INFO] [GameManager] 💾 Memory - Process: 87.9MB | System: 251/907MB (27.7%, 656MB free) | ⚙️  CPU - Process: 32.0% | System: 12.5% | Cores: [14%, 13%, 11%, 12%]
+[2025-11-21 01:03:16,376] [INFO] [GameManager] 💾 Memory - Process: 87.9MB | System: 251/907MB (27.7%, 655MB free) | ⚙️  CPU - Process: 32.0% | System: 11.5% | Cores: [5%, 12%, 21%, 8%]
+[2025-11-21 01:04:16,377] [INFO] [GameManager] 💾 Memory - Process: 87.9MB | System: 247/907MB (27.2%, 660MB free) | ⚙️  CPU - Process: 31.8% | System: 11.6% | Cores: [15%, 9%, 12%, 10%]
+[2025-11-21 01:05:16,396] [INFO] [GameManager] 💾 Memory - Process: 87.9MB | System: 248/907MB (27.4%, 659MB free) | ⚙️  CPU - Process: 32.0% | System: 11.6% | Cores: [13%, 15%, 11%, 8%]
+[2025-11-21 01:05:27,495] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 2 - Process terminating
+[2025-11-21 01:05:27,496] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-21 01:05:27,778] [INFO] [SoundController] Sound controller cleaned up successfully
+[2025-11-21 01:05:27,788] [INFO] [GameManager] Game stopped
+[2025-11-21 01:05:27,789] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

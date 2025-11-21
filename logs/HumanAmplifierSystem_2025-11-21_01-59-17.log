@@ -1,0 +1,52 @@
+[2025-11-21 01:59:17,109] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-21 01:59:17,110] [INFO] [Amplifier] Button configuration: 10 buttons on GPIO [6, 5, 22, 17, 4, 23, 24, 25, 16, 20]
+[2025-11-21 01:59:17,110] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-21 01:59:17,111] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-21 01:59:17,111] [INFO] [Amplifier]   Strip 2: 293 LEDs on GPIO 18
+[2025-11-21 01:59:17,112] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-21 01:59:17,112] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-21 01:59:17,112] [INFO] [Amplifier] Audio folder: songs
+[2025-11-21 01:59:17,113] [INFO] [Amplifier] Schedule: 13 daily, 1 special entries
+[2025-11-21 01:59:17,114] [INFO] [ButtonReader] 🎮 Keyboard sampler initialized (NO GPIO)
+[2025-11-21 01:59:17,114] [INFO] [ButtonReader]    10 virtual buttons mapped to digit keys 0-9
+[2025-11-21 01:59:17,114] [INFO] [ButtonReader]    Press digit keys to toggle buttons ON/OFF
+[2025-11-21 01:59:17,115] [INFO] [ButtonReader]    Each keypress toggles button ON/OFF
+[2025-11-21 01:59:17,115] [INFO] [ButtonReader] ButtonReader initialized with 10 buttons
+[2025-11-21 01:59:17,117] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-21 01:59:19,540] [INFO] [SongLibrary] Loaded 722 song codes from 11 collections
+[2025-11-21 01:59:19,541] [INFO] [SongLibrary] Collections updated: ['MAIJAM']
+[2025-11-21 01:59:19,640] [INFO] [SoundController] Pygame mixer initialized: 48000Hz, format=-16, channels=2
+[2025-11-21 01:59:27,841] [INFO] [SoundController] Sound controller initialized - mixer ready, first song will load on demand
+[2025-11-21 01:59:27,848] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-21 01:59:27,848] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-21 01:59:27,849] [INFO] [Amplifier] Hardware: 10 buttons, 2 LED strips, 20ms frame duration
+[2025-11-21 01:59:27,849] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['GENERAL', 'VIRAL', 'DISNEY', 'TV', 'PARTY', 'SPANISH', 'FESTIGAL', 'HAFLA', 'CLASSIC', 'MAIJAM', 'MORNING'], 'total_codes': 722, 'daily_schedule_entries': 13, 'special_schedule_entries': 1}
+[2025-11-21 01:59:27,850] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-21 01:59:27,850] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-21 01:59:27,851] [INFO] [Amplifier] Hardware status: 10 buttons, 2 LED strips
+[2025-11-21 01:59:27,851] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-21 01:59:27,852] [INFO] [Amplifier]   Strip 2: 293 LEDs active
+[2025-11-21 01:59:27,852] [INFO] [Amplifier] Audio system: 722 song codes, 13 sound effects
+[2025-11-21 01:59:27,853] [INFO] [Amplifier] Available collections: GENERAL, VIRAL, DISNEY, TV, PARTY, SPANISH, FESTIGAL, HAFLA, CLASSIC, MAIJAM, MORNING
+[2025-11-21 01:59:27,853] [INFO] [Amplifier] ===========================
+[2025-11-21 01:59:27,853] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-21 01:59:27,854] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-21 01:59:27,857] [INFO] [GameManager] 💾 Memory - Process: 87.6MB | System: 252/907MB (27.8%, 655MB free) | ⚙️  CPU - Process: 0.0% | System: 27.5% | Cores: [2%, 5%, 3%, 99%]
+[2025-11-21 01:59:27,858] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-21 01:59:27,859] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-21 01:59:27,859] [DEBUG] [SequenceTracker] UPDATE: '' → '3' (added buttons: [3], elapsed: 0.00s)
+[2025-11-21 01:59:27,860] [DEBUG] [IdleState] Checking sequence: '3' (need '777' for code mode)
+[2025-11-21 01:59:27,871] [INFO] [AmplifyState] Song "The Weather Girls - It's Raining Men (Video).mp3" was randomly started 🎚️
+[2025-11-21 01:59:31,694] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-21 01:59:31,695] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-21 01:59:31,696] [DEBUG] [SequenceTracker] UPDATE: '3' → '35' (added buttons: [5], elapsed: 3.84s)
+[2025-11-21 01:59:39,069] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 01:59:39,070] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 01:59:39,070] [DEBUG] [SequenceTracker] UPDATE: '35' → '357' (added buttons: [7], elapsed: 11.21s)
+[2025-11-21 02:00:19,556] [INFO] [SongLibrary] Collections updated: ['VIRAL', 'PARTY', 'FESTIGAL', 'HAFLA', 'MAIJAM']
+[2025-11-21 02:00:27,865] [INFO] [GameManager] 💾 Memory - Process: 87.7MB | System: 248/907MB (27.4%, 659MB free) | ⚙️  CPU - Process: 19.0% | System: 9.5% | Cores: [10%, 10%, 10%, 8%]
+[2025-11-21 02:00:37,667] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 2 - Process terminating
+[2025-11-21 02:00:37,668] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-21 02:00:37,935] [INFO] [SoundController] Sound controller cleaned up successfully
+[2025-11-21 02:00:37,946] [INFO] [GameManager] Game stopped
+[2025-11-21 02:00:37,947] [INFO] [Amplifier] ✅ HumanAmplifier system shut down
