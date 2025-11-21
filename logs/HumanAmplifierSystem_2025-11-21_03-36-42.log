@@ -1,0 +1,254 @@
+[2025-11-21 03:36:42,289] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-21 03:36:42,291] [INFO] [Amplifier] Button configuration: 10 buttons on GPIO [6, 5, 22, 17, 4, 23, 24, 25, 16, 20]
+[2025-11-21 03:36:42,292] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-21 03:36:42,293] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-21 03:36:42,293] [INFO] [Amplifier]   Strip 2: 293 LEDs on GPIO 18
+[2025-11-21 03:36:42,294] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-21 03:36:42,295] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-21 03:36:42,296] [INFO] [Amplifier] Audio folder: songs
+[2025-11-21 03:36:42,296] [INFO] [Amplifier] Schedule: 16 daily, 1 special entries
+[2025-11-21 03:36:42,297] [INFO] [ButtonReader] 🎮 Keyboard sampler initialized (NO GPIO)
+[2025-11-21 03:36:42,297] [INFO] [ButtonReader]    10 virtual buttons mapped to digit keys 0-9
+[2025-11-21 03:36:42,298] [INFO] [ButtonReader]    Press digit keys to toggle buttons ON/OFF
+[2025-11-21 03:36:42,298] [INFO] [ButtonReader]    Each keypress toggles button ON/OFF
+[2025-11-21 03:36:42,299] [INFO] [ButtonReader] ButtonReader initialized with 10 buttons
+[2025-11-21 03:36:42,301] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-21 03:36:44,842] [INFO] [SongLibrary] Loaded 724 song codes from 13 collections
+[2025-11-21 03:36:44,843] [INFO] [SongLibrary] Collections updated: ['VIRAL', 'PARTY', 'HAFLA', 'MAIJAM', 'FESTIGAL']
+[2025-11-21 03:36:44,945] [INFO] [SoundController] Pygame mixer initialized: 48000Hz, format=-16, channels=2
+[2025-11-21 03:36:53,158] [INFO] [SoundController] Sound controller initialized - mixer ready, first song will load on demand
+[2025-11-21 03:36:53,164] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-21 03:36:53,165] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-21 03:36:53,165] [INFO] [Amplifier] Hardware: 10 buttons, 2 LED strips, 20ms frame duration
+[2025-11-21 03:36:53,166] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['VIRAL', 'PARTY', 'FOUR_AT_NIGHT', 'MORNING', 'GENERAL', 'THREE_AT_NIGHT', 'HAFLA', 'MAIJAM', 'FESTIGAL', 'DISNEY', 'SPANISH', 'CLASSIC', 'TV'], 'total_codes': 724, 'daily_schedule_entries': 16, 'special_schedule_entries': 1}
+[2025-11-21 03:36:53,166] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-21 03:36:53,167] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-21 03:36:53,167] [INFO] [Amplifier] Hardware status: 10 buttons, 2 LED strips
+[2025-11-21 03:36:53,167] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-21 03:36:53,168] [INFO] [Amplifier]   Strip 2: 293 LEDs active
+[2025-11-21 03:36:53,168] [INFO] [Amplifier] Audio system: 724 song codes, 13 sound effects
+[2025-11-21 03:36:53,168] [INFO] [Amplifier] Available collections: VIRAL, PARTY, FOUR_AT_NIGHT, MORNING, GENERAL, THREE_AT_NIGHT, HAFLA, MAIJAM, FESTIGAL, DISNEY, SPANISH, CLASSIC, TV
+[2025-11-21 03:36:53,168] [INFO] [Amplifier] ===========================
+[2025-11-21 03:36:53,169] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-21 03:36:53,169] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-21 03:36:53,172] [INFO] [GameManager] 💾 Memory - Process: 87.8MB | System: 256/907MB (28.2%, 651MB free) | ⚙️  CPU - Process: 0.0% | System: 29.7% | Cores: [4%, 9%, 6%, 99%]
+[2025-11-21 03:37:11,233] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 03:37:11,234] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 03:37:11,269] [DEBUG] [SoundController] Started playing song: "קובי פרץ   בלבלי אותו.mp3"
+[2025-11-21 03:37:11,270] [INFO] [AmplifyState] Song "קובי פרץ   בלבלי אותו.mp3" was randomly started 🎚️
+[2025-11-21 03:37:11,752] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 03:37:11,753] [INFO] [AmplifyState] Song "קובי פרץ   בלבלי אותו.mp3" was released 🤷🏻‍♀️
+[2025-11-21 03:37:12,234] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 03:37:12,235] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 03:37:12,265] [DEBUG] [SoundController] Started playing song: "Dua Lipa - Levitating Featuring DaBaby (Official Music Video).mp3"
+[2025-11-21 03:37:12,265] [INFO] [AmplifyState] Song "Dua Lipa - Levitating Featuring DaBaby (Official Music Video).mp3" was randomly started 🎚️
+[2025-11-21 03:37:12,587] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 03:37:12,588] [INFO] [AmplifyState] Song "Dua Lipa - Levitating Featuring DaBaby (Official Music Video).mp3" was released 🤷🏻‍♀️
+[2025-11-21 03:37:12,969] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 03:37:12,970] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 03:37:12,970] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-21 03:37:12,994] [DEBUG] [SoundController] Playing sound: CODE_SOUND (volume: 0.80)
+[2025-11-21 03:37:13,013] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-21 03:37:15,467] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-21 03:37:15,468] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-21 03:37:15,469] [DEBUG] [SoundController] Playing sound: CODE_DIGIT_SOUND (volume: 0.70)
+[2025-11-21 03:37:16,377] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-21 03:37:16,379] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-21 03:37:16,380] [DEBUG] [SoundController] Playing sound: CODE_DIGIT_SOUND (volume: 0.70)
+[2025-11-21 03:37:17,262] [INFO] [ButtonReader] Keyboard: Button 8 toggled ON (key '8')
+[2025-11-21 03:37:17,263] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-21 03:37:17,263] [DEBUG] [SoundController] Playing sound: CODE_DIGIT_SOUND (volume: 0.70)
+[2025-11-21 03:37:18,226] [INFO] [ButtonReader] Keyboard: Button 0 toggled ON (key '0')
+[2025-11-21 03:37:18,246] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-21 03:37:18,247] [DEBUG] [SoundController] Playing sound: CODE_DIGIT_SOUND (volume: 0.70)
+[2025-11-21 03:37:21,179] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-21 03:37:21,180] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-21 03:37:21,180] [INFO] [CodeModeState] Code entered: 63804
+[2025-11-21 03:37:21,214] [DEBUG] [SoundController] Playing sound: CODE_SOUND (volume: 0.90)
+[2025-11-21 03:37:21,215] [INFO] [CodeRevealState] Code reveal started for code: 63804 for song "Bach - Aria (from) Hunt Cantata.mp3"
+[2025-11-21 03:37:22,060] [DEBUG] [SoundController] Playing sound: ONE_TWO_THREE_SOUND (volume: 0.90)
+[2025-11-21 03:37:25,215] [DEBUG] [SoundController] Playing song by code 63804: "Bach - Aria (from) Hunt Cantata.mp3"
+[2025-11-21 03:37:25,249] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: Bach - Aria (from) Hunt Cantata.mp3
+[2025-11-21 03:37:42,568] [INFO] [ButtonReader] Keyboard: Button 4 toggled OFF (key '4')
+[2025-11-21 03:37:43,016] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-21 03:37:43,017] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-21 03:37:46,861] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-21 03:37:46,861] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-21 03:37:53,181] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 252/907MB (27.7%, 655MB free) | ⚙️  CPU - Process: 35.2% | System: 12.5% | Cores: [6%, 14%, 15%, 14%]
+[2025-11-21 03:37:54,180] [INFO] [PartyState] Party Mode for song "Bach - Aria (from) Hunt Cantata.mp3" was quite-down! 🤫
+[2025-11-21 03:37:54,180] [DEBUG] [SoundController] Playing sound: BOOM_SOUND (volume: 1.00)
+[2025-11-21 03:38:06,805] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 03:38:07,186] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 03:38:07,187] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 03:38:07,201] [DEBUG] [SoundController] Started playing song: "הדורבנים - יצאנו לרקוד.mp3"
+[2025-11-21 03:38:07,201] [INFO] [AmplifyState] Song "הדורבנים - יצאנו לרקוד.mp3" was randomly started 🎚️
+[2025-11-21 03:38:07,608] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 03:38:07,609] [INFO] [AmplifyState] Song "הדורבנים - יצאנו לרקוד.mp3" was released 🤷🏻‍♀️
+[2025-11-21 03:38:07,989] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 03:38:07,990] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 03:38:08,001] [DEBUG] [SoundController] Started playing song: "Depeche Mode - Just Can_t Get Enough (Official Video).mp3"
+[2025-11-21 03:38:08,002] [INFO] [AmplifyState] Song "Depeche Mode - Just Can_t Get Enough (Official Video).mp3" was randomly started 🎚️
+[2025-11-21 03:38:08,411] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 03:38:08,412] [INFO] [AmplifyState] Song "Depeche Mode - Just Can_t Get Enough (Official Video).mp3" was released 🤷🏻‍♀️
+[2025-11-21 03:38:08,793] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 03:38:08,794] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 03:38:08,794] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-21 03:38:08,817] [DEBUG] [SoundController] Playing sound: CODE_SOUND (volume: 0.80)
+[2025-11-21 03:38:08,836] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-21 03:38:10,528] [INFO] [ButtonReader] Keyboard: Button 6 toggled OFF (key '6')
+[2025-11-21 03:38:11,332] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-21 03:38:11,332] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-21 03:38:11,333] [DEBUG] [SoundController] Playing sound: CODE_DIGIT_SOUND (volume: 0.70)
+[2025-11-21 03:38:11,834] [INFO] [ButtonReader] Keyboard: Button 3 toggled OFF (key '3')
+[2025-11-21 03:38:12,216] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-21 03:38:12,217] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-21 03:38:12,217] [DEBUG] [SoundController] Playing sound: CODE_DIGIT_SOUND (volume: 0.70)
+[2025-11-21 03:38:12,698] [INFO] [ButtonReader] Keyboard: Button 8 toggled OFF (key '8')
+[2025-11-21 03:38:13,300] [INFO] [ButtonReader] Keyboard: Button 8 toggled ON (key '8')
+[2025-11-21 03:38:13,301] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-21 03:38:13,302] [DEBUG] [SoundController] Playing sound: CODE_DIGIT_SOUND (volume: 0.70)
+[2025-11-21 03:38:14,164] [INFO] [ButtonReader] Keyboard: Button 0 toggled OFF (key '0')
+[2025-11-21 03:38:14,646] [INFO] [ButtonReader] Keyboard: Button 0 toggled ON (key '0')
+[2025-11-21 03:38:14,666] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-21 03:38:14,667] [DEBUG] [SoundController] Playing sound: CODE_DIGIT_SOUND (volume: 0.70)
+[2025-11-21 03:38:15,772] [INFO] [ButtonReader] Keyboard: Button 4 toggled OFF (key '4')
+[2025-11-21 03:38:17,163] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-21 03:38:17,163] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-21 03:38:17,164] [INFO] [CodeModeState] Code entered: 63804
+[2025-11-21 03:38:17,188] [DEBUG] [SoundController] Playing sound: CODE_SOUND (volume: 0.90)
+[2025-11-21 03:38:17,189] [INFO] [CodeRevealState] Code reveal started for code: 63804 for song "Bach - Aria (from) Hunt Cantata.mp3"
+[2025-11-21 03:38:18,034] [DEBUG] [SoundController] Playing sound: ONE_TWO_THREE_SOUND (volume: 0.90)
+[2025-11-21 03:38:21,186] [DEBUG] [SoundController] Playing song by code 63804: "Bach - Aria (from) Hunt Cantata.mp3"
+[2025-11-21 03:38:21,220] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: Bach - Aria (from) Hunt Cantata.mp3
+[2025-11-21 03:38:28,337] [INFO] [ButtonReader] Keyboard: Button 4 toggled OFF (key '4')
+[2025-11-21 03:38:29,000] [INFO] [ButtonReader] Keyboard: Button 5 toggled OFF (key '5')
+[2025-11-21 03:38:29,824] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-21 03:38:29,825] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-21 03:38:30,107] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-21 03:38:30,108] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-21 03:38:43,591] [INFO] [PartyState] Party Mode for song "Bach - Aria (from) Hunt Cantata.mp3" was quite-down! 🤫
+[2025-11-21 03:38:43,592] [DEBUG] [SoundController] Playing sound: BOOM_SOUND (volume: 1.00)
+[2025-11-21 03:38:47,709] [INFO] [ButtonReader] Keyboard: Button 6 toggled OFF (key '6')
+[2025-11-21 03:38:48,773] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-21 03:38:48,774] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-21 03:38:48,811] [DEBUG] [SoundController] Started playing song: "American Boy - Estelle.mp3"
+[2025-11-21 03:38:48,811] [INFO] [AmplifyState] Song "American Boy - Estelle.mp3" was randomly started 🎚️
+[2025-11-21 03:38:53,201] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 253/907MB (27.9%, 654MB free) | ⚙️  CPU - Process: 23.8% | System: 9.5% | Cores: [8%, 13%, 8%, 9%]
+[2025-11-21 03:38:54,946] [INFO] [ButtonReader] Keyboard: Button 6 toggled OFF (key '6')
+[2025-11-21 03:38:54,947] [INFO] [AmplifyState] Song "American Boy - Estelle.mp3" was released 🤷🏻‍♀️
+[2025-11-21 03:38:55,609] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 03:38:55,890] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 03:38:55,891] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 03:38:55,902] [DEBUG] [SoundController] Started playing song: "Adele - Rolling In The Deep.mp3"
+[2025-11-21 03:38:55,903] [INFO] [AmplifyState] Song "Adele - Rolling In The Deep.mp3" was randomly started 🎚️
+[2025-11-21 03:38:56,354] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 03:38:56,355] [INFO] [AmplifyState] Song "Adele - Rolling In The Deep.mp3" was released 🤷🏻‍♀️
+[2025-11-21 03:38:56,676] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 03:38:56,677] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 03:38:56,706] [DEBUG] [SoundController] Started playing song: "Symbolico - Earth Connect - Hanging in Space.mp3"
+[2025-11-21 03:38:56,707] [INFO] [AmplifyState] Song "Symbolico - Earth Connect - Hanging in Space.mp3" was randomly started 🎚️
+[2025-11-21 03:38:57,090] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 03:38:57,091] [INFO] [AmplifyState] Song "Symbolico - Earth Connect - Hanging in Space.mp3" was released 🤷🏻‍♀️
+[2025-11-21 03:38:57,435] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 03:38:57,436] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 03:38:57,437] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-21 03:38:57,471] [DEBUG] [SoundController] Playing sound: CODE_SOUND (volume: 0.80)
+[2025-11-21 03:38:57,490] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-21 03:38:59,961] [INFO] [ButtonReader] Keyboard: Button 6 toggled ON (key '6')
+[2025-11-21 03:38:59,962] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-21 03:38:59,963] [DEBUG] [SoundController] Playing sound: CODE_DIGIT_SOUND (volume: 0.70)
+[2025-11-21 03:39:01,207] [INFO] [ButtonReader] Keyboard: Button 3 toggled OFF (key '3')
+[2025-11-21 03:39:02,291] [INFO] [ButtonReader] Keyboard: Button 5 toggled OFF (key '5')
+[2025-11-21 03:39:02,896] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-21 03:39:02,897] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-21 03:39:02,898] [DEBUG] [SoundController] Playing sound: CODE_DIGIT_SOUND (volume: 0.70)
+[2025-11-21 03:39:03,660] [INFO] [ButtonReader] Keyboard: Button 4 toggled OFF (key '4')
+[2025-11-21 03:39:04,307] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-21 03:39:04,308] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-21 03:39:04,309] [DEBUG] [SoundController] Playing sound: CODE_DIGIT_SOUND (volume: 0.70)
+[2025-11-21 03:39:04,849] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-21 03:39:04,850] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-21 03:39:04,851] [DEBUG] [SoundController] Playing sound: CODE_DIGIT_SOUND (volume: 0.70)
+[2025-11-21 03:39:06,195] [INFO] [ButtonReader] Keyboard: Button 5 toggled OFF (key '5')
+[2025-11-21 03:39:06,197] [INFO] [CodeFailState] Code mode failed: Button was released
+[2025-11-21 03:39:06,197] [DEBUG] [SoundController] Playing sound: RELEASED_BUTTON_SOUND (volume: 0.80)
+[2025-11-21 03:39:13,373] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 03:39:14,458] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 03:39:14,459] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 03:39:14,475] [DEBUG] [SoundController] Started playing song: "זהבה בן אינתא עומרי Zehava Ben.mp3"
+[2025-11-21 03:39:14,476] [INFO] [AmplifyState] Song "זהבה בן אינתא עומרי Zehava Ben.mp3" was randomly started 🎚️
+[2025-11-21 03:39:15,041] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 03:39:15,042] [INFO] [AmplifyState] Song "זהבה בן אינתא עומרי Zehava Ben.mp3" was released 🤷🏻‍♀️
+[2025-11-21 03:39:15,544] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 03:39:15,545] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 03:39:15,557] [DEBUG] [SoundController] Started playing song: "Scatman (ski-ba-bop-ba-dop-bop) Official Video HD - Scatman John.mp3"
+[2025-11-21 03:39:15,558] [INFO] [AmplifyState] Song "Scatman (ski-ba-bop-ba-dop-bop) Official Video HD - Scatman John.mp3" was randomly started 🎚️
+[2025-11-21 03:39:15,846] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 03:39:15,847] [INFO] [AmplifyState] Song "Scatman (ski-ba-bop-ba-dop-bop) Official Video HD - Scatman John.mp3" was released 🤷🏻‍♀️
+[2025-11-21 03:39:16,188] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 03:39:16,189] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 03:39:16,190] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-21 03:39:16,215] [DEBUG] [SoundController] Playing sound: CODE_SOUND (volume: 0.80)
+[2025-11-21 03:39:16,234] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-21 03:39:19,412] [INFO] [ButtonReader] Keyboard: Button 1 toggled ON (key '1')
+[2025-11-21 03:39:19,412] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-21 03:39:19,413] [DEBUG] [SoundController] Playing sound: CODE_DIGIT_SOUND (volume: 0.70)
+[2025-11-21 03:39:20,094] [INFO] [ButtonReader] Keyboard: Button 2 toggled ON (key '2')
+[2025-11-21 03:39:20,095] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-21 03:39:20,096] [DEBUG] [SoundController] Playing sound: CODE_DIGIT_SOUND (volume: 0.70)
+[2025-11-21 03:39:20,717] [INFO] [ButtonReader] Keyboard: Button 3 toggled OFF (key '3')
+[2025-11-21 03:39:21,320] [INFO] [ButtonReader] Keyboard: Button 3 toggled ON (key '3')
+[2025-11-21 03:39:21,321] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-21 03:39:21,322] [DEBUG] [SoundController] Playing sound: CODE_DIGIT_SOUND (volume: 0.70)
+[2025-11-21 03:39:21,823] [INFO] [ButtonReader] Keyboard: Button 4 toggled OFF (key '4')
+[2025-11-21 03:39:22,366] [INFO] [ButtonReader] Keyboard: Button 4 toggled ON (key '4')
+[2025-11-21 03:39:22,367] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-21 03:39:22,368] [DEBUG] [SoundController] Playing sound: CODE_DIGIT_SOUND (volume: 0.70)
+[2025-11-21 03:39:22,950] [INFO] [ButtonReader] Keyboard: Button 5 toggled ON (key '5')
+[2025-11-21 03:39:22,951] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-21 03:39:22,951] [INFO] [CodeModeState] Code entered: 12345
+[2025-11-21 03:39:22,964] [INFO] [CodeFailState] Code mode failed: Invalid code: 12345
+[2025-11-21 03:39:22,965] [DEBUG] [SoundController] Playing sound: FAIL_SOUND_2 (volume: 0.80)
+[2025-11-21 03:39:29,499] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 03:39:29,863] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 03:39:29,863] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 03:39:29,878] [DEBUG] [SoundController] Started playing song: "La Pantera Mambo (320kbps).mp3"
+[2025-11-21 03:39:29,879] [INFO] [AmplifyState] Song "La Pantera Mambo (320kbps).mp3" was randomly started 🎚️
+[2025-11-21 03:39:30,447] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 03:39:30,448] [INFO] [AmplifyState] Song "La Pantera Mambo (320kbps).mp3" was released 🤷🏻‍♀️
+[2025-11-21 03:39:30,889] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 03:39:30,890] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 03:39:30,920] [DEBUG] [SoundController] Started playing song: "POLO & PAN Ani Kuni (official video).mp3"
+[2025-11-21 03:39:30,921] [INFO] [AmplifyState] Song "POLO & PAN Ani Kuni (official video).mp3" was randomly started 🎚️
+[2025-11-21 03:39:31,263] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 03:39:31,264] [INFO] [AmplifyState] Song "POLO & PAN Ani Kuni (official video).mp3" was released 🤷🏻‍♀️
+[2025-11-21 03:39:31,765] [INFO] [ButtonReader] Keyboard: Button 7 toggled ON (key '7')
+[2025-11-21 03:39:31,766] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 03:39:31,766] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-21 03:39:31,789] [DEBUG] [SoundController] Playing sound: CODE_SOUND (volume: 0.80)
+[2025-11-21 03:39:31,808] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-21 03:39:32,130] [INFO] [ButtonReader] Keyboard: Button 7 toggled OFF (key '7')
+[2025-11-21 03:39:53,217] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 254/907MB (28.0%, 653MB free) | ⚙️  CPU - Process: 12.3% | System: 6.6% | Cores: [7%, 6%, 6%, 7%]
+[2025-11-21 03:40:22,880] [INFO] [CodeFailState] Code mode failed: Timeout - song ended
+[2025-11-21 03:40:22,881] [DEBUG] [SoundController] Playing sound: FAIL_SOUND_4 (volume: 0.80)
+[2025-11-21 03:40:53,221] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 253/907MB (27.9%, 654MB free) | ⚙️  CPU - Process: 19.9% | System: 8.5% | Cores: [10%, 8%, 9%, 7%]
+[2025-11-21 03:41:53,232] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 255/907MB (28.1%, 652MB free) | ⚙️  CPU - Process: 31.7% | System: 11.1% | Cores: [14%, 12%, 8%, 10%]
+[2025-11-21 03:42:53,234] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 255/907MB (28.1%, 652MB free) | ⚙️  CPU - Process: 31.7% | System: 7.9% | Cores: [1%, 27%, 2%, 2%]
+[2025-11-21 03:43:53,237] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 255/907MB (28.1%, 652MB free) | ⚙️  CPU - Process: 31.7% | System: 7.9% | Cores: [0%, 9%, 12%, 11%]
+[2025-11-21 03:44:53,240] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 255/907MB (28.1%, 652MB free) | ⚙️  CPU - Process: 31.6% | System: 8.2% | Cores: [0%, 2%, 1%, 30%]
+[2025-11-21 03:45:53,245] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 252/907MB (27.8%, 655MB free) | ⚙️  CPU - Process: 32.1% | System: 9.1% | Cores: [2%, 16%, 9%, 9%]
+[2025-11-21 03:46:53,251] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 252/907MB (27.8%, 655MB free) | ⚙️  CPU - Process: 32.1% | System: 7.9% | Cores: [1%, 28%, 3%, 0%]
+[2025-11-21 03:47:53,271] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 252/907MB (27.8%, 655MB free) | ⚙️  CPU - Process: 31.5% | System: 7.9% | Cores: [1%, 11%, 19%, 1%]
+[2025-11-21 03:48:53,290] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 252/907MB (27.8%, 655MB free) | ⚙️  CPU - Process: 31.7% | System: 7.9% | Cores: [0%, 1%, 30%, 0%]
+[2025-11-21 03:49:53,291] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 252/907MB (27.8%, 655MB free) | ⚙️  CPU - Process: 32.2% | System: 8.8% | Cores: [5%, 3%, 25%, 2%]
+[2025-11-21 03:50:53,293] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 252/907MB (27.8%, 655MB free) | ⚙️  CPU - Process: 31.9% | System: 8.0% | Cores: [7%, 2%, 23%, 0%]
+[2025-11-21 03:51:53,297] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 252/907MB (27.7%, 655MB free) | ⚙️  CPU - Process: 31.6% | System: 7.9% | Cores: [0%, 14%, 8%, 9%]
+[2025-11-21 03:52:53,299] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 252/907MB (27.8%, 655MB free) | ⚙️  CPU - Process: 31.7% | System: 7.9% | Cores: [1%, 13%, 17%, 0%]
+[2025-11-21 03:53:53,303] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 252/907MB (27.8%, 655MB free) | ⚙️  CPU - Process: 32.1% | System: 8.0% | Cores: [19%, 9%, 4%, 0%]
+[2025-11-21 03:54:53,304] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 252/907MB (27.8%, 655MB free) | ⚙️  CPU - Process: 31.9% | System: 8.6% | Cores: [30%, 1%, 1%, 2%]
+[2025-11-21 03:55:53,306] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 252/907MB (27.8%, 655MB free) | ⚙️  CPU - Process: 31.6% | System: 7.8% | Cores: [27%, 1%, 3%, 0%]
+[2025-11-21 03:56:53,307] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 252/907MB (27.8%, 655MB free) | ⚙️  CPU - Process: 31.4% | System: 7.8% | Cores: [0%, 4%, 24%, 3%]
+[2025-11-21 03:57:36,986] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 1 - Process terminating
+[2025-11-21 03:57:37,241] [INFO] [SoundController] Sound controller cleaned up successfully
+[2025-11-21 03:57:37,251] [INFO] [GameManager] Game stopped
+[2025-11-21 03:57:37,251] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

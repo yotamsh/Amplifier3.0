@@ -867,25 +867,29 @@ class CodeModeState(GameState):
         # Get current sequence
         sequence = self.game_manager.sequence_tracker.get_sequence()
         
-        # Play digit sound if a new button was pressed
+        # Get code length for completion check
+        code_length = self.game_manager.sound_controller.song_library.code_length
+        
+        # Play digit sound if a new button was pressed (but NOT for the final digit)
         if button_state.any_changed:
             # Check if any button was newly pressed (prev=False, current=True)
             for i, currently_pressed in enumerate(button_state.for_button):
                 prev_pressed = button_state.previous_state_of[i]
                 if not prev_pressed and currently_pressed:
                     # New button press detected
-                    from audio_system.sound_controller import GameSounds
-                    self.game_manager.sound_controller.play_sound_with_volume(
-                        GameSounds.CODE_DIGIT_SOUND,
-                        volume=0.7
-                    )
+                    # Only play digit sound if this isn't the final digit
+                    if len(sequence) < code_length:
+                        from audio_system.sound_controller import GameSounds
+                        self.game_manager.sound_controller.play_sound_with_volume(
+                            GameSounds.CODE_DIGIT_SOUND,
+                            volume=0.7
+                        )
                     break  # Only play once even if multiple buttons pressed
         
         # Update animation to show entered digits
         self.code_anim.set_active_digits(sequence)
         
         # Check if code is complete (using configured code length)
-        code_length = self.game_manager.sound_controller.song_library.code_length
         if len(sequence) == code_length:
             self.logger.info(f"Code entered: {sequence}")
             
