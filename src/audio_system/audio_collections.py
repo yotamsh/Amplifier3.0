@@ -26,6 +26,8 @@ class AudioCollection(Enum):
     SPANISH = "spanish"
     TV = "tv"
     VIRAL = "viral"
+    THREE_AT_NIGHT = "threeAtNight"
+    FOUR_AT_NIGHT = "fourAtNight"
 
 
 # Constant with all collections

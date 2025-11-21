@@ -126,7 +126,10 @@ def create_amplifier_config() -> GameConfig:
         daily_schedule=[
             DailyScheduleEntry(time(0, 0), {AudioCollection.MAIJAM}),
             DailyScheduleEntry(time(2, 0), {AudioCollection.PARTY, AudioCollection.MAIJAM, AudioCollection.VIRAL, AudioCollection.HAFLA, AudioCollection.FESTIGAL}),
-            DailyScheduleEntry(time(4, 0), {AudioCollection.CLASSIC}),
+            DailyScheduleEntry(time(3, 0), {AudioCollection.THREE_AT_NIGHT}),
+            DailyScheduleEntry(time(3, 5), {AudioCollection.PARTY, AudioCollection.MAIJAM, AudioCollection.VIRAL, AudioCollection.HAFLA, AudioCollection.FESTIGAL}),
+            DailyScheduleEntry(time(4, 0), {AudioCollection.FOUR_AT_NIGHT}),
+            DailyScheduleEntry(time(4, 5), {AudioCollection.CLASSIC}),
             DailyScheduleEntry(time(6, 0), {AudioCollection.MORNING}),
             DailyScheduleEntry(time(10, 0), ALL_COLLECTIONS),
             DailyScheduleEntry(time(14, 0), {AudioCollection.TV}),
