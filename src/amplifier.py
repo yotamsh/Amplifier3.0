@@ -58,20 +58,14 @@ atexit.register(lambda: emergency_flush_and_log())
 sys.path.insert(0, str(Path(__file__).parent))
 
 try:
-    from button_system import ButtonReader, KeyboardSampler
+    from button_system import ButtonReader, GPIOSampler
     from led_system import PixelStripAdapter, Pixel
     from game_system import GameManager, ButtonsSequenceTracker
     from game_system.config import GameConfig, ButtonConfig, LedStripConfig, AudioConfig
     from audio_system import Schedule, DailyScheduleEntry, SpecialScheduleEntry, AudioCollection, SongLibrary, SoundController, ALL_COLLECTIONS
     from audio_system.mock_sound_controller import MockSoundController
     from utils import HybridLogger
-    # GPIO import commented out - using KeyboardSampler for testing
-    # import RPi.GPIO as GPIO
-    # Dummy GPIO for config compatibility
-    class GPIO:
-        PUD_OFF = 0
-        PUD_UP = 1
-        PUD_DOWN = 2
+    import RPi.GPIO as GPIO
 except ImportError as e:
     import traceback
     print(f"❌ Import error: {e}")
@@ -178,15 +172,14 @@ def create_game_system(config: GameConfig, amplifier_logger):
     game_manager_logger = amplifier_logger.create_class_logger("GameManager", logging.INFO)
     button_reader_logger = amplifier_logger.create_class_logger("ButtonReader", logging.INFO)
     song_library_logger = amplifier_logger.create_class_logger("SongLibrary", logging.INFO)
-    sound_controller_logger = amplifier_logger.create_class_logger("SoundController", logging.DEBUG)
+    sound_controller_logger = amplifier_logger.create_class_logger("SoundController", logging.INFO)
     sequence_tracker_logger = amplifier_logger.create_class_logger("SequenceTracker", logging.INFO)
     
     try:        
-        # Initialize button sampler (NO GPIO - pure keyboard for testing)
-        # Using KeyboardSampler for development/testing without Raspberry Pi
-        # Switch back to GPIOSampler or GPIOWithKeyboardSampler for production
-        button_sampler = KeyboardSampler(
-            num_buttons=len(config.button_config.pins),
+        # Initialize button sampler (GPIO for production)
+        button_sampler = GPIOSampler(
+            button_pins=config.button_config.pins,
+            pull_mode=config.button_config.pull_mode,
             logger=button_reader_logger
         )
         
