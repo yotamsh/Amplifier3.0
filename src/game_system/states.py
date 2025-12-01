@@ -594,25 +594,9 @@ class PartyState(GameState):
         button_A_pressed = button_state.for_button[self.button_A]
         button_B_pressed = button_state.for_button[self.button_B]
         
-        # Check for interference with button A spread (buttons A+1 to end)
-        if self.button_A_held and not self.button_A_spread_blocked:
-            for i in range(self.button_A + 1, button_count):
-                if button_state.for_button[i]:
-                    # Interference detected - clear spread but keep held
-                    self.a_red_pixels = 0
-                    self.button_A_spread_blocked = True
-                    self.logger.debug(f"Button A spread blocked by button {i}")
-                    break
-        
-        # Check for interference with button B spread (buttons 0 to B-1)
-        if self.button_B_held and not self.button_B_spread_blocked:
-            for i in range(0, self.button_B):
-                if button_state.for_button[i]:
-                    # Interference detected - clear spread but keep held
-                    self.b_red_pixels = 0
-                    self.button_B_spread_blocked = True
-                    self.logger.debug(f"Button B spread blocked by button {i}")
-                    break
+        # DISABLED: Interference blocking - allows reduction to continue even if other buttons pressed
+        # Uncomment the line below to re-enable interference detection
+        # self._check_interference_blocking(button_state)
         
         # Button A released - clear its red and reset block
         if self.button_A_held and not button_A_pressed:
@@ -685,6 +669,38 @@ class PartyState(GameState):
             return IdleState(self.game_manager)
         
         return None
+    
+    def _check_interference_blocking(self, button_state: 'ButtonState') -> None:
+        """
+        Check for interference with reduction buttons and block spreading if detected.
+        
+        If button A is held and any button from A+1 to end is pressed, block A's spread.
+        If button B is held and any button from 0 to B-1 is pressed, block B's spread.
+        
+        Args:
+            button_state: Current button state
+        """
+        button_count = len(button_state.for_button)
+        
+        # Check for interference with button A spread (buttons A+1 to end)
+        if self.button_A_held and not self.button_A_spread_blocked:
+            for i in range(self.button_A + 1, button_count):
+                if button_state.for_button[i]:
+                    # Interference detected - clear spread but keep held
+                    self.a_red_pixels = 0
+                    self.button_A_spread_blocked = True
+                    self.logger.debug(f"Button A spread blocked by button {i}")
+                    break
+        
+        # Check for interference with button B spread (buttons 0 to B-1)
+        if self.button_B_held and not self.button_B_spread_blocked:
+            for i in range(0, self.button_B):
+                if button_state.for_button[i]:
+                    # Interference detected - clear spread but keep held
+                    self.b_red_pixels = 0
+                    self.button_B_spread_blocked = True
+                    self.logger.debug(f"Button B spread blocked by button {i}")
+                    break
     
     def _handle_applause_button(self, button_state: 'ButtonState') -> None:
         """

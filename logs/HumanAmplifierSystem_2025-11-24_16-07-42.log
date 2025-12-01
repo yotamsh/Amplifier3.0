@@ -1,0 +1,61 @@
+[2025-11-24 16:07:42,552] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-24 16:07:42,553] [INFO] [Amplifier] Button configuration: 10 buttons on GPIO [6, 5, 22, 17, 4, 23, 24, 25, 16, 20]
+[2025-11-24 16:07:42,553] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-24 16:07:42,554] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-24 16:07:42,554] [INFO] [Amplifier]   Strip 2: 293 LEDs on GPIO 18
+[2025-11-24 16:07:42,554] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-24 16:07:42,555] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-24 16:07:42,555] [INFO] [Amplifier] Audio folder: songs
+[2025-11-24 16:07:42,555] [INFO] [Amplifier] Schedule: 16 daily, 1 special entries
+[2025-11-24 16:07:42,556] [INFO] [ButtonReader] GPIO sampler initialized: 10 pins (no pulls)
+[2025-11-24 16:07:42,556] [INFO] [ButtonReader] Pin mapping: Btn0=GPIO6, Btn1=GPIO5, Btn2=GPIO22, Btn3=GPIO17, Btn4=GPIO4, Btn5=GPIO23, Btn6=GPIO24, Btn7=GPIO25, Btn8=GPIO16, Btn9=GPIO20
+[2025-11-24 16:07:42,557] [INFO] [ButtonReader] ButtonReader initialized with 10 buttons
+[2025-11-24 16:07:42,560] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-24 16:07:49,144] [INFO] [SongLibrary] Loaded 724 song codes from 13 collections
+[2025-11-24 16:07:49,145] [INFO] [SongLibrary] Collections updated: ['FESTIGAL']
+[2025-11-24 16:07:49,292] [INFO] [SoundController] Pygame mixer initialized: 48000Hz, format=-16, channels=2
+[2025-11-24 16:07:57,462] [INFO] [SoundController] Sound controller initialized - mixer ready, first song will load on demand
+[2025-11-24 16:07:57,469] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-24 16:07:57,469] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-24 16:07:57,469] [INFO] [Amplifier] Hardware: 10 buttons, 2 LED strips, 20ms frame duration
+[2025-11-24 16:07:57,470] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['MORNING', 'FESTIGAL', 'HAFLA', 'VIRAL', 'PARTY', 'THREE_AT_NIGHT', 'GENERAL', 'TV', 'FOUR_AT_NIGHT', 'SPANISH', 'MAIJAM', 'DISNEY', 'CLASSIC'], 'total_codes': 724, 'daily_schedule_entries': 16, 'special_schedule_entries': 1}
+[2025-11-24 16:07:57,470] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-24 16:07:57,471] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-24 16:07:57,471] [INFO] [Amplifier] Hardware status: 10 buttons, 2 LED strips
+[2025-11-24 16:07:57,471] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-24 16:07:57,472] [INFO] [Amplifier]   Strip 2: 293 LEDs active
+[2025-11-24 16:07:57,472] [INFO] [Amplifier] Audio system: 724 song codes, 13 sound effects
+[2025-11-24 16:07:57,472] [INFO] [Amplifier] Available collections: MORNING, FESTIGAL, HAFLA, VIRAL, PARTY, THREE_AT_NIGHT, GENERAL, TV, FOUR_AT_NIGHT, SPANISH, MAIJAM, DISNEY, CLASSIC
+[2025-11-24 16:07:57,472] [INFO] [Amplifier] ===========================
+[2025-11-24 16:07:57,473] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-24 16:07:57,473] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-24 16:07:57,476] [INFO] [GameManager] 💾 Memory - Process: 87.1MB | System: 234/907MB (25.8%, 673MB free) | ⚙️  CPU - Process: 0.0% | System: 22.2% | Cores: [9%, 8%, 58%, 14%]
+[2025-11-24 16:07:57,476] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-24 16:07:57,477] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-24 16:07:57,477] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-24 16:07:57,477] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-24 16:07:57,478] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-24 16:07:57,478] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-24 16:07:57,478] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-24 16:07:57,479] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-24 16:07:57,479] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-24 16:07:57,479] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-24 16:07:57,490] [INFO] [AmplifyState] Song "אגם רודברג ועדי הימלבלוי - מטרה מספר אחת - מתוך פסטיגל 2009, קונגפו פסטיגל2.mp3" was randomly started 🎚️
+[2025-11-24 16:07:57,509] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: אגם רודברג ועדי הימלבלוי - מטרה מספר אחת - מתוך פסטיגל 2009, קונגפו פסטיגל2.mp3
+[2025-11-24 16:13:07,701] [INFO] [GameManager] 💾 Memory - Process: 87.4MB | System: 217/907MB (23.9%, 690MB free) | ⚙️  CPU - Process: 21.3% | System: 5.5% | Cores: [2%, 4%, 16%, 0%]
+[2025-11-24 16:14:07,743] [INFO] [GameManager] 💾 Memory - Process: 87.5MB | System: 212/907MB (23.4%, 695MB free) | ⚙️  CPU - Process: 41.0% | System: 10.4% | Cores: [5%, 3%, 33%, 1%]
+[2025-11-24 16:15:07,753] [INFO] [GameManager] 💾 Memory - Process: 87.5MB | System: 210/907MB (23.2%, 696MB free) | ⚙️  CPU - Process: 39.4% | System: 9.9% | Cores: [8%, 3%, 19%, 10%]
+[2025-11-24 16:16:07,758] [INFO] [GameManager] 💾 Memory - Process: 87.5MB | System: 210/907MB (23.1%, 697MB free) | ⚙️  CPU - Process: 40.0% | System: 10.1% | Cores: [4%, 3%, 32%, 1%]
+[2025-11-24 16:16:09,304] [INFO] [PartyState] Song finished, returning to idle: אגם רודברג ועדי הימלבלוי - מטרה מספר אחת - מתוך פסטיגל 2009, קונגפו פסטיגל2.mp3
+[2025-11-24 16:17:07,777] [INFO] [GameManager] 💾 Memory - Process: 87.5MB | System: 209/907MB (23.0%, 698MB free) | ⚙️  CPU - Process: 32.0% | System: 8.1% | Cores: [0%, 0%, 30%, 2%]
+[2025-11-24 16:18:07,784] [INFO] [GameManager] 💾 Memory - Process: 87.5MB | System: 209/907MB (23.1%, 698MB free) | ⚙️  CPU - Process: 31.4% | System: 8.1% | Cores: [5%, 1%, 20%, 5%]
+[2025-11-24 16:19:07,802] [INFO] [GameManager] 💾 Memory - Process: 87.5MB | System: 209/907MB (23.1%, 697MB free) | ⚙️  CPU - Process: 31.1% | System: 7.8% | Cores: [8%, 3%, 14%, 7%]
+[2025-11-24 16:20:07,812] [INFO] [GameManager] 💾 Memory - Process: 87.5MB | System: 210/907MB (23.2%, 697MB free) | ⚙️  CPU - Process: 32.6% | System: 8.3% | Cores: [7%, 19%, 7%, 1%]
+[2025-11-24 16:21:07,832] [INFO] [GameManager] 💾 Memory - Process: 87.5MB | System: 210/907MB (23.2%, 697MB free) | ⚙️  CPU - Process: 31.4% | System: 7.9% | Cores: [7%, 1%, 0%, 23%]
+[2025-11-24 16:22:07,837] [INFO] [GameManager] 💾 Memory - Process: 87.5MB | System: 210/907MB (23.2%, 697MB free) | ⚙️  CPU - Process: 31.7% | System: 8.0% | Cores: [0%, 5%, 7%, 20%]
+[2025-11-24 16:23:07,840] [INFO] [GameManager] 💾 Memory - Process: 87.5MB | System: 210/907MB (23.2%, 697MB free) | ⚙️  CPU - Process: 32.2% | System: 8.2% | Cores: [1%, 25%, 3%, 4%]
+[2025-11-24 16:23:25,945] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 15 - Process terminating
+[2025-11-24 16:23:25,946] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-24 16:23:26,142] [INFO] [SoundController] Sound controller cleaned up successfully
+[2025-11-24 16:23:26,153] [INFO] [GameManager] Game stopped
+[2025-11-24 16:23:26,153] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

@@ -1,0 +1,48 @@
+[2025-11-21 04:22:52,442] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-21 04:22:52,443] [INFO] [Amplifier] Button configuration: 10 buttons on GPIO [6, 5, 22, 17, 4, 23, 24, 25, 16, 20]
+[2025-11-21 04:22:52,443] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-21 04:22:52,443] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-21 04:22:52,444] [INFO] [Amplifier]   Strip 2: 293 LEDs on GPIO 18
+[2025-11-21 04:22:52,444] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-21 04:22:52,444] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-21 04:22:52,445] [INFO] [Amplifier] Audio folder: songs
+[2025-11-21 04:22:52,445] [INFO] [Amplifier] Schedule: 16 daily, 1 special entries
+[2025-11-21 04:22:52,446] [INFO] [ButtonReader] GPIO sampler initialized: 10 pins (no pulls)
+[2025-11-21 04:22:52,446] [INFO] [ButtonReader] Pin mapping: Btn0=GPIO6, Btn1=GPIO5, Btn2=GPIO22, Btn3=GPIO17, Btn4=GPIO4, Btn5=GPIO23, Btn6=GPIO24, Btn7=GPIO25, Btn8=GPIO16, Btn9=GPIO20
+[2025-11-21 04:22:52,446] [INFO] [ButtonReader] ButtonReader initialized with 10 buttons
+[2025-11-21 04:22:52,449] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-21 04:22:58,657] [INFO] [SongLibrary] Loaded 724 song codes from 13 collections
+[2025-11-21 04:22:58,658] [INFO] [SongLibrary] Collections updated: ['CLASSIC']
+[2025-11-21 04:22:58,799] [INFO] [SoundController] Pygame mixer initialized: 48000Hz, format=-16, channels=2
+[2025-11-21 04:23:06,977] [INFO] [SoundController] Sound controller initialized - mixer ready, first song will load on demand
+[2025-11-21 04:23:06,984] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-21 04:23:06,984] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-21 04:23:06,985] [INFO] [Amplifier] Hardware: 10 buttons, 2 LED strips, 20ms frame duration
+[2025-11-21 04:23:06,985] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['HAFLA', 'CLASSIC', 'SPANISH', 'FOUR_AT_NIGHT', 'FESTIGAL', 'GENERAL', 'TV', 'MAIJAM', 'MORNING', 'PARTY', 'VIRAL', 'DISNEY', 'THREE_AT_NIGHT'], 'total_codes': 724, 'daily_schedule_entries': 16, 'special_schedule_entries': 1}
+[2025-11-21 04:23:06,985] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-21 04:23:06,986] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-21 04:23:06,986] [INFO] [Amplifier] Hardware status: 10 buttons, 2 LED strips
+[2025-11-21 04:23:06,986] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-21 04:23:06,987] [INFO] [Amplifier]   Strip 2: 293 LEDs active
+[2025-11-21 04:23:06,987] [INFO] [Amplifier] Audio system: 724 song codes, 13 sound effects
+[2025-11-21 04:23:06,987] [INFO] [Amplifier] Available collections: HAFLA, CLASSIC, SPANISH, FOUR_AT_NIGHT, FESTIGAL, GENERAL, TV, MAIJAM, MORNING, PARTY, VIRAL, DISNEY, THREE_AT_NIGHT
+[2025-11-21 04:23:06,988] [INFO] [Amplifier] ===========================
+[2025-11-21 04:23:06,988] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-21 04:23:06,988] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-21 04:23:06,991] [INFO] [GameManager] 💾 Memory - Process: 87.0MB | System: 204/907MB (22.5%, 703MB free) | ⚙️  CPU - Process: 0.0% | System: 20.8% | Cores: [12%, 19%, 13%, 39%]
+[2025-11-21 04:23:06,991] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-21 04:23:06,992] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-21 04:23:06,992] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-21 04:23:06,992] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-21 04:23:06,993] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-21 04:23:06,993] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-21 04:23:06,993] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-21 04:23:06,994] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-21 04:23:06,994] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-21 04:23:07,005] [INFO] [AmplifyState] Song "Vivaldi - the Four Seasons - Spring.mp3" was randomly started 🎚️
+[2025-11-21 04:24:06,999] [INFO] [GameManager] 💾 Memory - Process: 87.3MB | System: 201/907MB (22.2%, 706MB free) | ⚙️  CPU - Process: 13.3% | System: 3.3% | Cores: [3%, 4%, 4%, 2%]
+[2025-11-21 04:24:15,749] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 15 - Process terminating
+[2025-11-21 04:24:15,749] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-21 04:24:16,008] [INFO] [SoundController] Sound controller cleaned up successfully
+[2025-11-21 04:24:16,019] [INFO] [GameManager] Game stopped
+[2025-11-21 04:24:16,019] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

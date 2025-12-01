@@ -1,0 +1,949 @@
+[2025-11-25 16:24:07,742] [INFO] [Amplifier] 🎵 HUMAN AMPLIFIER INTERACTIVE SYSTEM
+[2025-11-25 16:24:07,743] [INFO] [Amplifier] Button configuration: 10 buttons on GPIO [6, 5, 22, 17, 4, 23, 24, 25, 16, 20]
+[2025-11-25 16:24:07,743] [INFO] [Amplifier] LED configuration: 2 strips
+[2025-11-25 16:24:07,744] [INFO] [Amplifier]   Strip 1: 300 LEDs on GPIO 21
+[2025-11-25 16:24:07,744] [INFO] [Amplifier]   Strip 2: 293 LEDs on GPIO 18
+[2025-11-25 16:24:07,744] [INFO] [Amplifier] Game settings: 20ms frame duration (50.0 FPS)
+[2025-11-25 16:24:07,744] [INFO] [Amplifier] Button sample rate: 200Hz
+[2025-11-25 16:24:07,745] [INFO] [Amplifier] Audio folder: songs
+[2025-11-25 16:24:07,745] [INFO] [Amplifier] Schedule: 16 daily, 1 special entries
+[2025-11-25 16:24:07,746] [INFO] [ButtonReader] GPIO sampler initialized: 10 pins (no pulls)
+[2025-11-25 16:24:07,746] [INFO] [ButtonReader] Pin mapping: Btn0=GPIO6, Btn1=GPIO5, Btn2=GPIO22, Btn3=GPIO17, Btn4=GPIO4, Btn5=GPIO23, Btn6=GPIO24, Btn7=GPIO25, Btn8=GPIO16, Btn9=GPIO20
+[2025-11-25 16:24:07,746] [INFO] [ButtonReader] ButtonReader initialized with 10 buttons
+[2025-11-25 16:24:07,748] [INFO] [SongLibrary] Creating song codes dictionary
+[2025-11-25 16:24:10,330] [INFO] [SongLibrary] Loaded 724 song codes from 13 collections
+[2025-11-25 16:24:10,331] [INFO] [SongLibrary] Collections updated: ['FESTIGAL']
+[2025-11-25 16:24:10,429] [INFO] [SoundController] Pygame mixer initialized: 48000Hz, format=-16, channels=2
+[2025-11-25 16:24:18,625] [INFO] [SoundController] Sound controller initialized - mixer ready, first song will load on demand
+[2025-11-25 16:24:18,631] [INFO] [GameManager] GameManager initialized: 20ms frame duration, 2 LED strips
+[2025-11-25 16:24:18,632] [INFO] [Amplifier] HumanAmplifier system initialized successfully
+[2025-11-25 16:24:18,633] [INFO] [Amplifier] Hardware: 10 buttons, 2 LED strips, 20ms frame duration
+[2025-11-25 16:24:18,634] [INFO] [Amplifier] Audio system: {'songs_folder': 'songs', 'all_collections': ['CLASSIC', 'VIRAL', 'MAIJAM', 'MORNING', 'FESTIGAL', 'DISNEY', 'HAFLA', 'PARTY', 'TV', 'THREE_AT_NIGHT', 'SPANISH', 'GENERAL', 'FOUR_AT_NIGHT'], 'total_codes': 724, 'daily_schedule_entries': 16, 'special_schedule_entries': 1}
+[2025-11-25 16:24:18,634] [INFO] [Amplifier] Sound controller initialized successfully
+[2025-11-25 16:24:18,635] [INFO] [Amplifier] ✅ System initialized successfully!
+[2025-11-25 16:24:18,635] [INFO] [Amplifier] Hardware status: 10 buttons, 2 LED strips
+[2025-11-25 16:24:18,636] [INFO] [Amplifier]   Strip 1: 300 LEDs active
+[2025-11-25 16:24:18,636] [INFO] [Amplifier]   Strip 2: 293 LEDs active
+[2025-11-25 16:24:18,637] [INFO] [Amplifier] Audio system: 724 song codes, 13 sound effects
+[2025-11-25 16:24:18,637] [INFO] [Amplifier] Available collections: CLASSIC, VIRAL, MAIJAM, MORNING, FESTIGAL, DISNEY, HAFLA, PARTY, TV, THREE_AT_NIGHT, SPANISH, GENERAL, FOUR_AT_NIGHT
+[2025-11-25 16:24:18,638] [INFO] [Amplifier] ===========================
+[2025-11-25 16:24:18,638] [INFO] [Amplifier] 🚀 Starting HumanAmplifier system...
+[2025-11-25 16:24:18,639] [INFO] [GameManager] Starting game loop with 20ms frame duration
+[2025-11-25 16:24:18,642] [INFO] [GameManager] 💾 Memory - Process: 87.8MB | System: 248/907MB (27.4%, 659MB free) | ⚙️  CPU - Process: 0.0% | System: 29.3% | Cores: [6%, 7%, 99%, 4%]
+[2025-11-25 16:24:28,021] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:24:28,057] [INFO] [AmplifyState] Song "יובל המבולבל - הדרך שלי - מתוך פסטיגל 2007, פסטיגל על הזמן2.mp3" was randomly started 🎚️
+[2025-11-25 16:24:28,218] [INFO] [AmplifyState] Song "יובל המבולבל - הדרך שלי - מתוך פסטיגל 2007, פסטיגל על הזמן2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:24:28,640] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:24:28,651] [INFO] [AmplifyState] Song "__מירב פלדמן - אם אני אוהבת אותך - מתוך פסטיגל 2007, פסטיגל על הזמן - עותק.mp3" was randomly started 🎚️
+[2025-11-25 16:24:28,800] [INFO] [AmplifyState] Song "__מירב פלדמן - אם אני אוהבת אותך - מתוך פסטיגל 2007, פסטיגל על הזמן - עותק.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:24:29,242] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:24:29,243] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-25 16:24:29,285] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-25 16:24:34,776] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:24:35,480] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:24:37,771] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 16:24:39,579] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:24:40,763] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:24:40,764] [INFO] [CodeModeState] Code entered: 37984
+[2025-11-25 16:24:40,799] [INFO] [CodeRevealState] Code reveal started for code: 37984 for song "Michael Jackson - Love Never Felt So Good.mp3"
+[2025-11-25 16:24:44,830] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: Michael Jackson - Love Never Felt So Good.mp3
+[2025-11-25 16:25:18,660] [INFO] [GameManager] 💾 Memory - Process: 87.9MB | System: 231/907MB (25.4%, 676MB free) | ⚙️  CPU - Process: 35.6% | System: 9.5% | Cores: [1%, 28%, 4%, 5%]
+[2025-11-25 16:26:18,694] [INFO] [GameManager] 💾 Memory - Process: 87.9MB | System: 230/907MB (25.4%, 676MB free) | ⚙️  CPU - Process: 40.3% | System: 10.9% | Cores: [2%, 16%, 4%, 22%]
+[2025-11-25 16:26:37,994] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:26:39,050] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:26:39,656] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:26:40,515] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 16:26:40,817] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 16:26:41,896] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:26:43,668] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 16:26:46,196] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:26:47,638] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 16:26:48,185] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:26:49,765] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:26:57,092] [INFO] [PartyState] Party Mode for song "Michael Jackson - Love Never Felt So Good.mp3" was quite-down! 🤫
+[2025-11-25 16:27:18,701] [INFO] [GameManager] 💾 Memory - Process: 87.9MB | System: 230/907MB (25.4%, 677MB free) | ⚙️  CPU - Process: 36.9% | System: 9.4% | Cores: [0%, 18%, 5%, 15%]
+[2025-11-25 16:27:48,012] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:27:48,048] [INFO] [AmplifyState] Song "לעוף (1)2.mp3" was randomly started 🎚️
+[2025-11-25 16:27:48,433] [INFO] [AmplifyState] Song "לעוף (1)2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:27:49,495] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-25 16:27:49,506] [INFO] [AmplifyState] Song "__לב אמיץ - עותק.mp3" was randomly started 🎚️
+[2025-11-25 16:27:50,579] [INFO] [AmplifyState] Song "__לב אמיץ - עותק.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:27:50,616] [ERROR] [SoundController] ❌ Failed to load song 'אגם רודברג ועדי הימלבלוי - מטרה מספר אחת - מתוך פסטיגל 2009, קונגפו פסטיגל.m4a' (attempt 1/3): mpg123_getformat: Failed to find valid MPEG data within limit on resync. (code 28)
+[2025-11-25 16:28:04,375] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:28:04,390] [INFO] [AmplifyState] Song "לעוף (1)2.mp3" was randomly started 🎚️
+[2025-11-25 16:28:04,516] [INFO] [AmplifyState] Song "לעוף (1)2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:28:04,757] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:28:04,787] [INFO] [AmplifyState] Song "אגם רודברג ועדי הימלבלוי - מטרה מספר אחת - מתוך פסטיגל 2009, קונגפו פסטיגל2.mp3" was randomly started 🎚️
+[2025-11-25 16:28:04,969] [INFO] [AmplifyState] Song "אגם רודברג ועדי הימלבלוי - מטרה מספר אחת - מתוך פסטיגל 2009, קונגפו פסטיגל2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:28:05,149] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:28:05,150] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-25 16:28:05,191] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-25 16:28:12,463] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 16:28:14,792] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 16:28:16,310] [INFO] [CodeFailState] Code mode failed: Button was released
+[2025-11-25 16:28:16,981] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-25 16:28:18,710] [INFO] [GameManager] 💾 Memory - Process: 87.9MB | System: 229/907MB (25.3%, 678MB free) | ⚙️  CPU - Process: 23.9% | System: 6.4% | Cores: [0%, 3%, 16%, 6%]
+[2025-11-25 16:28:22,724] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:28:22,735] [INFO] [AmplifyState] Song "הלילה שלגיה2.mp3" was randomly started 🎚️
+[2025-11-25 16:28:22,925] [INFO] [AmplifyState] Song "הלילה שלגיה2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:28:23,005] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:28:23,035] [INFO] [AmplifyState] Song "2004 לעוף - הראל סקעת  לא יאומן כי פסטיגל2.mp3" was randomly started 🎚️
+[2025-11-25 16:28:23,257] [INFO] [AmplifyState] Song "2004 לעוף - הראל סקעת  לא יאומן כי פסטיגל2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:28:23,417] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:28:23,418] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-25 16:28:23,459] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-25 16:28:26,435] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 16:28:26,656] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 16:28:27,440] [INFO] [CodeFailState] Code mode failed: Button was released
+[2025-11-25 16:28:35,852] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:28:35,887] [INFO] [AmplifyState] Song "__לב אמיץ - עותק.mp3" was randomly started 🎚️
+[2025-11-25 16:28:36,048] [INFO] [AmplifyState] Song "__לב אמיץ - עותק.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:28:36,089] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:28:36,118] [INFO] [AmplifyState] Song "נומה נומה יה2.mp3" was randomly started 🎚️
+[2025-11-25 16:28:36,320] [INFO] [AmplifyState] Song "נומה נומה יה2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:28:36,561] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:28:36,561] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-25 16:28:36,603] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-25 16:28:39,395] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 16:28:40,761] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 16:28:41,986] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-25 16:28:43,513] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:28:44,597] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:28:44,598] [INFO] [CodeModeState] Code entered: 91034
+[2025-11-25 16:28:44,620] [INFO] [CodeRevealState] Code reveal started for code: 91034 for song "La Sonora Dinamita - Se Me Perdio La Cadenita (Official Audio) (320kbps).mp3"
+[2025-11-25 16:28:48,651] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: La Sonora Dinamita - Se Me Perdio La Cadenita (Official Audio) (320kbps).mp3
+[2025-11-25 16:29:18,716] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 228/907MB (25.2%, 678MB free) | ⚙️  CPU - Process: 15.8% | System: 3.9% | Cores: [0%, 4%, 2%, 9%]
+[2025-11-25 16:29:55,934] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:29:55,954] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:30:03,421] [INFO] [PartyState] Party Mode for song "La Sonora Dinamita - Se Me Perdio La Cadenita (Official Audio) (320kbps).mp3" was quite-down! 🤫
+[2025-11-25 16:30:03,467] [ERROR] [SoundController] ❌ Failed to load song 'אגם רודברג ועדי הימלבלוי - מטרה מספר אחת - מתוך פסטיגל 2009, קונגפו פסטיגל.m4a' (attempt 1/3): mpg123_getformat: Failed to find valid MPEG data within limit on resync. (code 28)
+[2025-11-25 16:30:04,231] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:30:04,261] [INFO] [AmplifyState] Song "נומה נומה יה2.mp3" was randomly started 🎚️
+[2025-11-25 16:30:04,523] [INFO] [AmplifyState] Song "נומה נומה יה2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:30:04,663] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:30:04,674] [INFO] [AmplifyState] Song "אמיר פיי גוטמן - אל תוותר - מתוך פסטיגל 2007, פסטיגל על הזמן2.mp3" was randomly started 🎚️
+[2025-11-25 16:30:04,945] [INFO] [AmplifyState] Song "אמיר פיי גוטמן - אל תוותר - מתוך פסטיגל 2007, פסטיגל על הזמן2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:30:05,065] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:30:05,066] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-25 16:30:05,107] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-25 16:30:05,469] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:30:05,772] [INFO] [CodeFailState] Code mode failed: Button was released
+[2025-11-25 16:30:14,866] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:30:14,880] [INFO] [AmplifyState] Song "2005 גלים גלים - סופי צדקה - פסטיגל גיבורי על2.mp3" was randomly started 🎚️
+[2025-11-25 16:30:15,188] [INFO] [AmplifyState] Song "2005 גלים גלים - סופי צדקה - פסטיגל גיבורי על2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:30:15,649] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:30:15,660] [INFO] [AmplifyState] Song "אמיר פיי גוטמן - אל תוותר - מתוך פסטיגל 2007, פסטיגל על הזמן2.mp3" was randomly started 🎚️
+[2025-11-25 16:30:15,931] [INFO] [AmplifyState] Song "אמיר פיי גוטמן - אל תוותר - מתוך פסטיגל 2007, פסטיגל על הזמן2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:30:16,292] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:30:16,293] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-25 16:30:16,334] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-25 16:30:16,716] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:30:17,028] [INFO] [CodeFailState] Code mode failed: Button was released
+[2025-11-25 16:30:18,727] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 228/907MB (25.1%, 679MB free) | ⚙️  CPU - Process: 41.8% | System: 10.6% | Cores: [0%, 3%, 2%, 37%]
+[2025-11-25 16:30:24,145] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:30:24,175] [INFO] [AmplifyState] Song "2004 לעוף - הראל סקעת  לא יאומן כי פסטיגל2.mp3" was randomly started 🎚️
+[2025-11-25 16:30:24,397] [INFO] [AmplifyState] Song "2004 לעוף - הראל סקעת  לא יאומן כי פסטיגל2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:30:26,384] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:30:26,395] [INFO] [AmplifyState] Song "__ראש בראש - עותק.mp3" was randomly started 🎚️
+[2025-11-25 16:30:26,766] [INFO] [AmplifyState] Song "__ראש בראש - עותק.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:30:27,951] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:30:27,962] [INFO] [AmplifyState] Song "כמו רובין הוד2.mp3" was randomly started 🎚️
+[2025-11-25 16:30:28,393] [INFO] [AmplifyState] Song "כמו רובין הוד2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:30:28,734] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:30:28,745] [INFO] [AmplifyState] Song "__כשהילדים שרים - עותק.mp3" was randomly started 🎚️
+[2025-11-25 16:30:28,854] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:30:32,248] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-25 16:30:33,955] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:30:34,658] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 16:30:36,586] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:30:39,602] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:30:44,065] [INFO] [AmplifyState] Song "__כשהילדים שרים - עותק.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:30:44,486] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 16:30:44,497] [INFO] [AmplifyState] Song "__כוכבי פסטיגל 2007 - זמן זה כח - מתוך פסטיגל 2007, פסטיגל על הזמן - עותק.mp3" was randomly started 🎚️
+[2025-11-25 16:30:45,129] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:30:45,812] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:30:46,053] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:30:46,153] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-25 16:30:46,856] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:30:50,832] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 16:30:59,569] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 16:31:00,332] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 16:31:00,573] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:31:01,035] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:31:04,108] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-25 16:31:04,124] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: __כוכבי פסטיגל 2007 - זמן זה כח - מתוך פסטיגל 2007, פסטיגל על הזמן - עותק.mp3
+[2025-11-25 16:31:16,657] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 16:31:18,728] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 228/907MB (25.2%, 678MB free) | ⚙️  CPU - Process: 22.8% | System: 6.1% | Cores: [0%, 16%, 2%, 6%]
+[2025-11-25 16:32:09,491] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:32:12,457] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:32:12,702] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:32:18,761] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 229/907MB (25.2%, 678MB free) | ⚙️  CPU - Process: 38.3% | System: 9.8% | Cores: [8%, 25%, 2%, 4%]
+[2025-11-25 16:32:28,167] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:32:28,566] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:32:28,902] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:32:31,973] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:32:32,374] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:32:32,836] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:32:35,006] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:32:38,319] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:32:38,320] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:32:41,279] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:32:42,242] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:32:42,925] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:32:44,210] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:32:56,330] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:32:56,431] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:33:03,799] [INFO] [PartyState] Party Mode for song "__כוכבי פסטיגל 2007 - זמן זה כח - מתוך פסטיגל 2007, פסטיגל על הזמן - עותק.mp3" was quite-down! 🤫
+[2025-11-25 16:33:10,345] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:33:10,381] [INFO] [AmplifyState] Song "פסטיגל גיבורי הממלכה האבודה - אליענה בקייר3.mp3" was randomly started 🎚️
+[2025-11-25 16:33:10,643] [INFO] [AmplifyState] Song "פסטיגל גיבורי הממלכה האבודה - אליענה בקייר3.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:33:10,804] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:33:10,833] [INFO] [AmplifyState] Song "פסטיגל גיבורי הממלכה האבודה - שלוש חברות _ כוכבות השמינייה3.mp3" was randomly started 🎚️
+[2025-11-25 16:33:11,095] [INFO] [AmplifyState] Song "פסטיגל גיבורי הממלכה האבודה - שלוש חברות _ כוכבות השמינייה3.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:33:11,296] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:33:11,297] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-25 16:33:11,338] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-25 16:33:12,685] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:33:13,269] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:33:15,239] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:33:16,788] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:33:17,370] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 16:33:17,371] [INFO] [CodeModeState] Code entered: 34579
+[2025-11-25 16:33:17,393] [INFO] [CodeRevealState] Code reveal started for code: 34579 for song "מולאן - אצלי תצאו גברים.mp3"
+[2025-11-25 16:33:18,781] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 229/907MB (25.3%, 678MB free) | ⚙️  CPU - Process: 34.1% | System: 11.1% | Cores: [23%, 5%, 7%, 9%]
+[2025-11-25 16:33:21,406] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: מולאן - אצלי תצאו גברים.mp3
+[2025-11-25 16:33:29,607] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:33:29,667] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-25 16:33:31,739] [INFO] [PartyState] Button 6 explosion! Power: 0.02
+[2025-11-25 16:34:04,804] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:34:06,480] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:34:07,326] [INFO] [PartyState] Button 3 explosion! Power: 0.17
+[2025-11-25 16:34:10,020] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:34:11,259] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 16:34:11,676] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:34:12,333] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 16:34:13,616] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 16:34:14,378] [INFO] [PartyState] Button 8 explosion! Power: 0.23
+[2025-11-25 16:34:15,219] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:34:17,060] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:34:18,800] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 232/907MB (25.5%, 675MB free) | ⚙️  CPU - Process: 42.2% | System: 13.6% | Cores: [16%, 13%, 18%, 7%]
+[2025-11-25 16:35:18,813] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 229/907MB (25.3%, 677MB free) | ⚙️  CPU - Process: 40.6% | System: 12.2% | Cores: [7%, 9%, 10%, 22%]
+[2025-11-25 16:35:24,694] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:35:25,136] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:35:47,634] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:35:48,735] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:36:14,180] [INFO] [PartyState] Song finished, returning to idle: מולאן - אצלי תצאו גברים.mp3
+[2025-11-25 16:36:18,819] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 227/907MB (25.1%, 679MB free) | ⚙️  CPU - Process: 42.1% | System: 10.6% | Cores: [0%, 2%, 40%, 1%]
+[2025-11-25 16:36:21,288] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:36:21,323] [INFO] [AmplifyState] Song "2004 לעוף - הראל סקעת  לא יאומן כי פסטיגל.mp3" was randomly started 🎚️
+[2025-11-25 16:36:21,525] [INFO] [AmplifyState] Song "2004 לעוף - הראל סקעת  לא יאומן כי פסטיגל.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:36:21,766] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:36:21,795] [INFO] [AmplifyState] Song "פסטיגל גיבורי הממלכה האבודה - אליענה בקייר3.mp3" was randomly started 🎚️
+[2025-11-25 16:36:22,018] [INFO] [AmplifyState] Song "פסטיגל גיבורי הממלכה האבודה - אליענה בקייר3.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:36:22,157] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:36:22,158] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-25 16:36:22,200] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-25 16:36:22,582] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:36:22,844] [INFO] [CodeFailState] Code mode failed: Button was released
+[2025-11-25 16:36:27,160] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:36:27,601] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:36:29,730] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:36:29,741] [INFO] [AmplifyState] Song "__לב אמיץ - עותק.mp3" was randomly started 🎚️
+[2025-11-25 16:36:29,931] [INFO] [AmplifyState] Song "__לב אמיץ - עותק.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:36:30,091] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:36:30,121] [INFO] [AmplifyState] Song "__ראש בראש - עותק.mp3" was randomly started 🎚️
+[2025-11-25 16:36:30,303] [INFO] [AmplifyState] Song "__ראש בראש - עותק.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:36:30,544] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:36:30,545] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-25 16:36:30,587] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-25 16:36:35,910] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 16:36:39,424] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:36:42,436] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:36:44,586] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:36:46,172] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 16:36:46,173] [INFO] [CodeModeState] Code entered: 25871
+[2025-11-25 16:36:46,197] [INFO] [CodeRevealState] Code reveal started for code: 25871 for song "ככה עושים פסטיגל2.mp3"
+[2025-11-25 16:36:50,228] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: ככה עושים פסטיגל2.mp3
+[2025-11-25 16:37:18,819] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 230/907MB (25.4%, 676MB free) | ⚙️  CPU - Process: 17.2% | System: 5.2% | Cores: [2%, 5%, 11%, 4%]
+[2025-11-25 16:38:18,828] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 228/907MB (25.1%, 679MB free) | ⚙️  CPU - Process: 42.6% | System: 12.3% | Cores: [8%, 5%, 31%, 4%]
+[2025-11-25 16:39:11,981] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:39:12,062] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-25 16:39:18,843] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 230/907MB (25.4%, 676MB free) | ⚙️  CPU - Process: 47.5% | System: 13.7% | Cores: [17%, 19%, 12%, 6%]
+[2025-11-25 16:39:19,748] [INFO] [PartyState] Button 6 explosion! Power: 1.00
+[2025-11-25 16:39:21,158] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:39:21,159] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-25 16:39:27,876] [INFO] [PartyState] Button 6 explosion! Power: 1.00
+[2025-11-25 16:39:32,839] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-25 16:39:34,205] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:39:35,494] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:39:38,559] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 16:39:45,613] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:39:47,503] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:39:47,768] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:39:48,739] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:39:51,345] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:40:02,838] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:40:05,891] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:40:11,735] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:40:18,847] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 229/907MB (25.3%, 678MB free) | ⚙️  CPU - Process: 48.1% | System: 12.2% | Cores: [0%, 43%, 2%, 4%]
+[2025-11-25 16:40:18,966] [INFO] [PartyState] Party Mode for song "ככה עושים פסטיגל2.mp3" was quite-down! 🤫
+[2025-11-25 16:40:25,933] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:40:25,947] [INFO] [AmplifyState] Song "__כוכבי פסטיגל 2007 - זמן זה כח - מתוך פסטיגל 2007, פסטיגל על הזמן - עותק.mp3" was randomly started 🎚️
+[2025-11-25 16:40:26,154] [INFO] [AmplifyState] Song "__כוכבי פסטיגל 2007 - זמן זה כח - מתוך פסטיגל 2007, פסטיגל על הזמן - עותק.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:40:26,174] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:40:26,185] [INFO] [AmplifyState] Song "לעוף (1)2.mp3" was randomly started 🎚️
+[2025-11-25 16:40:26,796] [INFO] [AmplifyState] Song "לעוף (1)2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:40:31,313] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:40:31,327] [INFO] [AmplifyState] Song "__כשהילדים שרים - עותק.mp3" was randomly started 🎚️
+[2025-11-25 16:40:32,157] [INFO] [AmplifyState] Song "__כשהילדים שרים - עותק.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:40:32,237] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:40:32,266] [INFO] [AmplifyState] Song "2004 לעוף - הראל סקעת  לא יאומן כי פסטיגל2.mp3" was randomly started 🎚️
+[2025-11-25 16:40:32,508] [INFO] [AmplifyState] Song "2004 לעוף - הראל סקעת  לא יאומן כי פסטיגל2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:40:32,671] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:40:32,703] [INFO] [AmplifyState] Song "עודד מנשה - אני רוצה להיות רשע - מתוך פסטיגל 2004, לא יאומן כי פסטיגל2.mp3" was randomly started 🎚️
+[2025-11-25 16:40:33,228] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:40:33,489] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:40:34,714] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:40:35,035] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:40:35,376] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:40:36,380] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:40:41,890] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:40:48,501] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 16:40:49,987] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 16:40:51,675] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:40:53,303] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:40:54,349] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:40:56,520] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:40:58,865] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:41:02,219] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-25 16:41:04,067] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:41:06,239] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:41:06,380] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 16:41:11,261] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:41:11,542] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:41:13,550] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-25 16:41:15,808] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 16:41:18,862] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 232/907MB (25.6%, 674MB free) | ⚙️  CPU - Process: 19.4% | System: 8.4% | Cores: [5%, 11%, 9%, 8%]
+[2025-11-25 16:41:18,863] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:41:21,313] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:41:22,660] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:41:22,700] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-25 16:41:23,523] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:41:23,664] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 16:41:24,950] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 16:41:24,966] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: עודד מנשה - אני רוצה להיות רשע - מתוך פסטיגל 2004, לא יאומן כי פסטיגל2.mp3
+[2025-11-25 16:41:49,836] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:41:49,876] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:41:52,207] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:41:52,247] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:41:53,613] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:41:53,814] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:41:59,182] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:42:00,368] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:42:07,598] [INFO] [PartyState] Party Mode for song "עודד מנשה - אני רוצה להיות רשע - מתוך פסטיגל 2004, לא יאומן כי פסטיגל2.mp3" was quite-down! 🤫
+[2025-11-25 16:42:14,772] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-25 16:42:14,789] [INFO] [AmplifyState] Song "תן2.mp3" was randomly started 🎚️
+[2025-11-25 16:42:15,476] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 16:42:16,842] [INFO] [AmplifyState] Song "תן2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:42:18,874] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 234/907MB (25.8%, 673MB free) | ⚙️  CPU - Process: 31.3% | System: 10.7% | Cores: [8%, 16%, 14%, 5%]
+[2025-11-25 16:42:19,213] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:42:19,248] [INFO] [AmplifyState] Song "__פסטיגל גיבורי הממלכה האבודה - רן דנקר - עותק.mp3" was randomly started 🎚️
+[2025-11-25 16:42:19,449] [INFO] [AmplifyState] Song "__פסטיגל גיבורי הממלכה האבודה - רן דנקר - עותק.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:42:19,469] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:42:19,483] [INFO] [AmplifyState] Song "אושרי כהן - אני רוצה להיות - מתוך פסטיגל 2005, פסטיגל גיבורי על2.mp3" was randomly started 🎚️
+[2025-11-25 16:42:20,112] [INFO] [AmplifyState] Song "אושרי כהן - אני רוצה להיות - מתוך פסטיגל 2005, פסטיגל גיבורי על2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:42:21,036] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:42:21,036] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-25 16:42:21,078] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-25 16:42:21,401] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:42:21,712] [INFO] [CodeFailState] Code mode failed: Button was released
+[2025-11-25 16:42:29,014] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:42:29,044] [INFO] [AmplifyState] Song "אגם רודברג ועדי הימלבלוי - מטרה מספר אחת - מתוך פסטיגל 2009, קונגפו פסטיגל2.mp3" was randomly started 🎚️
+[2025-11-25 16:42:29,266] [INFO] [AmplifyState] Song "אגם רודברג ועדי הימלבלוי - מטרה מספר אחת - מתוך פסטיגל 2009, קונגפו פסטיגל2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:42:29,326] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:42:29,337] [INFO] [AmplifyState] Song "יובל המבולבל - הדרך שלי - מתוך פסטיגל 2007, פסטיגל על הזמן2.mp3" was randomly started 🎚️
+[2025-11-25 16:42:29,970] [INFO] [AmplifyState] Song "יובל המבולבל - הדרך שלי - מתוך פסטיגל 2007, פסטיגל על הזמן2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:42:31,856] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:42:31,857] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-25 16:42:31,898] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-25 16:42:32,180] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:42:32,442] [INFO] [CodeFailState] Code mode failed: Button was released
+[2025-11-25 16:42:38,729] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:42:38,759] [INFO] [AmplifyState] Song "הלילה שלגיה2.mp3" was randomly started 🎚️
+[2025-11-25 16:42:39,162] [INFO] [AmplifyState] Song "הלילה שלגיה2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:42:39,382] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:42:39,393] [INFO] [AmplifyState] Song "ונשיר כולם2.mp3" was randomly started 🎚️
+[2025-11-25 16:42:39,784] [INFO] [AmplifyState] Song "ונשיר כולם2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:42:40,025] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:42:40,025] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-25 16:42:40,067] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-25 16:42:47,383] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-25 16:42:49,290] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:42:51,379] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:42:53,012] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 16:42:53,534] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:42:53,535] [INFO] [CodeModeState] Code entered: 63417
+[2025-11-25 16:42:53,569] [INFO] [CodeRevealState] Code reveal started for code: 63417 for song "Backstreet Boys - Everybody (Backstreet_s Back).mp3"
+[2025-11-25 16:42:57,580] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: Backstreet Boys - Everybody (Backstreet_s Back).mp3
+[2025-11-25 16:43:00,612] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:43:00,853] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:43:03,267] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:43:04,030] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:43:04,894] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 16:43:07,585] [INFO] [PartyState] Button 8 explosion! Power: 0.51
+[2025-11-25 16:43:08,910] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 16:43:10,115] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 16:43:18,877] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 232/907MB (25.6%, 675MB free) | ⚙️  CPU - Process: 10.9% | System: 5.3% | Cores: [4%, 7%, 5%, 5%]
+[2025-11-25 16:43:59,820] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:43:59,924] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:44:07,175] [INFO] [PartyState] Party Mode for song "Backstreet Boys - Everybody (Backstreet_s Back).mp3" was quite-down! 🤫
+[2025-11-25 16:44:10,388] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:44:10,425] [INFO] [AmplifyState] Song "__שלושת האבירים - שלישיית פרוזק (2004) _ לחן, עיבוד והפקה מוסיקלית_ קובי אשרת - עותק.mp3" was randomly started 🎚️
+[2025-11-25 16:44:11,131] [INFO] [AmplifyState] Song "__שלושת האבירים - שלישיית פרוזק (2004) _ לחן, עיבוד והפקה מוסיקלית_ קובי אשרת - עותק.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:44:11,895] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:44:11,924] [INFO] [AmplifyState] Song "__לב אמיץ - עותק.mp3" was randomly started 🎚️
+[2025-11-25 16:44:12,066] [INFO] [AmplifyState] Song "__לב אמיץ - עותק.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:44:12,126] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:44:12,137] [INFO] [AmplifyState] Song "__לב אמיץ - עותק.mp3" was randomly started 🎚️
+[2025-11-25 16:44:12,548] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:44:14,215] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-25 16:44:16,042] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 16:44:16,062] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 16:44:16,544] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:44:17,388] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:44:17,428] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-25 16:44:18,878] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 231/907MB (25.5%, 675MB free) | ⚙️  CPU - Process: 43.2% | System: 14.0% | Cores: [10%, 12%, 20%, 15%]
+[2025-11-25 16:44:19,238] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 16:44:20,061] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 16:44:20,342] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:44:21,127] [INFO] [AmplifyState] Song "__לב אמיץ - עותק.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:44:21,428] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:44:21,439] [INFO] [AmplifyState] Song "__איש השאלות - עותק.mp3" was randomly started 🎚️
+[2025-11-25 16:44:21,488] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-25 16:44:22,612] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:44:23,296] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:44:24,461] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:44:24,702] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-25 16:44:24,822] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 16:44:25,545] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 16:44:30,146] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 16:44:30,749] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:44:30,776] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: __איש השאלות - עותק.mp3
+[2025-11-25 16:44:32,082] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 16:44:32,142] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:45:18,891] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 231/907MB (25.5%, 675MB free) | ⚙️  CPU - Process: 24.8% | System: 6.5% | Cores: [1%, 4%, 3%, 18%]
+[2025-11-25 16:45:34,710] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:45:34,748] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:45:38,613] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:45:41,265] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-25 16:45:45,844] [INFO] [PartyState] Party Mode for song "__איש השאלות - עותק.mp3" was quite-down! 🤫
+[2025-11-25 16:45:47,008] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-25 16:45:47,038] [INFO] [AmplifyState] Song "__החץ המנצח - עותק.mp3" was randomly started 🎚️
+[2025-11-25 16:45:51,879] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:45:51,919] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-25 16:45:52,361] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 16:45:52,923] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:45:53,927] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:45:57,883] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 16:45:58,927] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:45:59,369] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-25 16:46:00,875] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 16:46:01,156] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:46:01,192] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: __החץ המנצח - עותק.mp3
+[2025-11-25 16:46:18,180] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 16:46:18,895] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 231/907MB (25.5%, 675MB free) | ⚙️  CPU - Process: 44.8% | System: 11.2% | Cores: [1%, 3%, 2%, 39%]
+[2025-11-25 16:46:20,133] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 16:46:21,595] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 16:46:22,226] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 16:46:22,579] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 16:46:23,129] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 16:46:24,682] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 16:46:48,165] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 16:46:52,170] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-25 16:47:18,929] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 229/907MB (25.3%, 677MB free) | ⚙️  CPU - Process: 39.4% | System: 12.0% | Cores: [12%, 6%, 25%, 5%]
+[2025-11-25 16:47:27,398] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 16:47:30,203] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-25 16:47:32,078] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:47:43,843] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:47:43,864] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:47:54,331] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:47:54,371] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:48:01,721] [INFO] [PartyState] Party Mode for song "__החץ המנצח - עותק.mp3" was quite-down! 🤫
+[2025-11-25 16:48:07,426] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 16:48:07,463] [INFO] [AmplifyState] Song "אמיר פיי גוטמן - אל תוותר - מתוך פסטיגל 2007, פסטיגל על הזמן2.mp3" was randomly started 🎚️
+[2025-11-25 16:48:07,966] [INFO] [AmplifyState] Song "אמיר פיי גוטמן - אל תוותר - מתוך פסטיגל 2007, פסטיגל על הזמן2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:48:10,315] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 16:48:10,328] [INFO] [AmplifyState] Song "__איש השאלות - עותק.mp3" was randomly started 🎚️
+[2025-11-25 16:48:11,259] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:48:11,299] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:48:13,590] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 16:48:15,618] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:48:15,638] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 16:48:16,180] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-25 16:48:16,722] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:48:17,285] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:48:18,934] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 229/907MB (25.2%, 678MB free) | ⚙️  CPU - Process: 41.1% | System: 10.6% | Cores: [2%, 2%, 34%, 4%]
+[2025-11-25 16:48:21,040] [INFO] [AmplifyState] Song "__איש השאלות - עותק.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:48:21,462] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:48:21,473] [INFO] [AmplifyState] Song "אושרי כהן - אני רוצה להיות - מתוך פסטיגל 2005, פסטיגל גיבורי על2.mp3" was randomly started 🎚️
+[2025-11-25 16:48:22,084] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:48:22,225] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-25 16:48:22,406] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:48:22,647] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:48:22,707] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 16:48:23,390] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:48:24,314] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-25 16:48:26,101] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 16:48:26,744] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:48:27,989] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 16:48:28,005] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: אושרי כהן - אני רוצה להיות - מתוך פסטיגל 2005, פסטיגל גיבורי על2.mp3
+[2025-11-25 16:49:18,935] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 231/907MB (25.5%, 676MB free) | ⚙️  CPU - Process: 40.3% | System: 10.8% | Cores: [3%, 34%, 2%, 3%]
+[2025-11-25 16:49:38,635] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:49:38,695] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:49:40,207] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:49:40,509] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 16:49:43,214] [INFO] [PartyState] Button 2 explosion! Power: 0.23
+[2025-11-25 16:49:43,214] [INFO] [PartyState] Button 7 explosion! Power: 0.33
+[2025-11-25 16:49:50,707] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:49:50,747] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:50:00,094] [INFO] [PartyState] Party Mode for song "אושרי כהן - אני רוצה להיות - מתוך פסטיגל 2005, פסטיגל גיבורי על2.mp3" was quite-down! 🤫
+[2025-11-25 16:50:05,980] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:50:05,993] [INFO] [AmplifyState] Song "הלילה שלגיה2.mp3" was randomly started 🎚️
+[2025-11-25 16:50:06,481] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:50:07,686] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:50:07,766] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-25 16:50:11,825] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 16:50:13,614] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:50:18,938] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 230/907MB (25.4%, 676MB free) | ⚙️  CPU - Process: 35.0% | System: 8.8% | Cores: [2%, 21%, 8%, 4%]
+[2025-11-25 16:50:21,727] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:50:21,868] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:50:23,594] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 16:50:23,895] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-25 16:50:23,996] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:50:24,036] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 16:50:24,518] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:50:29,738] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:50:31,124] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 16:50:32,991] [INFO] [AmplifyState] Song "הלילה שלגיה2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:50:33,955] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:50:33,984] [INFO] [AmplifyState] Song "__מירב פלדמן - אם אני אוהבת אותך - מתוך פסטיגל 2007, פסטיגל על הזמן - עותק.mp3" was randomly started 🎚️
+[2025-11-25 16:50:34,206] [INFO] [AmplifyState] Song "__מירב פלדמן - אם אני אוהבת אותך - מתוך פסטיגל 2007, פסטיגל על הזמן - עותק.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:50:34,467] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:50:34,478] [INFO] [AmplifyState] Song "תן2.mp3" was randomly started 🎚️
+[2025-11-25 16:50:34,788] [INFO] [AmplifyState] Song "תן2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:50:35,150] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:50:35,151] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-25 16:50:35,192] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-25 16:50:41,860] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:50:44,068] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 16:50:45,213] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:50:45,775] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:50:47,883] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:50:47,884] [INFO] [CodeModeState] Code entered: 52384
+[2025-11-25 16:50:47,907] [INFO] [CodeRevealState] Code reveal started for code: 52384 for song "ספר הג_ונגל - מה שטוב לדוב.mp3"
+[2025-11-25 16:50:51,896] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: ספר הג_ונגל - מה שטוב לדוב.mp3
+[2025-11-25 16:51:18,953] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 232/907MB (25.5%, 675MB free) | ⚙️  CPU - Process: 27.0% | System: 7.0% | Cores: [2%, 20%, 2%, 3%]
+[2025-11-25 16:51:47,378] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:51:47,439] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:51:54,668] [INFO] [PartyState] Party Mode for song "ספר הג_ונגל - מה שטוב לדוב.mp3" was quite-down! 🤫
+[2025-11-25 16:51:56,114] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:51:56,144] [INFO] [AmplifyState] Song "אגם רודברג ועדי הימלבלוי - מטרה מספר אחת - מתוך פסטיגל 2009, קונגפו פסטיגל2.mp3" was randomly started 🎚️
+[2025-11-25 16:51:56,427] [INFO] [AmplifyState] Song "אגם רודברג ועדי הימלבלוי - מטרה מספר אחת - מתוך פסטיגל 2009, קונגפו פסטיגל2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:51:56,850] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:51:56,861] [INFO] [AmplifyState] Song "__כשהילדים שרים - עותק.mp3" was randomly started 🎚️
+[2025-11-25 16:51:57,172] [INFO] [AmplifyState] Song "__כשהילדים שרים - עותק.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:51:57,573] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:51:57,574] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-25 16:51:57,615] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-25 16:52:03,145] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:52:04,450] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:52:05,293] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 16:52:14,939] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-25 16:52:18,968] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 233/907MB (25.7%, 674MB free) | ⚙️  CPU - Process: 17.9% | System: 5.8% | Cores: [3%, 14%, 4%, 2%]
+[2025-11-25 16:52:19,992] [INFO] [CodeFailState] Code mode failed: Button was released
+[2025-11-25 16:52:27,330] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:52:27,342] [INFO] [AmplifyState] Song "__קליפ - פסטיגל 2006 - פסטיגל פנטזיה - HD ! - עותק.mp3" was randomly started 🎚️
+[2025-11-25 16:52:27,692] [INFO] [AmplifyState] Song "__קליפ - פסטיגל 2006 - פסטיגל פנטזיה - HD ! - עותק.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:52:27,932] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:52:27,962] [INFO] [AmplifyState] Song "2005 גלים גלים - סופי צדקה - פסטיגל גיבורי על2.mp3" was randomly started 🎚️
+[2025-11-25 16:52:28,244] [INFO] [AmplifyState] Song "2005 גלים גלים - סופי צדקה - פסטיגל גיבורי על2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:52:28,605] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:52:28,606] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-25 16:52:28,647] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-25 16:52:31,681] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:52:33,179] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:52:34,223] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 16:52:36,111] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-25 16:52:37,095] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:52:37,095] [INFO] [CodeModeState] Code entered: 38104
+[2025-11-25 16:52:37,118] [INFO] [CodeRevealState] Code reveal started for code: 38104 for song "2004 לעוף - הראל סקעת  לא יאומן כי פסטיגל2.mp3"
+[2025-11-25 16:52:41,110] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: 2004 לעוף - הראל סקעת  לא יאומן כי פסטיגל2.mp3
+[2025-11-25 16:53:18,986] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 231/907MB (25.5%, 675MB free) | ⚙️  CPU - Process: 30.2% | System: 9.7% | Cores: [8%, 4%, 22%, 5%]
+[2025-11-25 16:54:19,001] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 232/907MB (25.6%, 675MB free) | ⚙️  CPU - Process: 43.7% | System: 11.0% | Cores: [0%, 34%, 6%, 4%]
+[2025-11-25 16:55:19,002] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 232/907MB (25.5%, 675MB free) | ⚙️  CPU - Process: 45.0% | System: 13.4% | Cores: [5%, 17%, 25%, 7%]
+[2025-11-25 16:56:07,928] [INFO] [PartyState] Song finished, returning to idle: 2004 לעוף - הראל סקעת  לא יאומן כי פסטיגל2.mp3
+[2025-11-25 16:56:18,331] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:56:18,366] [INFO] [AmplifyState] Song "אושרי כהן - אני רוצה להיות - מתוך פסטיגל 2005, פסטיגל גיבורי על2.mp3" was randomly started 🎚️
+[2025-11-25 16:56:18,607] [INFO] [AmplifyState] Song "אושרי כהן - אני רוצה להיות - מתוך פסטיגל 2005, פסטיגל גיבורי על2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:56:18,808] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:56:18,838] [INFO] [AmplifyState] Song "אגם רודברג ועדי הימלבלוי - מטרה מספר אחת - מתוך פסטיגל 2009, קונגפו פסטיגל2.mp3" was randomly started 🎚️
+[2025-11-25 16:56:19,021] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 232/907MB (25.5%, 675MB free) | ⚙️  CPU - Process: 34.1% | System: 8.8% | Cores: [2%, 3%, 29%, 0%]
+[2025-11-25 16:56:19,100] [INFO] [AmplifyState] Song "אגם רודברג ועדי הימלבלוי - מטרה מספר אחת - מתוך פסטיגל 2009, קונגפו פסטיגל2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:56:19,280] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:56:19,281] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-25 16:56:19,322] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-25 16:56:26,881] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 16:56:31,600] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:56:35,557] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 16:56:36,923] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:56:40,256] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 16:56:40,257] [INFO] [CodeModeState] Code entered: 94271
+[2025-11-25 16:56:40,290] [INFO] [CodeRevealState] Code reveal started for code: 94271 for song "Vivaldi - the Four Seasons - Spring.mp3"
+[2025-11-25 16:56:44,300] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: Vivaldi - the Four Seasons - Spring.mp3
+[2025-11-25 16:57:09,981] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:57:10,001] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:57:17,307] [INFO] [PartyState] Party Mode for song "Vivaldi - the Four Seasons - Spring.mp3" was quite-down! 🤫
+[2025-11-25 16:57:18,817] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:57:18,828] [INFO] [AmplifyState] Song "ככה עושים פסטיגל2.mp3" was randomly started 🎚️
+[2025-11-25 16:57:19,040] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 233/907MB (25.7%, 674MB free) | ⚙️  CPU - Process: 14.6% | System: 4.2% | Cores: [8%, 6%, 3%, 1%]
+[2025-11-25 16:57:19,259] [INFO] [AmplifyState] Song "ככה עושים פסטיגל2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:57:19,479] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:57:19,490] [INFO] [AmplifyState] Song "2004 לעוף - הראל סקעת  לא יאומן כי פסטיגל2.mp3" was randomly started 🎚️
+[2025-11-25 16:57:19,700] [INFO] [AmplifyState] Song "2004 לעוף - הראל סקעת  לא יאומן כי פסטיגל2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:57:20,001] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:57:20,002] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-25 16:57:20,044] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-25 16:57:21,651] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:57:25,588] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 16:57:28,078] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:57:28,360] [INFO] [CodeFailState] Code mode failed: Button was released
+[2025-11-25 16:57:30,429] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:57:34,546] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:57:34,557] [INFO] [AmplifyState] Song "__איש השאלות - עותק.mp3" was randomly started 🎚️
+[2025-11-25 16:57:34,787] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:57:35,169] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:57:35,631] [INFO] [AmplifyState] Song "__איש השאלות - עותק.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:57:35,691] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:57:35,702] [INFO] [AmplifyState] Song "פסטיגל גיבורי הממלכה האבודה - אליענה בקייר3.mp3" was randomly started 🎚️
+[2025-11-25 16:57:36,012] [INFO] [AmplifyState] Song "פסטיגל גיבורי הממלכה האבודה - אליענה בקייר3.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:57:37,419] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:57:37,449] [INFO] [AmplifyState] Song "__פסטיגל גיבורי הממלכה האבודה - רן דנקר - עותק.mp3" was randomly started 🎚️
+[2025-11-25 16:57:37,993] [INFO] [AmplifyState] Song "__פסטיגל גיבורי הממלכה האבודה - רן דנקר - עותק.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:57:38,094] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:57:38,104] [INFO] [AmplifyState] Song "ונשיר כולם2.mp3" was randomly started 🎚️
+[2025-11-25 16:57:38,415] [INFO] [AmplifyState] Song "ונשיר כולם2.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:57:38,977] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:57:39,007] [INFO] [AmplifyState] Song "__כוכבי פסטיגל 2007 - זמן זה כח - מתוך פסטיגל 2007, פסטיגל על הזמן - עותק.mp3" was randomly started 🎚️
+[2025-11-25 16:57:39,208] [INFO] [AmplifyState] Song "__כוכבי פסטיגל 2007 - זמן זה כח - מתוך פסטיגל 2007, פסטיגל על הזמן - עותק.mp3" was released 🤷🏻‍♀️
+[2025-11-25 16:57:39,248] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:57:39,249] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-25 16:57:39,291] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-25 16:57:41,922] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:57:45,015] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 16:57:46,421] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:57:48,975] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:57:51,205] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 16:57:51,206] [INFO] [CodeModeState] Code entered: 52734
+[2025-11-25 16:57:51,229] [INFO] [CodeRevealState] Code reveal started for code: 52734 for song "Disney_s Frozen Let It Go.mp3"
+[2025-11-25 16:57:55,218] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: Disney_s Frozen Let It Go.mp3
+[2025-11-25 16:58:11,961] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 16:58:11,962] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 16:58:13,928] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 16:58:13,998] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 16:58:17,407] [INFO] [PartyState] Button 7 explosion! Power: 1.00
+[2025-11-25 16:58:17,408] [INFO] [PartyState] Button 8 explosion! Power: 1.00
+[2025-11-25 16:58:19,042] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 233/907MB (25.7%, 674MB free) | ⚙️  CPU - Process: 17.0% | System: 6.9% | Cores: [5%, 8%, 9%, 7%]
+[2025-11-25 16:58:32,898] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:58:33,320] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:58:34,023] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-25 16:58:34,766] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 16:58:36,413] [INFO] [PartyState] Button 3 explosion! Power: 1.00
+[2025-11-25 16:58:36,453] [INFO] [PartyState] Button 2 explosion! Power: 1.00
+[2025-11-25 16:58:39,452] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-25 16:58:45,100] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 16:59:19,053] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 233/907MB (25.7%, 674MB free) | ⚙️  CPU - Process: 42.8% | System: 11.9% | Cores: [11%, 4%, 10%, 23%]
+[2025-11-25 16:59:58,422] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 17:00:08,451] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 17:00:08,572] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 17:00:10,697] [INFO] [SongLibrary] Collections updated: ['HAFLA', 'MAIJAM', 'GENERAL', 'PARTY']
+[2025-11-25 17:00:15,918] [INFO] [PartyState] Party Mode for song "Disney_s Frozen Let It Go.mp3" was quite-down! 🤫
+[2025-11-25 17:00:19,072] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 231/907MB (25.5%, 675MB free) | ⚙️  CPU - Process: 42.1% | System: 10.6% | Cores: [1%, 36%, 0%, 4%]
+[2025-11-25 17:00:19,993] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:00:20,008] [INFO] [AmplifyState] Song "סמיר שוקרי - רונה.mp3" was randomly started 🎚️
+[2025-11-25 17:00:20,254] [INFO] [AmplifyState] Song "סמיר שוקרי - רונה.mp3" was released 🤷🏻‍♀️
+[2025-11-25 17:00:20,495] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:00:20,525] [INFO] [AmplifyState] Song "Guns N__ Roses - Sweet Child O__ Mine (Official Music Video) (320kbps).mp3" was randomly started 🎚️
+[2025-11-25 17:00:20,912] [INFO] [AmplifyState] Song "Guns N__ Roses - Sweet Child O__ Mine (Official Music Video) (320kbps).mp3" was released 🤷🏻‍♀️
+[2025-11-25 17:00:21,133] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:00:21,134] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-25 17:00:21,176] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-25 17:00:25,453] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:00:29,248] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 17:00:30,726] [INFO] [CodeFailState] Code mode failed: Button was released
+[2025-11-25 17:00:33,344] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 17:00:34,067] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 17:00:39,508] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:00:39,522] [INFO] [AmplifyState] Song "Queen - Fat Bottomed Girls.mp3" was randomly started 🎚️
+[2025-11-25 17:00:39,789] [INFO] [AmplifyState] Song "Queen - Fat Bottomed Girls.mp3" was released 🤷🏻‍♀️
+[2025-11-25 17:00:39,829] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:00:39,859] [INFO] [AmplifyState] Song "שימי תבורי  לילה בלי כוכב.mp3" was randomly started 🎚️
+[2025-11-25 17:00:40,141] [INFO] [AmplifyState] Song "שימי תבורי  לילה בלי כוכב.mp3" was released 🤷🏻‍♀️
+[2025-11-25 17:00:40,221] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:00:40,222] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-25 17:00:40,264] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-25 17:00:41,932] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:00:43,337] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 17:00:44,040] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 17:00:46,149] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 17:00:50,468] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 17:00:50,468] [INFO] [CodeModeState] Code entered: 78439
+[2025-11-25 17:00:50,502] [INFO] [CodeRevealState] Code reveal started for code: 78439 for song "דנה פרידר - נערה חשמלית - מתוך פסטיגל 2007, פסטיגל על הזמן2.mp3"
+[2025-11-25 17:00:52,591] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 17:00:54,475] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: דנה פרידר - נערה חשמלית - מתוך פסטיגל 2007, פסטיגל על הזמן2.mp3
+[2025-11-25 17:01:19,084] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 231/907MB (25.5%, 675MB free) | ⚙️  CPU - Process: 13.2% | System: 4.2% | Cores: [6%, 5%, 3%, 3%]
+[2025-11-25 17:02:17,502] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 17:02:19,090] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 234/907MB (25.8%, 673MB free) | ⚙️  CPU - Process: 43.3% | System: 11.0% | Cores: [38%, 0%, 2%, 4%]
+[2025-11-25 17:02:20,092] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 17:02:43,583] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 17:02:44,719] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 17:03:00,394] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 17:03:00,454] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 17:03:13,973] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 17:03:18,712] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 17:03:18,753] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 17:03:19,096] [INFO] [GameManager] 💾 Memory - Process: 88.1MB | System: 234/907MB (25.8%, 673MB free) | ⚙️  CPU - Process: 46.5% | System: 11.9% | Cores: [2%, 2%, 36%, 8%]
+[2025-11-25 17:03:34,813] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:03:37,512] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-25 17:03:38,098] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:03:38,137] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-25 17:03:39,597] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 17:03:40,512] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:03:40,832] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 17:03:42,282] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 17:03:43,264] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:03:43,476] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:03:43,691] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 17:03:43,744] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:03:44,200] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:03:44,544] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:03:44,863] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:03:45,000] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:03:45,225] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:03:45,571] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:03:45,920] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:03:46,371] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:03:46,734] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:03:47,028] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:03:47,373] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:03:47,736] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:03:48,101] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:03:49,721] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:03:50,164] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:03:50,380] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 17:03:50,464] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:03:50,852] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:03:51,217] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:03:51,579] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:03:51,939] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:03:52,782] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:03:52,946] [INFO] [PartyState] Button 7 explosion! Power: 1.00
+[2025-11-25 17:03:52,946] [INFO] [PartyState] Button 8 explosion! Power: 1.00
+[2025-11-25 17:03:53,705] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:03:54,170] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-25 17:03:56,079] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:03:56,145] [INFO] [PartyState] Button 1 explosion! Power: 0.14
+[2025-11-25 17:03:56,251] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:03:56,624] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:03:56,780] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:03:57,432] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:03:57,631] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 17:03:58,220] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-25 17:04:00,135] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 17:04:01,588] [INFO] [PartyState] Song finished, returning to idle: דנה פרידר - נערה חשמלית - מתוך פסטיגל 2007, פסטיגל על הזמן2.mp3
+[2025-11-25 17:04:09,104] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-25 17:04:09,118] [INFO] [AmplifyState] Song "Blondie - Heart of Glass.mp3" was randomly started 🎚️
+[2025-11-25 17:04:11,535] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 17:04:13,984] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 17:04:16,053] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 17:04:16,314] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:04:16,334] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 17:04:17,399] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-25 17:04:19,107] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 229/907MB (25.2%, 678MB free) | ⚙️  CPU - Process: 49.8% | System: 12.6% | Cores: [4%, 28%, 1%, 17%]
+[2025-11-25 17:04:21,375] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:04:23,985] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 17:04:27,038] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 17:04:28,584] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 17:04:28,665] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-25 17:04:30,331] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:04:31,356] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-25 17:04:31,436] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 17:04:31,838] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 17:04:31,865] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: Blondie - Heart of Glass.mp3
+[2025-11-25 17:04:37,147] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:04:40,950] [INFO] [PartyState] Button 1 explosion! Power: 0.59
+[2025-11-25 17:04:42,851] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:04:46,453] [INFO] [PartyState] Button 1 explosion! Power: 0.53
+[2025-11-25 17:05:08,331] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 17:05:08,935] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 17:05:08,982] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 17:05:14,785] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 17:05:17,135] [INFO] [PartyState] Party Mode for song "Blondie - Heart of Glass.mp3" was quite-down! 🤫
+[2025-11-25 17:05:19,124] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 233/907MB (25.7%, 674MB free) | ⚙️  CPU - Process: 43.6% | System: 11.4% | Cores: [3%, 4%, 19%, 20%]
+[2025-11-25 17:05:32,997] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 17:05:33,032] [INFO] [AmplifyState] Song "Backstreet Boys - Everybody (Backstreet_s Back).mp3" was randomly started 🎚️
+[2025-11-25 17:05:35,562] [INFO] [AmplifyState] Song "Backstreet Boys - Everybody (Backstreet_s Back).mp3" was released 🤷🏻‍♀️
+[2025-11-25 17:05:37,109] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 17:05:37,121] [INFO] [AmplifyState] Song "עדן בן זקן - מלכת השושנים  Eden Ben Zaken - Malkat Hashoshanim.mp3" was randomly started 🎚️
+[2025-11-25 17:05:40,086] [INFO] [AmplifyState] Song "עדן בן זקן - מלכת השושנים  Eden Ben Zaken - Malkat Hashoshanim.mp3" was released 🤷🏻‍♀️
+[2025-11-25 17:05:40,528] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 17:05:40,559] [INFO] [AmplifyState] Song "הדג נחש ואינפקטד מאשרום - ליגל אייז (קליפ רשמי) (320kbps).mp3" was randomly started 🎚️
+[2025-11-25 17:05:43,798] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 17:05:44,079] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:05:45,967] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 17:05:47,413] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 17:05:54,180] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 17:06:05,005] [INFO] [AmplifyState] Song "הדג נחש ואינפקטד מאשרום - ליגל אייז (קליפ רשמי) (320kbps).mp3" was released 🤷🏻‍♀️
+[2025-11-25 17:06:07,173] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 17:06:07,207] [INFO] [AmplifyState] Song "Elton John-Crocodile Rock.mp3" was randomly started 🎚️
+[2025-11-25 17:06:11,184] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 17:06:11,605] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 17:06:12,328] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 17:06:13,574] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 17:06:13,755] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-25 17:06:13,795] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 17:06:14,939] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 17:06:18,374] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:06:19,139] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 232/907MB (25.5%, 675MB free) | ⚙️  CPU - Process: 21.3% | System: 5.3% | Cores: [3%, 7%, 3%, 8%]
+[2025-11-25 17:06:19,478] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:06:22,852] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-25 17:06:22,868] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: Elton John-Crocodile Rock.mp3
+[2025-11-25 17:06:44,844] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 17:06:45,131] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 17:06:54,783] [INFO] [PartyState] Party Mode for song "Elton John-Crocodile Rock.mp3" was quite-down! 🤫
+[2025-11-25 17:07:02,211] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:07:02,246] [INFO] [AmplifyState] Song "Los Fabulosos Cadillacs - La Parte De Adelante.mp3" was randomly started 🎚️
+[2025-11-25 17:07:02,548] [INFO] [AmplifyState] Song "Los Fabulosos Cadillacs - La Parte De Adelante.mp3" was released 🤷🏻‍♀️
+[2025-11-25 17:07:02,689] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:07:02,700] [INFO] [AmplifyState] Song "עדן בן זקן ואיתי גלו - מועבט.mp3" was randomly started 🎚️
+[2025-11-25 17:07:03,030] [INFO] [AmplifyState] Song "עדן בן זקן ואיתי גלו - מועבט.mp3" was released 🤷🏻‍♀️
+[2025-11-25 17:07:03,111] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:07:03,111] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-25 17:07:03,153] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-25 17:07:07,694] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:07:08,097] [INFO] [CodeFailState] Code mode failed: Button was released
+[2025-11-25 17:07:09,743] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:07:14,041] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:07:14,053] [INFO] [AmplifyState] Song "Daft Punk - Something About Us (Official Video) (320kbps).mp3" was randomly started 🎚️
+[2025-11-25 17:07:14,383] [INFO] [AmplifyState] Song "Daft Punk - Something About Us (Official Video) (320kbps).mp3" was released 🤷🏻‍♀️
+[2025-11-25 17:07:14,623] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:07:14,653] [INFO] [AmplifyState] Song "גלי עטרי - השיר שיביא לך אהבה.mp3" was randomly started 🎚️
+[2025-11-25 17:07:14,935] [INFO] [AmplifyState] Song "גלי עטרי - השיר שיביא לך אהבה.mp3" was released 🤷🏻‍♀️
+[2025-11-25 17:07:15,196] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:07:15,197] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-25 17:07:15,238] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-25 17:07:19,054] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:07:19,157] [INFO] [GameManager] 💾 Memory - Process: 88.2MB | System: 233/907MB (25.7%, 673MB free) | ⚙️  CPU - Process: 39.5% | System: 10.9% | Cores: [5%, 10%, 4%, 24%]
+[2025-11-25 17:07:22,147] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 17:07:25,647] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 17:07:29,814] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 17:07:30,700] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-25 17:07:30,701] [INFO] [CodeModeState] Code entered: 78430
+[2025-11-25 17:07:30,715] [INFO] [CodeFailState] Code mode failed: Invalid code: 78430
+[2025-11-25 17:07:37,365] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 17:07:37,380] [INFO] [AmplifyState] Song "Technotronic - Pump Up The Jam (Official Music Video).mp3" was randomly started 🎚️
+[2025-11-25 17:07:37,506] [INFO] [AmplifyState] Song "Technotronic - Pump Up The Jam (Official Music Video).mp3" was released 🤷🏻‍♀️
+[2025-11-25 17:07:37,526] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:07:37,537] [INFO] [AmplifyState] Song "Chopin, Frederic - 4 Waltz No.2 In A flat Major.mp3" was randomly started 🎚️
+[2025-11-25 17:07:37,807] [INFO] [AmplifyState] Song "Chopin, Frederic - 4 Waltz No.2 In A flat Major.mp3" was released 🤷🏻‍♀️
+[2025-11-25 17:07:38,108] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:07:38,120] [INFO] [AmplifyState] Song "מועדון הקצב של אביהו פנחסוב - ימים יפים (קליפ).mp3" was randomly started 🎚️
+[2025-11-25 17:07:38,450] [INFO] [AmplifyState] Song "מועדון הקצב של אביהו פנחסוב - ימים יפים (קליפ).mp3" was released 🤷🏻‍♀️
+[2025-11-25 17:07:38,651] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:07:38,680] [INFO] [AmplifyState] Song "Toto la momposina - Yo Me Llamo Cumbia.mp3" was randomly started 🎚️
+[2025-11-25 17:07:39,164] [INFO] [AmplifyState] Song "Toto la momposina - Yo Me Llamo Cumbia.mp3" was released 🤷🏻‍♀️
+[2025-11-25 17:07:40,047] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:07:40,076] [INFO] [AmplifyState] Song "מרגלית צנעני - חומות חימר 2012.mp3" was randomly started 🎚️
+[2025-11-25 17:07:40,318] [INFO] [AmplifyState] Song "מרגלית צנעני - חומות חימר 2012.mp3" was released 🤷🏻‍♀️
+[2025-11-25 17:07:40,559] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:07:40,589] [INFO] [AmplifyState] Song "סטטיק ובן אל תבורי - סתם.mp3" was randomly started 🎚️
+[2025-11-25 17:07:41,031] [INFO] [AmplifyState] Song "סטטיק ובן אל תבורי - סתם.mp3" was released 🤷🏻‍♀️
+[2025-11-25 17:07:41,172] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:07:41,183] [INFO] [AmplifyState] Song "Aris San - Dam Dam.mp3" was randomly started 🎚️
+[2025-11-25 17:07:41,956] [INFO] [AmplifyState] Song "Aris San - Dam Dam.mp3" was released 🤷🏻‍♀️
+[2025-11-25 17:07:42,682] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 17:07:42,712] [INFO] [AmplifyState] Song "שרית חדד - בחום של תל אביב.mp3" was randomly started 🎚️
+[2025-11-25 17:07:42,873] [INFO] [AmplifyState] Song "שרית חדד - בחום של תל אביב.mp3" was released 🤷🏻‍♀️
+[2025-11-25 17:07:44,460] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:07:44,472] [INFO] [AmplifyState] Song "Baha Men - Who Let The Dogs Out.mp3" was randomly started 🎚️
+[2025-11-25 17:07:46,773] [INFO] [AmplifyState] Song "Baha Men - Who Let The Dogs Out.mp3" was released 🤷🏻‍♀️
+[2025-11-25 17:07:47,819] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:07:47,851] [INFO] [AmplifyState] Song "Electric Light Orchestra - Livin_ Thing.mp3" was randomly started 🎚️
+[2025-11-25 17:07:48,034] [INFO] [AmplifyState] Song "Electric Light Orchestra - Livin_ Thing.mp3" was released 🤷🏻‍♀️
+[2025-11-25 17:07:48,154] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:07:48,184] [INFO] [AmplifyState] Song "החלונות הגבוהים - כל השבוע לך.mp3" was randomly started 🎚️
+[2025-11-25 17:07:48,407] [INFO] [AmplifyState] Song "החלונות הגבוהים - כל השבוע לך.mp3" was released 🤷🏻‍♀️
+[2025-11-25 17:07:48,548] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:07:48,548] [INFO] [GameManager] Triple 777 detected - entering code mode!
+[2025-11-25 17:07:48,590] [INFO] [CodeModeState] Entered code mode - awaiting 5-digit code
+[2025-11-25 17:07:52,228] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:07:52,750] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 17:07:55,026] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 17:08:02,724] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 17:08:05,294] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 17:08:05,295] [INFO] [CodeModeState] Code entered: 78439
+[2025-11-25 17:08:05,317] [INFO] [CodeRevealState] Code reveal started for code: 78439 for song "דנה פרידר - נערה חשמלית - מתוך פסטיגל 2007, פסטיגל על הזמן2.mp3"
+[2025-11-25 17:08:09,330] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: דנה פרידר - נערה חשמלית - מתוך פסטיגל 2007, פסטיגל על הזמן2.mp3
+[2025-11-25 17:08:19,177] [INFO] [GameManager] 💾 Memory - Process: 90.1MB | System: 235/907MB (25.9%, 672MB free) | ⚙️  CPU - Process: 12.9% | System: 5.0% | Cores: [3%, 8%, 5%, 4%]
+[2025-11-25 17:09:19,187] [INFO] [GameManager] 💾 Memory - Process: 90.1MB | System: 236/907MB (26.0%, 671MB free) | ⚙️  CPU - Process: 44.5% | System: 13.7% | Cores: [8%, 8%, 31%, 8%]
+[2025-11-25 17:09:27,628] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 17:09:29,154] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 17:09:36,573] [INFO] [PartyState] Party Mode for song "דנה פרידר - נערה חשמלית - מתוך פסטיגל 2007, פסטיגל על הזמן2.mp3" was quite-down! 🤫
+[2025-11-25 17:09:41,050] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 17:09:41,064] [INFO] [AmplifyState] Song "זהבה בן - טיפת מזל.mp3" was randomly started 🎚️
+[2025-11-25 17:09:41,391] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 17:09:43,239] [INFO] [AmplifyState] Song "זהבה בן - טיפת מזל.mp3" was released 🤷🏻‍♀️
+[2025-11-25 17:09:43,379] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 17:09:43,390] [INFO] [AmplifyState] Song "איפה הילד-נפלת חזק.mp3" was randomly started 🎚️
+[2025-11-25 17:09:43,740] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 17:09:43,781] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 17:09:47,375] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 17:09:48,439] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-25 17:09:58,258] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 17:09:58,760] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 17:10:02,214] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 17:10:02,275] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 17:10:02,315] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 17:10:05,266] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 17:10:10,568] [INFO] [AmplifyState] Song "איפה הילד-נפלת חזק.mp3" was released 🤷🏻‍♀️
+[2025-11-25 17:10:11,973] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 17:10:12,003] [INFO] [AmplifyState] Song "Dua Lipa - Levitating Featuring DaBaby (Official Music Video).mp3" was randomly started 🎚️
+[2025-11-25 17:10:12,043] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 17:10:13,831] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 17:10:14,052] [INFO] [ButtonReader] Button 0 pressed
+[2025-11-25 17:10:15,197] [INFO] [ButtonReader] Button 1 pressed
+[2025-11-25 17:10:19,195] [INFO] [GameManager] 💾 Memory - Process: 90.1MB | System: 235/907MB (25.9%, 672MB free) | ⚙️  CPU - Process: 22.2% | System: 5.5% | Cores: [1%, 1%, 17%, 3%]
+[2025-11-25 17:10:24,635] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 17:10:25,880] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 17:10:26,221] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 17:10:26,342] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 17:10:26,462] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 17:10:27,326] [INFO] [ButtonReader] Button 7 pressed
+[2025-11-25 17:10:27,366] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 17:10:27,951] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 17:10:28,975] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-25 17:10:37,791] [INFO] [ButtonReader] Button 6 pressed
+[2025-11-25 17:10:37,972] [INFO] [ButtonReader] Button 8 pressed
+[2025-11-25 17:10:38,052] [INFO] [ButtonReader] Button 3 pressed
+[2025-11-25 17:10:38,172] [INFO] [ButtonReader] Button 9 pressed
+[2025-11-25 17:10:40,682] [INFO] [ButtonReader] Button 2 pressed
+[2025-11-25 17:10:40,698] [INFO] [PartyState] 🎉 PARTY MODE ACTIVATED for song: Dua Lipa - Levitating Featuring DaBaby (Official Music Video).mp3
+[2025-11-25 17:11:19,206] [INFO] [GameManager] 💾 Memory - Process: 90.2MB | System: 235/907MB (25.9%, 672MB free) | ⚙️  CPU - Process: 39.1% | System: 10.4% | Cores: [1%, 27%, 10%, 3%]
+[2025-11-25 17:12:19,241] [INFO] [GameManager] 💾 Memory - Process: 90.2MB | System: 234/907MB (25.8%, 673MB free) | ⚙️  CPU - Process: 42.0% | System: 13.7% | Cores: [11%, 16%, 20%, 8%]
+[2025-11-25 17:12:21,801] [INFO] [ButtonReader] Button 5 pressed
+[2025-11-25 17:12:22,103] [INFO] [ButtonReader] Button 4 pressed
+[2025-11-25 17:12:29,580] [INFO] [PartyState] Party Mode for song "Dua Lipa - Levitating Featuring DaBaby (Official Music Video).mp3" was quite-down! 🤫
+[2025-11-25 17:12:34,346] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 15 - Process terminating
+[2025-11-25 17:12:34,347] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-25 17:12:34,577] [INFO] [SoundController] Sound controller cleaned up successfully
+[2025-11-25 17:12:34,588] [INFO] [GameManager] Game stopped
+[2025-11-25 17:12:34,588] [INFO] [Amplifier] ✅ HumanAmplifier system shut down

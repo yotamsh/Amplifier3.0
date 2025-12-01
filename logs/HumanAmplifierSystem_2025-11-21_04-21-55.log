@@ -34,3 +34,8 @@
 [2025-11-21 04:22:06,730] [INFO] [ButtonReader] Button 1 pressed
 [2025-11-21 04:22:06,730] [INFO] [ButtonReader] Button 4 pressed
 [2025-11-21 04:22:06,741] [INFO] [AmplifyState] Song "Chopin - Prelude In E Minor, Op.28 No.4.mp3" was randomly started 🎚️
+[2025-11-21 04:22:43,010] [CRITICAL] [Amplifier] ⚠️  SIGNAL RECEIVED: 15 - Process terminating
+[2025-11-21 04:22:43,012] [CRITICAL] [Amplifier] Emergency flush triggered
+[2025-11-21 04:22:43,244] [INFO] [SoundController] Sound controller cleaned up successfully
+[2025-11-21 04:22:43,255] [INFO] [GameManager] Game stopped
+[2025-11-21 04:22:43,255] [INFO] [Amplifier] ✅ HumanAmplifier system shut down
